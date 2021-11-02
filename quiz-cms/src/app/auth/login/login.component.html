@@ -1,0 +1,28 @@
+<div class="login">
+    <div class="login-form-wrapper">
+        <h4 class="color-white logo">{{ title }}</h4>
+        <form class="login-form" #loginForm="ngForm" (submit)="loginForm.valid && onSubmit()">
+            <div class="form-row column">
+                    <label class="color-white">Email</label>
+                    <input name="email" 
+                           type="email"
+                           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+"
+                           [(ngModel)]="login.email"
+                           required
+                           [ngClass]="{'form-submitted': loginForm.submitted}" />   
+                    <label class="color-white">Password</label>
+                    <input name="password" 
+                           required
+                           type="text"
+                           [(ngModel)]="login.password"
+                           [ngClass]="{'form-submitted': loginForm.submitted}"/>
+                          
+                    <button class="button-submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Submit</button>
+                    <div class="nav-buttons">
+                        <a routerLink='/register' class="login-nav-link">Register</a>  
+                        <a routerLink='/reset' class="login-nav-link">Reset password</a> 
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>

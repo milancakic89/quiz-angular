@@ -1,0 +1,47 @@
+@import '../abstract/variables';
+
+form{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+
+    .column{
+        flex-direction: column !important;
+    }
+
+    .form-row{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-row-input{
+        width: calc(50% - 15px);
+
+    }
+
+    label{
+        margin-bottom: 8px;
+    }
+
+    input{
+        height: 40px;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        border: 1px solid $input-border-color;
+        padding: 0px 15px;
+        font-size: 18px;
+        color: gray;
+
+        &:focus{
+            outline: 1px solid $input-border-color;
+        }
+    }
+
+}
+
+input.form-submitted:disabled,
+input.form-submitted:focus{
+    border: 1px solid red;
+}
