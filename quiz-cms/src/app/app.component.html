@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+
+<ul class="header" *ngIf="user">
+    <li><a>All questions (Admin)</a></li>
+    <li><a>Titles (Admin)</a></li>
+    <li><a>Play</a></li>
+    <li><a>Contribute</a></li>
+    <li><a>My questions</a></li>
+    <li><a>Ranking</a></li>
+    <li><a>Profile</a></li>
+</ul>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
+
+
+
