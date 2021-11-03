@@ -1,0 +1,35 @@
+@import '../../assets/abstract/variables';
+
+.approved,
+.pending,
+.denied{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 15px 20px;
+}
+
+.approved{
+    background-color: $approved-green;
+    color: #fff;
+}
+
+.pending{
+    background-color: $pending-yellow;
+    color: rgb(255, 255, 255);
+}
+
+.denied{
+    background-color: $denied-red;
+    color: #fff;
+}
+
+.contribute{
+    height: calc(100vh - 110px);
+    overflow-y: auto;
+}
+
+.question-details{
+    border-top: 1px solid lightgray;
+    width: 100%;
+    padding: 0px 30px;
+}

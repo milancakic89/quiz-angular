@@ -21,3 +21,13 @@
         cursor: not-allowed;
     }
 }
+
+.delete-link{
+    color: rgb(0, 26, 255);
+    cursor: pointer;
+    opacity: .6;
+
+    &:hover{
+        opacity: 1;
+    }
+}

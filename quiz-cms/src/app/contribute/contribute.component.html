@@ -1,0 +1,61 @@
+<div class="page-content">
+    <form action="" #questionForm="ngForm" (submit)="questionForm.valid && onFormSubmit(questionForm)">
+        <div class="form-row column">
+            <label for="">Pitanje</label>
+            <textarea name="question"
+                      cols="30" 
+                      rows="10" 
+                      required
+                      [(ngModel)]="newQuestion.question_text"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="">A</label>
+                <input name="letter_a" 
+                        type="text"
+                        required
+                        [(ngModel)]="newQuestion.letter_a"
+                        [ngClass]="{'form-submitted': questionForm.submitted}">
+            </div>
+            <div class="form-row-input">
+                <label for="">B</label>
+                <input name="letter_b" 
+                        type="text"
+                        required
+                        [(ngModel)]="newQuestion.letter_b"
+                        [ngClass]="{'form-submitted': questionForm.submitted}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="">C</label>
+                <input name="letter_c" 
+                      type="text"
+                      required
+                      [(ngModel)]="newQuestion.letter_c"
+                      [ngClass]="{'form-submitted': questionForm.submitted}">
+            </div>
+            <div class="form-row-input">
+                <label for="">D</label>
+                <input name="letter_d" 
+                       type="text"
+                       required
+                       [(ngModel)]="newQuestion.letter_d"
+                       [ngClass]="{'form-submitted': questionForm.submitted}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="">Tacan odgovor</label>
+                <ng-select  name="correct_letter" 
+                            [items]="items" 
+                            required
+                            [(ngModel)]="selected" 
+                            (ngModelChange)="onChange()"
+                            [ngClass]="{'form-submitted': questionForm.submitted}">
+                </ng-select>
+            </div>
+        </div>
+        <button class="button-submit" [disabled]="questionForm.invalid">Posalji</button>
+    </form>
+</div>

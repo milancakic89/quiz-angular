@@ -39,9 +39,96 @@ form{
         }
     }
 
+    textarea{
+        border: 1px solid $input-border-color;
+        border-radius: 5px;
+        color: gray;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
 }
 
 input.form-submitted:disabled,
 input.form-submitted:focus{
     border: 1px solid red;
+}
+
+
+.table{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    .thead,
+    .tbody{
+        width: 100%;
+        .tr{
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center ;
+            min-height: 55px;
+            padding: 0px 15px;
+            border-bottom: 1px solid rgb(212, 212, 212);
+
+            .th,
+            .td{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                overflow-x: hidden;
+                white-space: nowrap;
+                padding: 0px 8px;
+            }
+        }
+    }
+
+    .tbody{
+      
+        .tr{
+            background-color: #fff;
+
+            
+            &:hover{
+                background-color: rgb(235, 233, 233);
+                cursor: pointer;
+
+            }
+        }
+    }
+
+    .thead{
+        background-color: gray;
+        color: #fff;
+        .tr{
+            .th{
+                font-weight: 600;
+            }
+        }
+       
+    }
+}
+
+.w-10{
+    flex-grow: 1;
+    max-width: 10% !important;
+    min-width: 40px;
+}
+.w-20{
+    flex-grow: 2;
+    max-width: 20% !important;
+    min-width: 80px;
+}
+.w-30{
+    flex-grow: 3;
+    max-width: 30% !important;
+    min-width: 120px;
+}
+.w-40{
+    flex-grow: 4;
+    max-width: 40% !important;
+    min-width: 160px;
 }

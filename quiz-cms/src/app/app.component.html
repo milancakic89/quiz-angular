@@ -1,12 +1,12 @@
 
 <ul class="header" *ngIf="user">
-    <li><a>All questions (Admin)</a></li>
-    <li><a>Titles (Admin)</a></li>
-    <li><a>Play</a></li>
-    <li><a>Contribute</a></li>
-    <li><a>My questions</a></li>
-    <li><a>Ranking</a></li>
-    <li><a>Profile</a></li>
+    <li><a routerLink="/questions" routerLinkActive="active-link">All questions</a></li>
+    <li><a routerLinkActive="active-link">Titles</a></li>
+    <li><a routerLink="/play" routerLinkActive="active-link">Play</a></li>
+    <li><a routerLink="/contribute" routerLinkActive="active-link">Contribute</a></li>
+    <li><a routerLinkActive="active-link">My questions</a></li>
+    <li><a routerLinkActive="active-link">Ranking</a></li>
+    <li><a routerLinkActive="active-link">Profile</a></li>
 </ul>
 <div class="content">
     <router-outlet></router-outlet>

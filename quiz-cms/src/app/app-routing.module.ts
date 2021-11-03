@@ -5,6 +5,9 @@ import { AuthorizationGuard } from './shared/guards/authorization.guard';
 const routes: Routes = [
   { path: '', loadChildren: () => import('./auth/auth.module').then(module => module.AuthModule)},
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule)},
+  { path: 'questions', loadChildren: () => import('./questions/questions.module').then(module => module.QuestionsModule)},
+  { path: 'contribute', loadChildren: () => import('./contribute/contribute.module').then(module => module.ContributeModule)},
+  { path: 'play', loadChildren: () => import('./play/play.module').then(module => module.PlayModule)},
   { path: '**', redirectTo: ''}
 ];
 
