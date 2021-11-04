@@ -18,4 +18,4 @@ export interface DB{
   questions: Question[]
 }
 
-export type QuestionStatus = 'APPROVED' | 'PENDING' | 'DENIED';
+export type QuestionStatus = 'PRIHVACENO' | 'NA CEKANJU' | 'ODBIJENO';

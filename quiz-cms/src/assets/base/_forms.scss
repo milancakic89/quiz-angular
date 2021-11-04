@@ -60,6 +60,7 @@ input.form-submitted:focus{
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    margin-bottom: 30px;
     .thead,
     .tbody{
         width: 100%;
@@ -87,10 +88,12 @@ input.form-submitted:focus{
     }
 
     .tbody{
-      
+       
         .tr{
             background-color: #fff;
-
+            .th-last{
+                justify-content: flex-end;
+            }
             
             &:hover{
                 background-color: rgb(235, 233, 233);
@@ -106,6 +109,10 @@ input.form-submitted:focus{
         .tr{
             .th{
                 font-weight: 600;
+            }
+
+            .th-last{
+                justify-content: flex-end;
             }
         }
        

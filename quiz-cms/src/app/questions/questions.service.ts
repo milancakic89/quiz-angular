@@ -14,7 +14,7 @@ export class QuestionService{
                     answeredWrong: 0,
                     question_text: 'Koje je boje pikachu',
                     correct_letter: 'C',
-                    status: 'APPROVED',
+                    status: 'PRIHVACENO',
                     correct_text: 'Zute',
                     answers:[
                       {
@@ -40,7 +40,7 @@ export class QuestionService{
                     answeredWrong: 0,
                     question_text: 'Ko se bori sa Musom Kesedzijom',
                     correct_letter: 'A',
-                    status: 'PENDING',
+                    status: 'NA CEKANJU',
                     correct_text: 'Kraljevic Marko',
                     answers:[
                       {

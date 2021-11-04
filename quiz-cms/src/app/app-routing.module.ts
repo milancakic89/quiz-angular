@@ -8,6 +8,9 @@ const routes: Routes = [
   { path: 'questions', loadChildren: () => import('./questions/questions.module').then(module => module.QuestionsModule)},
   { path: 'contribute', loadChildren: () => import('./contribute/contribute.module').then(module => module.ContributeModule)},
   { path: 'play', loadChildren: () => import('./play/play.module').then(module => module.PlayModule)},
+  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(module => module.ProfileModule)},
+  { path: 'titles', loadChildren: () => import('./titles/titles.module').then(module => module.TitlesModule)},
+  { path: 'ranking', loadChildren: () => import('./ranking/ranking.module').then(module => module.RankingModule)},
   { path: '**', redirectTo: ''}
 ];
 

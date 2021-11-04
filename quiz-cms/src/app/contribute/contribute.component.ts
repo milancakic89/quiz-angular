@@ -44,7 +44,7 @@ export class ContributeComponent implements OnInit {
       answeredCorrect: 0,
       answeredWrong: 0,
       question_text: this._newQuestion.question_text,
-      status: 'APPROVED',
+      status: 'PRIHVACENO',
       answers: [
         {
           answer_text: this._newQuestion.letter_a,
