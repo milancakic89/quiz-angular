@@ -1,3 +1,22 @@
+
 <div class="play">
-    <button class="button-play-big">Igraj</button>
+    <div class="time-and-score">
+        <span>Rezultat: <b>14</b></span>
+        <span>Vreme: <b>15</b></span>
+        <span>Promasaji: <span *ngFor="let attempt of attempts" class="attempt"></span> </span>
+    </div>
+    <div class="question-wrapper">
+        <div class="question-box">
+            <h5>This is some question that im am about to ask you and you have 4 options to answer for it in givn amount of seconds?
+                This is some question that im am about to ask you and you have 4 options to answer for it in givn amount of seconds?
+                This is some question that im am about to ask you and you have 4 options to answer for it in givn amount of seconds?
+            </h5>
+        </div>
+        <div class="buttons-box">
+            <button class="answer-button" data-label="A">Some answer 1</button>
+            <button class="answer-button" data-label="B">Some answer 2</button>
+            <button class="answer-button" data-label="C">Some answer 3</button>
+            <button class="answer-button" data-label="D">Some answer 4</button>
+        </div>
+    </div>
 </div>

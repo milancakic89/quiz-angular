@@ -23,13 +23,13 @@ export class Configuration{
               }
               localStorage.setItem('db', JSON.stringify(data))
               this.user.next(data)
-            },2000)
+            },300)
           
           }else{
             setTimeout(()=>{
               const data = JSON.parse(JSON.stringify(localStorage.getItem('db'))) as any
               this.user.next(data)
-            },2000)
+            },300)
         }
     }
 

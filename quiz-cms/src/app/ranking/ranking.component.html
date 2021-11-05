@@ -1,1 +1,29 @@
-<p>ranking works!</p>
+<div class="rankings">
+    <div class="filters">
+        <h4>Rezultat: </h4>
+        <span class="filter-button" 
+              (click)="onSelectFilter(filter)"
+              [ngClass]="{'selected': filter.selected}" 
+              *ngFor="let filter of filters">{{ filter.label }}</span>
+    </div>
+        <div class="table">
+            <div class="thead">
+                <div class="tr">
+                    <div class="th w-10">#</div>
+                    <div class="th w-40">Ime</div>
+                    <div class="th w-20">Rezultat</div>
+                    <div class="th w-20">Odigrao/la</div>
+                </div>
+            </div>
+            <div class="tbody contribute">
+                <div class="tr" *ngFor="let player of rankedPlayers">
+                    <div class="th w-10">1</div>
+                    <div class="th w-40">Neko ime</div>
+                    <div class="th w-20">66</div>
+                    <div class="th w-20">42</div>
+                </div>
+            </div>
+        </div>
+
+   
+</div>

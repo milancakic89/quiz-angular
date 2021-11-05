@@ -4,9 +4,12 @@
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    border: 1px solid gray;
     height: 100%;
     display: flex;
+    background-color: #fff;
+    -webkit-box-shadow: -1px 3px 27px -3px #000000; 
+    box-shadow: -1px 3px 27px -3px #000000;
+    
     .image-and-info{   
         width: 100%;
         display: flex;
