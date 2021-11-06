@@ -3,11 +3,10 @@
         <div class="image" 
             [ngStyle]="{'background-image': 'url('+ imageUrl + ')'}"
             (click)="showInput = true">
-            <button *ngIf="!imageUrl">Promeni</button>
         </div>
         <div class="image-url"  *ngIf="showInput">
             <input name="avatar" placeholder="Url od slike" [(ngModel)]="imageUrl">
-            <button (click)="showInput = false">Ok</button>
+            <button (click)="onChangeAvatar()">Ok</button>
         </div>
         <div class="info">
             <h5 class="yellow-text">Ime: <span class="blue-text">Some name</span></h5>

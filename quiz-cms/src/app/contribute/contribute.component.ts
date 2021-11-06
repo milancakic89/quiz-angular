@@ -63,10 +63,9 @@ export class ContributeComponent implements OnInit {
           answer_letter: 'D',
         }
       ],
-      correct_letter: this._newQuestion.correct,
+      correct_letter: this.selected,
       correct_text: this.newQuestion.correct_answer_text
     }
-
     this.questionService.addQuestionToDB(question);
     form.resetForm();
   }
@@ -78,7 +77,7 @@ export class ContributeComponent implements OnInit {
     letter_b: '',
     letter_c: '',
     letter_d: '',
-    correct: this.selected
+    correct: ''
   }
 
 }

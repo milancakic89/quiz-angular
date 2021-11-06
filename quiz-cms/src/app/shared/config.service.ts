@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 
-interface User{
+export interface User{
   id?: number;
+  image_url?: string;
   name?: string;
   email: string;
   password: string;
@@ -21,7 +22,8 @@ export interface UserAutoLogin{
 
 const isLogged = {
   logged: false,
-  root: false
+  root: false,
+  gameRunning: false
 }
 
 export const logged = () =>{
@@ -32,6 +34,14 @@ export const isRoot = () =>{
   return isLogged.root;
 }
 
+export const setGameRunning = (value: boolean) =>{
+  isLogged.gameRunning = value;
+}
+
+export const isGameRunning = () =>{
+  return isLogged.gameRunning;
+}
+
 export const setRoot = (value: boolean) =>{
   isLogged.root = value;
 }
@@ -39,6 +49,7 @@ export const setRoot = (value: boolean) =>{
 export const setLogged = (value: boolean) =>{
   isLogged.logged = value;
 }
+
 
 @Injectable({providedIn: 'root'})
 export class Configuration{
@@ -51,6 +62,9 @@ export class Configuration{
 
     get isRoot(){return isRoot()}
     set isRoot(value){setRoot(value)}
+
+    get isGameRunning(){return isGameRunning()}
+    set setGameRunning(value: boolean){setGameRunning(value)}
 
     get logged(){return logged()}
     set logged(value){ setLogged(value)}

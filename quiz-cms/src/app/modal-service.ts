@@ -3,4 +3,5 @@ import { EventEmitter, Injectable } from "@angular/core";
 @Injectable({providedIn: 'root'})
 export class ModalWrapper {
         public openPlayModal = new EventEmitter<boolean>();
+        public startGame = new EventEmitter<boolean>();
 }

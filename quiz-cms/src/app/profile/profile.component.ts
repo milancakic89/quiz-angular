@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalWrapper } from '../modal-service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,13 @@ export class ProfileComponent implements OnInit {
 
   public showInput = false;
 
+  public onChangeAvatar(){
+    localStorage.setItem('avatar', this.imageUrl);
+    this.showInput = false;
+  }
+
   ngOnInit(): void {
+    this.imageUrl = localStorage.getItem('avatar') || '';
   }
 
 }

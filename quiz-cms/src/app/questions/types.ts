@@ -7,7 +7,7 @@ export interface Question{
     correct_letter: string;
     correct_text: string;
     opened?: boolean;
-  }
+}
   
 export interface Answers{
     answer_text: string;

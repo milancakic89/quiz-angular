@@ -19,13 +19,13 @@ export class AppComponent implements OnInit{
 
   public user: any;
   public showModal = false;
+  public gameRunning = false;
 
 
   ngOnInit(){
     this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
-        console.log(user)
       }
     })
     if(localStorage.getItem('access') && !this.config.logged){
@@ -34,6 +34,10 @@ export class AppComponent implements OnInit{
     this.modal.openPlayModal.subscribe(bool =>{
         this.showModal = bool;
     });
+
+    this.modal.startGame.subscribe(bool =>{
+      this.gameRunning = bool;
+  });
 
     if(this._initRedirect){
       this._initRedirect = false;
@@ -48,7 +52,9 @@ export class AppComponent implements OnInit{
   }
 
   public closeModal(){
+    this.gameRunning = true;
     this.modal.openPlayModal.emit(false)
+    this.modal.startGame.emit(true);
   }
 
   public logout(){

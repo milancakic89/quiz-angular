@@ -116,6 +116,37 @@
             }
         }
 
+        .wrong-answer{
+            background-color: red !important;
+            color: #fff !important;
+            &:before{
+                background-color: red !important;
+                color: #fff !important;
+            }
+        }
+        .correct-answer{
+            background-color: green !important;
+            color: #fff !important;
+            &:before{
+                background-color: green !important;
+                color: #fff !important;
+            }
+        }
 
+
+    }
+}
+
+.disabled-button,
+.disabled-question{
+    background-color: rgb(235, 235, 235) !important;
+    color: rgb(104, 103, 103) !important;
+    box-shadow: none !important;
+    &:hover{
+        transform: translateY(0px) !important;
+        background-color: rgb(235, 235, 235) !important;
+        cursor: not-allowed !important;
+        color: rgb(104, 103, 103) !important;
+        box-shadow: none !important;
     }
 }
