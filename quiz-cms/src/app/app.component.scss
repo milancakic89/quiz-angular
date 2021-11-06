@@ -92,9 +92,22 @@
     overflow-y: auto;
     background-image: linear-gradient(to bottom, rgb(255,204,64),rgb(255,204,44));
 }
+.logout-button,
+.logout-button a{
+    background-color: red;
+    color: #fff;
 
+    &:hover{
+        opacity: 1;
+        background-color: rgb(219, 0, 0) !important; 
+    }
+}
 .wrapper{
     display: flex;
     width: 100%;
     height: calc(100vh - 80px);
+}
+
+.expand{
+    padding-top: 0 !important;
 }

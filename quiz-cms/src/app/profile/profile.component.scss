@@ -10,6 +10,27 @@
     background-color: #fff;
     -webkit-box-shadow: -1px 3px 27px -3px #000000; 
     box-shadow: -1px 3px 27px -3px #000000;
+
+    
+    .image-url{
+        display: flex;
+        flex-direction: column;
+        top: 100%;
+        left: -50px;
+        width: 300px;
+        border-radius: 5px;
+
+        input{
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            margin: 5px;
+        }
+
+        button{
+            align-self: flex-end;
+        }
+    }
     
     .image-and-info{   
         width: 100%;
@@ -22,9 +43,19 @@
 
         .image{
             width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 200px;
             border-radius: 50%;
-            border: 1px solid gray;
+            border: 3px solid $primary-blue;
+            position: relative;
+            background-position: center;
+
+            p{
+                cursor: pointer;
+            }
+
         }
 
         .info{

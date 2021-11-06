@@ -10,6 +10,9 @@ export class ProfileComponent implements OnInit {
   constructor() { }
 
   public showContributionInfo = false;
+  public imageUrl = '';
+
+  public showInput = false;
 
   ngOnInit(): void {
   }

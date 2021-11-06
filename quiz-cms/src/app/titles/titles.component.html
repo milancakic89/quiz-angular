@@ -1,33 +1,35 @@
 
 <div class="page-content">
-    <form action="">
+    <form #newTitle="ngForm" (submit)="newTitle.valid && onFormSubmit()">
         <div class="form-row">
             <div class="form-row-input">
                 <label class="blue-heading">Titula</label>
-                <input name="titula" type="text" />
+                <input name="titula" [(ngModel)]="title.label" required type="text" />
             </div>
             <div class="form-row-input">
-                <label class="blue-heading">Rezultat veci od</label>
-                <input name="rezultat"  type="number"/>
+                <label class="blue-heading">Rezultat od</label>
+                <input name="rezultat_od" [(ngModel)]="title.starts_from_value" required  type="number"/>
+                <label class="blue-heading" >Rezultat do</label>
+                <input name="rezultat_do"  type="number" [(ngModel)]="title.ends_at_value" required/>
             </div>
         </div>
-        <button class="button-submit">Kreiraj</button>
+        <button class="button-submit" [disabled]="newTitle.invalid">Kreiraj</button>
     </form>
     <div class="table">
         <div class="thead">
             <div class="tr">
-                <div class="th w-10">#</div>
+                <div class="th w-20">#</div>
                 <div class="th w-40">Titula</div>
-                <div class="th w-30">Rezultat veci od</div>
-                <div class="th w-20 th-last">Opcije</div>
+                <div class="th w-30">Rezultat</div>
+                <div class="th w-10 th-last">Opcije</div>
             </div>
         </div>
         <div class="tbody contribute">
-            <div class="tr">
-                <div class="td w-10">#</div>
-                <div class="td w-40">Titula</div>
-                <div class="td w-30">80</div>
-                <div class="td w-20 td-last"><a class="delete-link">obrisi</a></div>
+            <div class="tr" *ngFor="let title of titles">
+                <div class="td w-20">{{ title.id }}</div>
+                <div class="td w-40">{{ title.label }}</div>
+                <div class="td w-30">{{ title.starts_from_value }} - {{ title.ends_at_value }}</div>
+                <div class="td w-10 td-last"><a class="delete-link" (click)="deleteTitle(title.id)">obrisi</a></div>
             </div>
         </div>
     </div>

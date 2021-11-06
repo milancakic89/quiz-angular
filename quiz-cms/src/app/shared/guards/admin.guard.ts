@@ -9,15 +9,15 @@ interface Access{
 }
 
 @Injectable({providedIn: 'root'})
-export class AuthorizationGuard implements CanActivate {
-    constructor(private router: Router, private config: Configuration) { }
+export class AdminGuard implements CanActivate {
+    constructor(private config: Configuration) { }
 
     public canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         
         return new Promise((resolve, reject)=>{
-            if(this.config.logged){
+            if(this.config.isRoot){
                 resolve(true)
                 return;
             }
