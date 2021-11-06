@@ -51,7 +51,7 @@ form{
 
 input.form-submitted:disabled,
 input.form-submitted:focus{
-    border: 1px solid red;
+    border: 1px solid red !important;
 }
 
 
@@ -84,6 +84,11 @@ input.form-submitted:focus{
                 white-space: nowrap;
                 padding: 0px 8px;
             }
+
+            .td{
+                color: $primary-blue;
+                font-weight: 600;
+            }
         }
     }
 
@@ -91,7 +96,8 @@ input.form-submitted:focus{
        
         .tr{
             background-color: #fff;
-            .th-last{
+            .th-last,
+            .td-last{
                 justify-content: flex-end;
             }
             

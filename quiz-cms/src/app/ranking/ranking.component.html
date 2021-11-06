@@ -1,6 +1,6 @@
 <div class="rankings">
     <div class="filters">
-        <h4>Rezultat: </h4>
+        <h4 class="blue-heading-big">Rezultat: </h4>
         <span class="filter-button" 
               (click)="onSelectFilter(filter)"
               [ngClass]="{'selected': filter.selected}" 
@@ -17,10 +17,10 @@
             </div>
             <div class="tbody contribute">
                 <div class="tr" *ngFor="let player of rankedPlayers">
-                    <div class="th w-10">1</div>
-                    <div class="th w-40">Neko ime</div>
-                    <div class="th w-20">66</div>
-                    <div class="th w-20">42</div>
+                    <div class="td w-10">1</div>
+                    <div class="td w-40">Neko ime</div>
+                    <div class="td w-20">66</div>
+                    <div class="td w-20">42</div>
                 </div>
             </div>
         </div>

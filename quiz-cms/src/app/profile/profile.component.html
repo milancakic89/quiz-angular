@@ -2,10 +2,20 @@
     <div class="image-and-info">
         <div class="image"></div>
         <div class="info">
-            <h5>Name: Some name</h5>
-            <h5>Title: Some title</h5>
-            <h5>Best score: 1000</h5>
-            <h5>Contributions: 11</h5>
+            <h5 class="yellow-text">Ime: <span class="blue-text">Some name</span></h5>
+            <h5 class="yellow-text">Titula: <span class="blue-text">Some title</span></h5>
+            <h5 class="yellow-text">Rezultat: <span class="blue-text">1000</span></h5>
+            <h5 class="yellow-text inline-center">Doprinos: 
+                <span class="blue-text">11</span>
+                <span class="info-button" (click)="showContributionInfo = !showContributionInfo">
+                    <span class="info-box" *ngIf="showContributionInfo">
+                        Svakim dodavanjem pitanja obogacujete ovaj kviz.
+                        Za uzvrat za svakih 30 odobrenih pitanja smanjujete
+                        vase vreme za koje vam se vracaju zivoti za 10 minuta,
+                        do maksimum od 30 minuta za 90 odobrenih pitanja
+                    </span>
+                </span>
+            </h5>
         </div>
     </div>
 </div>

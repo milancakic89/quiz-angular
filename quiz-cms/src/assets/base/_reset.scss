@@ -47,3 +47,19 @@ h5{
 a{
     text-decoration: none;
 }
+
+input,
+textarea{
+    border: none;
+
+    &:focus{
+        border: none;
+        outline: none;
+    }
+}
+
+button{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}

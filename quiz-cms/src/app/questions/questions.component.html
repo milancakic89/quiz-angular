@@ -14,23 +14,23 @@
         <div class="tbody contribute">
             <div class="tr" *ngFor="let question of questions; let i = index"
                  (click)="question.opened = !question.opened">
-                <div class="th w-10">{{ i }}</div>
-                <div class="th w-40">{{ question.question_text }}</div>
-                <div class="th w-20">{{ question.correct_text}}</div>
-                <div class="th w-20">
+                <div class="td w-10">{{ i }}</div>
+                <div class="td w-40">{{ question.question_text }}</div>
+                <div class="td w-20">{{ question.correct_text}}</div>
+                <div class="td w-20">
                     <span [ngClass]="{
                         'approved': question.status === 'PRIHVACENO',
                         'pending': question.status === 'NA CEKANJU',
                         'denied': question.status === 'ODBIJENO'
                     }">{{question.status | titlecase}}</span>
                 </div>
-                <div class="th w-10 th-last">
+                <div class="td w-10 th-last">
                     <a class="delete-link">obrisi</a>
                 </div>
                 <div class="question-details" *ngIf="question.opened">
-                    <p>Pitanje: {{ question.question_text }}</p>
-                    <p><b>Tacan odgovor: {{ question.correct_text }}</b></p>
-                    <p *ngFor="let answer of question.answers; let j = index">
+                    <p class="yellow-text">Pitanje: {{ question.question_text }}</p>
+                    <p class="blue-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
+                    <p class="yellow-text" *ngFor="let answer of question.answers; let j = index">
                         Odgovor {{j + 1}}: {{ answer.answer_text }}
                     </p>
                 </div>

@@ -1,3 +1,5 @@
+@import '../../assets/abstract/variables';
+
 .page-content{
     padding: 30px 100px;
     .form-row{
@@ -6,5 +8,7 @@
     textarea{
         width: 100%;
         margin-bottom: 40px;
+        max-height: 160px;
+        color: $primary-blue;
     }
 }

@@ -1,7 +1,7 @@
 <div class="page-content">
     <form action="" #questionForm="ngForm" (submit)="questionForm.valid && onFormSubmit(questionForm)">
         <div class="form-row column">
-            <label for="">Pitanje</label>
+            <label for="" class="blue-heading">Pitanje</label>
             <textarea name="question"
                       cols="30" 
                       rows="10" 
@@ -10,7 +10,7 @@
         </div>
         <div class="form-row">
             <div class="form-row-input">
-                <label for="">A</label>
+                <label for="" class="blue-heading">A</label>
                 <input name="letter_a" 
                         type="text"
                         required
@@ -18,7 +18,7 @@
                         [ngClass]="{'form-submitted': questionForm.submitted}">
             </div>
             <div class="form-row-input">
-                <label for="">B</label>
+                <label for="" class="blue-heading">B</label>
                 <input name="letter_b" 
                         type="text"
                         required
@@ -28,7 +28,7 @@
         </div>
         <div class="form-row">
             <div class="form-row-input">
-                <label for="">C</label>
+                <label for="" class="blue-heading">C</label>
                 <input name="letter_c" 
                       type="text"
                       required
@@ -36,7 +36,7 @@
                       [ngClass]="{'form-submitted': questionForm.submitted}">
             </div>
             <div class="form-row-input">
-                <label for="">D</label>
+                <label for="" class="blue-heading">D</label>
                 <input name="letter_d" 
                        type="text"
                        required
@@ -46,7 +46,7 @@
         </div>
         <div class="form-row">
             <div class="form-row-input">
-                <label for="">Tacan odgovor</label>
+                <label for="" class="blue-heading">Tacan odgovor</label>
                 <ng-select  name="correct_letter" 
                             [items]="items" 
                             required

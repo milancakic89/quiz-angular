@@ -9,6 +9,8 @@ export class ProfileComponent implements OnInit {
 
   constructor() { }
 
+  public showContributionInfo = false;
+
   ngOnInit(): void {
   }
 
