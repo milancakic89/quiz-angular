@@ -7,6 +7,7 @@ export interface User{
   image_url?: string;
   name?: string;
   email: string;
+  title: string;
   password: string;
   score: number;
   contributions: number;
@@ -77,6 +78,8 @@ export class Configuration{
                   name: 'Admin',
                   email: 'test@test.com',
                   password: 'korleone',
+                  image_url: 'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
+                  title: 'Begginer',
                   score: 0,
                   contributions: 0,
                   roles: ['admin']
@@ -85,7 +88,9 @@ export class Configuration{
                   id: Date.now() + 10,
                   email: 'test1@test.com',
                   password: 'korleone',
+                  image_url: 'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
                   score: 0,
+                  title: 'Begginer',
                   contributions: 0,
                   roles: ['user']
                 }
@@ -121,6 +126,7 @@ export class Configuration{
         id: Date.now(),
         email,
         password,
+        title: 'Begginer',
         score: 0,
         contributions: 0,
         roles: ['user']

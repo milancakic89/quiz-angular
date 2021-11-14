@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalWrapper } from './modal-service';
+import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
 
 
@@ -20,6 +20,11 @@ export class AppComponent implements OnInit{
   public user: any;
   public showModal = false;
   public gameRunning = false;
+  public gameResults: GameData = {
+    success: false,
+    showModal: false,
+    results: null
+  };
 
 
   ngOnInit(){
@@ -31,13 +36,30 @@ export class AppComponent implements OnInit{
     if(localStorage.getItem('access') && !this.config.logged){
       this.config.attemptAutoLogin();
   }
-    this.modal.openPlayModal.subscribe(bool =>{
-        this.showModal = bool;
-    });
+
+  this.modal.gameResults.subscribe(gameData =>{
+    if(gameData){
+      this.gameRunning = false;
+      this.modal.startGame.next(false);
+      this.gameResults.results = gameData.results;
+      this.gameResults.showModal = gameData.showModal;
+      this.gameResults.success = gameData.success;
+      setTimeout(()=>{
+        this.gameResults.showModal = false;
+        this.gameResults.results = null;
+        this.gameResults.success = false;
+        this.router.navigateByUrl('/profile')
+      }, 2000)
+    }
+   
+  })
 
     this.modal.startGame.subscribe(bool =>{
       this.gameRunning = bool;
   });
+
+
+
 
     if(this._initRedirect){
       this._initRedirect = false;
@@ -48,13 +70,7 @@ export class AppComponent implements OnInit{
   }
 
   public play(){
-    this.modal.openPlayModal.emit(true)
-  }
-
-  public closeModal(){
-    this.gameRunning = true;
-    this.modal.openPlayModal.emit(false)
-    this.modal.startGame.emit(true);
+    this.showModal = true;
   }
 
   public logout(){

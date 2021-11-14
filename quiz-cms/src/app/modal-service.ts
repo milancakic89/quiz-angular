@@ -1,7 +1,14 @@
 import { EventEmitter, Injectable } from "@angular/core";
+import { Subject } from "rxjs";
+
+export interface GameData{
+        success: boolean;
+        showModal: boolean;
+        results: any;
+}
 
 @Injectable({providedIn: 'root'})
 export class ModalWrapper {
-        public openPlayModal = new EventEmitter<boolean>();
-        public startGame = new EventEmitter<boolean>();
+        public gameResults = new Subject<GameData>();
+        public startGame = new Subject<boolean>();
 }

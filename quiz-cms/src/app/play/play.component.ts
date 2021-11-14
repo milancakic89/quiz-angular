@@ -1,5 +1,5 @@
 import { NonNullAssert } from '@angular/compiler';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalWrapper } from '../modal-service';
 import { QuestionService } from '../questions/questions.service';
@@ -10,7 +10,7 @@ import { Answers, Question } from '../questions/types';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnInit, OnDestroy {
+export class PlayComponent implements OnDestroy, OnChanges {
 
   constructor(private modal: ModalWrapper, 
               private router: Router,
@@ -27,6 +27,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   public timeInterval: any = null;
   public questionSelected = false;
   public selectedLetter = '';
+  public showModal = true;
   public nextQuestionInterval = 1000;
   public currentQuestion: Question = {
     answeredCorrect: 0,
@@ -39,13 +40,10 @@ export class PlayComponent implements OnInit, OnDestroy {
     opened: false
   }
 
-  ngOnInit(): void {
-    this.modal.openPlayModal.emit(true);
+  ngOnChanges(): void {
     this.modal.startGame.subscribe(bool =>{
+      console.log(bool)
       if(bool){
-        this.score = 0;
-        this.time = 15;
-        this.questionCount = 0;
         this.initGame();
       }
     })
@@ -53,10 +51,13 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     clearInterval(this.timeInterval);
-    this.modal.openPlayModal.emit(false);
   }
 
   public initGame(){
+    this.modal.startGame.next(true)
+    this.score = 0;
+    this.time = 15;
+    this.questionCount = 0;
     const db = this.questionService.getDB().questions;
     this.questions = db;
     this.getQuestion();
@@ -89,17 +90,33 @@ public timeWarning(){
   this.questionSelected = true;
   this.stopTime();
   setTimeout(()=>{
-    alert('getting question')
     this.getQuestion();  
   },this.nextQuestionInterval)
   
 }
-
 public gameOver(message?: string){
   this.stopTime();
-  alert(message)
-  this.modal.startGame.emit(false)
-  this.router.navigateByUrl('/profile');
+  let points = 0;
+  if(this.score > 2 && this.score <= 3){
+    points = 1;
+  }
+  if(this.score > 3 && this.score <= 5){
+    points = 2
+  }
+  if(this.score > 5 && this.score <= 9){
+    points = 3;
+  }
+  this.modal.gameResults.next({
+    success: points !== 0,
+    results: points,
+    showModal: true
+  })
+  this.modal.startGame.next(false)
+}
+
+public closeModal(){
+  this.showModal = false;
+  this.initGame();
 }
 
   public onSelectedAnswer(answer: Answers){

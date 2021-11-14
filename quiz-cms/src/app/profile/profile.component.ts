@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalWrapper } from '../modal-service';
+import { Configuration, User } from '../shared/config.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +8,13 @@ import { ModalWrapper } from '../modal-service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private config: Configuration) { }
 
   public showContributionInfo = false;
   public imageUrl = '';
 
   public showInput = false;
+  public user = null as unknown as User;
 
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
@@ -23,6 +23,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageUrl = localStorage.getItem('avatar') || '';
+    this.config.user.subscribe(user =>{
+      if(user){
+        this.user = user;
+        console.log(user)
+      }
+    })
   }
 
 }

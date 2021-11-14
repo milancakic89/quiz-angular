@@ -1,19 +1,19 @@
 <div class="profile">
     <div class="image-and-info">
         <div class="image" 
-            [ngStyle]="{'background-image': 'url('+ imageUrl + ')'}"
+            [ngStyle]="{'background-image': 'url('+ user?.image_url + ')'}"
             (click)="showInput = true">
         </div>
         <div class="image-url"  *ngIf="showInput">
             <input name="avatar" placeholder="Url od slike" [(ngModel)]="imageUrl">
             <button (click)="onChangeAvatar()">Ok</button>
         </div>
-        <div class="info">
-            <h5 class="yellow-text">Ime: <span class="blue-text">Some name</span></h5>
-            <h5 class="yellow-text">Titula: <span class="blue-text">Some title</span></h5>
-            <h5 class="yellow-text">Rezultat: <span class="blue-text">1000</span></h5>
+        <div class="info" *ngIf="user">
+            <h5 class="yellow-text">Ime: <span class="blue-text">{{ user.name }}</span></h5>
+            <h5 class="yellow-text">Titula: <span class="blue-text">{{user.title}}</span></h5>
+            <h5 class="yellow-text">Rezultat: <span class="blue-text">{{user.score}}</span></h5>
             <h5 class="yellow-text inline-center">Doprinos: 
-                <span class="blue-text">11</span>
+                <span class="blue-text">{{user.contributions}}</span>
                 <span class="info-button" (click)="showContributionInfo = !showContributionInfo">
                     <span class="info-box" *ngIf="showContributionInfo">
                         Svakim dodavanjem pitanja obogacujete ovaj kviz.
@@ -24,5 +24,6 @@
                 </span>
             </h5>
         </div>
+        <a routerLink="/play" class="button-play">Igraj</a>
     </div>
 </div>

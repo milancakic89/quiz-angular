@@ -16,6 +16,20 @@
         }
     }
 
+    &-play{
+        padding: 15px 25px;
+        background-color: $primary-blue;
+        color: #fff;
+        font-weight: 600;
+        font-size: 18px;
+        border-radius: 5px;
+        opacity: .9;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+
     &-gray{
         background-color: gray;
         cursor: not-allowed;

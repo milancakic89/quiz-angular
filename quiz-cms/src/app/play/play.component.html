@@ -1,4 +1,8 @@
-
+<div class="play-new" *ngIf="showModal">
+    <div class="modal-play open">
+        <button (click)="closeModal()">Play</button>
+    </div>
+</div>
 <div class="play">
     <div class="time-and-score">
         <span>Rezultat: <b>{{ score }}</b></span>

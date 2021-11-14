@@ -1,9 +1,14 @@
+@import '../assets/abstract/variables';
 
-.modal-play{
+
+.modal-game-results{
     width: 100%;
     height: 0;
     overflow: hidden;
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 50px;
     left: 0;
     background-color: rgb(255,204,64);
@@ -11,28 +16,11 @@
     backdrop-filter: blur(2px);
     transition: all .2s linear;
 
-    button{
-        position: absolute;
-        left: 50%;
-        top: 45%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        width: 300px;
-        height: 120px;
-        display: flex;
-        font-size: 35px;
-        cursor: pointer;
+    h3{
+        text-align: center;
         color: #fff;
-        border: none;
-        border-radius: 5px;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(0, 127, 185);
-
-        &:hover{
-            background-color: rgb(2, 104, 151);
-            margin-top: -3px;
-        }
+        -webkit-text-stroke: 2px $primary-blue;
+        font-weight: 600;
     }
 }
 
@@ -99,9 +87,37 @@
     width: 100%;
     height: calc(100vh - 80px);
 }
-.play-link{
-    background-color: rgb(255,204,64);
+
+
+@keyframes arrow {
+    0%{
+        left: -30%;
+    }
+    50%{
+        left: -10%;
+    }
+    100%{
+        left: -30%;
+    }
 }
 .expand{
     padding-top: 0 !important;
+}
+
+.play-link{
+    display: inline-block;
+    position: relative;
+    transition: all .2s linear;
+    &:before{
+        content: '->';
+        display: inline-block;
+        font-size: 30px;
+        color: yellow;
+        font-weight: 600;
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        left: -10px;
+        animation: arrow 1s ease-in-out infinite;
+    }
 }

@@ -2,7 +2,7 @@
 <ul class="header" *ngIf="user && isLogged && !gameRunning">
     <li><a routerLink="/questions" routerLinkActive="active-link">Pitanja</a></li>
     <li><a routerLink="/titles" routerLinkActive="active-link" *ngIf="isRoot">Titule</a></li>
-    <li class="play-link"><a (click)="play()" routerLink="/play" routerLinkActive="active-link play-link">Igraj</a></li>
+    <li><a routerLink="/play" routerLinkActive="active-link">Igraj</a></li>
     <li><a routerLink="/contribute" routerLinkActive="active-link">Dodaj</a></li>
     <li><a routerLink="/ranking" routerLinkActive="active-link">Top lista</a></li>
     <li><a routerLink="/profile" routerLinkActive="active-link">Profil</a></li>
@@ -10,8 +10,13 @@
 </ul>
 
 <div class="content" [ngClass]="{'expand': !isLogged}">
-    <div class="modal-play" [ngClass]="{'open': showModal}" *ngIf="showModal">
-        <button (click)="closeModal()">Play</button>
+    <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
+        <div *ngIf="gameResults.success">
+            <h3>Cestitamo, osvojili ste {{ gameResults.results }} poen/a</h3>
+        </div>
+        <div *ngIf="!gameResults.success">
+            <h3>Niste osvojili poen, pokusajte ponovo</h3>
+        </div>
     </div>
     <router-outlet></router-outlet>
 </div>

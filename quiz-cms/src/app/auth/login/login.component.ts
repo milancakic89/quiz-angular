@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
-        console.log(user)
         this.router.navigate(['/profile']);
       }
     })
