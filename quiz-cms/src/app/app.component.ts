@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Feedback, FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
 
@@ -11,15 +12,22 @@ import { Configuration } from './shared/config.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'quiz-cms';
+  title = 'Quiz';
 
-  constructor(private config: Configuration, private modal: ModalWrapper, private router: Router){}
+  constructor(private config: Configuration, 
+              private modal: ModalWrapper,
+              private feedbackService: FeedbackMessageService,
+              private router: Router){}
   get isRoot(){return this.config.isRoot}
   get isLogged(){return this.config.logged}
 
   public user: any;
   public showModal = false;
   public gameRunning = false;
+  public feedbackClass = '';
+  public feedbackMessage = 'test';
+  public feedbackTimeInSeconds = 5;
+  public spinner = true;
   public gameResults: GameData = {
     success: false,
     showModal: false,
@@ -28,14 +36,30 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(){
+    this.feedbackService.feedback.subscribe((feedback: Feedback) =>{
+      this.feedbackClass = feedback.success.toString();
+      this.feedbackMessage = feedback.message;
+      this.clearFeedback();
+    });
+
+    if(!this.user && !localStorage.getItem('access')){
+        this.spinner = false;
+    }
+
     this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
+        this.spinner = false;
       }
     })
     if(localStorage.getItem('access') && !this.config.logged){
-      this.config.attemptAutoLogin();
-  }
+          this.config.attemptAutoLogin();
+          setTimeout(()=>{
+            this.spinner = false;
+          }, 3000)
+    }
+
+  
 
   this.modal.gameResults.subscribe(gameData =>{
     if(gameData){
@@ -67,6 +91,13 @@ export class AppComponent implements OnInit{
       return;
     }
 
+  }
+
+  public clearFeedback(){
+    setTimeout(()=>{
+        this.feedbackClass = '';
+        this.feedbackMessage = '';
+    }, this.feedbackTimeInSeconds * 1000)
   }
 
   public play(){

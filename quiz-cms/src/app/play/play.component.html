@@ -9,45 +9,46 @@
         <span>Vreme: <b>{{ time }}</b></span>
         <span>Promasaji: <span *ngFor="let attempt of attempts" class="attempt"></span> </span>
     </div>
-    <div class="question-wrapper" *ngIf="currentQuestion">
+    <div class="question-wrapper" *ngIf="question">
         <div class="question-box" [ngClass]="{'disabled-question':questionSelected}">
             <h5>
-                {{ currentQuestion.question_text }}
+                {{ question.question }}
             </h5>
         </div>
-        <div class="buttons-box" *ngIf="questions.length">
-            <button class="answer-button" 
+        <div class="buttons-box" *ngIf="question">
+            <button class="answer-button"
+                    *ngFor="let answer of question.answers"
                     [ngClass]="{'disabled-button':questionSelected,
-                    'wrong-answer': questionSelected && currentQuestion.correct_letter !== 'A' && selectedLetter === 'A',
-                    'correct-answer': currentQuestion.correct_letter === 'A' && selectedLetter === 'A'}" 
-                    data-label="A" 
-                    (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[0])">
-                         {{ currentQuestion.answers[0].answer_text }}
+                    'wrong-answer': questionSelected && question.correct_letter !== answer.letter && selectedLetter === answer.letter,
+                    'correct-answer': question.correct_letter === answer.letter && selectedLetter === answer.letter}" 
+                    [attr.data-label]="answer.letter" 
+                    (click)="!questionSelected && onSelectedAnswer(answer)">
+                         {{ answer.text }}
             </button>
-            <button class="answer-button" 
+            <!-- <button class="answer-button" 
                     [ngClass]="{'disabled-button':questionSelected,
                                 'wrong-answer': questionSelected && currentQuestion.correct_letter !== 'B' && selectedLetter === 'B',
                                 'correct-answer':questionSelected &&  currentQuestion.correct_letter === 'B' && selectedLetter === 'B'}" 
                     data-label="B" 
                     (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[1])">
-                        {{ currentQuestion.answers[1].answer_text }}
-            </button>
-            <button class="answer-button" 
+                        {{ currentQuestion.answers[1].text }}
+            </button> -->
+            <!-- <button class="answer-button" 
                     [ngClass]="{'disabled-button':questionSelected,
                     'wrong-answer':questionSelected &&  currentQuestion.correct_letter !== 'C' && selectedLetter === 'C',
                     'correct-answer':questionSelected &&  currentQuestion.correct_letter === 'C' && selectedLetter === 'C'}" 
                     data-label="C" 
                     (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[2])">
-                        {{ currentQuestion.answers[2].answer_text }}
-            </button>
-            <button class="answer-button" 
+                        {{ currentQuestion.answers[2].text }}
+            </button> -->
+            <!-- <button class="answer-button" 
                     [ngClass]="{'disabled-button':questionSelected,
                     'wrong-answer':questionSelected && currentQuestion.correct_letter !== 'D' && selectedLetter === 'D',
                     'correct-answer':questionSelected && currentQuestion.correct_letter === 'D' && selectedLetter === 'D'}" 
                     data-label="D" 
                     (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[3])">
-                        {{ currentQuestion.answers[3].answer_text }}
-            </button>
+                        {{ currentQuestion.answers[3].text }}
+            </button> -->
         </div>
     </div>
 </div>

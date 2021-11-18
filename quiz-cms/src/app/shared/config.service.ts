@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
+import { ApiService } from "./api.servise";
 
 export interface User{
   id?: number;
@@ -14,12 +15,28 @@ export interface User{
   roles: string[];
 }
 
+export interface UserResponse{
+  success: boolean;
+  message: string;
+  user: User;
+}
+
 export interface UserAutoLogin{
   email?: string;
   password?: string;
   roles?: string[];
 }
 
+export interface LoginResponse{
+  success: boolean;
+  message: string;
+}
+
+export interface SignupResponse { 
+  success: boolean;
+  message: string;
+  data: any;
+}
 
 const isLogged = {
   logged: false,
@@ -51,12 +68,18 @@ export const setLogged = (value: boolean) =>{
   isLogged.logged = value;
 }
 
+export const setToken = (value: string) => {
+  localStorage.setItem('access', value)
+}
+
+export const getToken = () => {
+  localStorage.getItem('access')
+}
+
 
 @Injectable({providedIn: 'root'})
 export class Configuration{
-    constructor(private router: Router){
-        this.initDB();
-    }
+    constructor(private router: Router, private service: ApiService){ }
 
     get user() { return this._user}
     set user(value){this._user.next(value)}
@@ -70,79 +93,30 @@ export class Configuration{
     get logged(){return logged()}
     set logged(value){ setLogged(value)}
 
-    private initDB(){
-        if(!localStorage.getItem('db')){
-              const data: User[] = [
-                {
-                  id: Date.now(),
-                  name: 'Admin',
-                  email: 'test@test.com',
-                  password: 'korleone',
-                  image_url: 'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
-                  title: 'Begginer',
-                  score: 0,
-                  contributions: 0,
-                  roles: ['admin']
-                },
-                {
-                  id: Date.now() + 10,
-                  email: 'test1@test.com',
-                  password: 'korleone',
-                  image_url: 'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
-                  score: 0,
-                  title: 'Begginer',
-                  contributions: 0,
-                  roles: ['user']
-                }
-              ]
-              localStorage.setItem('db', JSON.stringify(data))
-          }
+
+  public createUser(email: string, password: string){
+      return this.service.post('/signup', { email, password });
     }
 
-    public async getUser(email: string, password: string): Promise<User | null>{
-      return new Promise((resolve, reject)=>{
-        const db = JSON.parse(localStorage.getItem('db') || '') as User[];
-        if(db){
-          const user = db.find(user => user.email === email && user.password === password);
-          if(user){
-            this.isRoot = user.roles.some( role => role === 'admin');
-            const credentials = {email: user.email, password: user.password}
-            localStorage.setItem('access', JSON.stringify(credentials));
-            this.logged = true;
-            this._user.next(user);
-            resolve(user);
-            return;
-          }
-          this._logged = false;
-          this._user.next(null);
-          resolve(null);
-        }
-      })
+    public login(email: string, password: string){
+       return this.service.post('/login', {email, password});
     }
 
-    public createUser(email: string, password: string){
-      const db = JSON.parse(localStorage.getItem('db') || '') as User[];
-      const newUser: User = {
-        id: Date.now(),
-        email,
-        password,
-        title: 'Begginer',
-        score: 0,
-        contributions: 0,
-        roles: ['user']
-      }
-
-      db.push(newUser)
-      localStorage.setItem('db', JSON.stringify(db))
+  public saveUser(user: User, token: string){
+      isLogged.root = user.roles.some((role: any) => role === 'ADMIN');
+      isLogged.logged = true;
+      setToken(token);
+      this._user.next(user);
     }
 
     public async attemptAutoLogin(){
-      if(localStorage.getItem('access')){
-        const savedUser = JSON.parse(localStorage.getItem('access') || '') as UserAutoLogin;
-        if(savedUser && savedUser.email && savedUser.password){
-          await this.getUser(savedUser.email, savedUser.password)
+      this.service.post('/autologin', {}).subscribe((data: UserResponse | any) =>{
+        if(data && data.user){
+          this.isRoot = data.user.roles.some((role: any) => role === 'ADMIN');
+          this.logged = true;
+          this._user.next(data.user);
         }
-      }
+      });
     }
 
     public logout(){
@@ -153,6 +127,4 @@ export class Configuration{
     }
 
     private _user = new BehaviorSubject<any>(null);
-    private _root= false;
-    private _logged = false;
 }

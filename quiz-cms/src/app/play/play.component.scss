@@ -8,7 +8,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
     .time-and-score{
         padding: 5px 10px 10px 10px ;
         width: 100%;
@@ -56,7 +56,7 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        
+        justify-content: space-between;
         .question-box{
             background-color: #fff;
             padding: 20px;

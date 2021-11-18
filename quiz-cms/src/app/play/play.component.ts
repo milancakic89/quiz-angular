@@ -23,17 +23,15 @@ export class PlayComponent implements OnDestroy, OnChanges {
   public score = 0;
 
   public questionCount = 0;
-  public questions: Question[] = [];
+  public question: Question | any = null;
   public timeInterval: any = null;
   public questionSelected = false;
   public selectedLetter = '';
   public showModal = true;
   public nextQuestionInterval = 1000;
   public currentQuestion: Question = {
-    answeredCorrect: 0,
-    answeredWrong: 0,
-    question_text: '',
-    status: 'PRIHVACENO',
+    question: '',
+    status: 'NA CEKANJU',
     answers: [],
     correct_letter: '',
     correct_text: '',
@@ -42,7 +40,6 @@ export class PlayComponent implements OnDestroy, OnChanges {
 
   ngOnChanges(): void {
     this.modal.startGame.subscribe(bool =>{
-      console.log(bool)
       if(bool){
         this.initGame();
       }
@@ -58,22 +55,22 @@ export class PlayComponent implements OnDestroy, OnChanges {
     this.score = 0;
     this.time = 15;
     this.questionCount = 0;
-    const db = this.questionService.getDB().questions;
-    this.questions = db;
     this.getQuestion();
   }
 
   public getQuestion(){
-    this.selectedLetter = '';
-    this.time = 15;
-    if(this.questions[this.questionCount]){
-      this.currentQuestion = JSON.parse(JSON.stringify(this.questions[this.questionCount]))
-      this.questionCount++;
-      this.questionSelected = false;
-      this.initTime();
-    }else{
-      this.gameOver('No more questions');
+    if (this._questionCounter > 15 || !this.attempts.length){
+      this.gameOver('End of game');
     }
+    this._questionCounter++;
+    this.questionSelected = false;
+    this.questionService.getSingleQuestion().subscribe((data: any) =>{
+      this.question = data.data;
+      this.selectedLetter = '';
+      this.time = 15;
+      this.initTime();
+    })
+
   }
 
   public initTime(){
@@ -97,14 +94,17 @@ public timeWarning(){
 public gameOver(message?: string){
   this.stopTime();
   let points = 0;
-  if(this.score > 2 && this.score <= 3){
+  if(this.score > 5 && this.score <= 8){
     points = 1;
   }
-  if(this.score > 3 && this.score <= 5){
+  if(this.score > 8 && this.score <= 11){
     points = 2
   }
-  if(this.score > 5 && this.score <= 9){
+  if (this.score > 11 && this.score <= 14){
     points = 3;
+  }
+  if (this.score === 15) {
+    points = 5;
   }
   this.modal.gameResults.next({
     success: points !== 0,
@@ -120,10 +120,10 @@ public closeModal(){
 }
 
   public onSelectedAnswer(answer: Answers){
-    this.selectedLetter = answer.answer_letter;
+    this.selectedLetter = answer.letter;
     this.stopTime();
     this.questionSelected = true;
-    if(answer.answer_letter === this.currentQuestion.correct_letter){
+    if(answer.letter === this.question.correct_letter){
        this.score++;
     }else{
       this.attempts.pop();
@@ -152,5 +152,6 @@ public closeModal(){
   }
 
   private _attempts = [1,1,1];
+  private _questionCounter = 1;
 
 }

@@ -1,4 +1,7 @@
 
+<div class="spinner" *ngIf="spinner">
+    <h1>LOADING</h1>
+</div>
 <ul class="header" *ngIf="user && isLogged && !gameRunning">
     <li><a routerLink="/questions" routerLinkActive="active-link">Pitanja</a></li>
     <li><a routerLink="/titles" routerLinkActive="active-link" *ngIf="isRoot">Titule</a></li>
@@ -8,7 +11,7 @@
     <li><a routerLink="/profile" routerLinkActive="active-link">Profil</a></li>
     <li class="logout-button"><a (click)="logout()" >Izloguj se</a></li>
 </ul>
-
+<h4 class="feedback-message {{feedbackClass}}">{{ feedbackMessage }}</h4>
 <div class="content" [ngClass]="{'expand': !isLogged}">
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
         <div *ngIf="gameResults.success">

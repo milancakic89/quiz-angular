@@ -1,3 +1,3 @@
 export const basicDetails = {
-    title: 'Kviz opsteg znanja'
+    title: 'Kviz znanja'
 }

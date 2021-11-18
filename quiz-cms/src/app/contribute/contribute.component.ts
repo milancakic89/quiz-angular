@@ -25,59 +25,60 @@ export class ContributeComponent implements OnInit {
 
   public onChange(){
     console.log(this.selected)
+    this.newQuestion.correct = this.selected;
   }
 
   public onFormSubmit(form: NgForm){
     if(this._newQuestion.correct === 'A'){
-      this.newQuestion.correct_answer_text = this._newQuestion.letter_a
+      this.newQuestion.correct_text = this._newQuestion.letter_a
     }
     if(this._newQuestion.correct === 'B'){
-      this.newQuestion.correct_answer_text = this._newQuestion.letter_b
+      this.newQuestion.correct_text = this._newQuestion.letter_b
     }
     if(this._newQuestion.correct === 'C'){
-      this.newQuestion.correct_answer_text = this._newQuestion.letter_c
+      this.newQuestion.correct_text = this._newQuestion.letter_c
     }
     if(this._newQuestion.correct === 'D'){
-      this.newQuestion.correct_answer_text = this._newQuestion.letter_d
+      this.newQuestion.correct_text = this._newQuestion.letter_d
     }
+ 
     const question: Question = {
-      answeredCorrect: 0,
-      answeredWrong: 0,
-      question_text: this._newQuestion.question_text,
-      status: 'PRIHVACENO',
+      question: this._newQuestion.question_text,
       answers: [
         {
-          answer_text: this._newQuestion.letter_a,
-          answer_letter: 'A',
+          text: this._newQuestion.letter_a,
+          letter: 'A',
         },
         {
-          answer_text: this._newQuestion.letter_b,
-          answer_letter: 'B',
+          text: this._newQuestion.letter_b,
+          letter: 'B',
         },
         {
-          answer_text: this._newQuestion.letter_c,
-          answer_letter: 'C',
+          text: this._newQuestion.letter_c,
+          letter: 'C',
         },
         {
-          answer_text: this._newQuestion.letter_d,
-          answer_letter: 'D',
+          text: this._newQuestion.letter_d,
+          letter: 'D',
         }
       ],
       correct_letter: this.selected,
-      correct_text: this.newQuestion.correct_answer_text
+      correct_text: this.newQuestion.correct_text
     }
-    this.questionService.addQuestionToDB(question);
+    this.questionService.addQuestion(question).subscribe((data: any) =>{
+      console.log(data)
+    })
     form.resetForm();
   }
 
   private _newQuestion = {
     question_text: '',
-    correct_answer_text: '',
+    correct_text: '',
     letter_a: '',
     letter_b: '',
     letter_c: '',
     letter_d: '',
-    correct: ''
+    correct: 'A'
   }
 
 }

@@ -1,8 +1,7 @@
 export interface Question{
-    answeredCorrect: number;
-    answeredWrong: number;
-    question_text: string;
-    status: QuestionStatus;
+    _id?: any;
+    question: string;
+    status?: QuestionStatus;
     answers: Answers[];
     correct_letter: string;
     correct_text: string;
@@ -10,8 +9,8 @@ export interface Question{
 }
   
 export interface Answers{
-    answer_text: string;
-    answer_letter: string;
+    text: string;
+    letter: string;
 }
 
 export interface DB{

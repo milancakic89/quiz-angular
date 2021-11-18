@@ -15,7 +15,7 @@
             <div class="tr" *ngFor="let question of questions; let i = index"
                  (click)="question.opened = !question.opened">
                 <div class="td w-10">{{ i }}</div>
-                <div class="td w-40">{{ question.question_text }}</div>
+                <div class="td w-40">{{ question.question }}</div>
                 <div class="td w-20">{{ question.correct_text}}</div>
                 <div class="td w-20">
                     <span [ngClass]="{
@@ -25,13 +25,13 @@
                     }">{{question.status | titlecase}}</span>
                 </div>
                 <div class="td w-10 th-last">
-                    <a class="delete-link">obrisi</a>
+                    <a class="delete-link" (click)="onDeleteQuesion(question._id)">obrisi</a>
                 </div>
                 <div class="question-details" *ngIf="question.opened">
-                    <p class="yellow-text">Pitanje: {{ question.question_text }}</p>
+                    <p class="yellow-text">Pitanje: {{ question.question }}</p>
                     <p class="blue-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
                     <p class="yellow-text" *ngFor="let answer of question.answers; let j = index">
-                        Odgovor {{j + 1}}: {{ answer.answer_text }}
+                        Odgovor {{j + 1}}: {{ answer.text }}
                     </p>
                 </div>
             </div>

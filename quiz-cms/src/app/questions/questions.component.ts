@@ -22,10 +22,20 @@ export class QuestionsComponent implements OnInit {
         this.user = user;
       }
     })
-    const db = this.questionService.getDB();
-    this.questions = db.questions;
-    this.questions.forEach(question =>{
-      question.opened = false;
+    this.questionService.getQuestions().subscribe((data) =>{
+      if(data){
+        this.questions = data.data;
+      }
+     
+    })
+  }
+
+  public onDeleteQuesion(id: string){
+    this.questionService.deleteQuestion(id).subscribe((data: any) =>{
+      if(data){
+        console.log(data)
+        this.questions = this.questions.filter(q => q._id !== id)
+      }
     })
   }
 
