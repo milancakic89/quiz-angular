@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
   constructor(private config: Configuration) { }
 
   public showContributionInfo = false;
-  public imageUrl = '';
+  public imageUrl = 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.0/img/avatar.png';
 
   public showInput = false;
   public user = null as unknown as User;

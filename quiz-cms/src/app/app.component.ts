@@ -59,16 +59,16 @@ export class AppComponent implements OnInit{
           }, 3000)
     }
 
-  
-
   this.modal.gameResults.subscribe(gameData =>{
     if(gameData){
       this.gameRunning = false;
       this.modal.startGame.next(false);
+      this.gameResults.noQuestions = gameData.noQuestions;
       this.gameResults.results = gameData.results;
       this.gameResults.showModal = gameData.showModal;
       this.gameResults.success = gameData.success;
       setTimeout(()=>{
+        this.gameResults.noQuestions = false;
         this.gameResults.showModal = false;
         this.gameResults.results = null;
         this.gameResults.success = false;
@@ -81,8 +81,6 @@ export class AppComponent implements OnInit{
     this.modal.startGame.subscribe(bool =>{
       this.gameRunning = bool;
   });
-
-
 
 
     if(this._initRedirect){

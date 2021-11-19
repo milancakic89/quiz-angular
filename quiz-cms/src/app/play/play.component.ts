@@ -4,16 +4,20 @@ import { Router } from '@angular/router';
 import { ModalWrapper } from '../modal-service';
 import { QuestionService } from '../questions/questions.service';
 import { Answers, Question } from '../questions/types';
+import { Configuration } from '../shared/config.service';
+import { PlayService } from './play.service';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnDestroy, OnChanges {
+export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
   constructor(private modal: ModalWrapper, 
               private router: Router,
+              private config: Configuration,
+              private playService: PlayService,
               private questionService: QuestionService) { }
 
   get attempts(){ return this._attempts }
@@ -28,6 +32,7 @@ export class PlayComponent implements OnDestroy, OnChanges {
   public questionSelected = false;
   public selectedLetter = '';
   public showModal = true;
+  public lives = 0;
   public nextQuestionInterval = 1000;
   public currentQuestion: Question = {
     question: '',
@@ -37,6 +42,18 @@ export class PlayComponent implements OnDestroy, OnChanges {
     correct_text: '',
     opened: false
   }
+  ngOnInit(){
+    this.config.user.subscribe(user =>{
+      if(user){
+        this.lives = user.lives;
+        if(this.lives === 0){
+          setTimeout(()=>{
+              this.router.navigateByUrl('/profile')
+          }, 1000)
+        }
+      }
+    })
+  }
 
   ngOnChanges(): void {
     this.modal.startGame.subscribe(bool =>{
@@ -44,9 +61,11 @@ export class PlayComponent implements OnDestroy, OnChanges {
         this.initGame();
       }
     })
+
   }
 
   ngOnDestroy(){
+    this.modal.startGame.next(false)
     clearInterval(this.timeInterval);
   }
 
@@ -65,10 +84,14 @@ export class PlayComponent implements OnDestroy, OnChanges {
     this._questionCounter++;
     this.questionSelected = false;
     this.questionService.getSingleQuestion().subscribe((data: any) =>{
-      this.question = data.data;
-      this.selectedLetter = '';
-      this.time = 15;
-      this.initTime();
+      if(data && data.success){
+        this.question = data.data;
+        this.selectedLetter = '';
+        this.time = 15;
+        this.initTime();
+      }else{
+        this.gameOver('No quesions')
+      }
     })
 
   }
@@ -119,39 +142,56 @@ public closeModal(){
   this.initGame();
 }
 
-  public onSelectedAnswer(answer: Answers){
+  public async onSelectedAnswer(answer: Answers){
     this.selectedLetter = answer.letter;
     this.stopTime();
     this.questionSelected = true;
-    if(answer.letter === this.question.correct_letter){
-       this.score++;
-    }else{
-      this.attempts.pop();
-    }
-    setTimeout(()=>{
-      if(this.attempts.length){
-        this.getQuestion();
-      }else{
-        this.gameOver('You have missed 3 times');
+    const correct = answer.letter === this.question.correct_letter;
+    this.playService.checkQuestion(this.question._id, correct).subscribe((data: any) =>{
+      if(data && data.success){
+        if (data.correct) {
+          this.score++;
+        } else {
+          this.reduceAttempts();
+        }
+        setTimeout(() => {
+          if (this.attempts.length) {
+            this.getQuestion();
+          } else {
+            this.gameOver('You have missed 3 times');
+          }
+
+        }, this.nextQuestionInterval)
       }
-     
-    },this.nextQuestionInterval)
+    })
   }
 
   public stopTime(){
     clearInterval(this.timeInterval);
   }
 
-  public reduceOneAttempt(){
-      this.reduceAttempts();
+  public reduceOneLife(){
+      this.playService.reduceOneLife().subscribe((data: any) => {
+        this.config.user.subscribe(user => {
+          if (user) {
+              user.lives = data.lives;
+          }
+        })
+      })
   }
   private reduceAttempts(){
     if(this._attempts.length > 0){
       this.attempts.pop();
     }
+    if (this.attempts.length === 0) {
+      console.log('reducing')
+      this.reduceOneLife();
+    }
+    
   }
 
   private _attempts = [1,1,1];
   private _questionCounter = 1;
+  private _userId: string = '';
 
 }

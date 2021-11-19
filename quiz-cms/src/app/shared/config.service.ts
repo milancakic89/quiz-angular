@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { ApiService } from "./api.servise";
 
 export interface User{
   id?: number;
-  image_url?: string;
+  avatar_url?: string;
   name?: string;
   email: string;
   title: string;
+  lives: number;
   password: string;
   score: number;
   contributions: number;

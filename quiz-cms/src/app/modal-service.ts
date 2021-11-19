@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 export interface GameData{
         success: boolean;
         showModal: boolean;
+        noQuestions?:boolean;
         results: any;
 }
 
