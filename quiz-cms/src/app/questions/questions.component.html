@@ -11,6 +11,7 @@
                 <div class="th w-10 th-last">Opcije</div>
             </div>
         </div>
+        <a routerLink="/contribute">Dodaj pitanje</a>
         <div class="tbody contribute">
             <div class="tr" *ngFor="let question of questions; let i = index"
                  (click)="question.opened = !question.opened">

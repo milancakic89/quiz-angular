@@ -1,5 +1,5 @@
 <div class="profile">
-    <div class="image-and-info">
+    <!-- <div class="image-and-info">
         <div class="image" 
             [ngStyle]="{'background-image': 'url('+ user?.avatar_url + ')'}"
             (click)="showInput = true">
@@ -27,5 +27,22 @@
         </div>
         <a *ngIf="user && user.lives > 0" routerLink="/play" class="button-play">Igraj</a>
         
+    </div> -->
+    <div class="profile-wrapper">
+        <h2>Kviz znanja</h2>
+        <div class="row">
+            <span><span class="icon">iconsss</span><span>69</span></span>
+            <span><span class="icon">iconsss</span><span>Kvizoman |||</span></span>
+            <span><span class="icon">iconsss</span><span>69</span></span>
+            <span><span class="icon">iconsss</span><span>69</span></span>
+            <span><span class="icon">iconsss</span><span>69</span></span>
+        </div>
+        <div class="row">
+            <a class="btn play" routerLink="/play" routerLinkActive="active">IGRAJ</a>
+            <a class="btn questions" routerLink="/questions" routerLinkActive="active">PITANJA</a>
+            <a class="btn table" routerLink="/ranking" routerLinkActive="active">TABELA</a>
+            <a class="btn help" routerLink="/titles" routerLinkActive="active" *ngIf="isRoot">TITULE</a>
+            <a class="btn help" routerLink="/play" routerLinkActive="active">POMOC</a>
+        </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration) { }
 
+  get isRoot(){return this.config.isRoot}
+
   public showContributionInfo = false;
   public imageUrl = 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.0/img/avatar.png';
 
