@@ -117,10 +117,10 @@ public timeWarning(){
 public gameOver(message?: string){
   this.stopTime();
   let points = 0;
-  if(this.score > 5 && this.score <= 8){
+  if(this.score > 5 && this.score <= 7){
     points = 1;
   }
-  if(this.score > 8 && this.score <= 11){
+  if(this.score > 7 && this.score <= 11){
     points = 2
   }
   if (this.score > 11 && this.score <= 14){

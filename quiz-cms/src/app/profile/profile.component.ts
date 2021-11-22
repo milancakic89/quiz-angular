@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { initialQuestionsSetup } from '../questions/initial';
 import { Configuration, User } from '../shared/config.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { Configuration, User } from '../shared/config.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private config: Configuration) { }
+  constructor(private config: Configuration, private setup: initialQuestionsSetup) { }
 
   get isRoot(){return this.config.isRoot}
 
@@ -30,5 +31,11 @@ export class ProfileComponent implements OnInit {
         this.user = user;
       }
     })
+
+    // console.log('here')
+    // this.setup.cities();
+    // setTimeout(() => {
+    //   this.setup.init();
+    // }, 1000)
   }
 }
