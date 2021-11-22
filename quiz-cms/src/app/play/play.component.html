@@ -30,30 +30,6 @@
                     (click)="!questionSelected && onSelectedAnswer(answer)">
                          {{ answer.text }}
             </button>
-            <!-- <button class="answer-button" 
-                    [ngClass]="{'disabled-button':questionSelected,
-                                'wrong-answer': questionSelected && currentQuestion.correct_letter !== 'B' && selectedLetter === 'B',
-                                'correct-answer':questionSelected &&  currentQuestion.correct_letter === 'B' && selectedLetter === 'B'}" 
-                    data-label="B" 
-                    (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[1])">
-                        {{ currentQuestion.answers[1].text }}
-            </button> -->
-            <!-- <button class="answer-button" 
-                    [ngClass]="{'disabled-button':questionSelected,
-                    'wrong-answer':questionSelected &&  currentQuestion.correct_letter !== 'C' && selectedLetter === 'C',
-                    'correct-answer':questionSelected &&  currentQuestion.correct_letter === 'C' && selectedLetter === 'C'}" 
-                    data-label="C" 
-                    (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[2])">
-                        {{ currentQuestion.answers[2].text }}
-            </button> -->
-            <!-- <button class="answer-button" 
-                    [ngClass]="{'disabled-button':questionSelected,
-                    'wrong-answer':questionSelected && currentQuestion.correct_letter !== 'D' && selectedLetter === 'D',
-                    'correct-answer':questionSelected && currentQuestion.correct_letter === 'D' && selectedLetter === 'D'}" 
-                    data-label="D" 
-                    (click)="!questionSelected && onSelectedAnswer(currentQuestion.answers[3])">
-                        {{ currentQuestion.answers[3].text }}
-            </button> -->
         </div>
     </div>
 </div>

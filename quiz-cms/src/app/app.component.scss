@@ -1,6 +1,6 @@
 @import '../assets/abstract/variables';
 
-.spinner{
+.spinner {
     width: 100%;
     height: 100%;
     z-index: 100000;
@@ -13,12 +13,12 @@
     justify-content: center;
     align-items: center;
 
-    h1{
+    h1 {
         color: #fff;
     }
 }
 
-.modal-game-results{
+.modal-game-results {
     width: 100%;
     height: 0;
     overflow: hidden;
@@ -26,14 +26,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 50px;
+    top: 0px;
     left: 0;
-    background-color: rgb(255,204,64);
+    background-color: rgb(255, 204, 64);
     z-index: 10000;
     backdrop-filter: blur(2px);
     transition: all .2s linear;
 
-    h3{
+    h3 {
         text-align: center;
         color: #fff;
         -webkit-text-stroke: 2px $primary-blue;
@@ -41,16 +41,16 @@
     }
 }
 
-.open{
+.open {
     height: 100vh;
 }
 
-.navigation,.header,.content{
-   
-}
+.navigation,
+.header,
+.content {}
 
 
-.header{
+.header {
     width: 100%;
     margin: 0;
     height: 50px;
@@ -61,9 +61,9 @@
     justify-content: flex-end;
     background-color: rgb(0, 102, 255);
 
-    li{
+    li {
 
-        a{
+        a {
             padding: 16px;
             text-align: center;
             cursor: pointer;
@@ -71,7 +71,8 @@
             display: inline-block;
             white-space: nowrap;
             overflow-x: hidden;
-            &:hover{
+
+            &:hover {
                 background-color: rgb(0, 58, 146);
             }
         }
@@ -79,27 +80,30 @@
     }
 }
 
-.active-link{
+.active-link {
     background-color: rgb(0, 58, 146);
 }
-.content{
+
+.content {
     width: 100%;
     padding: 0;
     height: 100vh;
     overflow-y: auto;
-    background-image: linear-gradient(to bottom, rgb(255,204,64),rgb(255,204,44));
+    background-color: #045da7;
 }
+
 .logout-button,
-.logout-button a{
+.logout-button a {
     background-color: red;
     color: #fff;
 
-    &:hover{
+    &:hover {
         opacity: 1;
-        background-color: rgb(219, 0, 0) !important; 
+        background-color: rgb(219, 0, 0) !important;
     }
 }
-.wrapper{
+
+.wrapper {
     display: flex;
     width: 100%;
     height: calc(100vh - 80px);
@@ -107,25 +111,29 @@
 
 
 @keyframes arrow {
-    0%{
+    0% {
         left: -30%;
     }
-    50%{
+
+    50% {
         left: -10%;
     }
-    100%{
+
+    100% {
         left: -30%;
     }
 }
-.expand{
+
+.expand {
     padding-top: 0 !important;
 }
 
-.play-link{
+.play-link {
     display: inline-block;
     position: relative;
     transition: all .2s linear;
-    &:before{
+
+    &:before {
         content: '->';
         display: inline-block;
         font-size: 30px;

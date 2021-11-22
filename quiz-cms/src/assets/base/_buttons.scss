@@ -34,6 +34,29 @@
         background-color: gray;
         cursor: not-allowed;
     }
+
+    &-back{
+        display: inline-block;
+        width: 60px !important;
+        height: 60px !important;
+        position: fixed;
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        top: 5px;
+        left: 5px;
+        font-size: 28px;
+        color: #fff;
+        background-color: gray;
+        cursor: pointer;
+        opacity: .8;
+        &:hover{
+            opacity: 1;
+        }
+
+    }
 }
 
 .delete-link{

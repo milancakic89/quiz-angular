@@ -2,40 +2,44 @@
 
 .approved,
 .pending,
-.denied{
+.denied {
     display: inline-block;
     border-radius: 5px;
     padding: 15px 20px;
 }
 
-.approved{
+.approved {
     background-color: $secondary-blue;
     color: #fff;
 }
 
-.pending{
+.pending {
     background-color: $pending-yellow;
     color: rgb(255, 255, 255);
 }
 
-.denied{
+.denied {
     background-color: $denied-red;
     color: #fff;
 }
 
-.contribute{
+.contribute {
     height: calc(100vh - 110px);
     overflow-y: auto;
 }
 
-.question-details{
+.question-details {
     border-top: 1px solid lightgray;
     width: 100%;
     padding: 0px 30px;
 }
 
-.page-content{
-    a{
+.page-content {
+    a {
         align-self: flex-start;
     }
+}
+
+.table{
+    margin-top: 70px;
 }

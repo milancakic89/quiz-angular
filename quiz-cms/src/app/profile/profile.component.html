@@ -28,14 +28,14 @@
         <a *ngIf="user && user.lives > 0" routerLink="/play" class="button-play">Igraj</a>
         
     </div> -->
-    <div class="profile-wrapper">
+    <div class="profile-wrapper" *ngIf="user">
         <h2>Kviz znanja</h2>
         <div class="row">
-            <span><span class="icon">iconsss</span><span>69</span></span>
-            <span><span class="icon">iconsss</span><span>Kvizoman |||</span></span>
-            <span><span class="icon">iconsss</span><span>69</span></span>
-            <span><span class="icon">iconsss</span><span>69</span></span>
-            <span><span class="icon">iconsss</span><span>69</span></span>
+            <span class="info"><i class="fa fa-user-circle"></i><span>{{ user.name }}</span></span>
+            <span class="info"><i class="fas fa-medal"></i><span>{{user.title}}</span></span>
+            <span class="info"><i class="fas fa-trophy"></i><span class="bold">{{user.score}}</span></span>
+            <span class="info"><i class="fa fa-heart"></i><span>{{user.lives}}</span></span>
+            <span class="info"><i class="fa fa-bell"></i><span></span></span>
         </div>
         <div class="row">
             <a class="btn play" routerLink="/play" routerLinkActive="active">IGRAJ</a>
