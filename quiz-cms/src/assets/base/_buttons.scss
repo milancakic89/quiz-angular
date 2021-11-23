@@ -37,8 +37,8 @@
 
     &-back{
         display: inline-block;
-        width: 60px !important;
-        height: 60px !important;
+        width: 50px !important;
+        height: 50px !important;
         position: fixed;
         z-index: 10000;
         display: flex;
@@ -49,11 +49,11 @@
         left: 5px;
         font-size: 28px;
         color: #fff;
-        background-color: gray;
+        background-color: $primary-yellow;
         cursor: pointer;
-        opacity: .8;
+        opacity: 1;
         &:hover{
-            opacity: 1;
+            opacity: .9;
         }
 
     }

@@ -1,14 +1,45 @@
 <div class="play-new" *ngIf="showModal && lives > 0">
-    <div class="modal-play open">
-        <button (click)="closeModal()">Igraj</button>
+    <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
+    <div class="category geography" (click)="closeModal()">
+        <div>
+             <span class="title">Geografija</span>
+        </div>
     </div>
+    <div class="category history locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije">
+        <div>
+             <span class="title">Istorija</span>
+        </div>
+    </div>
+    <div class="category movies locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
+        <div>
+             <span class="title">Filmovi i serije</span>
+        </div>
+    </div>
+    <div class="category celebrity locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Filmova i serija">
+        <div>
+             <span class="title">Poznate licnosti</span>
+        </div>
+    </div>
+    <div class="category sport locked" data-unlock="Otvoreno nakon 10 dodatih pitanja Poznatih licnosti">
+        <div>
+            <span class="title">Sport</span>
+        </div>
+    </div>
+    <div class="category others locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta">
+        <div>
+            <span class="title">Pitanja drugih takmicara</span>
+        </div>
+    </div>
+    <!-- <div class="modal-play open">
+        <button (click)="closeModal()">Igraj</button>
+    </div> -->
 </div>
 <div class="play-new" *ngIf="showModal && lives === 0">
     <div class="modal-play open">
         <h1>Nemate vise pokusaja</h1>
     </div>
 </div>
-<div class="play">
+<div class="play" *ngIf="!showModal && lives > 0">
     <div class="time-and-score">
         <span>Rezultat: <b>{{ score }}</b></span>
         <span>Vreme: <b>{{ time }}</b></span>

@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    FormsModule,
+    FormsModule
     
   ]
 })
