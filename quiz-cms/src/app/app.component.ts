@@ -67,6 +67,7 @@ export class AppComponent implements OnInit{
       this.gameResults.results = gameData.results;
       this.gameResults.showModal = gameData.showModal;
       this.gameResults.success = gameData.success;
+      this.addToScore(this.gameResults.results)
       setTimeout(()=>{
         this.gameResults.noQuestions = false;
         this.gameResults.showModal = false;
@@ -89,6 +90,11 @@ export class AppComponent implements OnInit{
       return;
     }
 
+  }
+
+  public addToScore(score: number){
+    this.user.score += score;
+    console.log(this.user.score)
   }
 
   public clearFeedback(){
