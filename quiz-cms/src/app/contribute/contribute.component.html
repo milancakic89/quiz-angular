@@ -57,6 +57,15 @@
                             [ngClass]="{'form-submitted': questionForm.submitted}">
                 </ng-select>
             </div>
+            <div class="form-row-input">
+                <label for="" class="blue-heading">Kategorija</label>
+                <ng-select  name="correct_letter" 
+                            [items]="categories" 
+                            required
+                            [(ngModel)]="selectedCategory"
+                            [ngClass]="{'form-submitted': questionForm.submitted}">
+                </ng-select>
+            </div>
         </div>
         <button class="button-submit" [disabled]="questionForm.invalid">Posalji</button>
     </form>

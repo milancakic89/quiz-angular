@@ -2,35 +2,44 @@
 
 <div class="page-content">
     <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
+    <a class="button-contribute" routerLink="/contribute">Dodaj pitanje</a>
     <div class="table">
         <div class="thead">
             <div class="tr">
                 <div class="th w-10">#</div>
                 <div class="th w-40">Pitanje</div>
                 <div class="th w-20">Odgovor</div>
-                <div class="th w-20">Status</div>
-                <div class="th w-10 th-last">Opcije</div>
+                <div class="th w-10">Status</div>
+                <div class="th w-20 th-last">Opcije</div>
             </div>
         </div>
-        <a routerLink="/contribute">Dodaj pitanje</a>
+        
         <div class="tbody contribute">
-            <div class="tr" *ngFor="let question of questions; let i = index"
-                 (click)="question.opened = !question.opened">
+            <div class="tr" *ngFor="let question of questions; let i = index">
                 <div class="td w-10">{{ i }}</div>
-                <div class="td w-40">{{ question.question }}</div>
+                <div class="td w-40" (click)="question.opened = !question.opened">{{ question.question }}</div>
                 <div class="td w-20">{{ question.correct_text}}</div>
-                <div class="td w-20">
+                <div class="td w-10">
                     <span [ngClass]="{
-                        'approved': question.status === 'PRIHVACENO',
+                        'approved': question.status === 'ODOBRENO',
                         'pending': question.status === 'NA CEKANJU',
                         'denied': question.status === 'ODBIJENO'
                     }">{{question.status | titlecase}}</span>
                 </div>
-                <div class="td w-10 th-last">
+                <div class="td w-20 th-last">
+                    <span class="publish" [ngClass]="{
+                        'denied': question.status === 'ODOBRENO',
+                        'approved': question.status === 'NA CEKANJU'}" 
+                             (click)="question.status === 'NA CEKANJU' ? publish(question._id) : unpublish(question._id)">
+                             {{ question.status === 'NA CEKANJU' ? 'PRIHVATI' : 'ODBIJ' }}
+                    </span>
                     <a class="delete-link" (click)="onDeleteQuesion(question._id)">obrisi</a>
                 </div>
                 <div class="question-details" *ngIf="question.opened">
                     <p class="yellow-text">Pitanje: {{ question.question }}</p>
+                    <textarea type="text" [(ngModel)]="updateQuestion" name="update"
+                            [placeholder]="question.question"></textarea>
+                        <button (click)="updateQuestionText(question._id)">Posalji izmenu</button>
                     <p class="blue-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
                     <p class="yellow-text" *ngFor="let answer of question.answers; let j = index">
                         Odgovor {{j + 1}}: {{ answer.text }}

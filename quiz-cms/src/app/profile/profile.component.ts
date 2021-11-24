@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { initialQuestionsSetup } from '../questions/initial';
 import { Configuration, User } from '../shared/config.service';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,9 @@ import { Configuration, User } from '../shared/config.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private config: Configuration, private setup: initialQuestionsSetup) { }
+  constructor(private config: Configuration, 
+              private service: ProfileService,
+              private setup: initialQuestionsSetup) { }
 
   get isRoot(){return this.config.isRoot}
 
@@ -18,6 +21,9 @@ export class ProfileComponent implements OnInit {
 
   public showInput = false;
   public user = null as unknown as User;
+
+  public name = '';
+  public showNameBox = false;
 
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
@@ -37,5 +43,26 @@ export class ProfileComponent implements OnInit {
     // setTimeout(() => {
     //   this.setup.init();
     // }, 1000)
+
   }
+
+  public closeNameBox(){
+    setTimeout(()=>{
+      this.showNameBox = false
+    }, 10)
+  }
+
+  public updateName(){
+    if(!this.name.length){
+      return;
+    }
+      this.service.updateName(this.name).subscribe((data: any) =>{
+        if(data && data.success){
+          console.log('name changed')
+          this.user.name = this.name;
+        }
+        this.closeNameBox()
+      })
+  }
+
 }

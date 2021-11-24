@@ -31,7 +31,13 @@
     <div class="profile-wrapper" *ngIf="user">
         <h2>Kviz znanja</h2>
         <div class="row">
-            <span class="info"><i class="fa fa-user-circle"></i><span>{{ user.name }}</span></span>
+            <span class="info avatar" (click)="showNameBox = true"><i class="fa fa-user-circle"></i>
+                <div *ngIf="showNameBox">
+                    <input type="text" [(ngModel)]="name" [placeholder]="user.name"/>
+                    <button (click)="updateName()">Ok</button>
+                    <button (click)="closeNameBox()">Odustani</button>
+                </div>
+                <span>{{ user.name }}</span></span>
             <span class="info"><i class="fas fa-medal"></i><span>{{user.title}}</span></span>
             <span class="info"><i class="fas fa-trophy"></i><span class="bold">{{user.score}}</span></span>
             <span class="info"><i class="fa fa-heart"></i><span>{{user.lives}}</span></span>

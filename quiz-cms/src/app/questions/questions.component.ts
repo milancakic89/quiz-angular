@@ -13,8 +13,12 @@ export class QuestionsComponent implements OnInit {
 
   constructor(private questionService: QuestionService, private config: Configuration) { }
 
+  get isRoot(){return this.config.isRoot}
+
   public questions: Question[] = []
   public user: any;
+  public updateQuestion = '';
+  public showUpdateButton = true;
 
   ngOnInit(): void {
     this.config.user.subscribe(user =>{
@@ -28,6 +32,53 @@ export class QuestionsComponent implements OnInit {
       }
      
     })
+  }
+
+  public updateQuestionText(id: string){
+    this.showUpdateButton = false;
+    this.questionService.updateQuestionText(id, this.updateQuestion).subscribe((data: any) =>{
+      if(data && data.success){
+        this.showUpdateButton = true;
+        this.questions.forEach(question =>{
+          if(question._id === id){
+            question.question = this.updateQuestion;
+            question.status = 'NA CEKANJU';
+            this.updateQuestion = '';
+            question.opened = false;
+          }
+        })
+      }
+    },
+    error =>{
+      this.showUpdateButton = true;
+    })
+  }
+
+  public publish(id: string){
+    this.questionService.publish(id).subscribe((data: any) =>{
+      console.log(data)
+      if(data && data.success){
+        this.questions.forEach(question =>{
+          if(question._id === id){
+            question.status = 'ODOBRENO';
+          }
+        })
+      }
+    })
+  }
+
+  public unpublish(id: string){
+    this.questionService.unpublish(id).subscribe((data: any) =>{
+      console.log(data)
+      if(data && data.success){
+        this.questions.forEach(question =>{
+          if(question._id === id){
+            question.status = 'NA CEKANJU';
+          }
+        })
+      }
+    })
+
   }
 
   public onDeleteQuesion(id: string){

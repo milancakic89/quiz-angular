@@ -7,8 +7,6 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: #045da7;
-    background-image: url('../../assets/images/bg.jpg');
     background-size: cover;
 
     -webkit-box-shadow: -1px 3px 27px -3px #000000;
@@ -87,7 +85,7 @@
             text-align: center;
             color: rgb(252, 206, 39);
             width: 100%;
-            margin: 50px 0;
+            margin: 100px 0;
         }
 
         .row {
@@ -200,6 +198,32 @@
             .fa-bell {
                 color: lightgray;
 
+            }
+
+            .avatar{
+                position: relative;
+
+                div{
+                    position: absolute;
+                    left: 0;
+                    top: 100%;
+                    height: 50px;
+                    display: inline-flex;
+                    align-items: center;
+                    z-index: 10000;
+                    background-color: gray;
+                    padding: 10px;
+                    justify-content: space-between;
+                    button{
+                        margin: 0 5px;
+                        height: 30px;
+                   
+                    }
+                    input{
+                        height: 30px;
+                        margin-right: 10px;
+                    }
+                }
             }
 
             .icon {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
-import { Question } from '../questions/types';
+import { Category, Question } from '../questions/types';
 
 type Correct = 'A' | 'B' | 'C' | 'D';
 @Component({
@@ -16,15 +16,22 @@ export class ContributeComponent implements OnInit {
   get newQuestion(){ return this._newQuestion}
   set newQuestion(value){ this._newQuestion = value}
 
-  public items = ['A','B','C','D']
+  public items = ['A','B','C','D'];
+  public categories = [
+    'Geografija',
+    'Istorija',
+    'Filmovi i Serije',
+    'Poznate licnosti',
+    'Sport'
+  ]
 
   public selected: Correct = 'A';
+  public selectedCategory: Category = 'Geografija';
 
   ngOnInit(): void {
   }
 
   public onChange(){
-    console.log(this.selected)
     this.newQuestion.correct = this.selected;
   }
 
@@ -62,6 +69,7 @@ export class ContributeComponent implements OnInit {
           letter: 'D',
         }
       ],
+      category: this.selectedCategory,
       correct_letter: this.selected,
       correct_text: this.newQuestion.correct_text
     }
@@ -74,6 +82,7 @@ export class ContributeComponent implements OnInit {
   private _newQuestion = {
     question_text: '',
     correct_text: '',
+    category: '',
     letter_a: '',
     letter_b: '',
     letter_c: '',

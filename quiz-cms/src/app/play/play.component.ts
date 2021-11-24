@@ -33,7 +33,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public selectedLetter = '';
   public showModal = true;
   public lives = 0;
-  public nextQuestionInterval = 1000;
+  public nextQuestionInterval = 10;
   public currentQuestion: Question = {
     question: '',
     status: 'NA CEKANJU',
@@ -82,11 +82,11 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.gameOver('End of game');
     }
     this._questionCounter++;
-    this.questionSelected = false;
     this.questionService.getSingleQuestion().subscribe((data: any) =>{
       if(data && data.success){
         this.question = data.data;
         this.selectedLetter = '';
+        this.questionSelected = false;
         this.time = 15;
         this.initTime();
       }else{
@@ -97,6 +97,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public initTime(){
+    clearInterval(this.timeInterval)
     this.timeInterval = setInterval(()=>{
       if(this.time > 0){
        this.time--;
@@ -109,15 +110,23 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 public timeWarning(){
   this.questionSelected = true;
   this.stopTime();
-  setTimeout(()=>{
-    this.getQuestion();  
-  },this.nextQuestionInterval)
+  this.reduceAttempts();
+  if(this.attempts.length){
+    setTimeout(()=>{
+      this.getQuestion();  
+      console.log('get question in time warning')
+    },this.nextQuestionInterval)
+  }else{
+    clearInterval(this.timeInterval);
+    this.gameOver()
+  }
+
   
 }
 public gameOver(message?: string){
   this.stopTime();
   let points = 0;
-  if(this.score > 5 && this.score <= 7){
+  if(this.score > 2 && this.score <= 7){
     points = 1;
   }
   if(this.score > 7 && this.score <= 11){
@@ -143,9 +152,12 @@ public closeModal(){
 }
 
   public async onSelectedAnswer(answer: Answers){
+    if(this.questionSelected){
+      return;
+    }
+    this.questionSelected = true;
     this.selectedLetter = answer.letter;
     this.stopTime();
-    this.questionSelected = true;
     const correct = answer.letter === this.question.correct_letter;
     this.playService.checkQuestion(this.question._id, correct).subscribe((data: any) =>{
       if(data && data.success){
@@ -157,6 +169,7 @@ public closeModal(){
         setTimeout(() => {
           if (this.attempts.length) {
             this.getQuestion();
+            console.log('get question in check question')
           } else {
             this.gameOver('You have missed 3 times');
           }
@@ -183,8 +196,7 @@ public closeModal(){
     if(this._attempts.length > 0){
       this.attempts.pop();
     }
-    if (this.attempts.length === 0) {
-      console.log('reducing')
+    if (this.attempts.length === 0 && this.score === 0) {
       this.reduceOneLife();
     }
     

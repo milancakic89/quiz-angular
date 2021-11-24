@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit{
 
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
+              private service: AppService,
               private feedbackService: FeedbackMessageService,
               private router: Router){}
   get isRoot(){return this.config.isRoot}
@@ -68,6 +70,10 @@ export class AppComponent implements OnInit{
       this.gameResults.showModal = gameData.showModal;
       this.gameResults.success = gameData.success;
       this.addToScore(this.gameResults.results)
+      if(gameData.results > 0){
+        this.user.score += gameData.results;
+        this.updateScore();
+      }
       setTimeout(()=>{
         this.gameResults.noQuestions = false;
         this.gameResults.showModal = false;
@@ -94,7 +100,13 @@ export class AppComponent implements OnInit{
 
   public addToScore(score: number){
     this.user.score += score;
-    console.log(this.user.score)
+  }
+
+  private updateScore(){
+    this.service.updateScore(this.user.score).subscribe((data: any) =>{
+      if(data && data.success){
+      }
+    })
   }
 
   public clearFeedback(){

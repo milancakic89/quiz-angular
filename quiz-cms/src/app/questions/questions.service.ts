@@ -24,4 +24,16 @@ export class QuestionService{
       return this.service.delete('/delete-question/' + id, {})
   }
 
+  public publish(id: string){
+    return this.service.post('/publish', {id});
+  }
+
+  public unpublish(id: string){
+    return this.service.post('/unpublish', {id});
+  }
+
+  public updateQuestionText(id: string, text: string){
+    return this.service.post('/update-question-text', {id, text});
+  }
+//update-question-text
 }
