@@ -46,12 +46,18 @@
 
 .blue-text,
 .blue-heading,
+.heading-big,
 .yellow-text,
 .yellow-heading {
     color: $secondary-blue;
     font-size: 18px;
     font-weight: 600;
     margin-left: 5px;
+}
+
+.heading-big {
+    color: #fff;
+    font-size: 35px;
 }
 
 .yellow-text,

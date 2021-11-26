@@ -1,6 +1,6 @@
 @import '../assets/abstract/variables';
 
-$headerHeight: 100px;
+$headerHeight: 65px;
 
 .spinner {
     width: 100%;
@@ -30,27 +30,20 @@ $headerHeight: 100px;
     align-items: center;
     top: 0px;
     left: 0;
-    background-color: rgb(255, 204, 64);
     z-index: 10000;
+    background-color: rgb(26, 26, 26);
     backdrop-filter: blur(2px);
     transition: all .2s linear;
 
     h3 {
         text-align: center;
-        color: #fff;
-        -webkit-text-stroke: 2px $primary-blue;
-        font-weight: 600;
+        color: #FFF;
     }
 }
 
 .open {
     height: 100vh;
 }
-
-.navigation,
-.header,
-.content {}
-
 
 .header {
     width: 100%;
@@ -96,12 +89,18 @@ $headerHeight: 100px;
 
         p {
             margin: 0;
+
         }
 
         span {
             color: #fff;
             font-weight: 800;
+            font-size: 35px;
             display: inline-block;
+
+            b{
+                color: $primary-yellow;
+            }
 
         }
 
@@ -113,10 +112,13 @@ $headerHeight: 100px;
     }
 
     .right-info {
-        align-items: flex-end;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
 
         p {
             display: flex;
+            margin-right: 55px;
             align-items: center;
         }
 
@@ -130,18 +132,36 @@ $headerHeight: 100px;
             background-position: 50% 50%;
         }
 
-        .user-score {
+        .user-score,
+        .user-ticket {
             font-size: 35px;
+
             &-icon {
-                width: 40px;
-                height: 40px;
-                margin-right: 5px;
-                background-image: url('../assets/images/ic_star.png');
+                margin-right: 10px;
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
             }
         }
+
+        .user-score {
+            &-icon {
+                width: 40px;
+                height: 40px;
+                background-image: url('../assets/images/ic_star.png');
+            }
+        }
+
+        .user-ticket {
+            &-icon {
+                width: 50px;
+                height: 50px;
+                background-image: url('../assets/images/ic_ticket.svg');
+            }
+        }
+
+
+
     }
 }
 

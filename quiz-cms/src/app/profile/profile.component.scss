@@ -77,11 +77,11 @@
         align-items: center;
         justify-content: space-around;
 
-        .box-item{
+        .box-item {
             margin-top: -100px;
 
-            div{
-                .title{
+            div {
+                .title {
                     color: #fff;
                     font-size: 32px;
                 }
@@ -207,10 +207,10 @@
 
             }
 
-            .avatar{
+            .avatar {
                 position: relative;
 
-                div{
+                div {
                     position: absolute;
                     left: 0;
                     top: 100%;
@@ -221,12 +221,14 @@
                     background-color: gray;
                     padding: 10px;
                     justify-content: space-between;
-                    button{
+
+                    button {
                         margin: 0 5px;
                         height: 30px;
-                   
+
                     }
-                    input{
+
+                    input {
                         height: 30px;
                         margin-right: 10px;
                     }

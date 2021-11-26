@@ -1,3 +1,7 @@
+
+<div class="timer" *ngIf="!showModal" [ngStyle]="{'width': time * 6.6666 + '%'}">
+    <p class="timer-placeholder"></p>
+</div>
 <div class="play-new" *ngIf="showModal && lives > 0">
     <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
     <div class="box-item geography" (click)="closeModal()">
@@ -42,7 +46,6 @@
 <div class="play" *ngIf="!showModal && lives > 0">
     <div class="time-and-score">
         <span>Rezultat: <b>{{ score }}</b></span>
-        <span>Vreme: <b>{{ time }}</b></span>
         <span>Promasaji: <span *ngFor="let attempt of attempts" class="attempt"></span> </span>
     </div>
     <div class="question-wrapper" *ngIf="question">
