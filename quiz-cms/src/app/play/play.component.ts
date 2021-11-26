@@ -138,11 +138,17 @@ public gameOver(message?: string){
   if (this.score === 15) {
     points = 5;
   }
+  if(this.score < 2){
+    this.reduceOneLife();
+  }
+
   this.modal.gameResults.next({
     success: points !== 0,
     results: points,
     showModal: true
   })
+  this.score = 0;
+  this.attempts = [1, 1, 1]
   this.modal.startGame.next(false)
 }
 
@@ -169,7 +175,6 @@ public closeModal(){
         setTimeout(() => {
           if (this.attempts.length) {
             this.getQuestion();
-            console.log('get question in check question')
           } else {
             this.gameOver('You have missed 3 times');
           }
@@ -195,9 +200,6 @@ public closeModal(){
   private reduceAttempts(){
     if(this._attempts.length > 0){
       this.attempts.pop();
-    }
-    if (this.attempts.length === 0 && this.score === 0) {
-      this.reduceOneLife();
     }
     
   }
