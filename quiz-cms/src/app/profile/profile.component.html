@@ -29,7 +29,7 @@
         
     </div> -->
     <div class="profile-wrapper" *ngIf="user">
-        <h2>Kviz znanja</h2>
+        <!-- <h2>Kviz znanja</h2>
         <div class="row">
             <span class="info avatar" (click)="showNameBox = true"><i class="fa fa-user-circle"></i>
                 <div *ngIf="showNameBox">
@@ -50,5 +50,26 @@
             <a class="btn help" routerLink="/titles" routerLinkActive="active" *ngIf="isRoot">TITULE</a>
             <a class="btn help" routerLink="/play" routerLinkActive="active">POMOC</a>
         </div>
-    </div>
+    </div> -->
+    <a class="box-item play-button" routerLink="/play">
+            <div>
+                <span class="title">Igraj</span>
+            </div>
+    </a>
+    <a class="box-item questions-button" routerLink="/questions">
+        <div>
+            <span class="title">Pitanja</span>
+        </div>
+    </a>
+    <a class="box-item achivements-button" routerLink="/achivements">
+        <div>
+            <span class="title">Dostignuca</span>
+        </div>
+    </a>
+    <a class="box-item ranking-button" routerLink="/ranking">
+        <div>
+            <span class="title">Tabela</span>
+        </div>
+    </a>
+
 </div>

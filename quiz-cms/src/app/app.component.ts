@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
   public spinner = true;
+  public lives: any = [];
   public gameResults: GameData = {
     success: false,
     showModal: false,
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit{
       if(user){
         this.user = user;
         this.spinner = false;
+        this.lives = Array(user.lives);
       }
     })
     if(localStorage.getItem('access') && !this.config.logged){

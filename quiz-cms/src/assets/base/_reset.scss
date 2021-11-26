@@ -1,16 +1,23 @@
 @import '../abstract/mixins';
 @import '../abstract/variables';
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
 
 * {
     box-sizing: border-box;
 }
 
+span,
+p,
+h1,h2,h3,h4,h5,h6,li,a{
+    letter-spacing: 6px;
+}
+
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Shadows Into Light Two', sans-serif;
     background-color: $primary-background;
     width: 100%;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: hidden;
     font-size: 100%;
     margin: 0;
     padding: 0;
@@ -75,20 +82,20 @@ button {
 
 ::-webkit-scrollbar {
     width: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     border-radius: 3px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(0, 91, 119); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 91, 119);
     border-radius: 3px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
-  }
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
