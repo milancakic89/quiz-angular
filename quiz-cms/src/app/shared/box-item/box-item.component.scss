@@ -12,7 +12,7 @@
         background-repeat: no-repeat;
         background-size: 80px;
         background-position: 50% 40%;
-        background-image: url('../../../assets/images/ic_trophy.png');
+        background-image: url('../../../assets/images/medal.svg');
         border-radius: 5px;
         overflow: hidden;
         cursor: pointer;
@@ -22,6 +22,7 @@
             position: absolute;
             right: 0;
             top: 0;
+            max-width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
         }

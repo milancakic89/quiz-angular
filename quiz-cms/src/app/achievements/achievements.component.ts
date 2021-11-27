@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Configuration } from '../shared/config.service';
+import { AchievementsService } from './achievements.service';
+
+interface Achievement{
+  category: string;
+  achiveText: string;
+  achievedAt: number;
+}
 
 @Component({
   selector: 'app-achievements',
@@ -7,64 +15,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AchievementsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private config: Configuration, private service: AchievementsService) { }
 
-  public testAch = [
-    {
-     category: 'GEOGRAFIJA', 
-     achiveText: '30 pogodjenih pitanja', 
-     backgroundUrl: '../../assets/images/category/geography.jpeg'
-    },
-    {
-      category: 'GEOGRAFIJA', 
-      achiveText: '60 pogodjenih pitanja', 
-      backgroundUrl: '../../assets/images/category/geography.jpeg'
-     },
-     {
-      category: 'GEOGRAFIJA', 
-      achiveText: '100 pogodjenih pitanja', 
-      backgroundUrl: '../../assets/images/category/geography.jpeg'
-     },
-     {
-      category: 'GEOGRAFIJA', 
-      achiveText: '200 pogodjenih pitanja', 
-      backgroundUrl: '../../assets/images/category/geography.jpeg'
-     },
-     {
-      category: 'GEOGRAFIJA', 
-      achiveText: '500 pogodjenih pitanja', 
-      backgroundUrl: '../../assets/images/category/geography.jpeg'
-     },
-     //BREAK
-     {
-      category: 'ISTORIJA', 
-      achiveText: '30 pogodjenih pitanja', 
-      backgroundUrl: '../../assets/images/category/history.jpg'
-     },
-     {
-       category: 'ISTORIJA', 
-       achiveText: '60 pogodjenih pitanja', 
-       backgroundUrl: '../../assets/images/category/history.jpg'
-      },
-      {
-       category: 'ISTORIJA', 
-       achiveText: '100 pogodjenih pitanja', 
-       backgroundUrl: '../../assets/images/category/history.jpg'
-      },
-      {
-       category: 'ISTORIJA', 
-       achiveText: '200 pogodjenih pitanja', 
-       backgroundUrl: '../../assets/images/category/history.jpg'
-      },
-      {
-       category: 'ISTORIJA', 
-       achiveText: '500 pogodjenih pitanja', 
-       backgroundUrl: '../../assets/images/category/history.jpg'
-      },
-    
-  ]
+  public user: any = null;
+
+  public achievements: Achievement[] = [];
 
   ngOnInit(): void {
+    this.config.user.subscribe((user: any) =>{
+      this.user = user;
+    })
+
+    this.service.getAchievements().subscribe((data: any) =>{
+      if(data && data.success){
+        this.achievements = data.achievements;
+        console.log(data)
+      }
+    })
   }
 
 }
