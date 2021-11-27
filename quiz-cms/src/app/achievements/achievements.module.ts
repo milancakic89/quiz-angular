@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RankingComponent } from './ranking.component';
-import { RankingRoutingModule } from './ranking-routing.module';
+import { AchievementsComponent } from './achievements.component';
 import { SharedModule } from '../shared/shared.module';
+import { AchievementsRoutingModule } from './achievements-routing.module';
 
 
 
 @NgModule({
   declarations: [
-    RankingComponent
+    AchievementsComponent
   ],
   imports: [
     CommonModule,
-    RankingRoutingModule,
+    AchievementsRoutingModule,
     SharedModule
   ]
 })
-export class RankingModule { }
+export class AchievementsModule { }

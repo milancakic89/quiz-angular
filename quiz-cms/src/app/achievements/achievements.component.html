@@ -1,0 +1,10 @@
+<div class="achievements">
+    <div class="navigation">
+        <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
+</div>
+    <box-item *ngFor="let achievement of testAch"
+              [description]="achievement.category"
+              [title]="achievement.achiveText"
+              theme="blue"
+              [backgroundUrl]="achievement.backgroundUrl"></box-item>
+</div>

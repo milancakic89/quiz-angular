@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlayComponent } from './play.component';
 import { PlayRoutingmodule } from './play-routing.module';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PlayRoutingmodule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PlayModule { }

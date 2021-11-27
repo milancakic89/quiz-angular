@@ -1,0 +1,82 @@
+@import '../../../assets/abstract/variables';
+@import '../../../assets/abstract/mixins';
+
+.box-item{
+    &-wrapper{
+        width: 250px;
+        height: 250px;
+        position: relative;
+        padding: 0%;
+        margin: 0 20px 20px 0;
+        background-color: $primary-blue;
+        background-repeat: no-repeat;
+        background-size: 80px;
+        background-position: 50% 40%;
+        background-image: url('../../../assets/images/ic_trophy.png');
+        border-radius: 5px;
+        overflow: hidden;
+        cursor: pointer;
+
+        .completed-percent{
+            z-index: 1000;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        &:hover{
+            transform: translateY(-2px);
+            @include box-shadow-red;
+        }
+
+
+    }
+
+    &-description{
+        text-align: center;
+        font-weight: 800;
+        color: #fff;
+        font-size: 18px;
+    }
+
+    &-title{
+        position: absolute;
+        background-color: $primary-braon;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        &-btn{
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+        }
+    }
+
+}
+
+// .blue{
+//     .box-item-title{
+//         background-color: $primary-blue;
+//     }
+// }
+// .yellow{
+//     .box-item-title{
+//         background-color: $primary-yellow;
+//         &-btn{
+//             color: #000;
+//         }
+//     }
+// }
+// .braon{
+//     .box-item-title{
+//         background-color: $primary-braon;
+//     }
+// }

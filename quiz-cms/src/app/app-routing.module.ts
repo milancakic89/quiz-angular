@@ -34,6 +34,10 @@ const routes: Routes = [
   { path: 'ranking', 
     loadChildren: () => import('./ranking/ranking.module').then(module => module.RankingModule),
     canActivate: [AuthorizationGuard]},
+
+    { path: 'achievements', 
+    loadChildren: () => import('./achievements/achievements.module').then(module => module.AchievementsModule),
+    canActivate: [AuthorizationGuard]},
   
   { path: '**', redirectTo: ''}
 ];
