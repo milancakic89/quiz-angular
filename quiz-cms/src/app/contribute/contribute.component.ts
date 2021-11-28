@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
+import { NotificationService } from '../shared/notification.service';
 
 type Correct = 'A' | 'B' | 'C' | 'D';
 @Component({
@@ -11,7 +12,7 @@ type Correct = 'A' | 'B' | 'C' | 'D';
 })
 export class ContributeComponent implements OnInit {
 
-  constructor(private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService, private notificationService: NotificationService) { }
 
   get newQuestion(){ return this._newQuestion}
   set newQuestion(value){ this._newQuestion = value}
@@ -74,7 +75,12 @@ export class ContributeComponent implements OnInit {
       correct_text: this.newQuestion.correct_text
     }
     this.questionService.addQuestion(question).subscribe((data: any) =>{
-      console.log(data)
+      if(data && data.success){
+        this.notificationService.notification.emit({
+          success: true,
+          message: 'Pitanje upesno dodato'
+        })
+      }
     })
     form.resetForm();
   }

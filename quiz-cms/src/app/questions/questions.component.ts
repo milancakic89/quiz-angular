@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Configuration, User } from '../shared/config.service';
+import { NotificationService } from '../shared/notification.service';
 import { QuestionService } from './questions.service';
 import { Question } from './types';
 
@@ -11,7 +12,9 @@ import { Question } from './types';
 })
 export class QuestionsComponent implements OnInit {
 
-  constructor(private questionService: QuestionService, private config: Configuration) { }
+  constructor(private questionService: QuestionService, 
+              private notificationService: NotificationService,
+              private config: Configuration) { }
 
   get isRoot(){return this.config.isRoot}
 
@@ -29,6 +32,7 @@ export class QuestionsComponent implements OnInit {
     this.questionService.getQuestions().subscribe((data) =>{
       if(data){
         this.questions = data.data;
+        localStorage.setItem('questions', JSON.stringify(data.data))
       }
      
     })
@@ -45,6 +49,10 @@ export class QuestionsComponent implements OnInit {
             question.status = 'NA CEKANJU';
             this.updateQuestion = '';
             question.opened = false;
+            this.notificationService.notification.emit({
+              success: true,
+              message: 'Uspesno promenjeno.'
+            })
           }
         })
       }
@@ -56,8 +64,11 @@ export class QuestionsComponent implements OnInit {
 
   public publish(id: string){
     this.questionService.publish(id).subscribe((data: any) =>{
-      console.log(data)
       if(data && data.success){
+        this.notificationService.notification.emit({
+          success: true,
+          message: 'Uspesno promenjeno.'
+        })
         this.questions.forEach(question =>{
           if(question._id === id){
             question.status = 'ODOBRENO';
@@ -71,6 +82,10 @@ export class QuestionsComponent implements OnInit {
     this.questionService.unpublish(id).subscribe((data: any) =>{
       console.log(data)
       if(data && data.success){
+        this.notificationService.notification.emit({
+          success: true,
+          message: 'Uspesno promenjeno.'
+        })
         this.questions.forEach(question =>{
           if(question._id === id){
             question.status = 'NA CEKANJU';
@@ -83,8 +98,11 @@ export class QuestionsComponent implements OnInit {
 
   public onDeleteQuesion(id: string){
     this.questionService.deleteQuestion(id).subscribe((data: any) =>{
-      if(data){
-        console.log(data)
+      if(data && data.success){
+        this.notificationService.notification.emit({
+          success: true,
+          message: 'Uspesno obrisano.'
+        })
         this.questions = this.questions.filter(q => q._id !== id)
       }
     })

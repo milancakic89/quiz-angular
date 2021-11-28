@@ -1,6 +1,10 @@
 @import '../../assets/abstract/mixins';
 @import '../../assets/abstract/variables';
 
+
+button{
+    align-self: flex-start;
+}
 .profile {
     width: 100%;
     height: 100%;

@@ -1,56 +1,6 @@
 <div class="profile">
-    <!-- <div class="image-and-info">
-        <div class="image" 
-            [ngStyle]="{'background-image': 'url('+ user?.avatar_url + ')'}"
-            (click)="showInput = true">
-        </div>
-        <div class="image-url"  *ngIf="showInput">
-            <input name="avatar" placeholder="Url od slike" [(ngModel)]="imageUrl">
-            <button (click)="onChangeAvatar()">Ok</button>
-        </div>
-        <div class="info" *ngIf="user">
-            <h5 class="yellow-text">Ime: <span class="blue-text">{{ user.name }}</span></h5>
-            <h5 class="yellow-text">Titula: <span class="blue-text">{{user.title}}</span></h5>
-            <h5 class="yellow-text">Rezultat: <span class="blue-text">{{user.score}}</span></h5>
-            <h5 class="yellow-text">Preostalo pokusaja: <span class="blue-text">{{user.lives}}</span></h5>
-            <h5 class="yellow-text inline-center">Doprinos: 
-                <span class="blue-text">{{user.contributions}}</span>
-                <span class="info-button" (click)="showContributionInfo = !showContributionInfo">
-                    <span class="info-box" *ngIf="showContributionInfo">
-                        Svakim dodavanjem pitanja obogacujete ovaj kviz.
-                        Za uzvrat za svakih 30 odobrenih pitanja smanjujete
-                        vase vreme za koje vam se vracaju zivoti za 10 minuta,
-                        do maksimum od 30 minuta za 90 odobrenih pitanja
-                    </span>
-                </span>
-            </h5>
-        </div>
-        <a *ngIf="user && user.lives > 0" routerLink="/play" class="button-play">Igraj</a>
-        
-    </div> -->
+<button (click)="onResetLives()">Resset lives (TEST MODE)</button>
     <div class="profile-wrapper" *ngIf="user">
-        <!-- <h2>Kviz znanja</h2>
-        <div class="row">
-            <span class="info avatar" (click)="showNameBox = true"><i class="fa fa-user-circle"></i>
-                <div *ngIf="showNameBox">
-                    <input type="text" [(ngModel)]="name" [placeholder]="user.name"/>
-                    <button (click)="updateName()">Ok</button>
-                    <button (click)="closeNameBox()">Odustani</button>
-                </div>
-                <span>{{ user.name }}</span></span>
-            <span class="info"><i class="fas fa-medal"></i><span>{{user.title}}</span></span>
-            <span class="info"><i class="fas fa-trophy"></i><span class="bold">{{user.score}}</span></span>
-            <span class="info"><i class="fa fa-heart"></i><span>{{user.lives}}</span></span>
-            <span class="info"><i class="fa fa-bell"></i><span></span></span>
-        </div>
-        <div class="row">
-            <a class="btn play" routerLink="/play" routerLinkActive="active">IGRAJ</a>
-            <a class="btn questions" routerLink="/questions" routerLinkActive="active">PITANJA</a>
-            <a class="btn table" routerLink="/ranking" routerLinkActive="active">TABELA</a>
-            <a class="btn help" routerLink="/titles" routerLinkActive="active" *ngIf="isRoot">TITULE</a>
-            <a class="btn help" routerLink="/play" routerLinkActive="active">POMOC</a>
-        </div>
-    </div> -->
     <a class="box-item play-button" routerLink="/play">
             <div>
                 <span class="title">Igraj</span>

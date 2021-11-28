@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
+import { Noth, NotificationService } from './shared/notification.service';
 
 
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit{
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
               private service: AppService,
+              private notificationService: NotificationService,
               private feedbackService: FeedbackMessageService,
               private router: Router){}
   get isRoot(){return this.config.isRoot}
@@ -26,11 +28,12 @@ export class AppComponent implements OnInit{
   public user: any;
   public showModal = false;
   public gameRunning = false;
-  public feedbackClass = '';
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
   public spinner = true;
   public lives: any = [];
+  public showFeedback = false;
+  public successFeedback = true;
   public gameResults: GameData = {
     success: false,
     showModal: false,
@@ -39,11 +42,13 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(){
-    this.feedbackService.feedback.subscribe((feedback: Feedback) =>{
-      this.feedbackClass = feedback.success.toString();
-      this.feedbackMessage = feedback.message;
-      this.clearFeedback();
+    this.notificationService.notification.subscribe((noth: Noth) =>{
+      this.successFeedback = noth.success;
+      this.showFeedback = true;
+      this.feedbackMessage = noth.message;
+      this.hideFeedback();
     });
+
 
     if(!this.user && !localStorage.getItem('access')){
         this.spinner = false;
@@ -99,6 +104,13 @@ export class AppComponent implements OnInit{
     }
 
   }
+  
+  public hideFeedback(){
+    setTimeout(()=>{
+      this.showFeedback = false;
+      this.feedbackMessage = '';
+    }, 3000)
+  }
 
   public addToScore(score: number){
     this.user.score += score;
@@ -109,13 +121,6 @@ export class AppComponent implements OnInit{
       if(data && data.success){
       }
     })
-  }
-
-  public clearFeedback(){
-    setTimeout(()=>{
-        this.feedbackClass = '';
-        this.feedbackMessage = '';
-    }, this.feedbackTimeInSeconds * 1000)
   }
 
   public play(){

@@ -29,7 +29,6 @@ export class AchievementsComponent implements OnInit {
     this.service.getAchievements().subscribe((data: any) =>{
       if(data && data.success){
         this.achievements = data.achievements;
-        console.log(data)
       }
     })
   }

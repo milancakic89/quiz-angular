@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   public imageUrl = 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.0/img/avatar.png';
 
   public showInput = false;
-  public user = null as unknown as User;
+  public user = null as any as User;
 
   public name = '';
   public showNameBox = false;
@@ -37,13 +37,6 @@ export class ProfileComponent implements OnInit {
         this.user = user;
       }
     })
-
-    // console.log('here')
-    // this.setup.cities();
-    // setTimeout(() => {
-    //   this.setup.init();
-    // }, 1000)
-
   }
 
   public closeNameBox(){
@@ -63,6 +56,14 @@ export class ProfileComponent implements OnInit {
         }
         this.closeNameBox()
       })
+  }
+
+  public onResetLives(){
+    this.service.resetLives().subscribe((data: any) =>{
+      if(data && data.success){
+        this.config.user = data.user;
+      }
+    })
   }
 
 }

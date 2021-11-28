@@ -8,4 +8,8 @@ export class ProfileService{
     public updateName(name: string){
         return this.service.post('/name', {name})
     }
+
+    public resetLives(){
+        return this.service.post('/reset-lives', {})
+    }
 }

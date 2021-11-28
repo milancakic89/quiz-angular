@@ -5,6 +5,7 @@ import { ModalWrapper } from '../modal-service';
 import { QuestionService } from '../questions/questions.service';
 import { Answers, Question } from '../questions/types';
 import { Configuration } from '../shared/config.service';
+import { NotificationService } from '../shared/notification.service';
 import { PlayService } from './play.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   constructor(private modal: ModalWrapper, 
               private router: Router,
               private config: Configuration,
+              private notificationService: NotificationService,
               private playService: PlayService,
               private questionService: QuestionService) { }
 
@@ -90,8 +92,21 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
         this.time = 15;
         this.initTime();
       }else{
-        this.gameOver('No quesions')
+        clearInterval(this.timeInterval)
+        this.notificationService.notification.emit({
+          success: false,
+          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
+        })
+        this.router.navigateByUrl('/profile')
       }
+    },
+    error =>{
+        clearInterval(this.timeInterval)
+        this.notificationService.notification.emit({
+          success: false,
+          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
+        })
+        this.router.navigateByUrl('/profile')
     })
 
   }
@@ -110,19 +125,9 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 public timeWarning(){
   this.questionSelected = true;
   this.stopTime();
-  this.reduceAttempts();
-  if(this.attempts.length){
-    setTimeout(()=>{
-      this.getQuestion();  
-      console.log('get question in time warning')
-    },this.nextQuestionInterval)
-  }else{
-    clearInterval(this.timeInterval);
-    this.gameOver()
-  }
-
-  
+  this.updateQuestion(false)  
 }
+
 public gameOver(message?: string){
   this.stopTime();
   let points = 0;
@@ -165,6 +170,10 @@ public closeModal(){
     this.selectedLetter = answer.letter;
     this.stopTime();
     const correct = answer.letter === this.question.correct_letter;
+    this.updateQuestion(correct);
+  }
+
+  public updateQuestion(correct: boolean){
     this.playService.checkQuestion(this.question._id, correct).subscribe((data: any) =>{
       if(data && data.success){
         if (data.correct) {
@@ -180,8 +189,23 @@ public closeModal(){
           }
 
         }, this.nextQuestionInterval)
+      }else{
+        clearInterval(this.timeInterval)
+        this.notificationService.notification.emit({
+          success: false,
+          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
+        })
+        this.router.navigateByUrl('/profile')
       }
-    })
+    },
+    error =>{
+      clearInterval(this.timeInterval)
+      this.notificationService.notification.emit({
+        success: false,
+        message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
+      })
+      this.router.navigateByUrl('/profile')
+  })
   }
 
   public stopTime(){
@@ -190,11 +214,9 @@ public closeModal(){
 
   public reduceOneLife(){
       this.playService.reduceOneLife().subscribe((data: any) => {
-        this.config.user.subscribe(user => {
-          if (user) {
-              user.lives = data.lives;
-          }
-        })
+        if(data && data.success){
+          this.config.user.next(data.user)
+        }
       })
   }
   private reduceAttempts(){

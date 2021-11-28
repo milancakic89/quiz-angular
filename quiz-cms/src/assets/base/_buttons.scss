@@ -39,7 +39,7 @@
     }
 
     &-back {
-        display: inline-block;
+        position: sticky;
         width: 50px !important;
         height: 50px !important;
         z-index: 10000;
