@@ -78,7 +78,6 @@ export class AppComponent implements OnInit{
       this.gameResults.success = gameData.success;
       this.addToScore(this.gameResults.results)
       if(gameData.results > 0){
-        this.user.score += gameData.results;
         this.updateScore();
       }
       setTimeout(()=>{

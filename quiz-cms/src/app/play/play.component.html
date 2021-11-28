@@ -59,7 +59,7 @@
                     *ngFor="let answer of question.answers"
                     [ngClass]="{'disabled-button':questionSelected,
                     'wrong-answer': questionSelected && question.correct_letter !== answer.letter && selectedLetter === answer.letter,
-                    'correct-answer': question.correct_letter === answer.letter && selectedLetter === answer.letter}" 
+                    'correct-answer':questionSelected && question.correct_letter === answer.letter}" 
                     [attr.data-label]="answer.letter" 
                     (click)="!questionSelected && onSelectedAnswer(answer)">
                          {{ answer.text }}

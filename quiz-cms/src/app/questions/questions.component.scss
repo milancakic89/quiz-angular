@@ -43,7 +43,9 @@
 
 .button-contribute {
     z-index: 10000;
-    top: 5px;
+    top: 80px;
+    left: 50px;
+    position: fixed;
     padding: 5px;
     margin-left: 15px;
     height: 50px;
@@ -74,7 +76,7 @@
 }
 
 .table {
-    margin-top: 25px;
+    margin-top: 80px;
 
     .tbody {
         .tr:last-child {

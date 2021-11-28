@@ -24,11 +24,13 @@ export class AchievementsComponent implements OnInit {
   ngOnInit(): void {
     this.config.user.subscribe((user: any) =>{
       this.user = user;
+      console.log(this.user)
     })
 
     this.service.getAchievements().subscribe((data: any) =>{
       if(data && data.success){
         this.achievements = data.achievements;
+        console.log(this.achievements)
       }
     })
   }
