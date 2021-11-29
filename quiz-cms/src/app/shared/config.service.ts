@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { ApiService } from "./api.servise";
+import { ApiResponse, ApiService } from "./api.servise";
 
 export interface User{
   id?: number;
@@ -16,10 +16,13 @@ export interface User{
   roles: string[];
 }
 
+
+
 export interface UserResponse{
   success: boolean;
   message: string;
-  user: User;
+  data: User;
+  token: string;
 }
 
 export interface UserAutoLogin{
@@ -96,12 +99,12 @@ export class Configuration{
 
 
   public createUser(email: string, password: string){
-      return this.service.post('/signup', { email, password });
+    return this.service.post<any>('/signup', { email, password }, 'Registracija neuspesna. Pokusajte ponovo');
     }
 
-    public login(email: string, password: string){
-       return this.service.post('/login', {email, password});
-    }
+  public login(email: string, password: string){
+      return this.service.post<any>('/login', {email, password}, 'Neuspelo logovanje. Pokusajte ponovo');
+  }
 
   public saveUser(user: User, token: string){
       isLogged.root = user.roles.some((role: any) => role === 'ADMIN');
@@ -111,13 +114,12 @@ export class Configuration{
     }
 
     public async attemptAutoLogin(){
-      this.service.post('/autologin', {}).subscribe((data: UserResponse | any) =>{
-        if(data && data.user){
-          this.isRoot = data.user.roles.some((role: any) => role === 'ADMIN');
-          this.logged = true;
-          this._user.next(data.user);
-        }
-      });
+      const { data, success } = await this.service.post<User>('/autologin', {}, 'Automatsko logovanje nije uspelo')
+      if (success) {
+        this.isRoot = data.roles.some((role: any) => role === 'ADMIN');
+        this.logged = true;
+        this._user.next(data);
+      }
     }
 
     public logout(){

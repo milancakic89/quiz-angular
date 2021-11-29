@@ -79,36 +79,26 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.getQuestion();
   }
 
-  public getQuestion(){
+  public async getQuestion(){
     if (this._questionCounter > 15 || !this.attempts.length){
       this.gameOver('End of game');
     }
     this._questionCounter++;
-    this.questionService.getSingleQuestion().subscribe((data: any) =>{
-      if(data && data.success){
-        this.question = data.data;
-        this.selectedLetter = '';
-        this.questionSelected = false;
-        this.time = 15;
-        this.initTime();
-      }else{
-        clearInterval(this.timeInterval)
-        this.notificationService.notification.emit({
-          success: false,
-          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-        })
-        this.router.navigateByUrl('/profile')
-      }
-    },
-    error =>{
-        clearInterval(this.timeInterval)
-        this.notificationService.notification.emit({
-          success: false,
-          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-        })
-        this.router.navigateByUrl('/profile')
-    })
-
+    const { data, success } = await this.questionService.getSingleQuestion()
+    if(success){
+      this.question = data.data;
+      this.selectedLetter = '';
+      this.questionSelected = false;
+      this.time = 15;
+      this.initTime();
+    }else{
+      clearInterval(this.timeInterval);
+      this.notificationService.notification.emit({
+        success: false,
+        message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
+      })
+      this.router.navigateByUrl('/profile')
+    }
   }
 
   public initTime(){
@@ -173,52 +163,44 @@ public closeModal(){
     this.updateQuestion(correct);
   }
 
-  public updateQuestion(correct: boolean){
-    this.playService.checkQuestion(this.question._id, correct).subscribe((data: any) =>{
-      if(data && data.success){
-        if (data.correct) {
-          this.score++;
-        } else {
-          this.reduceAttempts();
-        }
-        setTimeout(() => {
-          if (this.attempts.length) {
-            this.getQuestion();
-          } else {
-            this.gameOver('You have missed 3 times');
-          }
-
-        }, this.nextQuestionInterval)
-      }else{
-        clearInterval(this.timeInterval)
-        this.notificationService.notification.emit({
-          success: false,
-          message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-        })
-        this.router.navigateByUrl('/profile')
+  public async updateQuestion(correct: boolean){
+    const { data, success } = await this.playService.checkQuestion(this.question._id, correct)
+    if(success){
+      if (data.correct) {
+        this.score++;
+      } else {
+        this.reduceAttempts();
       }
-    },
-    error =>{
+      setTimeout(() => {
+        if (this.attempts.length) {
+          this.getQuestion();
+        } else {
+          this.gameOver('You have missed 3 times');
+        }
+
+      }, this.nextQuestionInterval)
+    }else{
       clearInterval(this.timeInterval)
       this.notificationService.notification.emit({
         success: false,
         message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
       })
       this.router.navigateByUrl('/profile')
-  })
+    }
   }
 
   public stopTime(){
     clearInterval(this.timeInterval);
   }
 
-  public reduceOneLife(){
-      this.playService.reduceOneLife().subscribe((data: any) => {
-        if(data && data.success){
-          this.config.user.next(data.user)
-        }
-      })
+  public async reduceOneLife(){
+    const { data, success } = await this.playService.reduceOneLife()
+    if(success){
+      console.log(data)
+      this.config.user.next(data)
+    }
   }
+  
   private reduceAttempts(){
     if(this._attempts.length > 0){
       this.attempts.pop();

@@ -26,24 +26,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.config.user.subscribe(user =>{
       if(user){
-        console.log('have user redirect')
         this.user = user;
         this.router.navigateByUrl('/profile')
       }
     })
-
-
   }
 
-  public onSubmit(){
-   this.config.login(this._loginDetails.email, this._loginDetails.password).subscribe((data: SignupResponse | any) =>{
-    if(data){
-      this.feedbackService.feedback.emit({success: data.success, message: data.message});
-      if(data.user){
-          this.config.saveUser(data.user, data.token);
-      }
-    }   
-   })
+  public async onSubmit(){
+    const { data, success, token } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
+    if (success) {
+      this.feedbackService.feedback.emit({ success: success, message: '' });
+      this.config.saveUser(data, token);
+    }
   }
 
   private _loginDetails = {

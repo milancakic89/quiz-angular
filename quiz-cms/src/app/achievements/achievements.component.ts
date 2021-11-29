@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Configuration } from '../shared/config.service';
+import { NotificationService } from '../shared/notification.service';
 import { AchievementsService } from './achievements.service';
 
-interface Achievement{
+export interface Achievement{
   category: string;
   achiveText: string;
   achievedAt: number;
@@ -15,7 +16,9 @@ interface Achievement{
 })
 export class AchievementsComponent implements OnInit {
 
-  constructor(private config: Configuration, private service: AchievementsService) { }
+  constructor(private config: Configuration, 
+              private service: AchievementsService, 
+              private notificationService: NotificationService) { }
 
   public user: any = null;
 
@@ -25,12 +28,14 @@ export class AchievementsComponent implements OnInit {
     this.config.user.subscribe((user: any) =>{
       this.user = user;
     })
+    this.load();
+  }
 
-    this.service.getAchievements().subscribe((data: any) =>{
-      if(data && data.success){
-        this.achievements = data.achievements;
-      }
-    })
+  public async load(){
+    const { data, success} = await this.service.getAchievements();
+    if(success){
+      this.achievements = data;
+    }
   }
 
 }

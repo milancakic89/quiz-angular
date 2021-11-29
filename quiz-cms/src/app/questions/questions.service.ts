@@ -9,31 +9,31 @@ export class QuestionService{
   constructor(private service: ApiService){}
 
   public getQuestions(){
-    return this.service.get('/all-questions');
+    return this.service.get<any>('/all-questions', 'Ucitavanje pitanja nije uspelo');
   }
 
   public getSingleQuestion(){
-    return this.service.get('/question');
+    return this.service.get<any>('/question', 'Neuspelo preuzimanje pitanja.');
   }
 
   public addQuestion(question: any){
-    return this.service.post('/add-question', question);
+    return this.service.post<any>('/add-question', question, 'Neuspelo dodavanje pitanja.');
   }
 
   public deleteQuestion(id: any | string){
-      return this.service.delete('/delete-question/' + id, {})
+    return this.service.delete<any>('/delete-question/' + id, {}, 'Neuspelo brisanje pitanja')
   }
 
   public publish(id: string){
-    return this.service.post('/publish', {id});
+    return this.service.post<any>('/publish', {id}, 'Objavljivanje nije uspelo.');
   }
 
   public unpublish(id: string){
-    return this.service.post('/unpublish', {id});
+    return this.service.post<any>('/unpublish', {id}, 'Objavljivanje nije uspelo');
   }
 
   public updateQuestionText(id: string, text: string){
-    return this.service.post('/update-question-text', {id, text});
+    return this.service.post<any>('/update-question-text', {id, text}, 'Neuspesno menjanje pitanja');
   }
 //update-question-text
 }

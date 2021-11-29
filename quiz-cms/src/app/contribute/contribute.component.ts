@@ -74,15 +74,15 @@ export class ContributeComponent implements OnInit {
       correct_letter: this.selected,
       correct_text: this.newQuestion.correct_text
     }
-    this.questionService.addQuestion(question).subscribe((data: any) =>{
-      if(data && data.success){
-        this.notificationService.notification.emit({
-          success: true,
-          message: 'Pitanje upesno dodato'
-        })
-      }
-    })
+    this.addQuestion(question)
     form.resetForm();
+  }
+
+  public async addQuestion(question: Question){
+    const { success } = await this.questionService.addQuestion(question);
+    if(success){
+      this.notificationService.notification.emit({success: true,message: 'Pitanje upesno dodato'})
+    }
   }
 
   private _newQuestion = {

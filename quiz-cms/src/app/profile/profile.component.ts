@@ -45,25 +45,23 @@ export class ProfileComponent implements OnInit {
     }, 10)
   }
 
-  public updateName(){
+  public async updateName(){
     if(!this.name.length){
       return;
     }
-      this.service.updateName(this.name).subscribe((data: any) =>{
-        if(data && data.success){
-          console.log('name changed')
-          this.user.name = this.name;
-        }
-        this.closeNameBox()
-      })
+    const { success } = await this.service.updateName(this.name);
+    if(success){
+      this.user.name = this.name;
+    }
+    this.closeNameBox()
   }
 
-  public onResetLives(){
-    this.service.resetLives().subscribe((data: any) =>{
-      if(data && data.success){
-        this.config.user = data.user;
-      }
-    })
+  public async onResetLives(){
+    const { data, success } = await this.service.resetLives()
+    if(success){
+      console.log(data);
+      this.config.user.next(data);
+    }
   }
 
 }

@@ -6,13 +6,13 @@ export class PlayService{
     constructor(private service: ApiService){}
 
     public checkQuestion(questionId: string, correct: boolean){
-        return this.service.post('/check-question', {questionId, correct})
+        return this.service.post<any>('/check-question', {questionId, correct}, '')
     }
     public saveQuizResults(){
 
     }
 
     public reduceOneLife(){
-        return this.service.post('/reduce-lives', {})
+        return this.service.post<any>('/reduce-lives', {}, '')
     }
 }

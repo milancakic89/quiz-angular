@@ -12,11 +12,11 @@ import { Question } from './types';
 })
 export class QuestionsComponent implements OnInit {
 
-  constructor(private questionService: QuestionService, 
-              private notificationService: NotificationService,
-              private config: Configuration) { }
+  constructor(private questionService: QuestionService,
+    private notificationService: NotificationService,
+    private config: Configuration) { }
 
-  get isRoot(){return this.config.isRoot}
+  get isRoot() { return this.config.isRoot }
 
   public questions: Question[] = []
   public user: any;
@@ -24,89 +24,83 @@ export class QuestionsComponent implements OnInit {
   public showUpdateButton = true;
 
   ngOnInit(): void {
-    this.config.user.subscribe(user =>{
-      if(user){
+    this.config.user.subscribe(user => {
+      if (user) {
         this.user = user;
       }
     })
-    this.questionService.getQuestions().subscribe((data) =>{
-      if(data){
-        this.questions = data.data;
-        localStorage.setItem('questions', JSON.stringify(data.data))
-      }
-     
-    })
+    this.load();
   }
 
-  public updateQuestionText(id: string){
+  public async load() {
+    const { data, success } = await this.questionService.getQuestions();
+    if (success) {
+      this.questions = data.data;
+      localStorage.setItem('questions', JSON.stringify(data.data))
+    }
+  }
+
+  public async updateQuestionText(id: string) {
     this.showUpdateButton = false;
-    this.questionService.updateQuestionText(id, this.updateQuestion).subscribe((data: any) =>{
-      if(data && data.success){
-        this.showUpdateButton = true;
-        this.questions.forEach(question =>{
-          if(question._id === id){
-            question.question = this.updateQuestion;
-            question.status = 'NA CEKANJU';
-            this.updateQuestion = '';
-            question.opened = false;
-            this.notificationService.notification.emit({
-              success: true,
-              message: 'Uspesno promenjeno.'
-            })
-          }
-        })
-      }
-    },
-    error =>{
+    const { success } = await this.questionService.updateQuestionText(id, this.updateQuestion);
+    if (success) {
       this.showUpdateButton = true;
-    })
+      this.questions.forEach(question => {
+        if (question._id === id) {
+          question.question = this.updateQuestion;
+          question.status = 'NA CEKANJU';
+          this.updateQuestion = '';
+          question.opened = false;
+          this.notificationService.notification.emit({
+            success: true,
+            message: 'Uspesno promenjeno.'
+          })
+        }
+      })
+    } else {
+      this.showUpdateButton = true;
+    }
   }
 
-  public publish(id: string){
-    this.questionService.publish(id).subscribe((data: any) =>{
-      if(data && data.success){
-        this.notificationService.notification.emit({
-          success: true,
-          message: 'Uspesno promenjeno.'
-        })
-        this.questions.forEach(question =>{
-          if(question._id === id){
-            question.status = 'ODOBRENO';
-          }
-        })
-      }
-    })
+  public async publish(id: string) {
+    const { data, success } = await this.questionService.publish(id)
+    if (success) {
+      this.notificationService.notification.emit({
+        success: true,
+        message: 'Uspesno promenjeno.'
+      });
+      this.questions.forEach(question => {
+        if (question._id === id) {
+          question.status = 'ODOBRENO';
+        }
+      })
+    }
   }
 
-  public unpublish(id: string){
-    this.questionService.unpublish(id).subscribe((data: any) =>{
-      console.log(data)
-      if(data && data.success){
-        this.notificationService.notification.emit({
-          success: true,
-          message: 'Uspesno promenjeno.'
-        })
-        this.questions.forEach(question =>{
-          if(question._id === id){
-            question.status = 'NA CEKANJU';
-          }
-        })
-      }
-    })
-
+  public async unpublish(id: string) {
+    const { data, success } = await this.questionService.unpublish(id)
+    if (success) {
+      this.notificationService.notification.emit({
+        success: true,
+        message: 'Uspesno promenjeno.'
+      })
+      this.questions.forEach(question => {
+        if (question._id === id) {
+          question.status = 'NA CEKANJU';
+        }
+      })
+    }
   }
 
-  public onDeleteQuesion(id: string){
-    this.questionService.deleteQuestion(id).subscribe((data: any) =>{
-      if(data && data.success){
-        this.notificationService.notification.emit({
-          success: true,
-          message: 'Uspesno obrisano.'
-        })
-        this.questions = this.questions.filter(q => q._id !== id)
-      }
-    })
+  public async onDeleteQuesion(id: string) {
+    const { success } = await this.questionService.deleteQuestion(id);
+    if (success) {
+      this.notificationService.notification.emit({
+        success: true,
+        message: 'Uspesno obrisano.'
+      })
+      this.questions = this.questions.filter(q => q._id !== id)
+    }
   }
-
 
 }
