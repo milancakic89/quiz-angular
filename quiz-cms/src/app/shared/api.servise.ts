@@ -34,12 +34,12 @@ export class ApiService{
         Object.keys(body).forEach(key =>{
             config[`${key}`] = body[`${key}`]
         })
-        const { data, success, error} = await this.mapToResponse<T>(this.http.post(this.localApi + url, config, {
+        const { data, success, error, token} = await this.mapToResponse<T>(this.http.post(this.localApi + url, config, {
             headers: {
                 Authorization: 'Bearer ' + getToken(),
             }
         }).toPromise() as any, errorMessageFeedback)
-        return { data, success, error};
+        return { data, success, error, token};
     }
 
     public async delete<T>(url: string, body: any, errorMessageFeedback: string) {
@@ -55,19 +55,21 @@ export class ApiService{
         return { data, success, error};
     }
 
-    public mapToResponse<T>(promise: Promise<ApiResponse<T>>, errorMessageFeedback: string): Promise<{data: T, success: boolean, error: string}>{
+    public mapToResponse<T>(promise: Promise<ApiResponse<T>>, errorMessageFeedback: string): Promise<{data: T, success: boolean, error: string, token: string}>{
         return promise.then( (data: any) =>{
             if(data.success){
                 return {
                     data: data.data as any as T,
                     success: data.success,
-                    error: data.error
+                    error: data.error,
+                    token: data.token
                 }
             }
             return {
                 data: undefined as any,
                 success: false,
-                error: errorMessageFeedback
+                error: errorMessageFeedback,
+                token: ''
             }
            
         })
@@ -76,7 +78,8 @@ export class ApiService{
             return {
                 data: undefined as any,
                 success: false,
-                error: errorMessageFeedback
+                error: errorMessageFeedback,
+                token: ''
             }
             })
     }

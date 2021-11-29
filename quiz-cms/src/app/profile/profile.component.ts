@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { initialQuestionsSetup } from '../questions/initial';
 import { Configuration, User } from '../shared/config.service';
 import { ProfileService } from './profile.service';
 
@@ -11,8 +10,7 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration, 
-              private service: ProfileService,
-              private setup: initialQuestionsSetup) { }
+              private service: ProfileService) { }
 
   get isRoot(){return this.config.isRoot}
 
@@ -37,6 +35,16 @@ export class ProfileComponent implements OnInit {
         this.user = user;
       }
     })
+    setTimeout(()=>{
+      const leaved = JSON.parse(sessionStorage.getItem('play-mode') || '');
+      console.log(leaved)
+      if (leaved) {
+        const conf = confirm('Napustanjem igre gubite 1 zivot!!!!')
+        if (conf) {
+          sessionStorage.setItem('play-mode', 'false')
+        }
+      }
+    }, 500)
   }
 
   public closeNameBox(){

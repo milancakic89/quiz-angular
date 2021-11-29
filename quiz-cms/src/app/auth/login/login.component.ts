@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
-import { initialQuestionsSetup } from 'src/app/questions/initial';
 import { ApiService } from 'src/app/shared/api.servise';
 import { Configuration, SignupResponse } from 'src/app/shared/config.service';
 
@@ -35,6 +34,7 @@ export class LoginComponent implements OnInit {
   public async onSubmit(){
     const { data, success, token } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
     if (success) {
+      console.log(token)
       this.feedbackService.feedback.emit({ success: success, message: '' });
       this.config.saveUser(data, token);
     }

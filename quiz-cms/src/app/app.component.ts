@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
@@ -69,6 +69,7 @@ export class AppComponent implements OnInit{
     }
 
   this.modal.gameResults.subscribe(gameData =>{
+    sessionStorage.setItem('play-mode', 'false');
     if(gameData){
       this.gameRunning = false;
       this.modal.startGame.next(false);
@@ -104,6 +105,7 @@ export class AppComponent implements OnInit{
     }
 
   }
+
   
   public hideFeedback(){
     setTimeout(()=>{
@@ -116,11 +118,8 @@ export class AppComponent implements OnInit{
     this.user.score += score;
   }
 
-  private updateScore(){
-    this.service.updateScore(this.user.score).subscribe((data: any) =>{
-      if(data && data.success){
-      }
-    })
+  private async updateScore(){
+    await this.service.updateScore(this.user.score);
   }
 
   public play(){

@@ -34,6 +34,7 @@ export class AchievementsComponent implements OnInit {
   public async load(){
     const { data, success} = await this.service.getAchievements();
     if(success){
+      console.log(data)
       this.achievements = data;
     }
   }

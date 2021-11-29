@@ -35,8 +35,8 @@ export class QuestionsComponent implements OnInit {
   public async load() {
     const { data, success } = await this.questionService.getQuestions();
     if (success) {
-      this.questions = data.data;
-      localStorage.setItem('questions', JSON.stringify(data.data))
+      this.questions = data;
+      localStorage.setItem('questions', JSON.stringify(data))
     }
   }
 

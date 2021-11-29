@@ -67,12 +67,14 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   ngOnDestroy(){
-    this.modal.startGame.next(false)
+    this.modal.startGame.next(false);
+    this.playService.allowBackButton = true;
     clearInterval(this.timeInterval);
   }
 
   public initGame(){
     this.modal.startGame.next(true)
+    this.playService.allowBackButton = false;
     this.score = 0;
     this.time = 15;
     this.questionCount = 0;
@@ -83,10 +85,11 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this._questionCounter > 15 || !this.attempts.length){
       this.gameOver('End of game');
     }
+    sessionStorage.setItem('play-mode', 'true');
     this._questionCounter++;
     const { data, success } = await this.questionService.getSingleQuestion()
     if(success){
-      this.question = data.data;
+      this.question = data;
       this.selectedLetter = '';
       this.questionSelected = false;
       this.time = 15;
@@ -120,6 +123,7 @@ public timeWarning(){
 
 public gameOver(message?: string){
   this.stopTime();
+  sessionStorage.setItem('play-mode', 'false');
   let points = 0;
   if(this.score > 2 && this.score <= 7){
     points = 1;
@@ -136,15 +140,17 @@ public gameOver(message?: string){
   if(this.score < 2){
     this.reduceOneLife();
   }
-
   this.modal.gameResults.next({
     success: points !== 0,
     results: points,
     showModal: true
-  })
+  });
+
+  this.playService.allowBackButton = true;
   this.score = 0;
   this.attempts = [1, 1, 1]
   this.modal.startGame.next(false)
+
 }
 
 public closeModal(){
@@ -164,9 +170,10 @@ public closeModal(){
   }
 
   public async updateQuestion(correct: boolean){
+    sessionStorage.setItem('play-mode', 'true');
     const { data, success } = await this.playService.checkQuestion(this.question._id, correct)
     if(success){
-      if (data.correct) {
+      if (data) {
         this.score++;
       } else {
         this.reduceAttempts();
@@ -194,9 +201,9 @@ public closeModal(){
   }
 
   public async reduceOneLife(){
+    sessionStorage.setItem('play-mode', 'true');
     const { data, success } = await this.playService.reduceOneLife()
     if(success){
-      console.log(data)
       this.config.user.next(data)
     }
   }

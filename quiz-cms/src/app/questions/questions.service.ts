@@ -9,11 +9,11 @@ export class QuestionService{
   constructor(private service: ApiService){}
 
   public getQuestions(){
-    return this.service.get<any>('/all-questions', 'Ucitavanje pitanja nije uspelo');
+    return this.service.get<Question[]>('/all-questions', 'Ucitavanje pitanja nije uspelo');
   }
 
   public getSingleQuestion(){
-    return this.service.get<any>('/question', 'Neuspelo preuzimanje pitanja.');
+    return this.service.get<Question>('/question', 'Neuspelo preuzimanje pitanja.');
   }
 
   public addQuestion(question: any){
