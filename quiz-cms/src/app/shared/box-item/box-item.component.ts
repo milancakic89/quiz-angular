@@ -15,13 +15,13 @@ export class BoxItemComponent implements OnInit {
   @Input() backgroundUrl = '';
   @Input() title = '';
   @Input() theme: Theme = 'blue';
-  @Input() score = 0;
+  @Input() answered = 0;
   @Input() achivedAt = 0;
   @Input() completed: any;
 
 
   ngOnInit(): void {
-   this.completed = 100 - (100 * (this.score / this.achivedAt));
+   this.completed = 100 - (100 * (this.answered / this.achivedAt));
   }
 
 }

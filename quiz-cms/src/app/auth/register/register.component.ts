@@ -19,12 +19,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onSubmit(){
-    this.config.createUser(this._registerDetails.email, this._registerDetails.password).subscribe((user: any) =>{
-      if(user){
-        this.feedbackService.feedback.emit({success: user.success, message: user.message})
-      }
-    })
+  public async onSubmit(){
+    const { data, success } = await this.config.createUser(this._registerDetails.email, this._registerDetails.password);
+    if(success){
+        this.feedbackService.feedback.emit({ success: data.success, message: data.message })
+    }
   }
 
   private _registerDetails = {

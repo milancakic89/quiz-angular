@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { initialQuestionsSetup } from '../questions/initial';
+import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
 import { ProfileService } from './profile.service';
 
@@ -10,9 +10,9 @@ import { ProfileService } from './profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private config: Configuration, 
-              private service: ProfileService,
-              private setup: initialQuestionsSetup) { }
+  constructor(private config: Configuration,
+              private playService: PlayService,
+              private service: ProfileService) { }
 
   get isRoot(){return this.config.isRoot}
 
@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
 
   public showInput = false;
   public user = null as any as User;
+
+  public gameLeaved = false;
 
   public name = '';
   public showNameBox = false;
@@ -37,6 +39,24 @@ export class ProfileComponent implements OnInit {
         this.user = user;
       }
     })
+    setTimeout(()=>{
+      let leaved;
+      if(sessionStorage.getItem('play-mode')){
+        leaved = JSON.parse(sessionStorage.getItem('play-mode') || '');
+        console.log(leaved)
+      }
+      if (leaved) {
+        this.gameLeaved = true;
+        setTimeout(()=>{
+          console.log('triggering false')
+          sessionStorage.setItem('play-mode', 'false');
+          this.gameLeaved = false;
+          this.reduceOneLife();
+        }, 5000)
+      }else{
+        sessionStorage.setItem('play-mode', 'false');
+      }
+    }, 500)
   }
 
   public closeNameBox(){
@@ -45,25 +65,31 @@ export class ProfileComponent implements OnInit {
     }, 10)
   }
 
-  public updateName(){
+  public async updateName(){
     if(!this.name.length){
       return;
     }
-      this.service.updateName(this.name).subscribe((data: any) =>{
-        if(data && data.success){
-          console.log('name changed')
-          this.user.name = this.name;
-        }
-        this.closeNameBox()
-      })
+    const { success } = await this.service.updateName(this.name);
+    if(success){
+      this.user.name = this.name;
+    }
+    this.closeNameBox()
   }
 
-  public onResetLives(){
-    this.service.resetLives().subscribe((data: any) =>{
-      if(data && data.success){
-        this.config.user = data.user;
-      }
-    })
+  public async onResetLives(){
+    const { data, success } = await this.service.resetLives()
+    if(success){
+      console.log(data);
+      this.config.user.next(data);
+    }
+  }
+
+  public async reduceOneLife() {
+    sessionStorage.setItem('play-mode', 'false');
+    const { data, success } = await this.playService.reduceOneLife()
+    if (success) {
+      this.config.user.next(data)
+    }
   }
 
 }

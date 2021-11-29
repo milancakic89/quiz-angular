@@ -1,51 +1,87 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
+import { NotificationService } from "./notification.service";
 
 
 const getToken = () =>{
     return localStorage.getItem('access');
 }
 
-export interface Response<T>{
+export interface ApiResponse<T>{
     success: boolean;
     message: string;
-    data: any;
+    token?:string;
+    data: T;
 }
 
 @Injectable({providedIn: 'root'})
 export class ApiService{
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private nothService: NotificationService){}
 
 
-    public get(url: string){
-        return this.http.get<any>(this.localApi + url,{
-            headers:{
+    public async get<T>(url: string, errorMessageFeedback: string){
+        const { data, success, error } = await this.mapToResponse<T>(this.http.get<any>(this.localApi + url, {
+            headers: {
                 Authorization: 'Bearer ' + getToken()
             }
-        })
+        }).toPromise() as any, errorMessageFeedback)
+        return { data, success, error };
     }
 
-    public post(url: string, body: any) {
+    public async post<T>(url: string, body: any, errorMessageFeedback: string) {
         let config: any = {}
         Object.keys(body).forEach(key =>{
             config[`${key}`] = body[`${key}`]
         })
-        return this.http.post(this.localApi + url, config, {headers:{
+        const { data, success, error, token} = await this.mapToResponse<T>(this.http.post(this.localApi + url, config, {
+            headers: {
                 Authorization: 'Bearer ' + getToken(),
-        }})
+            }
+        }).toPromise() as any, errorMessageFeedback)
+        return { data, success, error, token};
     }
 
-    public delete(url: string, body: any) {
+    public async delete<T>(url: string, body: any, errorMessageFeedback: string) {
         let config: any = { }
         Object.keys(body).forEach(key => {
             config[`${key}`] = body[`${key}`]
         })
-        return this.http.delete(this.localApi + url, {
+        const { data, success, error } = await this.mapToResponse<T>(this.http.delete(this.localApi + url, {
             headers: {
                 Authorization: 'Bearer ' + getToken(),
             }
+        }).toPromise() as any, errorMessageFeedback);
+        return { data, success, error};
+    }
+
+    public mapToResponse<T>(promise: Promise<ApiResponse<T>>, errorMessageFeedback: string): Promise<{data: T, success: boolean, error: string, token: string}>{
+        return promise.then( (data: any) =>{
+            if(data.success){
+                return {
+                    data: data.data as any as T,
+                    success: data.success,
+                    error: data.error,
+                    token: data.token
+                }
+            }
+            return {
+                data: undefined as any,
+                success: false,
+                error: errorMessageFeedback,
+                token: ''
+            }
+           
         })
+        .catch((error: any) =>{
+            this.nothService.notification.emit({message: 'Error conecting to server: ' + error, success: false});
+            return {
+                data: undefined as any,
+                success: false,
+                error: errorMessageFeedback,
+                token: ''
+            }
+            })
     }
 
     private localApi = 'http://localhost:3000';

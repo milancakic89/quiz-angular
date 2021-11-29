@@ -7,6 +7,6 @@ export class AppService{
 
  
     public updateScore(score: number){
-        return this.service.post('/score', {score});
+        return this.service.post('/score', {score}, '');
     }
 }

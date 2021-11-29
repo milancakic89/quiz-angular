@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './shared/guards/admin.guard';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
+import { PlayGuard } from './shared/guards/play-guard';
 
 const routes: Routes = [
   { path: '', 
@@ -21,7 +22,9 @@ const routes: Routes = [
   
   { path: 'play', 
     loadChildren: () => import('./play/play.module').then(module => module.PlayModule),
-    canActivate: [AuthorizationGuard]},
+    canActivate: [AuthorizationGuard],
+    canDeactivate: [PlayGuard]},
+    
   
   { path: 'profile', 
     loadChildren: () => import('./profile/profile.module').then(module => module.ProfileModule),
