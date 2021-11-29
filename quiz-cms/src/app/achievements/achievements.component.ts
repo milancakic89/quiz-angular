@@ -7,6 +7,8 @@ export interface Achievement{
   category: string;
   achiveText: string;
   achievedAt: number;
+  answered: number;
+  price_received: boolean;
 }
 
 @Component({

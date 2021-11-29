@@ -5,7 +5,7 @@
     <box-item *ngFor="let achievement of achievements"
               [description]="achievement.category"
               [title]="achievement.achiveText"
-              [score]="user.score"
+              [answered]="achievement.answered"
               [achivedAt]="achievement.achievedAt"
               theme="blue"></box-item>
 </div>

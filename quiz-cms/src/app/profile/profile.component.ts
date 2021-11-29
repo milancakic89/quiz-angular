@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
 import { ProfileService } from './profile.service';
 
@@ -9,7 +10,8 @@ import { ProfileService } from './profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private config: Configuration, 
+  constructor(private config: Configuration,
+              private playService: PlayService,
               private service: ProfileService) { }
 
   get isRoot(){return this.config.isRoot}
@@ -19,6 +21,8 @@ export class ProfileComponent implements OnInit {
 
   public showInput = false;
   public user = null as any as User;
+
+  public gameLeaved = false;
 
   public name = '';
   public showNameBox = false;
@@ -37,12 +41,14 @@ export class ProfileComponent implements OnInit {
     })
     setTimeout(()=>{
       const leaved = JSON.parse(sessionStorage.getItem('play-mode') || '');
-      console.log(leaved)
       if (leaved) {
-        const conf = confirm('Napustanjem igre gubite 1 zivot!!!!')
-        if (conf) {
-          sessionStorage.setItem('play-mode', 'false')
-        }
+        this.gameLeaved = true;
+        setTimeout(()=>{
+          sessionStorage.setItem('play-mode', 'false');
+          this.gameLeaved = false;
+          this.reduceOneLife();
+        }, 5000)
+       
       }
     }, 500)
   }
@@ -69,6 +75,14 @@ export class ProfileComponent implements OnInit {
     if(success){
       console.log(data);
       this.config.user.next(data);
+    }
+  }
+
+  public async reduceOneLife() {
+    sessionStorage.setItem('play-mode', 'true');
+    const { data, success } = await this.playService.reduceOneLife()
+    if (success) {
+      this.config.user.next(data)
     }
   }
 
