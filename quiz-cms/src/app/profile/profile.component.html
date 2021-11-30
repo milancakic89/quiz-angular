@@ -4,7 +4,7 @@
         <span>Trudite se da ne izlazite iz igre dok ona traje!</span>
     </div>
 </div>
-<div class="profile">
+<div class="profile" *ngIf="user && !gameLeaved">
 <!-- <button (click)="onResetLives()">Resset lives (TEST MODE)</button> -->
     <div class="profile-wrapper" *ngIf="user">
     <a class="box-item play-button" routerLink="/play">

@@ -85,7 +85,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this._questionCounter > 15 || !this.attempts.length){
       this.gameOver('End of game');
     }
-    sessionStorage.setItem('play-mode', 'true');
     this._questionCounter++;
     const { data, success } = await this.questionService.getSingleQuestion()
     if(success){
@@ -123,7 +122,6 @@ public timeWarning(){
 
 public gameOver(message?: string){
   this.stopTime();
-  sessionStorage.setItem('play-mode', 'false');
   let points = 0;
   if(this.score > 2 && this.score <= 7){
     points = 1;
@@ -170,7 +168,6 @@ public closeModal(){
   }
 
   public async updateQuestion(correct: boolean){
-    sessionStorage.setItem('play-mode', 'true');
     const { data, success } = await this.playService.checkQuestion(this.question._id, correct)
     if(success){
       if (data) {
@@ -201,7 +198,6 @@ public closeModal(){
   }
 
   public async reduceOneLife(){
-    sessionStorage.setItem('play-mode', 'true');
     const { data, success } = await this.playService.reduceOneLife()
     if(success){
       this.config.user.next(data)

@@ -34,23 +34,29 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageUrl = localStorage.getItem('avatar') || '';
-    this.config.user.subscribe(user =>{
-      if(user){
-        this.user = user;
-      }
-    })
-    setTimeout(()=>{
-      const leaved = JSON.parse(sessionStorage.getItem('play-mode') || '');
-      if (leaved) {
+    this.load();
+  }
+
+  public async load(){
+    const { data, success } = await this.config.refreshUser()
+    if(success){
+      this.user = data;
+      this.config.user.next(data);
+      if (data.playing) {
         this.gameLeaved = true;
-        setTimeout(()=>{
-          sessionStorage.setItem('play-mode', 'false');
+        setTimeout(() => {
           this.gameLeaved = false;
-          this.reduceOneLife();
-        }, 5000)
-       
+          this.resetPlayingState();
+        }, 3000)
       }
-    }, 500)
+    }
+  }
+
+  public async resetPlayingState(){
+    const { success } = await this.playService.resetPlayingState();
+    if(success){
+      this.reduceOneLife();
+    }
   }
 
   public closeNameBox(){
@@ -73,15 +79,14 @@ export class ProfileComponent implements OnInit {
   public async onResetLives(){
     const { data, success } = await this.service.resetLives()
     if(success){
-      console.log(data);
       this.config.user.next(data);
     }
   }
 
   public async reduceOneLife() {
-    sessionStorage.setItem('play-mode', 'true');
     const { data, success } = await this.playService.reduceOneLife()
     if (success) {
+      this.user = data;
       this.config.user.next(data)
     }
   }
