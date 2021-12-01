@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
   public name = '';
   public showNameBox = false;
 
+  public achievementNotification = false;
+
+
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
     this.showInput = false;
@@ -41,6 +44,10 @@ export class ProfileComponent implements OnInit {
     const { data, success } = await this.config.refreshUser()
     if(success){
       this.user = data;
+      if (this.user.notifications.achievements) {
+        console.log('got achievement')
+        this.achievementNotification = true;
+      }
       this.config.user.next(data);
       if (data.playing) {
         this.gameLeaved = true;
@@ -50,6 +57,10 @@ export class ProfileComponent implements OnInit {
         }, 3000)
       }
     }
+  }
+
+  public hideAchievementNotification(){
+    this.achievementNotification = false;
   }
 
   public async resetPlayingState(){

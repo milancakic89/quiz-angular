@@ -20,7 +20,14 @@ export interface User{
   reset_password_token: string;
   increase_lives_at: number;
   reset_lives_at: number;
+  notifications: Notifications;
  
+}
+
+interface Notifications{
+  achievements: boolean;
+  questions: boolean;
+  ranking: boolean;
 }
 
 interface Achievement{

@@ -17,7 +17,10 @@
             <span class="title">Pitanja</span>
         </div>
     </a>
-    <a class="box-item achivements-button" routerLink="/achievements">
+    <a class="box-item achivements-button" 
+       routerLink="/achievements" 
+       (click)="achievementNotification = false"
+       [ngClass]="achievementNotification ? 'show-notification' : ''">
         <div>
             <span class="title">Dostignuca</span>
         </div>
