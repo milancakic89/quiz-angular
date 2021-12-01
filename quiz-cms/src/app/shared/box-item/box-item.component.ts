@@ -18,10 +18,15 @@ export class BoxItemComponent implements OnInit {
   @Input() answered = 0;
   @Input() achivedAt = 0;
   @Input() completed: any;
+  
+  public displayGray = false;
 
 
   ngOnInit(): void {
    this.completed = 100 - (100 * (this.answered / this.achivedAt));
+   if(this.completed > 0){
+      this.displayGray = true;
+   }
   }
 
 }

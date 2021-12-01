@@ -17,6 +17,10 @@
         overflow: hidden;
         cursor: pointer;
 
+        &.gray{
+            filter: grayscale(0.9);
+        }
+
         .completed-percent{
             z-index: 1000;
             position: absolute;

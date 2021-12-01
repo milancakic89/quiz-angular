@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
     if(success){
       this.user = data;
       if (this.user.notifications.achievements) {
-        console.log('got achievement')
         this.achievementNotification = true;
       }
       this.config.user.next(data);
