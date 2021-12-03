@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 import { NotificationService } from "./notification.service";
+import { User } from "./config.service";
 
 
 const getToken = () =>{
@@ -84,5 +85,5 @@ export class ApiService{
             })
     }
 
-    private localApi = 'http://localhost:3000';
+    private localApi = environment.api;
 }

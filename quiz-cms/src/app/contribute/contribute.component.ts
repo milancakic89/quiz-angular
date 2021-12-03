@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
 import { NotificationService } from '../shared/notification.service';
+import { map } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Configuration } from '../shared/config.service';
 
 type Correct = 'A' | 'B' | 'C' | 'D';
+export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
 @Component({
   selector: 'app-contribute',
   templateUrl: './contribute.component.html',
@@ -12,10 +17,19 @@ type Correct = 'A' | 'B' | 'C' | 'D';
 })
 export class ContributeComponent implements OnInit {
 
-  constructor(private questionService: QuestionService, private notificationService: NotificationService) { }
+  constructor(private questionService: QuestionService, 
+              private config: Configuration,
+              private notificationService: NotificationService,
+              private http: HttpClient) { }
+
+  @ViewChild('upload') public upload: any;
 
   get newQuestion(){ return this._newQuestion}
   set newQuestion(value){ this._newQuestion = value}
+
+  public questionType: QuestionType = 'MODAL';
+
+  public selectedImage = null;
 
   public items = ['A','B','C','D'];
   public categories = [
@@ -23,6 +37,7 @@ export class ContributeComponent implements OnInit {
     'Istorija',
     'Filmovi i Serije',
     'Poznate licnosti',
+    'Razno',
     'Sport'
   ]
 
@@ -33,7 +48,11 @@ export class ContributeComponent implements OnInit {
   }
 
   public onChange(){
-    this.newQuestion.correct = this.selected;
+    
+  }
+
+  public changeType(type: QuestionType){
+    this.questionType = type;
   }
 
   public onFormSubmit(form: NgForm){
@@ -70,12 +89,38 @@ export class ContributeComponent implements OnInit {
           letter: 'D',
         }
       ],
+      type: this.questionType,
       category: this.selectedCategory,
       correct_letter: this.selected,
       correct_text: this.newQuestion.correct_text
     }
-    this.addQuestion(question)
-    form.resetForm();
+    if(this.questionType === 'PICTURE'){
+      const formData = new FormData();
+      formData.append('image', this._newQuestion.image);
+      let progress = 0;
+
+      this.http.post('http://localhost:3000/add-image-question', formData, {
+        headers: {
+          Authorization: "Bearer " + this.config.token
+        }
+      })
+        .subscribe((response: any) =>{
+          if (response.success){
+            question.imageUrl = response.data;
+            this.addImageQuestion(question)
+          }
+
+        })
+      
+      
+    }else{
+
+    }
+    // form.resetForm();
+  }
+
+  public onImageChange(){
+    this._newQuestion.image = this.upload.nativeElement.files[0];
   }
 
   public async addQuestion(question: Question){
@@ -85,9 +130,19 @@ export class ContributeComponent implements OnInit {
     }
   }
 
+  public async addImageQuestion(question: any) {
+
+    const { success } = await this.questionService.addImageQuestion(question);
+    if (success) {
+      this.notificationService.notification.emit({ success: true, message: 'Pitanje upesno dodato' })
+    }
+  }
+
+
   private _newQuestion = {
     question_text: '',
     correct_text: '',
+    image: '',
     category: '',
     letter_a: '',
     letter_b: '',

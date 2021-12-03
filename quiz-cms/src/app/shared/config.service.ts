@@ -10,12 +10,36 @@ export interface User{
   email: string;
   title: string;
   lives: number;
+  playing: boolean;
   password: string;
   score: number;
-  contributions: number;
   roles: string[];
+  tickets: number;
+  achievements: Achievement;
+  categories: Category[];
+  reset_password_token: string;
+  increase_lives_at: number;
+  reset_lives_at: number;
+  notifications: Notifications;
+ 
 }
 
+interface Notifications{
+  achievements: boolean;
+  questions: boolean;
+  ranking: boolean;
+}
+
+interface Achievement{
+  category: string;
+  answered: number;
+  achievement_ticket_ids: string[]
+}
+
+interface Category{
+  category: string,
+  questions_added: string;
+}
 
 
 export interface UserResponse{
@@ -77,8 +101,10 @@ export const setToken = (value: string) => {
 }
 
 export const getToken = () => {
-  localStorage.getItem('access')
+  return localStorage.getItem('access')
 }
+
+
 
 
 @Injectable({providedIn: 'root'})
@@ -86,16 +112,20 @@ export class Configuration{
     constructor(private router: Router, private service: ApiService){ }
 
     get user() { return this._user}
-    set user(value){this._user.next(value)}
+    set user(value){this._user.next(value as any as User)}
 
     get isRoot(){return isRoot()}
     set isRoot(value){setRoot(value)}
+
+    get token(){return getToken()}
+    set token(value: any){setToken(value)}
 
     get isGameRunning(){return isGameRunning()}
     set setGameRunning(value: boolean){setGameRunning(value)}
 
     get logged(){return logged()}
     set logged(value){ setLogged(value)}
+    
 
 
   public createUser(email: string, password: string){
@@ -103,7 +133,7 @@ export class Configuration{
     }
 
   public login(email: string, password: string){
-      return this.service.post<any>('/login', {email, password}, 'Neuspelo logovanje. Pokusajte ponovo');
+      return this.service.post<User>('/login', {email, password}, 'Neuspelo logovanje. Pokusajte ponovo');
   }
 
   public saveUser(user: User, token: string){
@@ -111,6 +141,10 @@ export class Configuration{
       isLogged.logged = true;
       setToken(token);
       this._user.next(user);
+    }
+
+    public async refreshUser(){
+      return this.service.post<User>('/refresh', {}, '')
     }
 
     public async attemptAutoLogin(){
@@ -122,6 +156,10 @@ export class Configuration{
       }
     }
 
+    public getToken(){
+      return 
+    }
+
     public logout(){
       this.logged = false;
       localStorage.removeItem('access');
@@ -129,5 +167,5 @@ export class Configuration{
       this.router.navigateByUrl('/')
     }
 
-    private _user = new BehaviorSubject<any>(null);
+    private _user = new BehaviorSubject<User | null>(null);
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../shared/config.service';
+import { RankingService } from './ranking-service';
 
 interface Filter{
   filter: string,
@@ -13,9 +15,9 @@ interface Filter{
 })
 export class RankingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rankingService: RankingService) { }
 
-  public rankedPlayers = [1,2,3,4,5,6]
+  public rankedPlayers: User[] = []
   public filters: Filter[] = [
     {
       filter: '50',
@@ -44,6 +46,15 @@ export class RankingComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.load() 
+  }
+
+  public async load(){
+    const { data, success } = await this.rankingService.getRankingList(100);
+    if(success){
+      console.log(data)
+      this.rankedPlayers = data;
+    }
   }
 
   public onSelectFilter(filter: Filter){

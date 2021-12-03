@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ApiService } from "../shared/api.servise";
+import { User } from "../shared/config.service";
 
 let allowBackButton = false;
 
@@ -20,6 +21,10 @@ export class PlayService{
 
     public checkQuestion(questionId: string, correct: boolean){
         return this.service.post<boolean>('/check-question', {questionId, correct}, '')
+    }
+
+    public resetPlayingState(){
+        return this.service.post<User>('/reset-playing-state', {}, '')
     }
     
     public saveQuizResults(){

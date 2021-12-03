@@ -1,6 +1,28 @@
 @import '../../assets/abstract/mixins';
 @import '../../assets/abstract/variables';
 
+.show-notification {
+    @include box-shadow-red-small;
+    animation: notification 2s ease-out infinite;
+}
+
+@keyframes notification {
+    0% {
+        @include box-shadow-red-small;
+    }
+
+    35% {
+        @include box-shadow-medium;
+    }
+
+    70% {
+        @include box-shadow-big;
+    }
+
+    100% {
+        @include box-shadow-medium;
+    }
+}
 
 .on-game-leave {
     position: fixed;
@@ -123,7 +145,8 @@ button {
         justify-content: space-around;
 
         .box-item {
-            margin-top: -100px;
+            transform: translateY(-100px);
+            position: relative;
 
             div {
                 .title {

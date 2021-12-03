@@ -44,6 +44,7 @@
                             [placeholder]="question.question"></textarea>
                         <button (click)="updateQuestionText(question._id)">Posalji izmenu</button>
                     <p class="blue-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
+                    <p class="blue-text" *ngIf="question.type === 'PICTURE'"><b>iMAGE: <a [href]="question.imageUrl">{{ question.imageUrl }}</a></b></p>
                     <p class="yellow-text" *ngFor="let answer of question.answers; let j = index">
                         Odgovor {{j + 1}}: {{ answer.text }}
                     </p>

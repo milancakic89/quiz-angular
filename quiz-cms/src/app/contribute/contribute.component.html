@@ -1,5 +1,88 @@
 
-<div class="page-content">
+<div class="page-content modal-contribute" *ngIf="questionType === 'MODAL'">
+    <a class=button-back routerLink="/questions"><i class="fas fa-backward"></i></a><br>
+    <div class="flex-wrapper">
+            <box-item title="Sa slikom" (onClick)="changeType('PICTURE')"></box-item>
+            <box-item title="Samo pitamnje sa odgovorom" (onClick)="changeType('REGULAR')"></box-item>
+    </div>
+
+</div>
+
+<div class="page-content" *ngIf="questionType === 'PICTURE'">
+    <a class=button-back routerLink="/questions"><i class="fas fa-backward"></i></a>
+    <form #questionImageForm="ngForm" enctype="multipart/form-data" (submit)="questionImageForm.valid && onFormSubmit(questionImageForm)">
+        <div class="form-row column">
+            <label for="upload" class="blue-heading">{{ selectedImage ? '' : 'Izaberite sliku'}}</label>
+            <input type="file" #upload id="upload" name="image" [(ngModel)]="selectedImage" (ngModelChange)="onImageChange()"  style="visibility: hidden;" required [(ngModel)]="selectedImage"/>
+            <label for="" class="blue-heading">Pitanje vezano za sliku</label>
+            <textarea name="question"
+                      cols="30"
+                      rows="2"
+                      required
+                      [(ngModel)]="newQuestion.question_text"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="" class="blue-heading">A</label>
+                <input name="letter_a"
+                       type="text"
+                       required
+                       [(ngModel)]="newQuestion.letter_a"
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
+            </div>
+            <div class="form-row-input">
+                <label for="" class="blue-heading">B</label>
+                <input name="letter_b"
+                       type="text"
+                       required
+                       [(ngModel)]="newQuestion.letter_b"
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="" class="blue-heading">C</label>
+                <input name="letter_c"
+                       type="text"
+                       required
+                       [(ngModel)]="newQuestion.letter_c"
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
+            </div>
+            <div class="form-row-input">
+                <label for="" class="blue-heading">D</label>
+                <input name="letter_d"
+                       type="text"
+                       required
+                       [(ngModel)]="newQuestion.letter_d"
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label for="" class="blue-heading">Tacan odgovor</label>
+                <ng-select name="correct_letter"
+                           [items]="items"
+                           required
+                           [(ngModel)]="selected"
+                           (ngModelChange)="onChange()"
+                           [ngClass]="{'form-submitted': questionImageForm.submitted}">
+                </ng-select>
+            </div>
+            <div class="form-row-input">
+                <label for="" class="blue-heading">Kategorija</label>
+                <ng-select name="category"
+                           [items]="categories"
+                           required
+                           [(ngModel)]="selectedCategory"
+                           [ngClass]="{'form-submitted': questionImageForm.submitted}">
+                </ng-select>
+            </div>
+        </div>
+        <button class="button-submit" [disabled]="questionImageForm.invalid">Posalji</button>
+    </form>
+</div>
+
+<div class="page-content" *ngIf="questionType === 'REGULAR'">
 <a class=button-back routerLink="/questions"><i class="fas fa-backward"></i></a>
     <form action="" #questionForm="ngForm" (submit)="questionForm.valid && onFormSubmit(questionForm)">
         <div class="form-row column">

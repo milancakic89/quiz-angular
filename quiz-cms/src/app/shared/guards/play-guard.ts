@@ -1,37 +1,34 @@
 import { Injectable } from '@angular/core';
-import {  ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Configuration } from '../config.service';
 
-const isPlayMode = (): boolean =>{
-    if(sessionStorage.getItem('play-mode')){
-        return JSON.parse(sessionStorage.getItem('play-mode') || '');
-    }else{
-        return false;
-    }
-    
-}
 
 export type AllowBack = true | false;
 
 @Injectable({ providedIn: 'root' })
 export class PlayGuard implements CanDeactivate<AllowBack> {
-    constructor() { }
+    constructor(private config: Configuration) { }
 
     public canDeactivate(
         allow: AllowBack,
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        
-       return new Promise((resolve, reject) =>{
-           let playMode = isPlayMode();
-           if (playMode){
-                return resolve(false)
-           }else{
-               resolve(true)
-           }
-       })
-       
+
+        return new Promise((resolve, reject) => {
+            this.config.refreshUser().then(data =>{
+                if(data && data.data){
+                    const user = data.data;
+                    if(user.playing){
+                        return resolve(false);
+                    }
+                    return resolve(true);
+                }
+                return resolve(true);
+            })
+        })
+
 
     }
 

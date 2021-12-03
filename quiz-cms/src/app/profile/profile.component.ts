@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
   public name = '';
   public showNameBox = false;
 
+  public achievementNotification = false;
+
+
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
     this.showInput = false;
@@ -34,29 +37,35 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageUrl = localStorage.getItem('avatar') || '';
-    this.config.user.subscribe(user =>{
-      if(user){
-        this.user = user;
+    this.load();
+  }
+
+  public async load(){
+    const { data, success } = await this.config.refreshUser()
+    if(success){
+      this.user = data;
+      if (this.user.notifications.achievements) {
+        this.achievementNotification = true;
       }
-    })
-    setTimeout(()=>{
-      let leaved;
-      if(sessionStorage.getItem('play-mode')){
-        leaved = JSON.parse(sessionStorage.getItem('play-mode') || '');
-        console.log(leaved)
-      }
-      if (leaved) {
+      if (data.playing) {
         this.gameLeaved = true;
-        setTimeout(()=>{
-          console.log('triggering false')
-          sessionStorage.setItem('play-mode', 'false');
+        setTimeout(() => {
           this.gameLeaved = false;
-          this.reduceOneLife();
-        }, 5000)
-      }else{
-        sessionStorage.setItem('play-mode', 'false');
+          this.resetPlayingState();
+        }, 3000)
       }
-    }, 500)
+    }
+  }
+
+  public hideAchievementNotification(){
+    this.achievementNotification = false;
+  }
+
+  public async resetPlayingState(){
+    const { success } = await this.playService.resetPlayingState();
+    if(success){
+      this.reduceOneLife();
+    }
   }
 
   public closeNameBox(){
@@ -79,15 +88,14 @@ export class ProfileComponent implements OnInit {
   public async onResetLives(){
     const { data, success } = await this.service.resetLives()
     if(success){
-      console.log(data);
       this.config.user.next(data);
     }
   }
 
   public async reduceOneLife() {
-    sessionStorage.setItem('play-mode', 'false');
     const { data, success } = await this.playService.reduceOneLife()
     if (success) {
+      this.user = data;
       this.config.user.next(data)
     }
   }

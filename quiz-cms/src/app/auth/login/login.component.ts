@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
 import { ApiService } from 'src/app/shared/api.servise';
-import { Configuration, SignupResponse } from 'src/app/shared/config.service';
+import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   get login() { return this._loginDetails; }
   get isRoot(){ return this.config.isRoot}
   
-  public user = null;
+  public user = null as unknown as User;
   public title = 'Kviz opsteg znanja';
   public feedbackClass = '';
 

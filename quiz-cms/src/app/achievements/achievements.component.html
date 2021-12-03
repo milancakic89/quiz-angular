@@ -4,6 +4,7 @@
     </div>
     <box-item *ngFor="let achievement of achievements"
               [description]="achievement.category"
+              class="achievement"
               [title]="achievement.achiveText"
               [answered]="achievement.answered"
               [achivedAt]="achievement.achievedAt"

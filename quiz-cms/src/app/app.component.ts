@@ -69,7 +69,6 @@ export class AppComponent implements OnInit{
     }
 
   this.modal.gameResults.subscribe(gameData =>{
-    sessionStorage.setItem('play-mode', 'false');
     if(gameData){
       this.gameRunning = false;
       this.modal.startGame.next(false);
@@ -78,16 +77,7 @@ export class AppComponent implements OnInit{
       this.gameResults.showModal = gameData.showModal;
       this.gameResults.success = gameData.success;
       this.addToScore(this.gameResults.results)
-      if(gameData.results > 0){
-        this.updateScore();
-      }
-      setTimeout(()=>{
-        this.gameResults.noQuestions = false;
-        this.gameResults.showModal = false;
-        this.gameResults.results = null;
-        this.gameResults.success = false;
-        this.router.navigateByUrl('/profile')
-      }, 2000)
+      this.updateScore();
     }
    
   })
@@ -113,12 +103,23 @@ export class AppComponent implements OnInit{
     }, 3000)
   }
 
+  public onGameFinish(){
+    setTimeout(() => {
+      this.gameResults.noQuestions = false;
+      this.gameResults.results = null;
+      this.gameResults.success = false;
+      this.gameResults.showModal = false;
+    }, 1000);
+    this.router.navigateByUrl('/profile');
+  }
+
   public addToScore(score: number){
     this.user.score += score;
   }
 
   private async updateScore(){
     await this.service.updateScore(this.user.score);
+    this.onGameFinish();
   }
 
   public play(){

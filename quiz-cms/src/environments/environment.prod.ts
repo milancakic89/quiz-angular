@@ -1,3 +1,5 @@
+import { config } from '../../environment-hidden-prod';
 export const environment = {
-  production: true
+  production: true,
+  api: config.api
 };
