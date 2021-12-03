@@ -20,6 +20,10 @@ export class QuestionService{
     return this.service.post<any>('/add-question', question, 'Neuspelo dodavanje pitanja.');
   }
 
+  public addImageQuestion(question: any) {
+    return this.service.post<any>('/image-question', question, 'Neuspelo dodavanje pitanja.');
+  }
+
   public deleteQuestion(id: any | string){
     return this.service.delete<any>('/delete-question/' + id, {}, 'Neuspelo brisanje pitanja')
   }

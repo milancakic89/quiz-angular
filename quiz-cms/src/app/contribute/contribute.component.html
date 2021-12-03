@@ -10,10 +10,10 @@
 
 <div class="page-content" *ngIf="questionType === 'PICTURE'">
     <a class=button-back routerLink="/questions"><i class="fas fa-backward"></i></a>
-    <form action="" #questionForm="ngForm" (submit)="questionForm.valid && onFormSubmit(questionForm)">
+    <form #questionImageForm="ngForm" enctype="multipart/form-data" (submit)="questionImageForm.valid && onFormSubmit(questionImageForm)">
         <div class="form-row column">
-            <label for="upload" class="blue-heading">Izaberite sliku</label>
-            <input type="file" id="upload" name="picture" style="visibility: hidden;" required [(ngModel)]="selectedImage"/>
+            <label for="upload" class="blue-heading">{{ selectedImage ? '' : 'Izaberite sliku'}}</label>
+            <input type="file" #upload id="upload" name="image" [(ngModel)]="selectedImage" (ngModelChange)="onImageChange()"  style="visibility: hidden;" required [(ngModel)]="selectedImage"/>
             <label for="" class="blue-heading">Pitanje vezano za sliku</label>
             <textarea name="question"
                       cols="30"
@@ -28,7 +28,7 @@
                        type="text"
                        required
                        [(ngModel)]="newQuestion.letter_a"
-                       [ngClass]="{'form-submitted': questionForm.submitted}">
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
             </div>
             <div class="form-row-input">
                 <label for="" class="blue-heading">B</label>
@@ -36,7 +36,7 @@
                        type="text"
                        required
                        [(ngModel)]="newQuestion.letter_b"
-                       [ngClass]="{'form-submitted': questionForm.submitted}">
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
             </div>
         </div>
         <div class="form-row">
@@ -46,7 +46,7 @@
                        type="text"
                        required
                        [(ngModel)]="newQuestion.letter_c"
-                       [ngClass]="{'form-submitted': questionForm.submitted}">
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
             </div>
             <div class="form-row-input">
                 <label for="" class="blue-heading">D</label>
@@ -54,7 +54,7 @@
                        type="text"
                        required
                        [(ngModel)]="newQuestion.letter_d"
-                       [ngClass]="{'form-submitted': questionForm.submitted}">
+                       [ngClass]="{'form-submitted': questionImageForm.submitted}">
             </div>
         </div>
         <div class="form-row">
@@ -65,7 +65,7 @@
                            required
                            [(ngModel)]="selected"
                            (ngModelChange)="onChange()"
-                           [ngClass]="{'form-submitted': questionForm.submitted}">
+                           [ngClass]="{'form-submitted': questionImageForm.submitted}">
                 </ng-select>
             </div>
             <div class="form-row-input">
@@ -74,11 +74,11 @@
                            [items]="categories"
                            required
                            [(ngModel)]="selectedCategory"
-                           [ngClass]="{'form-submitted': questionForm.submitted}">
+                           [ngClass]="{'form-submitted': questionImageForm.submitted}">
                 </ng-select>
             </div>
         </div>
-        <button class="button-submit" [disabled]="questionForm.invalid">Posalji</button>
+        <button class="button-submit" [disabled]="questionImageForm.invalid">Posalji</button>
     </form>
 </div>
 

@@ -86,7 +86,7 @@ input.form-submitted:focus{
             }
 
             .td{
-                color: $primary-blue;
+                color: #fff;
                 font-weight: 600;
             }
         }
@@ -95,14 +95,14 @@ input.form-submitted:focus{
     .tbody{
        
         .tr{
-            background-color: #fff;
+            background-color: #232323;
             .th-last,
             .td-last{
                 justify-content: flex-end;
             }
             
             &:hover{
-                background-color: rgb(235, 233, 233);
+                background-color: rgb(62, 62, 62);
                 cursor: pointer;
 
             }
@@ -110,7 +110,7 @@ input.form-submitted:focus{
     }
 
     .thead{
-        background-color: gray;
+        background-color: rgb(73, 73, 73);
         color: #fff;
         .tr{
             .th{

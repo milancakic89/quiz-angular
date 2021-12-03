@@ -1,12 +1,16 @@
+import { QuestionType } from "../contribute/contribute.component";
+
 export interface Question{
     _id?: any;
     question: string;
     category?: Category;
     status?: QuestionStatus;
     answers: Answers[];
+    type?: QuestionType;
     correct_letter: string;
     correct_text: string;
     opened?: boolean;
+    imageUrl?: any;
 }
 
 export type Category =  'Geografija' | 'Istorija' | 'Filmovi i Serije' | 'Poznate licnosti' | 'Sport';

@@ -101,7 +101,7 @@ export const setToken = (value: string) => {
 }
 
 export const getToken = () => {
-  localStorage.getItem('access')
+  return localStorage.getItem('access')
 }
 
 
@@ -116,6 +116,9 @@ export class Configuration{
 
     get isRoot(){return isRoot()}
     set isRoot(value){setRoot(value)}
+
+    get token(){return getToken()}
+    set token(value: any){setToken(value)}
 
     get isGameRunning(){return isGameRunning()}
     set setGameRunning(value: boolean){setGameRunning(value)}
@@ -151,6 +154,10 @@ export class Configuration{
         this.logged = true;
         this._user.next(data);
       }
+    }
+
+    public getToken(){
+      return 
     }
 
     public logout(){
