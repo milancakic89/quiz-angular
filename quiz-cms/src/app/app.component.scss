@@ -134,7 +134,8 @@ $headerHeight: 65px;
         }
 
         .user-score,
-        .user-ticket {
+        .user-ticket,
+        .user-chest {
             font-size: 35px;
             transition: all 2s linear;
 
@@ -144,8 +145,55 @@ $headerHeight: 65px;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
                 background-image: url('../assets/images/ic_star.png');
-
+                width: 40px;
+                height: 40px;
                 animation: animate-icon 2s linear infinite;
+            }
+        }
+
+        .user-chest {
+            position: relative;
+
+            .chest-time {
+                font-size: 18px;
+                font-weight: 400;
+                margin-left: 10px;
+            }
+
+            &-icon {
+                background-image: url('../assets/images/chest.png');
+                animation: none;
+                width: 40px;
+                height: 40px;
+                position: relative;
+                margin-right: 0px;
+            }
+
+            &::before {
+                content: '';
+                display: inline-block;
+                transform: rotate(360deg);
+                animation: rotate 2s linear infinite;
+                width: 7px;
+                height: 7px;
+                top: 40px;
+                left: 20px;
+                z-index: 1000;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                transform-origin: 0px -22px;
+                background-image: url('../assets/images/circle.svg');
+                background-size: contain;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
             }
         }
 
