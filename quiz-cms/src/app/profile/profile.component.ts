@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
       if (this.user.notifications.achievements) {
         this.achievementNotification = true;
       }
-      this.config.user.next(data);
       if (data.playing) {
         this.gameLeaved = true;
         setTimeout(() => {

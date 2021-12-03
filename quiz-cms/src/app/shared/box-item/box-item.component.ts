@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export type Theme = 'blue' | 'yellow' | 'braon';
 
@@ -15,11 +15,14 @@ export class BoxItemComponent implements OnInit {
   @Input() backgroundUrl = '';
   @Input() title = '';
   @Input() theme: Theme = 'blue';
+  @Input() class = '';
   @Input() answered = 0;
   @Input() achivedAt = 0;
   @Input() completed: any;
   
   public displayGray = false;
+
+  @Output() onClick = new EventEmitter<any>();
 
 
   ngOnInit(): void {

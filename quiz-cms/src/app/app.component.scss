@@ -98,7 +98,7 @@ $headerHeight: 65px;
             font-size: 35px;
             display: inline-block;
 
-            b{
+            b {
                 color: $primary-yellow;
             }
 
@@ -115,6 +115,7 @@ $headerHeight: 65px;
         align-items: center;
         flex-direction: row;
         justify-content: flex-end;
+        perspective: 1000px;
 
         p {
             display: flex;
@@ -135,12 +136,16 @@ $headerHeight: 65px;
         .user-score,
         .user-ticket {
             font-size: 35px;
+            transition: all 2s linear;
 
             &-icon {
                 margin-right: 10px;
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
+                background-image: url('../assets/images/ic_star.png');
+
+                animation: animate-icon 2s linear infinite;
             }
         }
 
@@ -148,7 +153,29 @@ $headerHeight: 65px;
             &-icon {
                 width: 40px;
                 height: 40px;
-                background-image: url('../assets/images/ic_star.png');
+
+            }
+        }
+
+        @keyframes animate-icon {
+            0% {
+                transform: translateY(-3px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(0px) rotate(-15deg);
+            }
+
+            50% {
+                transform: translateY(+3px) rotate(-20deg);
+            }
+
+            75% {
+                transform: translateY(0px) rotate(-15deg);
+            }
+
+            100% {
+                transform: translateY(-3px) rotate(0deg);
             }
         }
 
@@ -236,7 +263,7 @@ $headerHeight: 65px;
     }
 }
 
-.notification{
+.notification {
     position: fixed;
     right: 5px;
     border-radius: 8px;
@@ -250,11 +277,11 @@ $headerHeight: 65px;
     justify-content: center;
     align-items: center;
 
-    &.error{
+    &.error {
         background-color: rgb(173, 4, 4);
     }
 
-    &.success{
+    &.success {
         background-color: rgb(2, 146, 2);
     }
 }

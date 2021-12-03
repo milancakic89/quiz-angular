@@ -5,6 +5,7 @@ import { Category, Question } from '../questions/types';
 import { NotificationService } from '../shared/notification.service';
 
 type Correct = 'A' | 'B' | 'C' | 'D';
+type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
 @Component({
   selector: 'app-contribute',
   templateUrl: './contribute.component.html',
@@ -17,12 +18,17 @@ export class ContributeComponent implements OnInit {
   get newQuestion(){ return this._newQuestion}
   set newQuestion(value){ this._newQuestion = value}
 
+  public questionType: QuestionType = 'MODAL';
+
+  public selectedImage = null;
+
   public items = ['A','B','C','D'];
   public categories = [
     'Geografija',
     'Istorija',
     'Filmovi i Serije',
     'Poznate licnosti',
+    'Razno',
     'Sport'
   ]
 
@@ -34,6 +40,10 @@ export class ContributeComponent implements OnInit {
 
   public onChange(){
     this.newQuestion.correct = this.selected;
+  }
+
+  public changeType(type: QuestionType){
+    this.questionType = type;
   }
 
   public onFormSubmit(form: NgForm){

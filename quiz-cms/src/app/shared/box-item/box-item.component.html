@@ -1,4 +1,4 @@
-<div class="box-item-wrapper {{ theme }}" [ngClass]="displayGray ? 'gray' : ''">
+<div class="box-item-wrapper {{ theme }} {{ class }}" [ngClass]="displayGray ? 'gray' : ''" (click)="onClick.emit()">
     <div class="completed-percent" [ngStyle]="{'width': completed + '%'}"></div>
     <p class="box-item-description">{{ description }}</p>
     <div class="box-item-title">
