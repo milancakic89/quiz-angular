@@ -1,11 +1,17 @@
 @import '../../assets/abstract/variables';
 
-.page-content{
-    padding: 30px 100px;
-    .form-row{
+.page-content {
+    padding: 30px 30px;
+
+    @media screen and (min-width: 901px) {
+        padding: 30px 100px;
+    }
+
+    .form-row {
         text-align: center;
     }
-    textarea{
+
+    textarea {
         width: 100%;
         margin-bottom: 40px;
         max-height: 160px;
