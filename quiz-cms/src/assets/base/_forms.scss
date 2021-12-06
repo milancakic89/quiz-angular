@@ -1,30 +1,30 @@
 @import '../abstract/variables';
 
-form{
+form {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
 
-    .column{
+    .column {
         flex-direction: column !important;
     }
 
-    .form-row{
+    .form-row {
         width: 100%;
         display: flex;
         justify-content: space-between;
     }
 
-    .form-row-input{
+    .form-row-input {
         width: calc(50% - 15px);
 
     }
 
-    label{
+    label {
         margin-bottom: 8px;
     }
 
-    input{
+    input {
         height: 40px;
         width: 100%;
         margin-bottom: 30px;
@@ -34,12 +34,12 @@ form{
         font-size: 18px;
         color: gray;
 
-        &:focus{
+        &:focus {
             outline: 1px solid $input-border-color;
         }
     }
 
-    textarea{
+    textarea {
         border: 1px solid $input-border-color;
         border-radius: 5px;
         color: gray;
@@ -50,32 +50,44 @@ form{
 }
 
 input.form-submitted:disabled,
-input.form-submitted:focus{
+input.form-submitted:focus {
     border: 1px solid red !important;
 }
 
 
-.table{
+.table {
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     margin-bottom: 30px;
+
+    .thead {
+        .tr {
+            display: none !important;
+
+            @media screen and (min-width: 1060px) {
+                display: flex;
+            }
+        }
+    }
+
     .thead,
-    .tbody{
+    .tbody {
         width: 100%;
-        .tr{
+
+        .tr {
             position: relative;
             width: 100%;
             display: flex;
             flex-wrap: wrap;
-            align-items: center ;
+            align-items: center;
             min-height: 55px;
             padding: 0px 15px;
             border-bottom: 1px solid rgb(212, 212, 212);
 
             .th,
-            .td{
+            .td {
                 width: 100%;
                 height: 100%;
                 display: flex;
@@ -85,23 +97,37 @@ input.form-submitted:focus{
                 padding: 0px 8px;
             }
 
-            .td{
+            .td {
                 color: #fff;
                 font-weight: 600;
             }
         }
     }
 
-    .tbody{
-       
-        .tr{
+    .tbody {
+
+        .tr {
             background-color: #232323;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            .td{
+                justify-content: flex-start;
+            }
+
             .th-last,
-            .td-last{
+            .td-last {
                 justify-content: flex-end;
             }
-            
-            &:hover{
+
+            @media screen and (min-width: 1060px) {
+                display: flex;
+                flex-direction: row;
+                padding-left: 10px;
+            }
+
+            &:hover {
                 background-color: rgb(62, 62, 62);
                 cursor: pointer;
 
@@ -109,39 +135,46 @@ input.form-submitted:focus{
         }
     }
 
-    .thead{
+    .thead {
         background-color: rgb(73, 73, 73);
         color: #fff;
-        .tr{
-            .th{
+
+        .tr {
+            .th {
                 font-weight: 600;
             }
 
-            .th-last{
+            .th-last {
                 justify-content: flex-end;
             }
         }
-       
+
     }
 }
 
-.w-10{
-    flex-grow: 1;
-    max-width: 10% !important;
-    min-width: 40px;
-}
-.w-20{
-    flex-grow: 2;
-    max-width: 20% !important;
-    min-width: 80px;
-}
-.w-30{
-    flex-grow: 3;
-    max-width: 30% !important;
-    min-width: 120px;
-}
-.w-40{
-    flex-grow: 4;
-    max-width: 40% !important;
-    min-width: 160px;
+@media screen and (min-width: 1060px) {
+
+    .w-10 {
+        flex-grow: 1;
+        max-width: 10% !important;
+        min-width: 40px;
+    }
+
+    .w-20 {
+        flex-grow: 2;
+        max-width: 20% !important;
+        min-width: 80px;
+    }
+
+    .w-30 {
+        flex-grow: 3;
+        max-width: 30% !important;
+        min-width: 120px;
+    }
+
+    .w-40 {
+        flex-grow: 4;
+        max-width: 40% !important;
+        min-width: 160px;
+    }
 }

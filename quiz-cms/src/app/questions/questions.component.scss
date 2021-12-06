@@ -12,9 +12,21 @@
     text-align: center;
 }
 
+.answer-text {
+    @media screen and (max-width: 1060px) {
+        color: orange !important;
+    }
+}
+
+
 .approved {
-    background-color: $secondary-blue;
-    color: #fff;
+    background-color: transparent;
+    color: $secondary-blue;
+
+    @media screen and (min-width: 1060px) {
+        background-color: $secondary-blue;
+        color: #fff;
+    }
 }
 
 .publish {
@@ -79,6 +91,16 @@
     margin-top: 80px;
 
     .tbody {
+        .thead {
+            .tr {
+                display: none !important;
+
+                @media screen and (min-width: 1060px) {
+                    display: flex;
+                }
+            }
+        }
+
         .tr:last-child {
             margin-bottom: 50px;
         }
