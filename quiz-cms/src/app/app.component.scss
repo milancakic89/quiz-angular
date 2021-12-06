@@ -84,8 +84,12 @@ $headerHeight: 65px;
         display: flex;
         flex-direction: column;
         width: 50%;
-        padding: 10px 35px;
+        padding: 10px 10px;
         justify-content: center;
+
+        @media screen and (min-width: 667px) {
+            padding: 10px 35px;
+        }
 
         p {
             margin: 0;
@@ -95,8 +99,16 @@ $headerHeight: 65px;
         span {
             color: #fff;
             font-weight: 800;
-            font-size: 35px;
+            font-size: 13px;
             display: inline-block;
+
+            @media screen and (min-width: 500px) {
+                font-size: 20px;
+            }
+
+            @media screen and (min-width: 768px) {
+                font-size: 35px;
+            }
 
             b {
                 color: $primary-yellow;
@@ -119,18 +131,35 @@ $headerHeight: 65px;
 
         p {
             display: flex;
-            margin-right: 55px;
+            margin-right: 5px;
             align-items: center;
+
+            @media screen and (min-width: 768px) {
+                margin-right: 55px;
+            }
+
+            @media screen and (min-width: 768px) {
+                margin-right: 55px;
+            }
         }
 
         .hearth-life {
-            width: 30px;
-            height: 30px;
+            width: 15px;
+            height: 15px;
             margin-left: 5px;
             background-image: url('../assets/images/ic_heart.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: 50% 50%;
+
+            &:last-child{
+                margin-right: 5px;
+            }
+
+            @media screen and (min-width: 768px) {
+                width: 30px;
+                height: 30px;
+            }
         }
 
         .user-score,
@@ -140,14 +169,25 @@ $headerHeight: 65px;
             transition: all 2s linear;
 
             &-icon {
-                margin-right: 10px;
+                margin-right: 0px;
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
                 background-image: url('../assets/images/ic_star.png');
-                width: 40px;
-                height: 40px;
+                width: 26px !important;
+                height: 26px !important;
                 animation: animate-icon 2s linear infinite;
+
+                @media screen and (min-width: 768px) {
+                    margin-right: 10px;
+                    width: 35px !important;
+                    height: 35px !important;
+                }
+
+                @media screen and (min-width: 901px) {
+                    width: 40px !important;
+                    height: 40px !important;
+                }
             }
         }
 
@@ -163,39 +203,25 @@ $headerHeight: 65px;
             &-icon {
                 background-image: url('../assets/images/chest.png');
                 animation: none;
-                width: 40px;
-                height: 40px;
+                width: 22px;
+                height: 22px;
                 position: relative;
                 margin-right: 0px;
+                animation: animate-icon 2s linear infinite;
+
+                @media screen and (min-width: 768px) {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                @media screen and (min-width: 901px) {
+                    width: 40px;
+                    height: 40px;
+                }
             }
 
-            &::before {
-                content: '';
-                display: inline-block;
-                transform: rotate(360deg);
-                animation: rotate 2s linear infinite;
-                width: 7px;
-                height: 7px;
-                top: 40px;
-                left: 20px;
-                z-index: 1000;
-                transform: translate(-50%, -50%);
-                position: absolute;
-                transform-origin: 0px -22px;
-                background-image: url('../assets/images/circle.svg');
-                background-size: contain;
-            }
         }
 
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
 
         .user-score {
             &-icon {

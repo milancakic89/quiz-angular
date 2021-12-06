@@ -8,11 +8,11 @@
 <div class="content" [ngClass]="{'expand': !isLogged}">
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
-            <span>User: <b>{{ user.name }}</b></span>
+            <span><b>{{ user.name }}</b></span>
         </div>
         <div class="right-info">
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
-            <p class="user-chest"><span class="user-chest-icon"></span><span class="chest-time"></span></p>
+            <p class="user-chest"><span class="user-chest-icon"></span></p>
             <p class="user-score"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>
             <p class="user-ticket"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
         </div>

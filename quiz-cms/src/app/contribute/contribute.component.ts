@@ -114,9 +114,10 @@ export class ContributeComponent implements OnInit {
       
       
     }else{
-
+      this.addQuestion(question)
     }
     // form.resetForm();
+    form.resetForm();
   }
 
   public onImageChange(){

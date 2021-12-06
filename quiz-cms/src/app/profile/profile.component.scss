@@ -136,7 +136,7 @@ button {
 
     .profile-wrapper {
         width: 100%;
-        padding: 40px;
+        padding: 20px;
         display: flex;
         height: 100%;
         flex-direction: row;
@@ -144,9 +144,16 @@ button {
         align-items: center;
         justify-content: space-around;
 
+        @media screen and (min-width: 628px) {
+            padding: 40px;
+        }
+
         .box-item {
-            transform: translateY(-100px);
             position: relative;
+
+            @media screen and (min-width: 1160px) {
+                transform: translateY(-100px);
+            }
 
             div {
                 .title {
