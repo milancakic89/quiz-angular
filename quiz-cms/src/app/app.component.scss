@@ -152,7 +152,7 @@ $headerHeight: 65px;
             background-repeat: no-repeat;
             background-position: 50% 50%;
 
-            &:last-child{
+            &:last-child {
                 margin-right: 5px;
             }
 
@@ -188,6 +188,11 @@ $headerHeight: 65px;
                     width: 40px !important;
                     height: 40px !important;
                 }
+            }
+
+            &-icon.false {
+                animation: none;
+                filter: grayscale(1);
             }
         }
 

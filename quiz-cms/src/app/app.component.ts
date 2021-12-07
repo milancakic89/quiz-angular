@@ -103,6 +103,13 @@ export class AppComponent implements OnInit{
     }, 3000)
   }
 
+  public async claimDailyReward(){
+    const { data, success} = await this.service.claimDailyReward();
+    if(success){
+      this.user = data;
+    }
+  }
+
   public onGameFinish(){
     setTimeout(() => {
       this.gameResults.noQuestions = false;

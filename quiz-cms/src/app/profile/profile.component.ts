@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
     const { data, success } = await this.config.refreshUser()
     if(success){
       this.user = data;
+      this.config.user.next(data)
       if (this.user.notifications.achievements) {
         this.achievementNotification = true;
       }
