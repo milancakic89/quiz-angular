@@ -77,7 +77,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.modal.startGame.next(true)
     this.playService.allowBackButton = false;
     this.score = 0;
-    this.time = 100;
+    this.time = 15;
     this.questionCount = 0;
     this.getQuestion();
   }
@@ -92,7 +92,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.question = data;
       this.selectedLetter = '';
       this.questionSelected = false;
-      this.time = 100;
+      this.time = 15;
       this.initTime();
     }else{
       clearInterval(this.timeInterval);
