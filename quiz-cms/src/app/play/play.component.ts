@@ -33,6 +33,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public timeInterval: any = null;
   public questionSelected = false;
   public selectedLetter = '';
+  public playCategory = '';
   public showModal = true;
   public lives = 0;
   public nextQuestionInterval = 10;
@@ -76,7 +77,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.modal.startGame.next(true)
     this.playService.allowBackButton = false;
     this.score = 0;
-    this.time = 15;
+    this.time = 100;
     this.questionCount = 0;
     this.getQuestion();
   }
@@ -86,12 +87,12 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.gameOver('End of game');
     }
     this._questionCounter++;
-    const { data, success } = await this.questionService.getSingleQuestion()
+    const { data, success } = await this.questionService.getSingleQuestion(this.playCategory)
     if(success){
       this.question = data;
       this.selectedLetter = '';
       this.questionSelected = false;
-      this.time = 15;
+      this.time = 100;
       this.initTime();
     }else{
       clearInterval(this.timeInterval);
@@ -151,7 +152,8 @@ public gameOver(message?: string){
 
 }
 
-public closeModal(){
+public closeModal(category: string){
+  this.playCategory = category;
   this.showModal = false;
   this.initGame();
 }

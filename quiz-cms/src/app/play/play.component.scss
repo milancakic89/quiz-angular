@@ -26,23 +26,36 @@
         justify-content: space-between;
 
         .attempt {
-            width: 20px;
-            height: 20px;
+            width: 10px;
+            height: 10px;
             background-color: rgb(0, 127, 185);
             display: inline-block;
             border-radius: 50%;
             margin: 0 4px;
+
+            @media screen and (min-width: 667px) {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         span {
-            font-size: 24px;
+            font-size: 14px;
             display: flex;
             align-items: center;
             color: rgb(66, 66, 66) !important;
 
+            @media screen and (min-width: 667px) {
+                font-size: 24px;
+            }
+
             b {
-                font-size: 34px;
+                font-size: 16px;
                 color: rgb(0, 127, 185);
+
+                @media screen and (min-width: 667px) {
+                    font-size: 35px;
+                }
             }
         }
     }
@@ -85,68 +98,53 @@
         flex-direction: column;
         justify-content: space-between;
 
-        .question-box {
-            background-color: #fff;
-            padding: 20px;
-            min-height: 200px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-            -webkit-box-shadow: -1px 3px 17px -3px #afafaf;
-            box-shadow: -1px 3px 17px -3px #afafaf;
-
-            h5 {
-                color: rgb(66, 66, 66);
-            }
-        }
-
-        .buttons-box {
+        &-picture {
             width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
 
-            button {
+            @media screen and (min-width: 667px) {
+                flex-direction: row;
+            }
+
+            .left-question-side,
+            .right-question-side {
                 width: 100%;
-                border: none;
-                background-color: #fff;
-                padding: 20px 30px 20px 60px;
-                font-size: 16px;
-                margin-bottom: 10px;
-                font-weight: 600;
-                position: relative;
-                border-radius: 5px;
-                overflow: hidden;
-                color: rgb(104, 103, 103);
-                text-align: left;
-                transition: all .2s ease-out;
-                cursor: pointer;
+                margin-bottom: 20px;
+                min-height: 300px;
 
-                @media screen and (min-width: 901px) {
-                    font-size: 25px;
+                .question-box {
+                    min-height: 150px;
                 }
 
-                &:hover {
-                    transform: translateY(-3px);
-                    -webkit-box-shadow: -1px 3px 17px -3px #757575;
-                    box-shadow: -1px 3px 17px -3px #757575;
-                    background-color: rgb(0, 127, 185);
-                    color: #fff;
+                @media screen and (min-width: 667px) {
+                    width: 100%;
+                    width: calc(50% - 20px);
                 }
+            }
 
-                &:before {
-                    content: attr(data-label);
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 50px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #fff;
-                    background-color: $primary-yellow;
-                    height: 100%;
+            .left-question-side {
+                order: 2;
+
+                @media screen and (min-width: 667px) {
+                    order: 1;
+                }
+            }
+
+            .right-question-side {
+                order: 1;
+
+                @media screen and (min-width: 667px) {
+                    order: 2;
                 }
             }
         }
+
+
+
 
         .wrong-answer {
             background-color: red !important;
@@ -167,8 +165,37 @@
                 color: #fff !important;
             }
         }
+    }
+}
 
+.right-question-side {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../../assets/images/category/celebrity.jpg');
+}
 
+.question-box {
+    background-color: #fff;
+    padding: 5px;
+    min-height: 140px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    -webkit-box-shadow: -1px 3px 17px -3px #afafaf;
+    box-shadow: -1px 3px 17px -3px #afafaf;
+
+    @media screen and (min-width: 667px) {
+        padding: 20px;
+        min-height: 200px;
+    }
+
+    h5 {
+        color: rgb(66, 66, 66);
+        font-size: 15px;
+
+        @media screen and (min-width: 667px) {
+            font-size: 18px;
+        }
     }
 }
 
@@ -205,4 +232,53 @@
         z-index: 1;
     }
 
+}
+
+.buttons-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        width: 100%;
+        border: none;
+        background-color: #fff;
+        padding: 20px 30px 20px 60px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        color: rgb(104, 103, 103);
+        text-align: left;
+        transition: all .2s ease-out;
+        cursor: pointer;
+
+        @media screen and (min-width: 901px) {
+            font-size: 25px;
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+            -webkit-box-shadow: -1px 3px 17px -3px #757575;
+            box-shadow: -1px 3px 17px -3px #757575;
+            background-color: rgb(0, 127, 185);
+            color: #fff;
+        }
+
+        &:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background-color: $primary-yellow;
+            height: 100%;
+        }
+    }
 }

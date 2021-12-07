@@ -4,12 +4,12 @@
 </div>
 <div class="play-new" *ngIf="showModal && lives > 0">
     <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
-    <div class="box-item geography" (click)="closeModal()">
+    <div class="box-item geography" (click)="closeModal('GEOGRAFIJA')">
         <div>
              <span class="title">Geografija</span>
         </div>
     </div>
-    <div class="box-item history locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije">
+    <div class="box-item history locked" (click)="closeModal('ISTORIJA')" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije">
         <div>
              <span class="title">Istorija</span>
         </div>
@@ -48,7 +48,7 @@
         <span>Rezultat: <b>{{ score }}</b></span>
         <span>Promasaji: <span *ngFor="let attempt of attempts" class="attempt"></span> </span>
     </div>
-    <div class="question-wrapper" *ngIf="question">
+    <div class="question-wrapper" *ngIf="question && question.type === 'REGULAR'">
         <div class="question-box" [ngClass]="{'disabled-question':questionSelected}">
             <h5>
                 {{ question.question }}
@@ -66,4 +66,23 @@
             </button>
         </div>
     </div>
+        <div class="question-wrapper" *ngIf="question && question.type === 'PICTURE'">
+            <div class="question-box" [ngClass]="{'disabled-question':questionSelected}">
+                <h5> {{ question.question }} </h5>
+            </div>
+            <div class="left-question-side">
+                            <div class="buttons-box" *ngIf="question">
+                                <button class="answer-button"
+                                        *ngFor="let answer of question.answers"
+                                        [ngClass]="{'disabled-button':questionSelected,
+                                                        'wrong-answer': questionSelected && question.correct_letter !== answer.letter && selectedLetter === answer.letter,
+                                                        'correct-answer': questionSelected && question.correct_letter === answer.letter}"
+                                        [attr.data-label]="answer.letter"
+                                        (click)="!questionSelected && onSelectedAnswer(answer)"> {{ answer.text }} </button>
+                            </div>
+            </div>
+            <div class="right-question-side" [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}">
+
+            </div>
+        </div>
 </div>
