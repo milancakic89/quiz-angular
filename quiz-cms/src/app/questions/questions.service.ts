@@ -8,8 +8,11 @@ export class QuestionService{
 
   constructor(private service: ApiService){}
 
-  public getQuestions(){
-    return this.service.get<Question[]>('/all-questions', 'Ucitavanje pitanja nije uspelo');
+  public getQuestions(filter: string){
+    if(filter){
+      return this.service.get<Question[]>(`/all-questions/${filter}`, 'Ucitavanje pitanja nije uspelo');
+    }
+    return this.service.get<Question[]>(`/all-questions`, 'Ucitavanje pitanja nije uspelo');
   }
 
   public getSingleQuestion(){

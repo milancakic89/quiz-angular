@@ -136,6 +136,7 @@
                             [items]="items" 
                             required
                             [(ngModel)]="selected" 
+                            [clearable]="false"
                             (ngModelChange)="onChange()"
                             [ngClass]="{'form-submitted': questionForm.submitted}">
                 </ng-select>
@@ -145,6 +146,7 @@
                 <ng-select  name="category" 
                             [items]="categories" 
                             required
+                            [clearable]="false"
                             [(ngModel)]="selectedCategory"
                             [ngClass]="{'form-submitted': questionForm.submitted}">
                 </ng-select>

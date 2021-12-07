@@ -48,7 +48,7 @@ export class ContributeComponent implements OnInit {
   }
 
   public onChange(){
-    
+      console.log(this.selected)
   }
 
   public changeType(type: QuestionType){

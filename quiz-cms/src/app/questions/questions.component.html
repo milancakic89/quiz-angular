@@ -3,7 +3,17 @@
 <div class="page-content">
     <div class="navigation">
             <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
-            <a class="button-contribute" routerLink="/contribute">Dodaj pitanje</a>
+            <a class="button-contribute" routerLink="/contribute">+</a>
+            <div class="filters">
+                <ng-select [items]="filters"
+                           bindLabel="title"
+                           bindValue="value"
+                           [clearable]="false"
+                           [(ngModel)]="selectedFilter"
+                           (ngModelChange)="load()">
+
+                </ng-select>
+            </div>
     </div>
 
     <div class="table questions-table">

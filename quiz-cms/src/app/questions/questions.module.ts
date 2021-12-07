@@ -4,6 +4,7 @@ import { QuestionsComponent } from './questions.component';
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     QuestionsRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ]
 })
 export class QuestionsModule { }

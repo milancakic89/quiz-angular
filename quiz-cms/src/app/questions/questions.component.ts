@@ -23,6 +23,17 @@ export class QuestionsComponent implements OnInit {
   public updateQuestion = '';
   public showUpdateButton = true;
 
+  public filters = [
+    { title: 'SVE', value: '' },
+    { title: 'GEOGRAFIJA', value: 'GEOGRAFIJA' },
+    { title: 'ISTORIJA', value: 'ISTORIJA' },
+    { title: 'POZNATE LICNOSTI', value: 'POZNATE LICNOSTI' },
+    { title: 'MUZIKA', value: 'MUZIKA' },
+    { title: 'SPORT', value: 'SPORT' },
+    { title: 'RAZNO', value: 'RAZNO' },
+  ];
+  public selectedFilter = '';
+
   ngOnInit(): void {
     this.config.user.subscribe(user => {
       if (user) {
@@ -33,9 +44,10 @@ export class QuestionsComponent implements OnInit {
   }
 
   public async load() {
-    const { data, success } = await this.questionService.getQuestions();
+    const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
     if (success) {
       this.questions = data;
+      console.log(data)
       localStorage.setItem('questions', JSON.stringify(data))
     }
   }
