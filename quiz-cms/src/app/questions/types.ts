@@ -13,7 +13,7 @@ export interface Question{
     imageUrl?: any;
 }
 
-export type Category =  'Geografija' | 'Istorija' | 'Filmovi i Serije' | 'Poznate licnosti' | 'Sport';
+export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';
   
 export interface Answers{
     text: string;

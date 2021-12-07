@@ -63,8 +63,7 @@
                 <ng-select name="correct_letter"
                            [items]="items"
                            required
-                           [(ngModel)]="selected"
-                           (ngModelChange)="onChange()"
+                           [(ngModel)]="newQuestion.correct"
                            [ngClass]="{'form-submitted': questionImageForm.submitted}">
                 </ng-select>
             </div>
@@ -72,6 +71,8 @@
                 <label for="" class="blue-heading">Kategorija</label>
                 <ng-select name="category"
                            [items]="categories"
+                           bindLabel="title"
+                           bindValue="value"
                            required
                            [(ngModel)]="selectedCategory"
                            [ngClass]="{'form-submitted': questionImageForm.submitted}">
@@ -135,16 +136,17 @@
                 <ng-select  name="correct_letter" 
                             [items]="items" 
                             required
-                            [(ngModel)]="selected" 
+                            [(ngModel)]="newQuestion.correct" 
                             [clearable]="false"
-                            (ngModelChange)="onChange()"
                             [ngClass]="{'form-submitted': questionForm.submitted}">
                 </ng-select>
             </div>
             <div class="form-row-input">
                 <label for="" class="blue-heading">Kategorija</label>
                 <ng-select  name="category" 
-                            [items]="categories" 
+                            [items]="categories"
+                            bindLabel="title"
+                            bindValue="value" 
                             required
                             [clearable]="false"
                             [(ngModel)]="selectedCategory"

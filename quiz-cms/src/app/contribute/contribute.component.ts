@@ -32,24 +32,21 @@ export class ContributeComponent implements OnInit {
   public selectedImage = null;
 
   public items = ['A','B','C','D'];
-  public categories = [
-    'Geografija',
-    'Istorija',
-    'Filmovi i Serije',
-    'Poznate licnosti',
-    'Razno',
-    'Sport'
-  ]
+  public categories = 
+    [
+      { title: 'GEOGRAFIJA', value: 'GEOGRAFIJA' },
+      { title: 'ISTORIJA', value: 'ISTORIJA' },
+      { title: 'POZNATE LICNOSTI', value: 'POZNATE LICNOSTI' },
+      { title: 'MUZIKA', value: 'MUZIKA' },
+      { title: 'SPORT', value: 'SPORT' },
+      { title: 'RAZNO', value: 'RAZNO' },
+    ]
 
-  public selected: Correct = 'A';
-  public selectedCategory: Category = 'Geografija';
+  public selectedCategory: Category = 'GEOGRAFIJA';
 
   ngOnInit(): void {
   }
 
-  public onChange(){
-      console.log(this.selected)
-  }
 
   public changeType(type: QuestionType){
     this.questionType = type;
@@ -91,9 +88,10 @@ export class ContributeComponent implements OnInit {
       ],
       type: this.questionType,
       category: this.selectedCategory,
-      correct_letter: this.selected,
+      correct_letter: this.newQuestion.correct,
       correct_text: this.newQuestion.correct_text
     }
+    console.log(question)
     if(this.questionType === 'PICTURE'){
       const formData = new FormData();
       formData.append('image', this._newQuestion.image);
