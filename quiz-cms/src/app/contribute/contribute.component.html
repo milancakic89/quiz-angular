@@ -63,6 +63,7 @@
                 <ng-select name="correct_letter"
                            [items]="items"
                            required
+                           [clearable]="false"
                            [(ngModel)]="newQuestion.correct"
                            [ngClass]="{'form-submitted': questionImageForm.submitted}">
                 </ng-select>
@@ -74,6 +75,7 @@
                            bindLabel="title"
                            bindValue="value"
                            required
+                           [clearable]="false"
                            [(ngModel)]="selectedCategory"
                            [ngClass]="{'form-submitted': questionImageForm.submitted}">
                 </ng-select>

@@ -5,8 +5,7 @@ import { Feedback, FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
-
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',

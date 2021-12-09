@@ -1,14 +1,13 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
 import { NotificationService } from '../shared/notification.service';
-import { map } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Configuration } from '../shared/config.service';
+import { finalize } from "rxjs/operators";
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-type Correct = 'A' | 'B' | 'C' | 'D';
 export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
 @Component({
   selector: 'app-contribute',
@@ -19,6 +18,7 @@ export class ContributeComponent implements OnInit {
 
   constructor(private questionService: QuestionService, 
               private config: Configuration,
+              private storage: AngularFireStorage,
               private notificationService: NotificationService,
               private http: HttpClient) { }
 
@@ -38,6 +38,7 @@ export class ContributeComponent implements OnInit {
       { title: 'ISTORIJA', value: 'ISTORIJA' },
       { title: 'POZNATE LICNOSTI', value: 'POZNATE LICNOSTI' },
       { title: 'MUZIKA', value: 'MUZIKA' },
+      { title: 'FILMOVI I SERIJE', value: 'FILMOVI I SERIJE' },
       { title: 'SPORT', value: 'SPORT' },
       { title: 'RAZNO', value: 'RAZNO' },
     ]
@@ -68,6 +69,7 @@ export class ContributeComponent implements OnInit {
  
     const question: Question = {
       question: this._newQuestion.question_text,
+      imageUrl: '',
       answers: [
         {
           text: this._newQuestion.letter_a,
@@ -91,32 +93,29 @@ export class ContributeComponent implements OnInit {
       correct_letter: this.newQuestion.correct,
       correct_text: this.newQuestion.correct_text
     }
-    console.log(question)
     if(this.questionType === 'PICTURE'){
-      const formData = new FormData();
-      formData.append('image', this._newQuestion.image);
-      let progress = 0;
-
-      this.http.post('http://localhost:3000/add-image-question', formData, {
-        headers: {
-          Authorization: "Bearer " + this.config.token
-        }
-      })
-        .subscribe((response: any) =>{
-          if (response.success){
-            question.imageUrl = response.data;
-            this.addImageQuestion(question)
-          }
-
+      const filePath = Date.now() + this._newQuestion.image.name;
+      const fileRef = this.storage.ref(filePath)
+      this.storage.upload(filePath, this._newQuestion.image)
+      .snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe( (url: any) =>{
+            const imageUrl = url.split('&token')[0];
+            question.imageUrl = imageUrl;
+            question.firebasePath = filePath;
+            this.addQuestion(question);
+          });
         })
+      )
+      .subscribe()
       
       
     }else{
       this.addQuestion(question)
     }
-    // form.resetForm();
     form.resetForm();
   }
+
 
   public onImageChange(){
     this._newQuestion.image = this.upload.nativeElement.files[0];
@@ -141,7 +140,7 @@ export class ContributeComponent implements OnInit {
   private _newQuestion = {
     question_text: '',
     correct_text: '',
-    image: '',
+    image: null as any,
     category: '',
     letter_a: '',
     letter_b: '',
@@ -151,3 +150,4 @@ export class ContributeComponent implements OnInit {
   }
 
 }
+

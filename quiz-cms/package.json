@@ -14,6 +14,7 @@
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
+    "@angular/fire": "^7.2.0",
     "@angular/forms": "~12.2.0",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
@@ -21,7 +22,9 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@ng-select/ng-select": "^7.3.0",
+    "firebase": "^9.6.0",
     "font-awesome": "^4.7.0",
+    "googleapis": "^92.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
