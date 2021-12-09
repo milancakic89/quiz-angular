@@ -24,6 +24,7 @@ export class QuestionsComponent implements OnInit {
   public showUpdateButton = true;
 
   public filters = [
+    { title: 'SVE', value: '' },
     { title: 'GEOGRAFIJA', value: 'GEOGRAFIJA' },
     { title: 'ISTORIJA', value: 'ISTORIJA' },
     { title: 'POZNATE LICNOSTI', value: 'POZNATE LICNOSTI' },

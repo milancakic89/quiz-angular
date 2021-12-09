@@ -167,5 +167,5 @@ export class Configuration{
       this.router.navigateByUrl('/')
     }
 
-    private _user = new BehaviorSubject<User | null>(null);
+    private _user = new BehaviorSubject<User | any>(null);
 }

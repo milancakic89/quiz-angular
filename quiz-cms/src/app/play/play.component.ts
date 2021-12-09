@@ -25,6 +25,8 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   get attempts(){ return this._attempts }
   set attempts(value){this._attempts = value}
 
+  get userContributions() {return this.config.user.getValue().categories as unknown as any}
+
   public time = 15;
   public score = 0;
 
@@ -49,6 +51,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.config.user.subscribe(user =>{
       if(user){
         this.lives = user.lives;
+        console.log(user)
         if(this.lives === 0){
           setTimeout(()=>{
               this.router.navigateByUrl('/profile')
@@ -65,6 +68,17 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       }
     })
 
+  }
+
+  public isCategoryAllowed(category: String){
+    if(category === 'GEOGRAFIJA'){
+      return true;
+    }
+    const userContribution = this.userContributions.find((c: any) => c.category === category);
+    if(userContribution){
+      return userContribution.questions_added >= 10;
+    }
+    return false;
   }
 
   ngOnDestroy(){
@@ -152,7 +166,11 @@ public gameOver(message?: string){
 
 }
 
-public closeModal(category: string){
+public closeModal(category: string, allowedCategory: string){
+  const allowed = this.isCategoryAllowed(allowedCategory);
+  if (!allowed){
+    return;
+  }
   this.playCategory = category;
   this.showModal = false;
   this.initGame();
@@ -187,11 +205,14 @@ public closeModal(category: string){
       }, this.nextQuestionInterval)
     }else{
       clearInterval(this.timeInterval)
+      this.playService.allowBackButton = true;
       this.notificationService.notification.emit({
         success: false,
         message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-      })
-      this.router.navigateByUrl('/profile')
+      });
+      //todo set user not playing in DB and then router him
+      // this.router.navigateByUrl('/profile');
+
     }
   }
 

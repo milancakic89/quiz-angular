@@ -16,7 +16,7 @@ export class QuestionService{
   }
 
   public getSingleQuestion(category: string){
-    return this.service.get<Question>('/question', 'Neuspelo preuzimanje pitanja.');
+    return this.service.get<Question>(`/question/${category}`, 'Neuspelo preuzimanje pitanja.');
   }
 
   public addQuestion(question: any){
