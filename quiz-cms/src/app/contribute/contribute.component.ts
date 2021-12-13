@@ -4,9 +4,8 @@ import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
 import { NotificationService } from '../shared/notification.service';
-import { map } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Configuration } from '../shared/config.service';
+import { environment } from 'src/environments/environment';
 
 type Correct = 'A' | 'B' | 'C' | 'D';
 export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
@@ -97,7 +96,7 @@ export class ContributeComponent implements OnInit {
       formData.append('image', this._newQuestion.image);
       let progress = 0;
 
-      this.http.post('http://localhost:3000/add-image-question', formData, {
+      this.http.post(`${environment.api}/add-image-question`, formData, {
         headers: {
           Authorization: "Bearer " + this.config.token
         }
