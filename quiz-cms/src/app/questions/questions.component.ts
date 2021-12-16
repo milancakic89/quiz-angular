@@ -29,6 +29,7 @@ export class QuestionsComponent implements OnInit {
     { title: 'ISTORIJA', value: 'ISTORIJA' },
     { title: 'POZNATE LICNOSTI', value: 'POZNATE LICNOSTI' },
     { title: 'MUZIKA', value: 'MUZIKA' },
+    { title: 'FILMOVI I SERIJE', value: 'FILMOVI I SERIJE' },
     { title: 'SPORT', value: 'SPORT' },
     { title: 'RAZNO', value: 'RAZNO' },
   ];

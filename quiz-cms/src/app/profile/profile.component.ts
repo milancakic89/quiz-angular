@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { runInThisContext } from 'vm';
 import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
 import { ProfileService } from './profile.service';
@@ -11,6 +13,7 @@ import { ProfileService } from './profile.service';
 export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration,
+              private router: Router,
               private playService: PlayService,
               private service: ProfileService) { }
 
@@ -21,6 +24,8 @@ export class ProfileComponent implements OnInit {
 
   public showInput = false;
   public user = null as any as User;
+
+  public clicked = false;
 
   public gameLeaved = false;
 
@@ -37,6 +42,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageUrl = localStorage.getItem('avatar') || '';
+    this.clicked = false;
     this.load();
   }
 
@@ -99,6 +105,13 @@ export class ProfileComponent implements OnInit {
       this.user = data;
       this.config.user.next(data)
     }
+  }
+
+  public onClick(path: string){
+    this.clicked = true;
+    setTimeout(()=>{
+      this.router.navigateByUrl(path)
+    }, 500)
   }
 
 }

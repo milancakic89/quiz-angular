@@ -4,8 +4,7 @@
         <span>Trudite se da ne izlazite iz igre dok ona traje!</span>
     </div>
 </div>
-<div class="profile" *ngIf="user && !gameLeaved">
-<!-- <button (click)="onResetLives()">Resset lives (TEST MODE)</button> -->
+<!-- <div class="profile" *ngIf="user && !gameLeaved">
     <div class="profile-wrapper" *ngIf="user">
     <a class="box-item play-button" routerLink="/play">
             <div>
@@ -31,4 +30,14 @@
         </div>
     </a>
 
+</div> -->
+
+<div class="profile">
+    <div class="dropdown-menu" [ngClass]="{'close': clicked}">
+            <button (click)="onClick('/play')" class="wood-btn">Igraj</button>
+            <button (click)="onClick('/questions')" class="wood-btn">Pitanja</button>
+            <button (click)="onClick('/achievements')" class="wood-btn">Dostignuca</button>
+            <button (click)="onClick('/table')" class="wood-btn">Tabela</button>
+    </div>
+    <!-- <div class="animation"></div> -->
 </div>

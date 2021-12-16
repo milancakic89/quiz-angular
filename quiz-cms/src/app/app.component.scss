@@ -77,8 +77,13 @@ $headerHeight: 65px;
 
 .user-header {
     display: flex;
+    position: sticky;
     height: $headerHeight;
-
+    background-image: url('../assets/images/new-theme/menu-header.png');
+    background-size: 100% 100%;
+    width: 100%;
+    z-index: 1000;
+    margin: 0 auto;
     .left-info,
     .right-info {
         display: flex;
@@ -97,7 +102,7 @@ $headerHeight: 65px;
         }
 
         span {
-            color: #fff;
+            color: rgb(0, 0, 0);
             font-weight: 800;
             font-size: 13px;
             display: inline-block;
@@ -111,7 +116,7 @@ $headerHeight: 65px;
             }
 
             b {
-                color: $primary-yellow;
+                color: black;
             }
 
         }
@@ -131,16 +136,9 @@ $headerHeight: 65px;
 
         p {
             display: flex;
-            margin-right: 5px;
+            margin-right: 10px;
             align-items: center;
 
-            @media screen and (min-width: 768px) {
-                margin-right: 55px;
-            }
-
-            @media screen and (min-width: 768px) {
-                margin-right: 55px;
-            }
         }
 
         .hearth-life {
@@ -283,8 +281,15 @@ $headerHeight: 65px;
 
 .scrollable-area {
     width: 100%;
-    height: calc(100% - #{$headerHeight});
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
+    background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
+    background-size: cover;
 }
 
 .logout-button,

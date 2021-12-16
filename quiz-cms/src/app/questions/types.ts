@@ -11,6 +11,7 @@ export interface Question{
     correct_text: string;
     opened?: boolean;
     imageUrl?: any;
+    firebasePath?: string;
 }
 
 export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';

@@ -56,12 +56,13 @@ input.form-submitted:focus {
 
 
 .table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     margin-bottom: 30px;
-
+    background-color: rgb(70, 70, 70);
     .thead {
         .tr {
             display: none !important;
@@ -82,9 +83,10 @@ input.form-submitted:focus {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            background-color: transparent;
+            background-image: url('../images/new-theme/regular-question-btn.png');
+            background-size: 100% 100%;
             min-height: 55px;
-            padding: 0px 15px;
-            border-bottom: 1px solid rgb(212, 212, 212);
 
             .th,
             .td {
@@ -98,7 +100,7 @@ input.form-submitted:focus {
             }
 
             .td {
-                color: #fff;
+                color: rgb(0, 0, 0);
                 font-weight: 600;
             }
         }
@@ -107,8 +109,9 @@ input.form-submitted:focus {
     .tbody {
 
         .tr {
-            background-color: #232323;
             display: flex;
+            padding: 8px;
+            margin-bottom: 8px;
             flex-direction: column;
             position: relative;
 

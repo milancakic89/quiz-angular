@@ -157,3 +157,22 @@
     width: 100%;
     flex-wrap: wrap;
 }
+
+
+@keyframes dropdown {
+    0%{
+        top: -520px;
+    }
+    100%{
+        top: -115px;
+    }
+}
+
+@keyframes dropdown-hide {
+    0%{
+        top: -115px;
+    }
+    100%{
+        top: -520px;
+    }
+}

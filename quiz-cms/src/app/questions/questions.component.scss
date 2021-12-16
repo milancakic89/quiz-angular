@@ -14,7 +14,7 @@
 
 .answer-text {
     @media screen and (max-width: 1060px) {
-        color: orange !important;
+        color: rgb(255, 255, 255) !important;
     }
 }
 
@@ -103,9 +103,14 @@
 }
 
 .table {
-    margin-top: 40px;
-
+    background-color: rgb(31, 31, 31);
+    border: 6px solid rgb(91, 53, 23);
+    border-radius: 8px;
+    margin-top: 5px;
+    width: 95%;
+    height: calc(100vh - 170px) !important;
     .tbody {
+        height: auto;
         .thead {
             .tr {
                 display: none !important;

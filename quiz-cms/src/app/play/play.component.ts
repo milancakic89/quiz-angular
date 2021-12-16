@@ -25,6 +25,8 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   get attempts(){ return this._attempts }
   set attempts(value){this._attempts = value}
 
+  get userContributions() {return this.config.user.getValue().categories as unknown as any}
+
   public time = 15;
   public score = 0;
 
@@ -36,7 +38,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public playCategory = '';
   public showModal = true;
   public lives = 0;
-  public nextQuestionInterval = 10;
+  public nextQuestionInterval = 300;
   public currentQuestion: Question = {
     question: '',
     status: 'NA CEKANJU',
@@ -49,6 +51,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.config.user.subscribe(user =>{
       if(user){
         this.lives = user.lives;
+        console.log(user)
         if(this.lives === 0){
           setTimeout(()=>{
               this.router.navigateByUrl('/profile')
@@ -65,6 +68,17 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       }
     })
 
+  }
+
+  public isCategoryAllowed(category: String){
+    if(category === 'GEOGRAFIJA'){
+      return true;
+    }
+    const userContribution = this.userContributions.find((c: any) => c.category === category);
+    if(userContribution){
+      return userContribution.questions_added >= 10;
+    }
+    return false;
   }
 
   ngOnDestroy(){
@@ -93,7 +107,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.selectedLetter = '';
       this.questionSelected = false;
       this.time = 15;
-      this.initTime();
+      // this.initTime();
     }else{
       clearInterval(this.timeInterval);
       this.notificationService.notification.emit({
@@ -133,7 +147,7 @@ public gameOver(message?: string){
   if (this.score > 11 && this.score <= 14){
     points = 3;
   }
-  if (this.score === 15) {
+  if (this.score > 14) {
     points = 5;
   }
   if(this.score < 2){
@@ -152,10 +166,18 @@ public gameOver(message?: string){
 
 }
 
-public closeModal(category: string){
+public closeModal(category: string, allowedCategory: string){
+  const allowed = this.isCategoryAllowed(allowedCategory);
+  if (!allowed){
+    return;
+  }
   this.playCategory = category;
-  this.showModal = false;
-  this.initGame();
+  
+  setTimeout(()=>{
+    this.showModal = false;
+    this.initGame();
+  }, 1600)
+  
 }
 
   public async onSelectedAnswer(answer: Answers){
@@ -187,11 +209,14 @@ public closeModal(category: string){
       }, this.nextQuestionInterval)
     }else{
       clearInterval(this.timeInterval)
+      this.playService.allowBackButton = true;
       this.notificationService.notification.emit({
         success: false,
         message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-      })
-      this.router.navigateByUrl('/profile')
+      });
+      //todo set user not playing in DB and then router him
+      // this.router.navigateByUrl('/profile');
+
     }
   }
 

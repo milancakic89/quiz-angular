@@ -1,48 +1,57 @@
-
-<div class="timer" *ngIf="!showModal" [ngStyle]="{'width': time * 6.6666 + '%'}">
-    <p class="timer-placeholder"></p>
+<div class="play-new" *ngIf="showModal && lives === 0">
+  <div class="modal-play open">
+    <h1>Nemate vise pokusaja</h1>
+  </div>
 </div>
-<div class="play-new" *ngIf="showModal && lives > 0">
+<!-- <div class="play-new" *ngIf="showModal && lives > 0">
     <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
-    <div class="box-item geography" (click)="closeModal('GEOGRAFIJA')">
+    <div class="box-item geography" (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')">
         <div>
              <span class="title">Geografija</span>
         </div>
     </div>
-    <div class="box-item history locked" (click)="closeModal('ISTORIJA')" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije">
+    <div class="box-item history locked"
+         (click)="closeModal('ISTORIJA', 'GEOGRAFIJA')" 
+         [ngClass]="{'locked': !isCategoryAllowed('GEOGRAFIJA')}"
+         data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije">
         <div>
              <span class="title">Istorija</span>
         </div>
     </div>
-    <div class="box-item movies locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
+    <div class="box-item movies" 
+         (click)="closeModal('FILMOVI I SERIJE', 'ISTORIJA')"
+        [ngClass]="{'locked': !isCategoryAllowed('ISTORIJA')}"
+        data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
         <div>
              <span class="title">Filmovi i serije</span>
         </div>
     </div>
-    <div class="box-item celebrity locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Filmova i serija">
+    <div class="box-item celebrity" 
+        (click)="closeModal('POZNATE LICNOSTI', 'FILMOVI I SERIJE')"
+        [ngClass]="{'locked': !isCategoryAllowed('FILMOVI I SERIJE')}"
+        data-unlock="Otvoreno nakon 10 dodatih pitanja iz Filmova i serija">
         <div>
              <span class="title">Poznate licnosti</span>
         </div>
     </div>
-    <div class="box-item sport locked" data-unlock="Otvoreno nakon 10 dodatih pitanja Poznatih licnosti">
+    <div class="box-item sport" 
+        (click)="closeModal('SPORT', 'POZNATE LICNOSTI')"
+        [ngClass]="{'locked': !isCategoryAllowed('POZNATE LICNOSTI')}"
+        data-unlock="Otvoreno nakon 10 dodatih pitanja Poznatih licnosti">
         <div>
             <span class="title">Sport</span>
         </div>
     </div>
-    <div class="box-item others locked" data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta">
+    <div class="box-item others" 
+        (click)="closeModal('RAZNO', 'SPORT')"
+        [ngClass]="{'locked': !isCategoryAllowed('SPORT')}"
+        data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta">
         <div>
             <span class="title">Pitanja drugih takmicara</span>
         </div>
     </div>
-    <!-- <div class="modal-play open">
-        <button (click)="closeModal()">Igraj</button>
-    </div> -->
 </div>
-<div class="play-new" *ngIf="showModal && lives === 0">
-    <div class="modal-play open">
-        <h1>Nemate vise pokusaja</h1>
-    </div>
-</div>
+
 <div class="play" *ngIf="!showModal && lives > 0">
     <div class="time-and-score">
         <span>Rezultat: <b>{{ score }}</b></span>
@@ -66,7 +75,7 @@
             </button>
         </div>
     </div>
-        <div class="question-wrapper" *ngIf="question && question.type === 'PICTURE'">
+        <div class="question-wrapper-picture" *ngIf="question && question.type === 'PICTURE'">
             <div class="question-box" [ngClass]="{'disabled-question':questionSelected}">
                 <h5> {{ question.question }} </h5>
             </div>
@@ -81,8 +90,100 @@
                                         (click)="!questionSelected && onSelectedAnswer(answer)"> {{ answer.text }} </button>
                             </div>
             </div>
-            <div class="right-question-side" [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}">
+            <div class="right-question-side image-side" [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}">
 
             </div>
         </div>
+</div> -->
+<div class="play-game" *ngIf="showModal && lives > 0">
+  <div
+    class="dropdown-categories"
+    [ngClass]="{ 'close-categories': playCategory }"
+  >
+    <div
+      class="wood-btn geography"
+      (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')"
+    >
+      <div>
+        <span class="title">Geografija</span>
+      </div>
+    </div>
+    <div
+      class="wood-btn history locked"
+      (click)="closeModal('ISTORIJA', 'GEOGRAFIJA')"
+      [ngClass]="{ locked: !isCategoryAllowed('GEOGRAFIJA') }"
+      data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije"
+    >
+      <div>
+        <span class="title">Istorija</span>
+      </div>
+    </div>
+    <div
+      class="wood-btn movies"
+      (click)="closeModal('FILMOVI I SERIJE', 'ISTORIJA')"
+      [ngClass]="{ locked: !isCategoryAllowed('ISTORIJA') }"
+      data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije"
+    >
+      <div>
+        <span class="title">Filmovi i serije</span>
+      </div>
+    </div>
+    <div
+      class="wood-btn celebrity"
+      (click)="closeModal('POZNATE LICNOSTI', 'FILMOVI I SERIJE')"
+      [ngClass]="{ locked: !isCategoryAllowed('FILMOVI I SERIJE') }"
+      data-unlock="Otvoreno nakon 10 dodatih pitanja iz Filmova i serija"
+    >
+      <div>
+        <span class="title">Poznate licnosti</span>
+      </div>
+    </div>
+    <div
+      class="wood-btn sport"
+      (click)="closeModal('SPORT', 'POZNATE LICNOSTI')"
+      [ngClass]="{ locked: !isCategoryAllowed('POZNATE LICNOSTI') }"
+      data-unlock="Otvoreno nakon 10 dodatih pitanja Poznatih licnosti"
+    >
+      <div>
+        <span class="title">Sport</span>
+      </div>
+    </div>
+
+    <div
+      class="wood-btn others"
+      (click)="closeModal('RAZNO', 'SPORT')"
+      [ngClass]="{ locked: !isCategoryAllowed('SPORT') }"
+      data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta"
+    >
+      <div>
+        <span class="title long-text">Pitanja drugih takmicara</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="game-box" *ngIf="!showModal && lives > 0">
+  <div
+    class="timer"
+    *ngIf="!showModal"
+    [ngStyle]="{ width: time * 6.6666 + '%' }"
+  >
+    <p class="timer-placeholder"></p>
+  </div>
+  <div class="question-box-wrapper">
+    <div class="question-box-new">
+        <h6> {{ question.question }} </h6>
+    </div>
+    <button class="wood-btn"
+            *ngFor="let answer of question.answers"
+        [ngClass]="{
+        'disabled-button': questionSelected,
+        'wrong-answer':questionSelected && question.correct_letter !== answer.letter && selectedLetter === answer.letter,
+        'correct-answer': questionSelected && question.correct_letter === answer.letter}"
+         (click)="!questionSelected && onSelectedAnswer(answer)">
+        {{ answer.text }}
+    </button>
+    <!-- <div class="wood-btn">Answer 1</div>
+    <div class="wood-btn">Answer 1</div>
+    <div class="wood-btn">Answer 1</div> -->
+  </div>
 </div>
