@@ -293,6 +293,64 @@
         top: 50px;
         transform: translateX(-50%);
         animation: dropdown-categories 1.5s ease-out;
+        position: relative;
+
+        .wood-btn{
+            position: relative;
+            &::before,
+            &::after{
+                content: "";
+                display: inline-block;
+                position: absolute;
+                background-color: transparent;
+                width: 40px;
+                height: 10px;
+                background-image: url('../../assets/images/new-theme/rope.png');
+                background-size: cover;
+            }
+            &::before{
+                left: 15px;
+                top: 15px;
+                transform-origin: 0;
+                transform: rotate(-90deg);
+            }
+            &::after{
+                top: 15px;
+                right: 15px;
+                transform-origin: 100%;
+                transform: rotate(90deg);
+            }
+        }
+
+        .wood-btn:first-child{
+            position: relative;
+            &::before,
+            &::after{
+                content: "";
+                display: inline-block;
+                position: absolute;
+                background-color: transparent;
+                width: 600px;
+                height: 10px;
+                background-image: url('../../assets/images/new-theme/rope.png');
+                background-size: contain;
+            }
+            &::before{
+                left: 15px;
+                top: 15px;
+                transform-origin: 0;
+                transform: rotate(-90deg);
+            }
+            &::after{
+                top: 15px;
+                right: 15px;
+                transform-origin: 100%;
+                transform: rotate(90deg);
+            }
+        }
+
+
+
 
         &.close-categories{
             top: -100vh;
