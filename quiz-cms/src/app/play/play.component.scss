@@ -272,6 +272,7 @@
 }
 
 .play-game{
+    perspective: 1000px;
     width: 100%;
     max-width: 900px;
     overflow: hidden;
@@ -283,16 +284,20 @@
     transition: all 1.5s linear;
 
     .dropdown-categories{
-        width: 333px;
-        min-height: 450px;
+        width: 300px;
+        position: absolute;
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: absolute;
+        height: 500px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        top: 100px;
         left: 50%;
-        top: 50px;
-        transform: translateX(-50%);
-        animation: dropdown-categories 1.5s ease-out;
+        transform: translateX(-50%) rotateX(0deg);
+        transform-origin: 0 0;
+        background-position: 50% 50%;
+        animation: dropdown 2s ease-out;
         position: relative;
 
         .wood-btn{

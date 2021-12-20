@@ -158,6 +158,93 @@
     flex-wrap: wrap;
 }
 
+.dropdown-menu{
+    width: 300px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%) rotateX(0deg);
+    transform-origin: 0 0;
+    background-position: 50% 50%;
+    animation: dropdown 2s ease-out;
+
+    button,
+    input,
+    .wood-btn{
+        position: relative;
+
+        &::before,
+        &::after{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            background-color: transparent;
+            width: 40px;
+            height: 10px;
+            background-image: url('../../assets/images/new-theme/rope.png');
+            background-size: 10px 10px;
+        }
+        &::before{
+            left: 15px;
+            top: 15px;
+            transform-origin: 0;
+            transform: rotate(-90deg);
+        }
+        &::after{
+            top: 15px;
+            right: 15px;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+        }
+    }
+
+    button:first-child,
+    .wood-btn:first-child{
+        position: relative;
+        &::before,
+        &::after{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            background-color: transparent;
+            width: 600px;
+            height: 10px;
+            background-image: url('../../assets/images/new-theme/rope.png');
+            background-size: contain;
+        }
+        &::before{
+            left: 15px;
+            top: 15px;
+            transform-origin: 0;
+            transform: rotate(-90deg);
+        }
+        &::after{
+            top: 15px;
+            right: 15px;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+        }
+    }
+
+    &.close{
+        top: -520px;
+        animation: dropdown-hide .5s ease-out !important;
+    }
+
+    .items{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+}
+
 
 @keyframes dropdown {
     0%{
@@ -175,4 +262,96 @@
     100%{
         top: -520px;
     }
+}
+
+@keyframes dropdown {
+    0%{
+        top: -520px;
+        transform: rotateX(-5deg) translateX(-50%);
+    }
+
+    20%{
+        top: 100px;
+        transform: rotateX(0deg) translateX(-50%);
+    }
+
+    40%{
+        top: 100px;
+        transform: rotateX(25deg) translateX(-50%);
+    }
+
+    60%{
+        top: 100px;
+        transform: rotateX(-20deg) translateX(-50%);
+    }
+
+    80%{
+        top: 100px;
+        transform: rotateX(10deg) translateX(-50%);
+    }
+
+    90%{
+        top: 100px;
+        transform: rotateX(-5deg) translateX(-50%);
+    }
+
+    100%{
+        top: 100px;
+        transform: rotateX(0deg) translateX(-50%);
+    }
+}
+
+@keyframes dropdown-login {
+    0%{
+        top: -520px;
+        transform: rotateX(-5deg) translateX(-50%);
+    }
+
+    20%{
+        top: 0px;
+        transform: rotateX(0deg) translateX(-50%);
+    }
+
+    40%{
+        top: 0px;
+        transform: rotateX(25deg) translateX(-50%);
+    }
+
+    60%{
+        top: 0px;
+        transform: rotateX(-20deg) translateX(-50%);
+    }
+
+    80%{
+        top: 0px;
+        transform: rotateX(10deg) translateX(-50%);
+    }
+
+    90%{
+        top: 0px;
+        transform: rotateX(-5deg) translateX(-50%);
+    }
+
+    100%{
+        top: 0px;
+        transform: rotateX(0deg) translateX(-50%);
+    }
+}
+
+.wood-btn.link{
+    display: flex !important;
+    align-items: center;
+    &:before,
+    &::after{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        background-color: transparent;
+        width: 600px;
+        cursor: auto;
+        height: 10px;
+        background-image: url('../../assets/images/new-theme/rope.png');
+        background-size: contain;
+    }
+
 }

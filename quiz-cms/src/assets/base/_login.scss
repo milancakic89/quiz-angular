@@ -8,7 +8,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: rgb(36, 36, 36);
 
     .login-form-wrapper{
         width: 100%;
@@ -38,6 +37,13 @@
 
 .logo{
     margin: 60px 0;
+    z-index: 200;
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+}
+
+.mb-20{
+    margin-bottom: 20px !important;
 }
 
 .nav-buttons{

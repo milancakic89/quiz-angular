@@ -3,8 +3,8 @@
 
 .box-item {
     &-wrapper {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
         position: relative;
         padding: 0%;
         margin: 0 20px 20px 0;
@@ -47,7 +47,7 @@
         text-align: center;
         font-weight: 800;
         color: #fff;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     &-title {
@@ -63,7 +63,7 @@
 
         &-btn {
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
             margin: 0;
