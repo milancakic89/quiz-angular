@@ -107,7 +107,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.selectedLetter = '';
       this.questionSelected = false;
       this.time = 15;
-      // this.initTime();
+      this.initTime();
     }else{
       clearInterval(this.timeInterval);
       this.notificationService.notification.emit({
