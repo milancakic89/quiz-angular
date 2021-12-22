@@ -115,8 +115,8 @@ export class AppComponent implements OnInit{
       this.gameResults.results = null;
       this.gameResults.success = false;
       this.gameResults.showModal = false;
+      this.router.navigateByUrl('/profile');
     }, 1000);
-    this.router.navigateByUrl('/profile');
   }
 
   public addToScore(score: number){
@@ -126,6 +126,7 @@ export class AppComponent implements OnInit{
   private async updateScore(){
     await this.service.updateScore(this.user.score);
     this.onGameFinish();
+    this.router.navigateByUrl('/profile');
   }
 
   public play(){

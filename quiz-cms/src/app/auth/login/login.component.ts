@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
 import { ApiService } from 'src/app/shared/api.servise';
 import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private config: Configuration, 
               private router: Router,
-              private feedbackService: FeedbackMessageService) { }
+              private notification: NotificationService) { }
 
   get login() { return this._loginDetails; }
   get isRoot(){ return this.config.isRoot}
@@ -32,11 +33,12 @@ export class LoginComponent implements OnInit {
   }
 
   public async onSubmit(){
-    const { data, success, token } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
+    const { data, success, token, error } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
     if (success) {
-      console.log(token)
-      this.feedbackService.feedback.emit({ success: success, message: '' });
+      this.notification.notification.emit({ success: success, message: 'Dobrodosli' });
       this.config.saveUser(data, token);
+    }else{
+      this.notification.notification.emit({ success: false, message: error });
     }
   }
 

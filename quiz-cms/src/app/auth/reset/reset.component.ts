@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FeedbackMessageService } from 'src/app/feedback.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-reset',
@@ -7,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notification: NotificationService,
+              private router: Router) { }
 
   get email(){ return this._resetDetails.email}
   set email(value){ this._resetDetails.email = value}
@@ -15,6 +19,10 @@ export class ResetComponent implements OnInit {
   public title = 'Kviz opsteg znanja';
 
   ngOnInit(): void {
+    this.notification.notification.emit({ success: false, message: 'Ova opcija je u fazi izrade' });
+    setTimeout(()=>{
+      this.router.navigateByUrl('/')
+    }, 1000);
   }
 
 

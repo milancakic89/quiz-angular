@@ -288,6 +288,7 @@ $headerHeight: 65px;
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+    position: relative;
     background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
     background-size: cover;
 }
@@ -348,7 +349,7 @@ $headerHeight: 65px;
 }
 
 .notification {
-    position: fixed;
+    position: absolute;
     right: 5px;
     border-radius: 8px;
     display: flex;

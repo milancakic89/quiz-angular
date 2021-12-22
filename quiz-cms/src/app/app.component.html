@@ -2,9 +2,6 @@
 <div class="spinner" *ngIf="spinner">
     <h1>UCITAVA SE</h1>
 </div>
-<div class="notification" *ngIf="showFeedback" [ngClass]="successFeedback ? 'success' : 'error'">
-    <span>{{ feedbackMessage }}</span>
-</div>
 <div class="content" [ngClass]="{'expand': !isLogged}">
 
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
@@ -19,6 +16,9 @@
         </div>
     </div>
     <div class="scrollable-area">
+        <div class="notification" *ngIf="showFeedback" [ngClass]="successFeedback ? 'success' : 'error'">
+            <span>{{ feedbackMessage }}</span>
+        </div>
         <div class="user-header" *ngIf="isLogged">
             <div class="left-info">
                 <span><b>{{ user.name }}</b></span>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
 import { basicDetails } from 'src/app/shared/basic-details';
 import { Configuration } from 'src/app/shared/config.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,9 @@ import { Configuration } from 'src/app/shared/config.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private config: Configuration, private feedbackService: FeedbackMessageService) { }
+  constructor(private config: Configuration, 
+              private notification: NotificationService,
+              private router: Router) { }
 
   get register() { return this._registerDetails}
 
@@ -20,9 +24,12 @@ export class RegisterComponent implements OnInit {
   }
 
   public async onSubmit(){
-    const { data, success } = await this.config.createUser(this._registerDetails.email, this._registerDetails.password);
+    const { data, success, error } = await this.config.createUser(this._registerDetails.email, this._registerDetails.password);
     if(success){
-        this.feedbackService.feedback.emit({ success: data.success, message: data.message })
+        this.notification.notification.emit({ success: data.success, message: 'Nalog kreiran' });
+        this.router.navigateByUrl('/profile')
+    }else{
+      this.notification.notification.emit({ success: data.success, message: error });
     }
   }
 
