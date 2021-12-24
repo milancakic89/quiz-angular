@@ -80,10 +80,14 @@ $headerHeight: 65px;
     position: sticky;
     height: $headerHeight;
     background-image: url('../assets/images/new-theme/menu-header.png');
-    background-size: 100% 100%;
+    background-size: 135% 100%;
+    background-position-x: -60px;
     width: 100%;
+    max-width: 900px;
+    height: 60px;
     z-index: 1000;
     margin: 0 auto;
+
     .left-info,
     .right-info {
         display: flex;
@@ -289,7 +293,7 @@ $headerHeight: 65px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
+    background-image: url('../assets/images/new-theme/cartoon-bg.png');
     background-size: cover;
 }
 

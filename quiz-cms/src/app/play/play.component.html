@@ -4,6 +4,9 @@
   </div>
 </div>
 <div class="play-game" *ngIf="showModal && lives > 0">
+    <div class="navigation">
+      <a class=button-back routerLink="/profile"></a>
+    </div>
   <div
     class="dropdown-categories"
     [ngClass]="{ 'close-categories': playCategory }"

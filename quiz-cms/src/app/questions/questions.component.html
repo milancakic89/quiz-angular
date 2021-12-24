@@ -1,9 +1,12 @@
 
 
-<div class="page-content">
+<div class="page-content questions-wrapper">
     <div class="navigation">
-            <a class=button-back routerLink="/profile"><i class="fas fa-backward"></i></a>
-            <a class="button-contribute" routerLink="/contribute">+</a>
+        <div class="nav-links">
+            <a class="button-back" routerLink="/profile"></a>
+            <a class="button-contribute" routerLink="/contribute"></a>
+        </div>
+           
             <div class="filters">
                 <ng-select [items]="filters"
                            bindLabel="title"

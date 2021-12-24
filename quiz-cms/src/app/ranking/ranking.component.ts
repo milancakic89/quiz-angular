@@ -52,7 +52,6 @@ export class RankingComponent implements OnInit {
   public async load(){
     const { data, success } = await this.rankingService.getRankingList(100);
     if(success){
-      console.log(data)
       this.rankedPlayers = data;
     }
   }
