@@ -24,12 +24,12 @@ export class RegisterComponent implements OnInit {
   }
 
   public async onSubmit(){
-    const { data, success, error } = await this.config.createUser(this._registerDetails.email, this._registerDetails.password);
+    const { success, error } = await this.config.createUser(this._registerDetails.email, this._registerDetails.password);
     if(success){
-        this.notification.notification.emit({ success: data.success, message: 'Nalog kreiran' });
+        this.notification.notification.emit({ success: success, message: 'Nalog kreiran' });
         this.router.navigateByUrl('/profile')
     }else{
-      this.notification.notification.emit({ success: data.success, message: error });
+      this.notification.notification.emit({ success: success, message: error });
     }
   }
 
