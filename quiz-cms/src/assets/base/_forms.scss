@@ -32,14 +32,10 @@ form {
         background-image: url('../images/new-theme/question-board.png') !important;
         background-size: 100% 100%;
         background-color: transparent;
-        border: 1px solid $input-border-color;
+        border: 3px solid rgb(66, 30, 0);
         padding: 0px 15px;
         font-size: 18px;
         color: gray;
-
-        &:focus {
-            outline: 1px solid $input-border-color;
-        }
     }
 
     textarea {
@@ -66,6 +62,7 @@ input.form-submitted:focus {
     overflow-y: auto;
     margin-bottom: 30px;
     background-color: rgb(70, 70, 70);
+
     .thead {
         .tr {
             display: none !important;
@@ -118,7 +115,7 @@ input.form-submitted:focus {
             flex-direction: column;
             position: relative;
 
-            .td{
+            .td {
                 justify-content: flex-start;
             }
 

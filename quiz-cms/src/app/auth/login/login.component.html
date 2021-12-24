@@ -1,6 +1,9 @@
 <div class="login">
     <div class="login-form-wrapper dropdown-menu">
-        <h4 class=" logo">{{ title }}</h4>
+        <div class="logo-wrapper">
+            <img src="../../../assets/images/logo.png" class="logo-img" alt="Kvizcina" />
+        </div>
+        
         <form class="login-form" #loginForm="ngForm" (submit)="loginForm.valid && onSubmit()">
             <div class="form-row column">
                   

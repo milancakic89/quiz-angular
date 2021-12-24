@@ -359,24 +359,3 @@
         top: -520px;
     }
 }
-
-
-.animation{
-    width: 210px;
-    height: 283px;
-    position: absolute;
-    bottom: 31px;
-    left: 0px;
-    background-size: cover;
-    animation: bottom-animation 1.5s linear;
-    background-image: url('../../assets/images/new-theme/193-1930096_free-cartoon-characters-pictures-hd-png-download.png');
-}
-
-@keyframes bottom-animation {
-    0%{
-        left: -400px;
-    }
-    100%{
-        left: 0px;
-    }
-}
