@@ -32,6 +32,7 @@ export class AppComponent implements OnInit{
   public spinner = true;
   public lives: any = [];
   public showFeedback = false;
+  public resetAvailable = false;
   public successFeedback = true;
   public gameResults: GameData = {
     success: false,
@@ -106,6 +107,10 @@ export class AppComponent implements OnInit{
     const { data, success} = await this.service.claimDailyReward();
     if(success){
       this.user = data;
+      if(Date.now() >= data.daily_price){
+        this.resetAvailable = true;
+      }
+        this.resetAvailable = false;
     }
   }
 

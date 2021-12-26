@@ -20,6 +20,7 @@ export interface User{
   reset_password_token: string;
   increase_lives_at: number;
   reset_lives_at: number;
+  daily_price: number;
   notifications: Notifications;
  
 }

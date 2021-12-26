@@ -20,7 +20,7 @@
         </div>
         <div class="right-info">
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
-            <p class="user-chest"><span class="user-chest-icon {{user.daily_price}}"
+            <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
                       (click)="claimDailyReward()"></span>
             </p>
             <p class="user-score"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>

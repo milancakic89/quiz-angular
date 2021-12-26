@@ -275,13 +275,13 @@
 
     .dropdown-categories{
         width: 300px;
-        position: absolute;
+        position: absolute !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 500px;
         background-repeat: no-repeat;
         background-size: 100%;
+        justify-content: flex-start;
         top: 100px;
         left: 50%;
         transform: translateX(-50%) rotateX(0deg);
