@@ -61,6 +61,12 @@
     }
 }
 
+.nav-links {
+    @media screen and (max-width: 500px) {
+        min-width: 90px;
+    }
+
+}
 
 .blue-text,
 .blue-heading,
@@ -434,4 +440,8 @@ ng-select {
 .questions-wrapper,
 .contribute {
     padding: 20px;
+
+    @media screen and (max-width: 500px) {
+        padding: 8px;
+    }
 }

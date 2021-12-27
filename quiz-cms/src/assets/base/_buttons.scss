@@ -52,6 +52,13 @@
         display: inline-flex;
         align-items: center;
         font-weight: 600;
+
+        @media screen and (max-width: 500px) {
+            width: 35px !important;
+            height: 35px !important;
+            margin-left: 6px;
+            margin-right: 5px;
+        }
     }
 
     &-back {
@@ -67,6 +74,12 @@
         background-size: 100% 100%;
         cursor: pointer;
         opacity: 1;
+
+        @media screen and (max-width: 500px) {
+            width: 35px !important;
+            height: 35px !important;
+            margin-left: 6px;
+        }
 
         &:hover {
             opacity: .9;
