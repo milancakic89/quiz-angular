@@ -12,6 +12,6 @@ export class AppService{
     }
 
     public claimDailyReward() {
-        return this.service.post<User>('/daily-reward', {},'Doslo je do greske prilikom preuzimanja dnevne nagrade. Pokusajte ponovo');
+        return this.service.get<User>('/daily-reward','Doslo je do greske prilikom preuzimanja dnevne nagrade. Pokusajte ponovo');
     }
 }
