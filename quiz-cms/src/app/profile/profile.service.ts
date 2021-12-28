@@ -5,6 +5,7 @@ import { User } from "../shared/config.service";
 @Injectable({providedIn: 'root'})
 export class ProfileService{
     constructor(private service: ApiService){}
+    
 
     public updateName(name: string){
         return this.service.post('/name', {name}, '')

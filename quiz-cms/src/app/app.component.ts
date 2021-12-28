@@ -42,6 +42,9 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(){
+    this.feedbackService.DailyPrice.subscribe(bool =>{
+      this.resetAvailable = bool;
+    })
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
       this.showFeedback = true;
@@ -107,10 +110,7 @@ export class AppComponent implements OnInit{
     const { data, success} = await this.service.claimDailyReward();
     if(success){
       this.user = data;
-      if(Date.now() >= data.daily_price){
-        this.resetAvailable = true;
-      }
-        this.resetAvailable = false;
+      this.resetAvailable = false;
     }
   }
 

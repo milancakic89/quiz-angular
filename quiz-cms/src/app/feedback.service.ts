@@ -9,5 +9,5 @@ export interface Feedback{
 @Injectable({providedIn: 'root'})
 export class FeedbackMessageService {
 
-    public feedback = new EventEmitter<Feedback>();
+    public DailyPrice = new EventEmitter<boolean>();
 }

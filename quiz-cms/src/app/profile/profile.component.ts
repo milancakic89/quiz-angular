@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { runInThisContext } from 'vm';
+import { FeedbackMessageService } from '../feedback.service';
 import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
 import { ProfileService } from './profile.service';
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration,
               private router: Router,
+              private feedbackService: FeedbackMessageService,
               private playService: PlayService,
               private service: ProfileService) { }
 
@@ -51,6 +53,9 @@ export class ProfileComponent implements OnInit {
     if(success){
       this.user = data;
       this.config.user.next(data)
+      if(Date.now() >= data.daily_price){
+        this.feedbackService.DailyPrice.emit(true);
+      }
       if (this.user.notifications.achievements) {
         this.achievementNotification = true;
       }
