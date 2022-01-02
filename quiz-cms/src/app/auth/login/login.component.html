@@ -8,10 +8,10 @@
         <form class="login-form" #loginForm="ngForm" (submit)="loginForm.valid && onSubmit()">
             <div class="form-row column">
                   
-                    <div class="wood-btn">
+                    <div class="wood-btn z-10">
                         <label class="">Email</label>
                     </div>
-                    <div class="wood-btn mb-20">
+                    <div class="wood-btn mb-20 z-9">
                         <input name="email" 
                         type="email"
                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+"
@@ -19,24 +19,21 @@
                         required
                         [ngClass]="{'form-submitted': loginForm.submitted}" /> 
                     </div>
-                    <div class="wood-btn">
-                        <label class="">Password</label>
+                    <div class="wood-btn z-8">
+                        <label class="">Lozinka</label>
                     </div>
-                    <div class="wood-btn mb-20">
+                    <div class="wood-btn mb-20 z-7">
                         <input name="password" 
                         required
                         type="password"
                         [(ngModel)]="login.password"
                         [ngClass]="{'form-submitted': loginForm.submitted}"/>
                     </div>
-  
-                 
-               
                           
-                    <button class="wood-btn submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Submit</button>
-                    <div class="nav-buttons">
-                        <a routerLink='/register' class="wood-btn link">Register</a>  
-                        <a routerLink='/reset' class="wood-btn link">Reset password</a> 
+                    <button class="wood-btn submit z-6" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Uloguj se</button>
+                    <div class="nav-buttons z-5">
+                        <a routerLink='/register' class="wood-btn link z-5">Napravi nalog</a>  
+                        <a routerLink='/reset' class="wood-btn link z-5">Resetuj lozinku</a> 
                     </div>
             </div>
         </form>
