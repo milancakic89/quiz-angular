@@ -19,6 +19,7 @@
             <span><b>{{ user.name }}</b></span>
         </div>
         <div class="right-info">
+            <p class="reset-timer">{{ testTime | date}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
                       (click)="claimDailyReward()"></span>

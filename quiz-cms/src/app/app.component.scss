@@ -96,6 +96,31 @@ $headerHeight: 65px;
         padding: 10px 10px;
         justify-content: center;
 
+        .reset-timer {
+            border: 2px solid rgba(121, 41, 16, 0.596);
+            outline: 2px solid rgba(88, 27, 9, 0.616);
+            padding: 2px 5px;
+            border-radius: 5px;
+            position: relative;
+            background-image: url('../assets/images/new-theme/question-board.png');
+            white-space: nowrap;
+
+            &::before {
+                content: '';
+                position: absolute;
+                right: 105%;
+                display: inline-flex;
+                filter: grayscale(0.2);
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 20px;
+                background-image: url('../assets/images/ic_heart.png');
+
+            }
+        }
+
+
         @media screen and (min-width: 667px) {
             padding: 10px 35px;
         }
@@ -195,7 +220,8 @@ $headerHeight: 65px;
             &-icon.false {
                 animation: none;
                 filter: grayscale(1);
-                &:hover{
+
+                &:hover {
                     transform: scale(1);
                 }
             }
@@ -203,9 +229,11 @@ $headerHeight: 65px;
 
         .user-chest {
             position: relative;
-            &:hover{
+
+            &:hover {
                 transform: scale(1);
             }
+
             .chest-time {
                 font-size: 18px;
                 font-weight: 400;

@@ -34,6 +34,7 @@ export class AppComponent implements OnInit{
   public showFeedback = false;
   public resetAvailable = false;
   public successFeedback = true;
+  public testTime = new Date(Date.now() + 30000);
   public gameResults: GameData = {
     success: false,
     showModal: false,
