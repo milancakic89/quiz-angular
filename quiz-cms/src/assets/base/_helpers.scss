@@ -6,7 +6,8 @@
 
 .page-content {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px);
+    padding: 20px 0;
 }
 
 .play-new {
@@ -68,7 +69,10 @@
 
 }
 
-.blue-text,
+.white-text{
+    color: #fff;
+}
+
 .blue-heading,
 .heading-big,
 .yellow-text,
@@ -180,6 +184,7 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .dropdown-menu {
@@ -206,13 +211,15 @@
         &::before,
         &::after {
             content: "";
+            content: "";
             display: inline-block;
+            overflow: hidden;
             position: absolute;
             background-color: transparent;
-            width: 40px;
+            width: 50px;
             height: 10px;
+            background-size: 31px 10px;
             background-image: url('../../assets/images/new-theme/rope.png');
-            background-size: 40px 10px;
         }
 
         &::before {
@@ -436,12 +443,95 @@ ng-select {
 
 .achievements,
 .play,
+.questions,
 .rankings,
-.questions-wrapper,
 .contribute {
-    padding: 20px;
+    padding: 20px 0;
 
     @media screen and (max-width: 500px) {
         padding: 8px;
+    }
+}
+
+.questions-wrapper{
+    padding: 20px 0;
+}
+
+.z-10{
+    z-index: 10 !important;
+}
+
+.z-9{
+    z-index: 9 !important;
+}
+
+.z-8{
+    z-index: 8 !important;
+}
+
+.z-7{
+    z-index: 7 !important;
+}
+
+.z-6{
+    z-index: 6 !important;
+}
+
+.z-5{
+    z-index: 5 !important;
+}
+
+.stars-wrapper{
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0;
+    z-index: 10;
+    position: relative;
+    background-color: #000;
+
+    .stars-background{
+        background-image: url('../images/new-theme/stars.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 10;
+    }
+
+    .question-counter{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid $secondary-blue;
+        background-image: url('../images/new-theme/question-board.png');
+        background-size: cover;
+        color: #000;
+        padding: 1px 0px 0px 1px;
+        font-size: 16px;
+        font-weight: 900;
+        border-radius: 50%;
+        position: absolute;
+        top: -70px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .stars-progress{
+        background-color: $secondary-blue;
+        transition: all .3s linear;
+        height: 100%;
+        margin: 0;
+        position: absolute;
+        left: 2px;
+        top: 0;
+        z-index: 9;
     }
 }

@@ -1,6 +1,8 @@
 
 <div class="page-content modal-contribute" *ngIf="questionType === 'MODAL'">
-    <a class=button-back routerLink="/questions"></a><br>
+    <div class="navigation">
+        <a class=button-back routerLink="/questions"></a>
+    </div>
     <div class="flex-wrapper">
             <box-item title="Sa slikom" (onClick)="changeType('PICTURE')"></box-item>
             <box-item title="Samo pitamnje sa odgovorom" (onClick)="changeType('REGULAR')"></box-item>
@@ -9,7 +11,9 @@
 </div>
 
 <div class="page-content contribute" *ngIf="questionType === 'PICTURE'">
-    <a class=button-back routerLink="/questions"></a>
+    <div class="navigation">
+        <a class=button-back routerLink="/questions"></a>
+    </div>
     <form #questionImageForm="ngForm" enctype="multipart/form-data" (submit)="questionImageForm.valid && onFormSubmit(questionImageForm)">
         <div class="form-row column">
             <label for="upload" class="blue-heading">{{ selectedImage ? '' : 'Izaberite sliku'}}</label>

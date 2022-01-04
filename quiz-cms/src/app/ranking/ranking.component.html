@@ -9,7 +9,7 @@
               [ngClass]="{'selected': filter.selected}" 
               *ngFor="let filter of filters">{{ filter.label }}</span>
     </div> -->
-        <div class="table">
+        <div class="table ranking-table">
             <div class="thead">
                 <div class="tr">
                     <div class="th w-10">#</div>
@@ -18,7 +18,25 @@
                     <div class="th w-20">Odigrao/la</div>
                 </div>
             </div>
-            <div class="tbody contribute">
+            <div class="tbody">
+                <div class="tr" *ngFor="let player of rankedPlayers">
+                    <div class="td w-10">1</div>
+                    <div class="td w-40">{{ player.name }}</div>
+                    <div class="td w-20">{{ player.score }}</div>
+                    <div class="td w-20">in development</div>
+                </div>
+                <div class="tr" *ngFor="let player of rankedPlayers">
+                    <div class="td w-10">1</div>
+                    <div class="td w-40">{{ player.name }}</div>
+                    <div class="td w-20">{{ player.score }}</div>
+                    <div class="td w-20">in development</div>
+                </div>
+                <div class="tr" *ngFor="let player of rankedPlayers">
+                    <div class="td w-10">1</div>
+                    <div class="td w-40">{{ player.name }}</div>
+                    <div class="td w-20">{{ player.score }}</div>
+                    <div class="td w-20">in development</div>
+                </div>
                 <div class="tr" *ngFor="let player of rankedPlayers">
                     <div class="td w-10">1</div>
                     <div class="td w-40">{{ player.name }}</div>

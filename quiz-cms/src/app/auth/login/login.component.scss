@@ -8,6 +8,7 @@
     justify-content: flex-start;
     background-size: cover;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .animation-plane {
@@ -84,18 +85,12 @@
 }
 
 .link {
-    z-index: 0 !important;
     display: flex;
     text-align: center;
 }
 
 .submit {
-    margin-top: 0px !important;
-
-    &:after,
-    &::before {
-        display: none;
-    }
+    margin-top: -10px !important;
 }
 
 .logo-wrapper {

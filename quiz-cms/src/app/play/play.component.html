@@ -29,6 +29,7 @@
         <span class="title">Istorija</span>
       </div>
     </div>
+
     <div
       class="wood-btn movies"
       (click)="closeModal('FILMOVI I SERIJE', 'ISTORIJA')"
@@ -39,6 +40,7 @@
         <span class="title">Filmovi i serije</span>
       </div>
     </div>
+
     <div
       class="wood-btn celebrity"
       (click)="closeModal('POZNATE LICNOSTI', 'FILMOVI I SERIJE')"
@@ -82,11 +84,16 @@
   </div>
   <div class="question-box-wrapper">
     <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
-        <h6> {{ question.question }} </h6>
+        <h6><span *ngIf="questionCount">{{questionCount}}.</span> {{ question.question }} </h6>
     </div>
     <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new" *ngIf="question.type === 'PICTURE'">
      
   </div>
+  <div class="stars-wrapper">
+    <p class="question-counter" *ngIf="questionCount">{{ 16 - questionCount}}</p>
+    <p class="stars-background"></p>
+    <p class="stars-progress" [ngStyle]="{'width': progressBarPercentage + '%'}"></p>
+</div>
     <button class="wood-btn"
             *ngFor="let answer of question.answers"
         [ngClass]="{
@@ -96,8 +103,6 @@
          (click)="!questionSelected && onSelectedAnswer(answer)">
         {{ answer.text }}
     </button>
-    <!-- <div class="wood-btn">Answer 1</div>
-    <div class="wood-btn">Answer 1</div>
-    <div class="wood-btn">Answer 1</div> -->
+    
   </div>
 </div>

@@ -7,10 +7,10 @@
 # Only exists if Bazel was run
 /bazel-out
 
-firebase
-.firebase
-/firebase
-/.firebase
+*firebase
+*.firebase
+*/firebase
+*/.firebase
 
 environment-hidden-dev.ts
 environment-hidden-prod.ts

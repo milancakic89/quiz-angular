@@ -11,7 +11,7 @@
                            [(ngModel)]="register.email"
                            required
                            [ngClass]="{'form-submitted': registerForm.submitted}" />   
-                    <label class="color-white">Password</label>
+                    <label class="color-white">Lozinka</label>
                     <input name="password" 
                            required
                            [min]="6"
@@ -19,7 +19,7 @@
                            type="password"
                            [(ngModel)]="register.password"
                            [ngClass]="{'form-submitted': registerForm.submitted}"/>
-                    <label class="color-white">Repeat password</label>
+                    <label class="color-white">Ponovi lozinku</label>
                     <input name="repeatPassword" 
                            required
                            [min]="6"
@@ -29,9 +29,9 @@
                    
                     <button class="button-submit" 
                             name="submit" 
-                            [ngClass]="{'button-gray': registerForm.invalid || register.password !== register.repeatPassword}">Submit</button>
+                            [ngClass]="{'button-gray': registerForm.invalid || register.password !== register.repeatPassword}">Nastavi</button>
                             <div class="nav-buttons">
-                                <a routerLink='/' class="login-nav-link">Login</a>
+                                <a routerLink='/' class="login-nav-link">Uloguj se</a>
                             </div>
                             
             </div>

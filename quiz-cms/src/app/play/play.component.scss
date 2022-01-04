@@ -192,7 +192,7 @@
 .timer {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
     transform: translateX(-50%);
     height: 28px;
     width: 100%;
@@ -263,10 +263,11 @@
 
 .play-game{
     perspective: 1000px;
+    padding: 20px 0;
     width: 100%;
     max-width: 900px;
     overflow: hidden;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 60px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -373,9 +374,10 @@
   
 }
 
+
 .game-box{
     overflow: hidden;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 60px);
     position: relative;
 }
 

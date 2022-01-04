@@ -28,7 +28,7 @@
             </div>
         </div>
         
-        <div class="tbody contribute">
+        <div class="tbody">
             <div class="tr" *ngFor="let question of questions; let i = index">
                 <div data-label="Pitanje" class="td w-40" (click)="question.opened = !question.opened">{{ question.question }}</div>
                 <div data-label="Odgovor" class="td w-20 answer-text">{{ question.correct_text}}</div>
@@ -42,13 +42,13 @@
                     <a class="delete-link" (click)="onDeleteQuesion(question._id)">obrisi</a>
                 </div> -->
                 <div class="question-details" *ngIf="question.opened">
-                    <p class="yellow-text">Pitanje: {{ question.question }}</p>
+                    <p >Pitanje: {{ question.question }}</p>
                     <textarea type="text" [(ngModel)]="updateQuestion" name="update"
                             [placeholder]="question.question"></textarea>
                         <button (click)="updateQuestionText(question._id)">Posalji izmenu</button>
-                    <p class="blue-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
-                    <p class="blue-text" *ngIf="question.type === 'PICTURE'"><b>iMAGE: <a [href]="question.imageUrl">{{ question.imageUrl }}</a></b></p>
-                    <p class="yellow-text" *ngFor="let answer of question.answers; let j = index">
+                    <p class="white-text"><b>Tacan odgovor: {{ question.correct_text }}</b></p>
+                    <p class="white-text" *ngIf="question.type === 'PICTURE'"><b>iMAGE: <a [href]="question.imageUrl">{{ question.imageUrl }}</a></b></p>
+                    <p  *ngFor="let answer of question.answers; let j = index">
                         Odgovor {{j + 1}}: {{ answer.text }}
                     </p>
                 </div>

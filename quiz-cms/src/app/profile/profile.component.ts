@@ -119,4 +119,10 @@ export class ProfileComponent implements OnInit {
     }, 500)
   }
 
+  public logout(){
+    this.config.logged = false;
+    localStorage.clear();
+    this.router.navigateByUrl('')
+  }
+
 }

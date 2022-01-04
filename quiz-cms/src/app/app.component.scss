@@ -178,7 +178,7 @@ $headerHeight: 65px;
                 background-image: url('../assets/images/ic_star.png');
                 width: 26px !important;
                 height: 26px !important;
-                animation: animate-icon 2s linear infinite;
+
 
                 @media screen and (min-width: 768px) {
                     margin-right: 10px;
@@ -195,12 +195,17 @@ $headerHeight: 65px;
             &-icon.false {
                 animation: none;
                 filter: grayscale(1);
+                &:hover{
+                    transform: scale(1);
+                }
             }
         }
 
         .user-chest {
             position: relative;
-
+            &:hover{
+                transform: scale(1);
+            }
             .chest-time {
                 font-size: 18px;
                 font-weight: 400;
@@ -289,7 +294,7 @@ $headerHeight: 65px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 60px);
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
