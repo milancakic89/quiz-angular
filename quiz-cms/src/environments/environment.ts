@@ -9,7 +9,8 @@ export const environment = {
   client_id: config.client_id,
   client_secret: config.client_secret,
   refresh_token: config.refresh_token,
-  firebase: config.firebaseConfig
+  firebase: config.firebaseConfig,
+  facebookAppId: config.facebookAppId
 };
 
 
