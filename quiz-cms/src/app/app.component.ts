@@ -6,6 +6,7 @@ import { GameData, ModalWrapper } from './modal-service';
 import { Configuration } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit{
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
   public spinner = true;
+  public liveCounterMinutes = 0;
   public lives: any = [];
   public showFeedback = false;
   public resetAvailable = false;
@@ -45,6 +47,9 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
+    })
+    this.service.livesReset.subscribe(minutes =>{
+      this.liveCounterMinutes = minutes;
     })
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
@@ -62,6 +67,7 @@ export class AppComponent implements OnInit{
       if(user){
         this.user = user;
         this.spinner = false;
+        console.log(user);
         this.lives = Array(user.lives);
       }
     })

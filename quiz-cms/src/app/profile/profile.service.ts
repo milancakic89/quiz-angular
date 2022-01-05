@@ -12,6 +12,6 @@ export class ProfileService{
     }
 
     public resetLives(){
-        return this.service.post<User>('/reset-lives', {}, '')
+        return this.service.get<User>('/reset-lives', '')
     }
 }

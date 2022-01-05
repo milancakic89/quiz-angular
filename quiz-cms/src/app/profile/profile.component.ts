@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { runInThisContext } from 'vm';
+import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
 import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration,
               private router: Router,
+              private appService: AppService,
               private feedbackService: FeedbackMessageService,
               private playService: PlayService,
               private service: ProfileService) { }
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
   public clicked = false;
 
   public gameLeaved = false;
+  public liveCounterMinutes = 0;
 
   public name = '';
   public showNameBox = false;
@@ -52,7 +54,7 @@ export class ProfileComponent implements OnInit {
     const { data, success } = await this.config.refreshUser()
     if(success){
       this.user = data;
-      this.config.user.next(data)
+      this.config.user.next(data);
       if(Date.now() >= data.daily_price){
         this.feedbackService.DailyPrice.emit(true);
       }
@@ -65,6 +67,9 @@ export class ProfileComponent implements OnInit {
           this.gameLeaved = false;
           this.resetPlayingState();
         }, 3000)
+      }
+      if (this.user.lives === 0) {
+        this.onResetLives();
       }
     }
   }
@@ -100,6 +105,7 @@ export class ProfileComponent implements OnInit {
   public async onResetLives(){
     const { data, success } = await this.service.resetLives()
     if(success){
+      this.calculateResetTime(this.user.reset_lives_at)
       this.config.user.next(data);
     }
   }
@@ -108,8 +114,18 @@ export class ProfileComponent implements OnInit {
     const { data, success } = await this.playService.reduceOneLife()
     if (success) {
       this.user = data;
-      this.config.user.next(data)
+      this.config.user.next(data);
     }
+  }
+
+  public calculateResetTime(timeInMs: number){
+    const reset = new Date(timeInMs).getTime();
+    const now = Date.now();
+    const dif = reset - now;
+    const minutes = new Date(dif).getMinutes();
+    this.liveCounterMinutes = minutes;
+    this.appService.livesReset.next(minutes)
+    
   }
 
   public onClick(path: string){

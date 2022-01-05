@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { ApiService } from "./shared/api.servise";
 import { User } from "./shared/config.service";
 
 @Injectable({providedIn: 'root'})
 export class AppService{
     constructor(private service: ApiService){}
+
+    public livesReset = new BehaviorSubject<number>(0);
 
  
     public updateScore(score: number){
