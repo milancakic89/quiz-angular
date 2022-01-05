@@ -49,7 +49,12 @@ export class AppComponent implements OnInit{
       this.resetAvailable = bool;
     })
     this.service.livesReset.subscribe(minutes =>{
-      this.liveCounterMinutes = minutes;
+      if(minutes > 0){
+        this.liveCounterMinutes = minutes;
+      }else{
+        this.liveCounterMinutes = 0;
+      }
+     
     })
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
