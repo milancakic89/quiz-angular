@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
-import { Configuration } from './shared/config.service';
+import { Configuration, User } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
   get isRoot(){return this.config.isRoot}
   get isLogged(){return this.config.logged}
 
-  public user: any;
+  public user: User = {} as User;
   public showModal = false;
   public gameRunning = false;
   public feedbackMessage = 'test';
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit{
       this.resetAvailable = bool;
     })
     this.service.livesReset.subscribe(minutes =>{
-      if(minutes > 0){
+      if(minutes > 0 && this.user.lives === 0){
         this.liveCounterMinutes = minutes;
       }else{
         this.liveCounterMinutes = 0;
