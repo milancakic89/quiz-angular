@@ -16,10 +16,10 @@
     </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
-            <span><b>{{ user.name }}</b></span>
+            <span></span>
         </div>
         <div class="right-info">
-            <p class="reset-timer" *ngIf="liveCounterMinutes">{{ liveCounterMinutes }} minute/s</p>
+            <p class="reset-timer" *ngIf="liveCounterMinutes">{{ liveCounterMinutes }} m</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
                       (click)="claimDailyReward()"></span>

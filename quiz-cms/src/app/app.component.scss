@@ -97,6 +97,7 @@ $headerHeight: 65px;
         justify-content: center;
 
         .reset-timer {
+            width: 50px;
             border: 2px solid rgba(121, 41, 16, 0.596);
             outline: 2px solid rgba(88, 27, 9, 0.616);
             padding: 2px 5px;
@@ -108,9 +109,9 @@ $headerHeight: 65px;
             &::before {
                 content: '';
                 position: absolute;
-                right: 105%;
+                right: 115%;
                 display: inline-flex;
-                filter: grayscale(0.2);
+                filter: grayscale(0.6);
                 background-size: contain;
                 background-repeat: no-repeat;
                 width: 20px;
@@ -154,7 +155,13 @@ $headerHeight: 65px;
     }
 
     .left-info {
-        align-items: flex-start;
+        span{
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: rgb(0, 52, 73);
+        }
     }
 
     .right-info {

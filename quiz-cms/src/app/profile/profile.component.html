@@ -4,34 +4,6 @@
         <span>Trudite se da ne izlazite iz igre dok ona traje!</span>
     </div>
 </div>
-<!-- <div class="profile" *ngIf="user && !gameLeaved">
-    <div class="profile-wrapper" *ngIf="user">
-    <a class="box-item play-button" routerLink="/play">
-            <div>
-                <span class="title">Igraj</span>
-            </div>
-    </a>
-    <a class="box-item questions-button" routerLink="/questions">
-        <div>
-            <span class="title">Pitanja</span>
-        </div>
-    </a>
-    <a class="box-item achivements-button" 
-       routerLink="/achievements" 
-       (click)="achievementNotification = false"
-       [ngClass]="achievementNotification ? 'show-notification' : ''">
-        <div>
-            <span class="title">Dostignuca</span>
-        </div>
-    </a>
-    <a class="box-item ranking-button" routerLink="/ranking">
-        <div>
-            <span class="title">Tabela</span>
-        </div>
-    </a>
-
-</div> -->
-
 <div class="profile">
     <div class="dropdown-menu" [ngClass]="{'close': clicked}">
             <button (click)="onClick('/play')" class="wood-btn">Igraj</button>
@@ -40,5 +12,4 @@
             <button (click)="onClick('/ranking')" class="wood-btn">Tabela</button>
             <button (click)="logout()" class="wood-btn">Izloguj se</button>
     </div>
-    <!-- <div class="animation"></div> -->
 </div>
