@@ -1,25 +1,16 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ApiService } from "../shared/api.servise";
-import { User } from "../shared/config.service";
+import { Configuration, User } from "../shared/config.service";
 
-let allowBackButton = false;
-
-export const allowBack = () =>{
-    return allowBackButton;
-}
-
-export const setAllowBack = (value: boolean) =>{
-    allowBackButton = value;
-}
 @Injectable({providedIn: 'root'})
 export class PlayService{
-    constructor(private service: ApiService){}
+    constructor(private service: ApiService, private config: Configuration){}
 
-    get allowBackButton() { return allowBack()}
-    set allowBackButton(value: boolean) { setAllowBack(value)}
+    get allowBackButton() { return this.config.isGameRunning}
+    set allowBackButton(value: boolean) { this.config.setGameRunning = value}
 
-    public checkQuestion(questionId: string, correct: boolean){
+    public checkQuestion(questionId: string, correct: string){
         return this.service.post<boolean>('/check-question', {questionId, correct}, '')
     }
 

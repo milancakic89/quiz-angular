@@ -7,6 +7,7 @@ import { Configuration, User } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { ProfileService } from './profile/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit{
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
               private service: AppService,
+              private profileService: ProfileService,
               private notificationService: NotificationService,
               private feedbackService: FeedbackMessageService,
               private router: Router){}
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit{
   public gameRunning = false;
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
-  public spinner = true;
+  public spinner = false;
   public liveCounterMinutes = 0;
   public lives: any = [];
   public showFeedback = false;
@@ -48,14 +50,7 @@ export class AppComponent implements OnInit{
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
     })
-    this.service.livesReset.subscribe(minutes =>{
-      if(minutes > 0 && this.user.lives === 0){
-        this.liveCounterMinutes = minutes;
-      }else{
-        this.liveCounterMinutes = 0;
-      }
-     
-    })
+
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
       this.showFeedback = true;
@@ -72,35 +67,34 @@ export class AppComponent implements OnInit{
       if(user){
         this.user = user;
         this.spinner = false;
-        console.log(user);
         this.lives = Array(user.lives);
+        if(this.user.lives === 0){
+          this.liveCounterMinutes = this.profileService.calculateResetTime(this.user.reset_lives_at)
+        }else{
+          this.liveCounterMinutes = 0;
+        }
       }
     })
-    if(localStorage.getItem('access') && !this.config.logged){
-          this.config.attemptAutoLogin();
-          setTimeout(()=>{
-            this.spinner = false;
-          }, 3000)
-    }
 
-  this.modal.gameResults.subscribe(gameData =>{
-    if(gameData){
-      this.gameRunning = false;
-      this.modal.startGame.next(false);
-      this.gameResults.noQuestions = gameData.noQuestions;
-      this.gameResults.results = gameData.results;
-      this.gameResults.showModal = gameData.showModal;
-      this.gameResults.success = gameData.success;
-      this.addToScore(this.gameResults.results)
-      this.updateScore();
-    }
-   
-  })
+    this.modal.gameResults.subscribe(gameData =>{
+      if(gameData){
+        this.gameRunning = false;
+        this.modal.startGame.next(false);
+        this.gameResults.noQuestions = gameData.noQuestions;
+        this.gameResults.results = gameData.results;
+        this.gameResults.showModal = gameData.showModal;
+        this.gameResults.success = gameData.success;
+        this.addToScore(this.gameResults.results)
+        this.updateScore();
+      }
+    
+    })
 
-    this.modal.startGame.subscribe(bool =>{
-      this.gameRunning = bool;
-  });
+      this.modal.startGame.subscribe(bool =>{
+        this.gameRunning = bool;
+    });
 
+    this.autologin();
 
     if(this._initRedirect){
       this._initRedirect = false;
@@ -108,6 +102,17 @@ export class AppComponent implements OnInit{
       return;
     }
 
+    
+  }
+
+  public async autologin(){
+    this.spinner = true;
+    if(localStorage.getItem('access') && !this.config.logged){
+      await this.config.attemptAutoLogin();
+      this.spinner = false;
+      this.router.navigateByUrl('/profile')
+     }
+     this.spinner = false;
   }
 
   

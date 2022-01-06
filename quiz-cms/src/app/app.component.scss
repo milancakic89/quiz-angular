@@ -335,6 +335,10 @@ $headerHeight: 65px;
     position: relative;
     background-image: url('../assets/images/new-theme/cartoon-bg.png');
     background-size: cover;
+
+    &.not-logged{
+        height: 100vh !important;
+    }
 }
 
 .logout-button,

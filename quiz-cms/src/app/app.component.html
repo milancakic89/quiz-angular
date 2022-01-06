@@ -28,7 +28,7 @@
             <p class="user-ticket"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
         </div>
     </div>
-        <div class="scrollable-area">
+        <div class="scrollable-area" [ngClass]="{'not-logged': !isLogged}">
             <div class="notification" *ngIf="showFeedback" [ngClass]="successFeedback ? 'success' : 'error'">
                 <span>{{ feedbackMessage }}</span>
             </div>

@@ -95,12 +95,12 @@
     <p class="stars-progress" [ngStyle]="{'width': progressBarPercentage + '%'}"></p>
 </div>
     <button class="wood-btn"
-            *ngFor="let answer of question.answers"
+            *ngFor="let answer of question.answers; let i = index"
         [ngClass]="{
         'disabled-button': questionSelected,
-        'wrong-answer':questionSelected && question.correct_letter !== answer.letter && selectedLetter === answer.letter,
-        'correct-answer': questionSelected && question.correct_letter === answer.letter}"
-         (click)="!questionSelected && onSelectedAnswer(answer)">
+        'wrong-answer': correct === 1 && btnIndex === i,
+        'correct-answer': correct === 2 && btnIndex === i}"
+         (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)">
         {{ answer.text }}
     </button>
     

@@ -154,7 +154,9 @@ export class Configuration{
         this.isRoot = data.roles.some((role: any) => role === 'ADMIN');
         this.logged = true;
         this._user.next(data);
+        return true;
       }
+      return false;
     }
 
     public getToken(){

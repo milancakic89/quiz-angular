@@ -48,6 +48,8 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public lives = 0;
   public nextQuestionInterval = 400;
   public progressBarPercentage = 0;
+  public correct = 0;
+  public btnIndex: any = null;
 
   ngOnInit() {
     this.config.user.subscribe(user => {
@@ -104,6 +106,8 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     }
     const { data, success } = await this.questionService.getSingleQuestion(this.playCategory)
     if (success) {
+      this.correct = 0;
+      this.btnIndex = null;
       this.question = data;
       this.questionCount++;
       this.selectedLetter = '';
@@ -131,10 +135,18 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     }, 1000)
   }
 
-  public timeWarning() {
+  public async timeWarning() {
     this.questionSelected = true;
     this.stopTime();
-    this.updateQuestion(false)
+    await this.updateQuestion(this.question.answers[0].text);
+    setTimeout(() => {
+      if (this.attempts.length) {
+        this.getQuestion();
+      } else {
+        this.gameOver('You have missed 3 times');
+      }
+
+    }, this.nextQuestionInterval)
   }
 
   public updateProgressBar() {
@@ -238,34 +250,42 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
   }
 
-  public async onSelectedAnswer(answer: Answers) {
+  public async onSelectedAnswer(answer: Answers, questionId: number, btnIndex: number) {
     if (this.questionSelected) {
       return;
     }
+   
     this.questionSelected = true;
     this.selectedLetter = answer.letter;
     this.stopTime();
-    const correct = answer.letter === this.question.correct_letter;
-    this.updateQuestion(correct);
+    const correct = await this.updateQuestion(answer.text);
+    if(correct){
+      this.correct = 2;
+    }else{
+      this.correct = 1;
+    }
+    this.btnIndex = btnIndex;
+    setTimeout(() => {
+      if (this.attempts.length) {
+        this.getQuestion();
+      } else {
+        this.gameOver('You have missed 3 times');
+      }
+
+    }, this.nextQuestionInterval)
   }
 
-  public async updateQuestion(correct: boolean) {
+  public async updateQuestion(correct: string) {
     const { data, success } = await this.playService.checkQuestion(this.question._id, correct)
     if (success) {
       if (data) {
         this.score++;
         this.updateProgressBar();
+        return true;
       } else {
         this.reduceAttempts();
-      }
-      setTimeout(() => {
-        if (this.attempts.length) {
-          this.getQuestion();
-        } else {
-          this.gameOver('You have missed 3 times');
-        }
-
-      }, this.nextQuestionInterval)
+        return false;
+      }      
     } else {
       clearInterval(this.timeInterval)
       this.playService.allowBackButton = true;
@@ -275,7 +295,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       });
       //todo set user not playing in DB and then router him
       // this.router.navigateByUrl('/profile');
-
+      return false;
     }
   }
 
@@ -286,7 +306,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public async reduceOneLife() {
     const { data, success } = await this.playService.reduceOneLife()
     if (success) {
-      this.config.user.next(data)
+      // this.config.user.next(data)
     }
   }
 

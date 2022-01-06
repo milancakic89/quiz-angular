@@ -105,7 +105,6 @@ export class ProfileComponent implements OnInit {
   public async onResetLives(){
     const { data, success } = await this.service.resetLives()
     if(success){
-      this.calculateResetTime(this.user.reset_lives_at)
       this.config.user.next(data);
     }
   }
@@ -118,15 +117,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public calculateResetTime(timeInMs: number){
-    const reset = new Date(timeInMs).getTime();
-    const now = Date.now();
-    const dif = reset - now;
-    const minutes = new Date(dif).getMinutes();
-    this.liveCounterMinutes = minutes;
-    this.appService.livesReset.next(minutes)
-    
-  }
+  // public calculateResetTime(timeInMs: number){
+  //   const minutes = this.service.calculateResetTime(timeInMs)
+  //   this.liveCounterMinutes = minutes;
+  //   this.appService.livesReset.next(minutes)  
+  // }
 
   public onClick(path: string){
     this.clicked = true;
