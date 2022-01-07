@@ -135,7 +135,7 @@ export class AppComponent implements OnInit{
       if(this.seconds > 0){
         this.seconds--;
       }
-      if(this.seconds === 0){
+      if(this.seconds < 0){
         if(this.minutes === 0){
           clearInterval(this.lives_interval);
           this.refreshUser();
