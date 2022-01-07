@@ -118,9 +118,7 @@ export class AppComponent implements OnInit{
   }
 
   public countdown(){
-    if(this.lives_interval){
-      return;
-    }
+    clearInterval(this.lives_interval);
     this.lives_interval = setInterval(()=>{
       this.calculateCountdown();
     }, 1000)
