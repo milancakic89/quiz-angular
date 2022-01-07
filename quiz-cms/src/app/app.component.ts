@@ -33,10 +33,13 @@ export class AppComponent implements OnInit{
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
   public spinner = false;
-  public liveCounterMinutes = 0;
+  public showLivesTimer = false;
   public lives: any = [];
   public showFeedback = false;
   public resetAvailable = false;
+  public lives_interval: any = undefined;
+  public minutes = 0;
+  public seconds = 0;
   public successFeedback = true;
   public testTime = new Date(Date.now() + 30000);
   public gameResults: GameData = {
@@ -69,9 +72,14 @@ export class AppComponent implements OnInit{
         this.spinner = false;
         this.lives = Array(user.lives);
         if(this.user.lives === 0){
-          this.liveCounterMinutes = this.profileService.calculateResetTime(this.user.reset_lives_at)
+          console.log(this.user)
+          const timer = this.profileService.calculateResetTime(this.user.lives_timer_ms);
+          this.minutes = timer.minutes;
+          this.seconds = timer.seconds;
+          this.showLivesTimer = true;
+          this.countdown();
         }else{
-          this.liveCounterMinutes = 0;
+          this.showLivesTimer = false;
         }
       }
     })
@@ -101,8 +109,34 @@ export class AppComponent implements OnInit{
       this.router.navigateByUrl('');
       return;
     }
+  }
 
-    
+  public countdown(){
+    this.lives_interval = setInterval(()=>{
+      this.calculateCountdown();
+    }, 1000)
+  }
+
+  public calculateCountdown(){
+    if(this.showLivesTimer){
+      clearInterval(this.lives_interval)
+    }
+    if(this.minutes === 0 && this.seconds === 0){
+      clearInterval(this.lives_interval)
+    }else{
+      console.log('calculating')
+      if(this.seconds > 0){
+        this.seconds--;
+      }
+      if(this.seconds === 0){
+        this.seconds = 59;
+        this.minutes--;
+      }
+      if(this.minutes === 0 && this.seconds === 0){
+        clearInterval(this.lives_interval)
+      }
+    }
+
   }
 
   public async autologin(){

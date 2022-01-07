@@ -16,11 +16,19 @@ export class ProfileService{
         return this.service.get<User>('/reset-lives', '')
     }
 
-    public calculateResetTime(timeInMs: number){
-        const reset = new Date(timeInMs).getTime();
-        const now = Date.now();
-        const dif = reset - now;
-        const minutes = new Date(dif).getMinutes();
-        return minutes;
+    public calculateResetTime(future_ms: number){
+        let total_seconds = future_ms / 1000;
+        let counter = 0;
+        let minutes = 0;
+        let seconds = 0;
+        while((total_seconds - 60) > counter){
+            counter += 60;
+            minutes++;
+        }
+        seconds = total_seconds - counter;
+        return {
+            minutes,
+            seconds
+        };
       }
 }

@@ -12,6 +12,7 @@ export interface User{
   lives: number;
   playing: boolean;
   password: string;
+  lives_timer_ms: number;
   score: number;
   roles: string[];
   tickets: number;
