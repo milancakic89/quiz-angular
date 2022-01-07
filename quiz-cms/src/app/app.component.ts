@@ -34,12 +34,15 @@ export class AppComponent implements OnInit{
   public feedbackTimeInSeconds = 5;
   public spinner = false;
   public showLivesTimer = false;
+  public lives_timer_delay = false;
   public lives: any = [];
   public showFeedback = false;
   public resetAvailable = false;
   public lives_interval: any = undefined;
   public minutes = 0;
   public seconds = 0;
+  public minutesString = '00';
+  public secondsString = '00';
   public successFeedback = true;
   public testTime = new Date(Date.now() + 30000);
   public gameResults: GameData = {
@@ -60,7 +63,9 @@ export class AppComponent implements OnInit{
       this.feedbackMessage = noth.message;
       this.hideFeedback();
     });
-
+    setTimeout(()=>{
+      this.lives_timer_delay = true;
+    }, 2000)
 
     if(!this.user && !localStorage.getItem('access')){
         this.spinner = false;
@@ -72,10 +77,11 @@ export class AppComponent implements OnInit{
         this.spinner = false;
         this.lives = Array(user.lives);
         if(this.user.lives === 0){
-          console.log(this.user)
           const timer = this.profileService.calculateResetTime(this.user.lives_timer_ms);
           this.minutes = timer.minutes;
           this.seconds = timer.seconds;
+          this.minutesString = this.prefixNumberWithZero(this.minutes);
+          this.secondsString = this.prefixNumberWithZero(this.seconds);
           this.showLivesTimer = true;
           this.countdown();
         }else{
@@ -112,31 +118,43 @@ export class AppComponent implements OnInit{
   }
 
   public countdown(){
+    if(this.lives_interval){
+      return;
+    }
     this.lives_interval = setInterval(()=>{
       this.calculateCountdown();
     }, 1000)
   }
 
-  public calculateCountdown(){
-    if(this.showLivesTimer){
-      clearInterval(this.lives_interval)
+  public prefixNumberWithZero(num: number){
+    if(num > 9 || num < 0){
+      return `${num}`;
     }
-    if(this.minutes === 0 && this.seconds === 0){
-      clearInterval(this.lives_interval)
-    }else{
-      console.log('calculating')
+    return `0${num}`;
+  }
+
+  public calculateCountdown(){
       if(this.seconds > 0){
         this.seconds--;
       }
       if(this.seconds === 0){
+        if(this.minutes === 0){
+          clearInterval(this.lives_interval);
+          this.refreshUser();
+          return;
+        }
         this.seconds = 59;
         this.minutes--;
       }
-      if(this.minutes === 0 && this.seconds === 0){
-        clearInterval(this.lives_interval)
-      }
-    }
+      this.minutesString = this.prefixNumberWithZero(this.minutes);
+      this.secondsString = this.prefixNumberWithZero(this.seconds);
+  }
 
+  public async refreshUser(){
+    const { data, success } = await this.config.refreshUser();
+    if(success){
+      this.config.user.next(data);
+    }
   }
 
   public async autologin(){

@@ -19,7 +19,7 @@
             <span></span>
         </div>
         <div class="right-info">
-            <p class="reset-timer" *ngIf="showLivesTimer">{{ minutes }}:{{seconds}}</p>
+            <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
                       (click)="claimDailyReward()"></span>

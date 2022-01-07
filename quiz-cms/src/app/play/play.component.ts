@@ -58,7 +58,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
         if (this.lives === 0) {
           setTimeout(() => {
             this.router.navigateByUrl('/profile')
-          }, 1000)
+          }, 2000)
         }
       }
     })

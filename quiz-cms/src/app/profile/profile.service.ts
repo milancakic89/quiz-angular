@@ -17,7 +17,7 @@ export class ProfileService{
     }
 
     public calculateResetTime(future_ms: number){
-        let total_seconds = future_ms / 1000;
+        let total_seconds = Math.round((future_ms + 2000) / 1000);
         let counter = 0;
         let minutes = 0;
         let seconds = 0;
