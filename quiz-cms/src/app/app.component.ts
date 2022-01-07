@@ -132,9 +132,7 @@ export class AppComponent implements OnInit{
   }
 
   public calculateCountdown(){
-      if(this.seconds > 0){
-        this.seconds--;
-      }
+      this.seconds--;
       if(this.seconds < 0){
         if(this.minutes === 0){
           clearInterval(this.lives_interval);
