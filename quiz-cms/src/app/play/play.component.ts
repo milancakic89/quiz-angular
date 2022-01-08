@@ -55,11 +55,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.config.user.subscribe(user => {
       if (user) {
         this.lives = user.lives;
-        if (this.lives === 0) {
-          setTimeout(() => {
-            this.router.navigateByUrl('/profile')
-          }, 2000)
-        }
       }
     })
   }
@@ -297,6 +292,11 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       // this.router.navigateByUrl('/profile');
       return false;
     }
+  }
+
+  public backToProfile(){
+    this.playService.allowBackButton = true;
+    this.router.navigateByUrl('/profile')
   }
 
   public stopTime() {

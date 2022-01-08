@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.playService.allowBackButton = true;
     this.imageUrl = localStorage.getItem('avatar') || '';
     this.clicked = false;
     this.load();
