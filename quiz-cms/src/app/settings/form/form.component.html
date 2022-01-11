@@ -1,0 +1,34 @@
+<div class="settings">
+    <div class="navigation">
+        <a class=button-back (click)="backToProfile()"></a>
+    </div>
+    <form #settingsForm="ngForm" (submit)="settingsForm.valid && onFormSubmit()">
+    <div class="form-row">
+        <div class="form-row-input">
+            <label>Ime</label>
+            <input name="name" [(ngModel)]="settings.name"/>
+        </div>
+        <div class="form-row-input">
+            <label>Prezime</label>
+            <input name="lastname" [(ngModel)]="settings.lastname"/>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-row-input">
+            <label>Email</label>
+            <input name="email" [(ngModel)]="settings.email"/>
+        </div>
+        <div class="form-row-input">
+            <label>Lozinka</label>
+            <input name="password" type="password" [(ngModel)]="settings.password"/>
+        </div>
+    </div>
+        <div class="form-row">
+            <div class="form-row-input">
+                <label class="image-upload-label" for="image">Promeni sliku</label>
+                <input id="image" type="file" name="email" [(ngModel)]="settings.imageUrl" />
+            </div>
+        </div>
+    <button class="button-submit" [disabled]="settingsForm.invalid">Sacuvaj</button>
+    </form>
+</div>

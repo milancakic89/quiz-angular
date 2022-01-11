@@ -1,0 +1,20 @@
+.settings {
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-image: url('../../../assets/images/new-theme/question-board.png');
+    background-size: cover;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+input[type="file"] {
+    visibility: hidden;
+}
+
+.image-upload-label {
+    background-color: transparent;
+    padding: 5px 15px;
+    border: 1px solid black;
+    display: inline-flex;
+    cursor: pointer;
+}

@@ -17,7 +17,7 @@
     </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
-            <span></span>
+            <a routerLink="/settings"></a>
         </div>
         <div class="right-info">
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
