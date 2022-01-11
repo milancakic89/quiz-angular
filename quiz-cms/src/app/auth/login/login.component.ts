@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FeedbackMessageService } from 'src/app/feedback.service';
-import { ApiService } from 'src/app/shared/api.servise';
 
 import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
-import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { SocialAuthService, FacebookLoginProvider } from 'angularx-social-login';
 
+
+declare var FB: any;
+
+interface FBResponse{
+  name: string;
+  id: number;
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private config: Configuration, 
               private router: Router,
-              private socialAuthService: SocialAuthService,
               private notification: NotificationService) { }
 
   get login() { return this._loginDetails; }
@@ -27,26 +31,47 @@ export class LoginComponent implements OnInit {
   public feedbackClass = '';
 
   ngOnInit(): void {
-    this.config.user.subscribe(user =>{
+    (window as any).fbAsyncInit = function () {
+      FB.init({
+        appId: '1043385909568285',
+        xfbml: true,
+        version: 'v12.0'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js: any, fjs: any = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+
+  public facebookSignin(): void {
+    FB.login((response: any) =>{
+      if (response.authResponse) {
+        FB.api('/me', (res: FBResponse) => {
+          this.config.facebookLogin(res.id, res.name);
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, { scope: 'public_profile,email' })
+  }
+
+  ngAfterViewInit(): void {
+      this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
         this.router.navigateByUrl('/profile')
       }
     })
-
-    this.socialAuthService.authState.subscribe((user: any) => {
-      this.user = user;
-      // this.isSignedin = (user != null);
-      console.log(this.user);
-    });
-  }
-
-  public facebookSignin(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   public logOut(): void {
-    this.socialAuthService.signOut();
+    FB.logout()
   }
 
   public async onSubmit(){

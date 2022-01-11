@@ -138,6 +138,10 @@ export class Configuration{
       return this.service.post<User>('/login', {email, password}, 'Neuspelo logovanje. Pokusajte ponovo');
   }
 
+  public facebookLogin(id: number, name: string){
+    console.log('logging person: ' + name +  ', with id: ' + id)
+  }
+
   public saveUser(user: User, token: string){
       isLogged.root = user.roles.some((role: any) => role === 'ADMIN');
       isLogged.logged = true;

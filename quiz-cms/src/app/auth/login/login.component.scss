@@ -22,6 +22,10 @@
     animation: airplane 16s ease-in infinite;
 }
 
+.facebook{
+    min-height: 40px;
+} 
+
 @keyframes airplane {
     0% {
         transform: rotateZ(0deg) rotateY(-8deg);
