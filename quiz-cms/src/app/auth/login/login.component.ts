@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     FB.login((response: any) =>{
       if (response.authResponse) {
         FB.api('/me', (res: FBResponse) => {
-          this.config.facebookLogin(res.id, res.name);
+          this.loginFacebookUser(res.id, res.name)
         });
       } else {
         console.log('User cancelled login or did not fully authorize.');
@@ -72,6 +72,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   public logOut(): void {
     FB.logout()
+  }
+
+  public async loginFacebookUser(id: number, name: string){
+    const { success, data, token } = await this.config.facebookLogin(id, name)
+    if(success){
+      let href = location.href;
+      this.config.saveUser(data, token);
+      location.href = href + '/profile';
+    }
   }
 
   public async onSubmit(){

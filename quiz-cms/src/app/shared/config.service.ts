@@ -139,7 +139,7 @@ export class Configuration{
   }
 
   public facebookLogin(id: number, name: string){
-    console.log('logging person: ' + name +  ', with id: ' + id)
+    return this.service.post<User>('/facebook-login', {name, id}, 'Neuspelo logovanje. Pokusajte ponovo ili napravite nalog');
   }
 
   public saveUser(user: User, token: string){

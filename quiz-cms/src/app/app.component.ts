@@ -73,6 +73,7 @@ export class AppComponent implements OnInit{
 
     this.config.user.subscribe(user =>{
       if(user){
+        console.log(user)
         this.user = user;
         this.spinner = false;
         this.lives = Array(user.lives);
