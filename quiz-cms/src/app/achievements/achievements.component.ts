@@ -29,7 +29,6 @@ export class AchievementsComponent implements OnInit {
   ngOnInit(): void {
     this.config.user.subscribe((user: any) =>{
       this.user = user;
-      console.log(this.user)
     })
     this.load();
   }
@@ -37,7 +36,6 @@ export class AchievementsComponent implements OnInit {
   public async load(){
     const { data, success} = await this.service.getAchievements();
     if(success){
-      console.log(data)
       this.achievements = data;
     }
   }

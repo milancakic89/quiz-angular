@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 interface Settings{
-  name: string;
+  firstname: string;
   lastname: string;
   email: string;
   password: string;
@@ -18,7 +18,7 @@ export class FormComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  get setting(){ return this._settings}
+  get settings(){ return this._settings}
   set settings(value: Settings){ this._settings = value}
 
 
@@ -30,11 +30,10 @@ export class FormComponent implements OnInit {
   }
 
   public onFormSubmit(){
-    console.log('settings submited')
   }
 
   private _settings: Settings = {
-    name: '',
+    firstname: '',
     lastname: '',
     email: '',
     password: '',

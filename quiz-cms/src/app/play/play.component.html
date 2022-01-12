@@ -29,6 +29,7 @@
     >
       <div>
         <span class="title">Istorija</span>
+        <sup *ngIf="!isCategoryAllowed('GEOGRAFIJA')">Dodati 10 pitanja iz Geografije</sup>
       </div>
     </div>
 
@@ -40,6 +41,7 @@
     >
       <div>
         <span class="title">Filmovi i serije</span>
+        <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati 10 pitanja iz Istorije</sup>
       </div>
     </div>
 
@@ -51,6 +53,7 @@
     >
       <div>
         <span class="title">Poznate licnosti</span>
+        <sup *ngIf="!isCategoryAllowed('FILMOVI I SERIJE')">Dodati 10 pitanja iz Filmova i serija</sup>
       </div>
     </div>
     <div
@@ -61,6 +64,7 @@
     >
       <div>
         <span class="title">Sport</span>
+        <sup *ngIf="!isCategoryAllowed('POZNATE LICNOSTI')">Dodati 10 pitanja iz Poznatih licnosti"</sup>
       </div>
     </div>
 
@@ -72,6 +76,7 @@
     >
       <div>
         <span class="title long-text">Pitanja drugih takmicara</span>
+        <sup *ngIf="!isCategoryAllowed('SPORT')">Dodati 10 pitanja iz Sporta</sup>
       </div>
     </div>
   </div>
@@ -101,7 +106,7 @@
         [ngClass]="{
         'disabled-button': questionSelected,
         'wrong-answer': correct === 1 && btnIndex === i,
-        'correct-answer': correct === 2 && btnIndex === i}"
+        'correct-answer': correct === 2  && btnIndex === i}"
          (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)">
         {{ answer.text }}
     </button>

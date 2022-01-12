@@ -392,47 +392,9 @@
 
 ng-select {
 
-    .ng-select-container.ng-has-value {
-        background-image: url('../images/new-theme/question-board.png');
-        background-size: cover;
-        background-color: black;
-        font-weight: 800;
-        color: #000;
-    }
 
-    .ng-select-opened {
-        background-image: url('../images/new-theme/question-board.png') !important;
-        background-size: cover;
-        background-color: black;
-        color: #000;
-    }
-
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-        background-image: url('../images/new-theme/question-board.png');
-        background-size: cover;
-        background-color: black;
-        color: #000;
-    }
-
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option-selected,
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option-marked,
-    .ng-select-container .ng-has-value {
-        background-image: url('../images/new-theme/question-board.png');
-        background-size: cover;
-        background-color: black;
-        color: #000;
-    }
-
-    .ng-dropdown-panel-items .scroll-host {
-        background-color: #000;
-    }
-
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
-        background-image: url('../images/new-theme/question-board.png');
-        background-size: cover;
-        background-color: black;
-        color: #000;
+    input {
+        background-image: none;
     }
 }
 

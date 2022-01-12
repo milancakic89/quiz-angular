@@ -18,12 +18,6 @@
         <div class="form-row column">
             <label for="upload" class="blue-heading">{{ selectedImage ? '' : 'Izaberite sliku'}}</label>
             <input type="file" #upload id="upload" name="image" [(ngModel)]="selectedImage" (ngModelChange)="onImageChange()"  style="visibility: hidden;" required [(ngModel)]="selectedImage"/>
-            <label for="" class="blue-heading">Pitanje vezano za sliku</label>
-            <textarea name="question"
-                      cols="30"
-                      rows="2"
-                      required
-                      [(ngModel)]="newQuestion.question_text"></textarea>
         </div>
         <div class="form-row">
             <div class="form-row-input">

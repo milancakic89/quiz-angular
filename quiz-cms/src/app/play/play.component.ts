@@ -46,9 +46,10 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public playCategory = '';
   public showModal = true;
   public lives = 0;
-  public nextQuestionInterval = 400;
+  public nextQuestionInterval = 1000;
   public progressBarPercentage = 0;
   public correct = 0;
+  public showCorrect = false;
   public btnIndex: any = null;
 
   ngOnInit() {
@@ -102,6 +103,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     const { data, success } = await this.questionService.getSingleQuestion(this.playCategory)
     if (success) {
       this.correct = 0;
+      this.showCorrect = false;
       this.btnIndex = null;
       this.question = data;
       this.questionCount++;
@@ -249,17 +251,16 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this.questionSelected) {
       return;
     }
-   
     this.questionSelected = true;
     this.selectedLetter = answer.letter;
     this.stopTime();
     const correct = await this.updateQuestion(answer.text);
+    this.btnIndex = btnIndex;
     if(correct){
       this.correct = 2;
     }else{
       this.correct = 1;
     }
-    this.btnIndex = btnIndex;
     setTimeout(() => {
       if (this.attempts.length) {
         this.getQuestion();

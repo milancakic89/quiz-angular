@@ -18,3 +18,22 @@ input[type="file"] {
     display: inline-flex;
     cursor: pointer;
 }
+
+form{
+    input{
+        border: none;
+        border-bottom: 3px solid black;
+    }
+}
+
+.form-row{
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+    }
+    &-input{
+        
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
+    }
+}

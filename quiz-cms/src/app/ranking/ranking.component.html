@@ -19,26 +19,8 @@
                 </div>
             </div>
             <div class="tbody">
-                <div class="tr" *ngFor="let player of rankedPlayers">
-                    <div class="td w-10">1</div>
-                    <div class="td w-40">{{ player.name }}</div>
-                    <div class="td w-20">{{ player.score }}</div>
-                    <div class="td w-20">in development</div>
-                </div>
-                <div class="tr" *ngFor="let player of rankedPlayers">
-                    <div class="td w-10">1</div>
-                    <div class="td w-40">{{ player.name }}</div>
-                    <div class="td w-20">{{ player.score }}</div>
-                    <div class="td w-20">in development</div>
-                </div>
-                <div class="tr" *ngFor="let player of rankedPlayers">
-                    <div class="td w-10">1</div>
-                    <div class="td w-40">{{ player.name }}</div>
-                    <div class="td w-20">{{ player.score }}</div>
-                    <div class="td w-20">in development</div>
-                </div>
-                <div class="tr" *ngFor="let player of rankedPlayers">
-                    <div class="td w-10">1</div>
+                <div class="tr" *ngFor="let player of rankedPlayers; let i = index">
+                    <div class="td w-10">{{ i }}</div>
                     <div class="td w-40">{{ player.name }}</div>
                     <div class="td w-20">{{ player.score }}</div>
                     <div class="td w-20">in development</div>
