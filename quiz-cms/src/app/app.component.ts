@@ -110,7 +110,7 @@ export class AppComponent implements OnInit{
 
     this.autologin();
 
-    if(this._initRedirect){
+    if(this._initRedirect && !location.href.includes('privacy-and-terms')){
       this._initRedirect = false;
       this.router.navigateByUrl('');
       return;
