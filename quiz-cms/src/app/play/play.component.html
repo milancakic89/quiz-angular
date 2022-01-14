@@ -33,6 +33,17 @@
       </div>
     </div>
 
+        <div
+             class="wood-btn history locked"
+             (click)="closeModal('MUZIKA', 'ISTORIJA')"
+             [ngClass]="{ locked: !isCategoryAllowed('ISTORIJA') }"
+             data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
+          <div>
+            <span class="title">Muzika</span>
+            <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati 10 pitanja iz Istorije</sup>
+          </div>
+        </div>
+
     <div
       class="wood-btn movies"
       (click)="closeModal('FILMOVI I SERIJE', 'ISTORIJA')"
