@@ -70,7 +70,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public isCategoryAllowed(category: String) {
-    if (category === 'GEOGRAFIJA') {
+    if (category === 'GEOGRAFIJA' || this.config.isRoot) {
       return true;
     }
     const userContribution = this.userContributions.find((c: any) => c.category === category);
