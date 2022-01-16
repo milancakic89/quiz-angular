@@ -46,7 +46,6 @@ export class AppComponent implements OnInit{
   public minutesString = '00';
   public secondsString = '00';
   public successFeedback = true;
-  public testTime = new Date(Date.now() + 30000);
   public gameResults: GameData = {
     success: false,
     showModal: false,
@@ -113,7 +112,7 @@ export class AppComponent implements OnInit{
 
     this.autologin();
 
-    if(this._initRedirect){
+    if(this._initRedirect && !location.href.includes('privacy-and-terms')){
       this._initRedirect = false;
       this.router.navigateByUrl('');
       return;

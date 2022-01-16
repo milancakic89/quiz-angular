@@ -47,6 +47,10 @@ const routes: Routes = [
     loadChildren: () => import('./settings/settings.module').then(module => module.SettingsModule),
     canActivate: [AuthorizationGuard]
   },
+  {
+    path: 'privacy-and-terms',
+    loadChildren: () => import('./terms/terms.module').then(module => module.TermsModule)
+  },
   
   { path: '**', redirectTo: ''}
 ];
