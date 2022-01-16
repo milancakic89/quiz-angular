@@ -16,7 +16,50 @@ $headerHeight: 65px;
     align-items: center;
 
     h1 {
-        color: #fff;
+        width: 100%;
+        max-width: 400px;
+        height: 50px;
+        padding: 0;
+        margin: 0px 10px;
+        position: relative;
+
+        .image{
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+            background-image: url('../assets/images/new-theme/loading-bar.png');
+            z-index: 10;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .loading-bar{
+            height: 50%;
+            margin: 0;
+            padding: 0;
+            z-index: 5;
+            left: 17px;
+            transition: all .3s ease-out;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgb(252, 86, 9);
+            position: absolute;
+        }
+
+        .loading-text{
+            color: #fff;
+            font-size: 17px;
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            transform: translateX(-50%);
+        }
     }
 }
 
@@ -172,7 +215,7 @@ $headerHeight: 65px;
             height: 40px;
             border: 1px solid black;
             border-radius: 50%;
-            background-color: rgb(0, 52, 73);
+            background-size: cover;
         }
     }
 
@@ -407,14 +450,57 @@ $headerHeight: 65px;
         animation: arrow 1s ease-in-out infinite;
     }
 }
+.daily-reward-rulet{
+    opacity: 1;
+    transition: all .3s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 306px;
+    height: 340px;
+    left: 50%;
+    background-image: url('../assets/images/new-theme/question-board.png');
+    background-size: cover;
+    border: 3px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 1000;
+    backdrop-filter: drop-shadow(2px 4px 6px black);
+    top: 45%;
+    transform: translateX(-50%) translateY(-50%);
 
+    .title{
+        font-size: 28px;
+        font-weight: 700;
+        margin: 5px 0;
+    }
+
+    .reward-image{
+        font-size: 30px;
+        font-weight: 700;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        img{
+            margin-right: 15px;
+        }
+    }
+
+    .small-btn{
+        width: 90px;
+    }
+}
 .notification {
     position: absolute;
     right: 5px;
     border-radius: 8px;
     display: flex;
     padding: 10px;
-    top: 80px;
+    top: 2px;
     width: 250px;
     min-height: 90px;
     color: #fff;

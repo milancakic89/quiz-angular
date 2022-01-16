@@ -35,10 +35,12 @@ export class AppComponent implements OnInit{
   public spinner = false;
   public showLivesTimer = false;
   public lives_timer_delay = false;
+  public dailyModal = false;
   public lives: any = [];
   public showFeedback = false;
   public resetAvailable = false;
   public lives_interval: any = undefined;
+  public loadingPercent = 0;
   public minutes = 0;
   public seconds = 0;
   public minutesString = '00';
@@ -69,6 +71,7 @@ export class AppComponent implements OnInit{
 
     if(!this.user && !localStorage.getItem('access')){
         this.spinner = false;
+        this.loadingPercent = 10;
     }
 
     this.config.user.subscribe(user =>{
@@ -131,6 +134,10 @@ export class AppComponent implements OnInit{
     return `0${num}`;
   }
 
+  public openDailyReward(){
+    this.dailyModal = true;
+  }
+
   public calculateCountdown(){
       this.seconds--;
       if(this.seconds < 0){
@@ -156,11 +163,19 @@ export class AppComponent implements OnInit{
   public async autologin(){
     this.spinner = true;
     if(localStorage.getItem('access') && !this.config.logged){
+      setTimeout(()=>{
+        this.loadingPercent = 50;
+      },100)
       await this.config.attemptAutoLogin();
+      this.loadingPercent = 90;
+      setTimeout(()=>{
+        this.spinner = false;
+        this.router.navigateByUrl('/profile')
+      },300)
+     }else{
       this.spinner = false;
-      this.router.navigateByUrl('/profile')
      }
-     this.spinner = false;
+
   }
 
   
@@ -175,6 +190,7 @@ export class AppComponent implements OnInit{
     const { data, success} = await this.service.claimDailyReward();
     if(success){
       this.user = data;
+      this.dailyModal = false;
       this.resetAvailable = false;
     }
   }

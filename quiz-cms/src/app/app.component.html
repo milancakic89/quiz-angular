@@ -1,5 +1,9 @@
 <div class="spinner" *ngIf="spinner">
-    <h1>UCITAVA SE</h1>
+    <h1>
+        <p class="image"></p>
+        <p class="loading-bar" [ngStyle]="{'width': loadingPercent + '%'}"></p>
+        <p class="loading-text">Ucitava se</p>
+    </h1>
 </div>
 
 <div class="content" [ngClass]="{'expand': !isLogged}">
@@ -17,21 +21,27 @@
     </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
-            <a routerLink="/settings"></a>
+            <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
         <div class="right-info">
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
-                      (click)="claimDailyReward()"></span>
+                      (click)="resetAvailable && openDailyReward()"></span>
             </p>
             <p class="user-score"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>
             <p class="user-ticket"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
         </div>
     </div>
+    
         <div class="scrollable-area" [ngClass]="{'not-logged': !isLogged}">
             <div class="notification" *ngIf="showFeedback" [ngClass]="successFeedback ? 'success' : 'error'">
                 <span>{{ feedbackMessage }}</span>
+            </div>
+            <div class="daily-reward-rulet" *ngIf="dailyModal">
+                <p class="title">Dnevna nagrada</p>
+                <p class="reward-image"> <img src="../assets/images/ic_ticket.svg" alt=""> x 1</p>
+                <button class="wood-btn" (click)="claimDailyReward()">Ok</button>
             </div>
             <router-outlet></router-outlet>
         </div>
