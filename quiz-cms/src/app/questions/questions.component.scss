@@ -73,6 +73,15 @@
     }
 }
 
+.filter{
+    span{
+        background-color: $secondary-blue;
+        color: #fff;
+        padding: 3px 5px;
+    }
+}
+
+
 .table {
     background-color: rgb(31, 31, 31);
     border: 6px solid rgb(91, 53, 23);

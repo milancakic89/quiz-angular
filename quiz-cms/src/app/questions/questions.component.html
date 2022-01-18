@@ -19,6 +19,10 @@
             </div>
     </div>
     <p>Ukupno({{questions.length}})</p>
+    <p class="filter"><span (click)="load()">Sva </span>
+        <span (click)="filter('NA CEKANJU')">Na cekanju </span>
+        <span (click)="filter('ODOBRENO')">Odobreno</span>
+        <span (click)="filter('ODBIJENO')">Odobijeno</span></p>
     <div class="table questions-table">
         <div class="thead">
             <div class="tr">
