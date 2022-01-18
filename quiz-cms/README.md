@@ -1,4 +1,4 @@
-# QuizCms
+# Kvizcina
 
 Serbian question quiz with question expanding.
 
