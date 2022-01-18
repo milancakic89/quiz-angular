@@ -1,6 +1,6 @@
 # Kvizcina
 
-Serbian question quiz with question expanding.
+Serbian question quiz with questions expanding.
 
 ## Gameplay
 
