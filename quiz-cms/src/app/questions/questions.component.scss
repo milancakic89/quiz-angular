@@ -73,11 +73,20 @@
     }
 }
 
-.filter{
-    span{
+.filter {
+    display: inline-flex;
+    width: 100%;
+    max-width: 420px;
+    justify-content: space-between;
+
+    span {
         background-color: $secondary-blue;
         color: #fff;
         padding: 3px 5px;
+
+        &.active {
+            background-color: $secondary-blue;
+        }
     }
 }
 

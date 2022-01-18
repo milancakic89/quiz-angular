@@ -22,6 +22,7 @@ export class QuestionsComponent implements OnInit {
   public user: any;
   public updateQuestion = '';
   public showUpdateButton = true;
+  public filterStatus = '';
 
   public filters = [
     { title: 'SVE', value: '' },
@@ -55,6 +56,7 @@ export class QuestionsComponent implements OnInit {
   public async filter(status: QuestionStatus){
     const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
     if (success) {
+      this.filterStatus = status;
       this.questions = data.filter(item => item.status === status);
       localStorage.setItem('questions', JSON.stringify(data))
     }
