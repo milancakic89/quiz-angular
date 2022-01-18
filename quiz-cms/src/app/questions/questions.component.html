@@ -43,9 +43,9 @@
                 </div>
                 <div data-label="Opcije" class="td w-20 th-last" *ngIf="!isRoot">
                     <span class="publish" [ngClass]="{
-                                        'denied': question.status === 'ODOBRENO',
-                                        'approved': question.status === 'NA CEKANJU'}"> {{
-                        question.status}} </span>
+                                        'approved': question.status === 'ODOBRENO',
+                                        'denied': question.status === 'ODBIJENO',
+                                        'pending': question.status === 'NA CEKANJU'}">{{question.status}}</span>
                 </div>
                 <div class="question-details" *ngIf="question.opened">
                     <p >Pitanje: {{ question.question }}</p>
