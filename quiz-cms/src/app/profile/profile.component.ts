@@ -4,6 +4,7 @@ import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
 import { PlayService } from '../play/play.service';
 import { Configuration, User } from '../shared/config.service';
+import { SocketService } from '../socket-service';
 import { ProfileService } from './profile.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(private config: Configuration,
               private router: Router,
               private appService: AppService,
+              private socketService: SocketService,
               private feedbackService: FeedbackMessageService,
               private playService: PlayService,
               private service: ProfileService) { }
@@ -72,6 +74,15 @@ export class ProfileComponent implements OnInit {
       if (this.user.lives === 0) {
         this.onResetLives();
       }
+      this.testSocket();
+
+    }
+  }
+
+  public async testSocket() {
+    const { data, error } = await this.socketService.testConnection()
+    if (!error) {
+      console.log(data)
     }
   }
 
