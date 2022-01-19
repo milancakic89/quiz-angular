@@ -8,6 +8,7 @@ import { Noth, NotificationService } from './shared/notification.service';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { ProfileService } from './profile/profile.service';
+import { SocketService } from './socket-service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit{
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
               private service: AppService,
+              private socketService: SocketService,
               private profileService: ProfileService,
               private notificationService: NotificationService,
               private feedbackService: FeedbackMessageService,
@@ -57,7 +59,8 @@ export class AppComponent implements OnInit{
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
     })
-
+    console.log('testing')
+    this.socketService.testConnection();
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
       this.showFeedback = true;

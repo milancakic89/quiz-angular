@@ -29,7 +29,7 @@
     >
       <div>
         <span class="title">Istorija</span>
-        <sup *ngIf="!isCategoryAllowed('GEOGRAFIJA')">Dodati 10 pitanja iz Geografije</sup>
+        <sup *ngIf="!isCategoryAllowed('GEOGRAFIJA')">Dodati {{ questionsLeftToOpen('GEOGRAFIJA') }} pitanja iz Geografije</sup>
       </div>
     </div>
 
@@ -40,19 +40,19 @@
              data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
           <div>
             <span class="title">Muzika</span>
-            <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati 10 pitanja iz Istorije</sup>
+            <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati {{ questionsLeftToOpen('ISTORIJA') }} pitanja iz Istorije</sup>
           </div>
         </div>
 
     <div
       class="wood-btn movies"
-      (click)="closeModal('FILMOVI I SERIJE', 'ISTORIJA')"
-      [ngClass]="{ locked: !isCategoryAllowed('ISTORIJA') }"
+      (click)="closeModal('FILMOVI I SERIJE', 'MUZIKA')"
+      [ngClass]="{ locked: !isCategoryAllowed('MUZIKA') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije"
     >
       <div>
         <span class="title">Filmovi i serije</span>
-        <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati 10 pitanja iz Istorije</sup>
+        <sup *ngIf="!isCategoryAllowed('MUZIKA')">Dodati {{ questionsLeftToOpen('MUZIKA') }} pitanja iz Muzike</sup>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
     >
       <div>
         <span class="title">Poznate licnosti</span>
-        <sup *ngIf="!isCategoryAllowed('FILMOVI I SERIJE')">Dodati 10 pitanja iz Filmova i serija</sup>
+        <sup *ngIf="!isCategoryAllowed('FILMOVI I SERIJE')">Dodati {{ questionsLeftToOpen('FILMOVI I SERIJE') }} pitanja iz Filmova i serija</sup>
       </div>
     </div>
     <div
@@ -75,7 +75,7 @@
     >
       <div>
         <span class="title">Sport</span>
-        <sup *ngIf="!isCategoryAllowed('POZNATE LICNOSTI')">Dodati 10 pitanja iz Poznatih licnosti"</sup>
+        <sup *ngIf="!isCategoryAllowed('POZNATE LICNOSTI')">Dodati {{ questionsLeftToOpen('POZNATE LICNOSTI') }} pitanja iz Poznatih licnosti"</sup>
       </div>
     </div>
 
@@ -87,7 +87,7 @@
     >
       <div>
         <span class="title long-text">Pitanja drugih takmicara</span>
-        <sup *ngIf="!isCategoryAllowed('SPORT')">Dodati 10 pitanja iz Sporta</sup>
+        <sup *ngIf="!isCategoryAllowed('SPORT')">Dodati {{ questionsLeftToOpen('SPORT') }} pitanja iz Sporta</sup>
       </div>
     </div>
   </div>

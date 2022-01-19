@@ -10,6 +10,7 @@
     font-size: 13px;
     min-width: 90px;
     text-align: center;
+    color: #fff;
 }
 
 .answer-text {
@@ -20,8 +21,8 @@
 
 
 .approved {
-    background-color: transparent;
-    color: $secondary-blue;
+    background-color: $approved-green;
+
 
     @media screen and (min-width: 1060px) {
         background-color: $secondary-blue;
@@ -59,7 +60,7 @@
         width: 100%;
     }
 
-    p{
+    p {
         font-weight: 700;
     }
 }
@@ -72,13 +73,32 @@
     }
 }
 
+.filter {
+    display: inline-flex;
+    padding: 0px 3px;
+    width: 100%;
+    max-width: 420px;
+    justify-content: space-between;
+
+    span {
+        background-color: $secondary-blue;
+        color: #fff;
+        padding: 3px 5px;
+
+        &.active {
+            background-color: $primary-blue;
+        }
+    }
+}
+
+
 .table {
     background-color: rgb(31, 31, 31);
     border: 6px solid rgb(91, 53, 23);
     border-radius: 8px;
     margin-top: 5px;
     width: 95%;
-    height: calc(100vh - 170px) !important;
+    height: calc(100vh - 210px) !important;
 
     .tbody {
         height: auto;

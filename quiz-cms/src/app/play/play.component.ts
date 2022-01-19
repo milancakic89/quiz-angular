@@ -75,9 +75,22 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     }
     const userContribution = this.userContributions.find((c: any) => c.category === category);
     if (userContribution) {
-      return userContribution.questions_added >= 10;
+      return userContribution.questions_added >= 5;
     }
     return false;
+  }
+
+  public questionsLeftToOpen(category: String): number{
+    const userContribution = this.userContributions.find((c: any) => c.category === category);
+    if (userContribution) {
+      const toAdd = 5 - userContribution.questions_added;
+      if(toAdd > 0){
+        return toAdd;
+      }
+      return 0;
+
+    }
+    return 5;
   }
 
   ngOnDestroy() {

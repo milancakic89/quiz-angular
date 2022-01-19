@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Configuration, User } from '../shared/config.service';
 import { NotificationService } from '../shared/notification.service';
 import { QuestionService } from './questions.service';
-import { Question } from './types';
+import { Category, Question, QuestionStatus } from './types';
 
 
 @Component({
@@ -18,10 +18,11 @@ export class QuestionsComponent implements OnInit {
 
   get isRoot() { return this.config.isRoot }
 
-  public questions: Question[] = []
+  public questions: Question[] = [];
   public user: any;
   public updateQuestion = '';
   public showUpdateButton = true;
+  public filterStatus = '';
 
   public filters = [
     { title: 'SVE', value: '' },
@@ -48,6 +49,16 @@ export class QuestionsComponent implements OnInit {
     const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
     if (success) {
       this.questions = data;
+      this.filterStatus = 'SVA';
+      localStorage.setItem('questions', JSON.stringify(data))
+    }
+  }
+
+  public async filter(status: QuestionStatus){
+    const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
+    if (success) {
+      this.filterStatus = status;
+      this.questions = data.filter(item => item.status === status);
       localStorage.setItem('questions', JSON.stringify(data))
     }
   }

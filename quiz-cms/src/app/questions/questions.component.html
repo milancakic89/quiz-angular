@@ -18,7 +18,11 @@
                 </ng-select>
             </div>
     </div>
-
+    <p>Ukupno({{questions.length}})</p>
+    <p class="filter"><span [ngClass]="filterStatus === 'SVA' ? 'active': ''" (click)="load()">Sva </span>
+        <span [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
+        <span [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span>
+        <span [ngClass]="filterStatus === 'ODBIJENO' ? 'active' : ''" (click)="filter('ODBIJENO')">Odobijeno</span></p>
     <div class="table questions-table">
         <div class="thead">
             <div class="tr">
@@ -32,7 +36,7 @@
             <div class="tr" *ngFor="let question of questions; let i = index">
                 <div data-label="Pitanje" class="td w-40" (click)="question.opened = !question.opened">{{ question.question }}</div>
                 <div data-label="Odgovor" class="td w-20 answer-text">{{ question.correct_text}}</div>
-                <div data-label="Opcije" class="td w-20 th-last">
+                <div data-label="Opcije" class="td w-20 th-last" *ngIf="isRoot">
                     <span class="publish" [ngClass]="{
                         'denied': question.status === 'ODOBRENO',
                         'approved': question.status === 'NA CEKANJU'}" 
@@ -40,6 +44,12 @@
                              {{ question.status === 'NA CEKANJU' ? 'PRIHVATI' : 'ODBIJ' }}
                     </span>
                     <a class="delete-link" (click)="onDeleteQuesion(question._id)">obrisi</a>
+                </div>
+                <div data-label="Opcije" class="td w-20 th-last" *ngIf="!isRoot">
+                    <span class="publish" [ngClass]="{
+                                        'approved': question.status === 'ODOBRENO',
+                                        'denied': question.status === 'ODBIJENO',
+                                        'pending': question.status === 'NA CEKANJU'}">{{question.status}}</span>
                 </div>
                 <div class="question-details" *ngIf="question.opened">
                     <p >Pitanje: {{ question.question }}</p>
