@@ -98,7 +98,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
   public async getQuestion() {
     if (this.questionCount >= 15 || !this.attempts.length) {
-      this.gameOver('End of game');
+      return this.gameOver('End of game');
     }
     const { data, success } = await this.questionService.getSingleQuestion(this.playCategory)
     if (success) {
@@ -140,7 +140,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       if (this.attempts.length) {
         this.getQuestion();
       } else {
-        this.gameOver('You have missed 3 times');
+       return this.gameOver('You have missed 3 times');
       }
 
     }, this.nextQuestionInterval)
@@ -202,6 +202,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public gameOver(message?: string) {
     this.stopTime();
     let points = 0;
+    this.playService.allowBackButton = true;
     if (this.score > 4 && this.score <= 7) {
       points = 1;
     }
@@ -225,8 +226,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       results: points,
       showModal: true
     });
-
-    this.playService.allowBackButton = true;
     this.score = 0;
     this.attempts = [1, 1, 1]
     this.modal.startGame.next(false)
