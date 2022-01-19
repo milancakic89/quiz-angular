@@ -19,7 +19,7 @@
             </div>
     </div>
     <p>Ukupno({{questions.length}})</p>
-    <p class="filter"><span (click)="load()">Sva </span>
+    <p class="filter"><span [ngClass]="filterStatus === 'SVA' ? 'active': ''" (click)="load()">Sva </span>
         <span [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
         <span [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span>
         <span [ngClass]="filterStatus === 'ODBIJENO' ? 'active' : ''" (click)="filter('ODBIJENO')">Odobijeno</span></p>

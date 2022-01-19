@@ -49,6 +49,7 @@ export class QuestionsComponent implements OnInit {
     const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
     if (success) {
       this.questions = data;
+      this.filterStatus = 'SVA';
       localStorage.setItem('questions', JSON.stringify(data))
     }
   }

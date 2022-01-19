@@ -75,6 +75,7 @@
 
 .filter {
     display: inline-flex;
+    padding: 0px 3px;
     width: 100%;
     max-width: 420px;
     justify-content: space-between;
@@ -85,7 +86,7 @@
         padding: 3px 5px;
 
         &.active {
-            background-color: $secondary-blue;
+            background-color: $primary-blue;
         }
     }
 }
@@ -97,7 +98,7 @@
     border-radius: 8px;
     margin-top: 5px;
     width: 95%;
-    height: calc(100vh - 170px) !important;
+    height: calc(100vh - 210px) !important;
 
     .tbody {
         height: auto;
