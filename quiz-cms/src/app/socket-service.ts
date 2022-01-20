@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
-import { io, Socket } from 'socket.io-client';
+import { Observable } from 'rxjs';
+import * as io from 'socket.io-client';
 import { AppService } from './app.service';
 import { ApiService } from './shared/api.servise';
 
 @Injectable({providedIn: 'root'})
 export class SocketService{
-    constructor(private service: ApiService){
-        this.socket = io('http://localhost:3000');
-        this.listen();
+    public socket: any;
+
+    constructor(private service: ApiService){    
+        this.socket = io.connect('ws://localhost:3000');
     }
+
+   
 
     public testConnection(){
-        return this.service.get('/somelink', '')
+        this.emit('message', 'this is angular message');
+        this.listen('message')
+        // return this.service.post('/enter-room',{}, '')
     }
 
-    public listen(){
-        this.socket.on('test', data =>{
-            console.log(data)
-        })
+    public listen(eventName?: string){
+       this.socket.on(eventName, (data: any) =>{
+           console.log(data)
+       })
     }
 
-    private socket: Socket;
+    public emit(eventName: string, data: any){
+        this.socket.emit(eventName, data)
+    }
+
+    public testEmit(){
+        this.emit('message', 'some message')
+    }
 }
