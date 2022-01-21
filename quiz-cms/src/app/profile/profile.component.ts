@@ -56,7 +56,6 @@ export class ProfileComponent implements OnInit {
   public async load(){
     const { data, success } = await this.config.refreshUser()
     if(success){
-      this.testSocket();
       this.user = data;
       this.config.user.next(data);
       if(Date.now() >= data.daily_price){
@@ -80,9 +79,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public testSocket() {
-    this.socketService.testConnection() 
-  }
 
   public hideAchievementNotification(){
     this.achievementNotification = false;

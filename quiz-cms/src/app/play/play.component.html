@@ -11,12 +11,10 @@
     </div>
   <div
     class="dropdown-categories"
-    [ngClass]="{ 'close-categories': playCategory }"
-  >
-    <div
-      class="wood-btn geography"
-      (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')"
-    >
+    [ngClass]="{ 'close-categories': playCategory }">
+    <a class="wood-btn tournament" routerLink="/tournament">Turnir</a>
+    <div class="wood-btn geography"
+      (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')">
       <div>
         <span class="title">Geografija</span>
       </div>

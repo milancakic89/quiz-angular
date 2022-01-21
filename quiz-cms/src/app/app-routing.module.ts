@@ -42,6 +42,10 @@ const routes: Routes = [
     loadChildren: () => import('./achievements/achievements.module').then(module => module.AchievementsModule),
     canActivate: [AuthorizationGuard]
   },
+  { path: 'tournament', 
+    loadChildren: () => import('./tournament/tournament.module').then(module => module.TournamentModule),
+    canActivate: [AuthorizationGuard]
+  },
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(module => module.SettingsModule),

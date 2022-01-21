@@ -242,7 +242,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.score = 0;
     this.attempts = [1, 1, 1]
     this.modal.startGame.next(false)
-
   }
 
   public closeModal(category: string, allowedCategory: string) {

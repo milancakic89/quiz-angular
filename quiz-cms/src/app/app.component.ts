@@ -59,8 +59,6 @@ export class AppComponent implements OnInit{
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
     })
-    console.log('testing')
-    this.socketService.testConnection();
     this.notificationService.notification.subscribe((noth: Noth) =>{
       this.successFeedback = noth.success;
       this.showFeedback = true;

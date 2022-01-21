@@ -1,0 +1,10 @@
+<div class="tournaments">
+    <div class="navigation">
+        <a class=button-back routerLink="/play"></a>
+    </div>
+    <div class="dropdown-menu" [ngClass]="{'close': clicked}">
+            <button (click)="createRoom()" class="wood-btn">Kreiraj Turnir</button>
+            <button (click)="onClick('/join')" class="wood-btn">Udji na turnir</button>
+            <button class="wood-btn">Globalni turniri</button>
+    </div>
+</div>
