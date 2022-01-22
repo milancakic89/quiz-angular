@@ -1,0 +1,14 @@
+<div class="room">
+    <div class="navigation">
+        <a class=button-back routerLink="/play"></a>
+    </div>
+    <h5>Tournament code: {{ room }}</h5>
+    <div class="table" *ngIf="tableReady">
+        <div class="user" *ngFor="let user of roomUsers">
+            <div class="image" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}"></div>
+            <div class="user-details">
+                <p>{{ user.name }}</p>
+            </div>
+        </div>
+    </div>
+</div>

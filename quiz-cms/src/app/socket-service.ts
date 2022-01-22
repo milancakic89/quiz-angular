@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import * as io from 'socket.io-client';
 
 export type EventType = 'CREATE-ROOM' |
-'JOIN-ROOM' | 'ROOM-CREATED';
+'JOIN-ROOM' | 'ROOM-CREATED' | 'LEAVE-ROOM';
 
 export interface Room{
     roomName?: string;
+    success?: boolean;
     user_id: string;
 }
 
@@ -16,27 +18,34 @@ export class SocketService{
 
     public socketData = new BehaviorSubject<any>(null);
 
-    constructor(){
+    constructor(private router: Router){
         this.socket = io.connect('ws://localhost:3000');
         this.setup();
     }
     
     public setup(){
-        this.socket.on('CREATE-ROOM', (data: any) =>{
-            console.log('create room')
+        this.socket.on('CREATE-ROOM', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('JOIN-ROOM', (data: any) =>{
-            console.log('join room')
+        this.socket.on('JOIN-ROOM', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('ROOM-CREATED', (data: any) =>{
-            console.log('room is created', data)
+        this.socket.on('ROOM-CREATED', (data: Room) =>{
+            this.socketData.next(data)
+        });
+        this.socket.on('JOINED-ROOM', (data: Room) =>{
+            this.socketData.next(data)
+        });
+        this.socket.on('ROOM-DONT-EXIST', (data: Room) =>{
+            this.socketData.next(data)
+        });
+        this.socket.on('LEAVED-ROOM', (data: Room) =>{
+            console.log('leaving room', data)
             this.socketData.next(data)
         });
     }
 
-    public emit(eventName: EventType, data: Room){
+    public emit(eventName: EventType, data: any){
         this.socket.emit(eventName, data)
     }
 }

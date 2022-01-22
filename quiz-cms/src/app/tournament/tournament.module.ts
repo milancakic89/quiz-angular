@@ -4,13 +4,15 @@ import { TournamentComponent } from './tournament.component';
 import { TournamentRoutingModule } from './tournament-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
+import { RoomComponent } from './room/room.component';
 
 
 
 @NgModule({
   declarations: [
     TournamentComponent,
-    DashboardComponent
+    DashboardComponent,
+    RoomComponent
   ],
   imports: [
     TournamentRoutingModule,
