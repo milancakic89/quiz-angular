@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 
 export type EventType = 'CREATE-ROOM' |
@@ -19,7 +20,7 @@ export class SocketService{
     public socketData = new BehaviorSubject<any>(null);
 
     constructor(private router: Router){
-        this.socket = io.connect('ws://localhost:3000');
+        this.socket = io.connect(environment.socketUrl);
         this.setup();
     }
     
