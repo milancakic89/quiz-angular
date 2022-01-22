@@ -12,18 +12,18 @@
         <div class="table ranking-table">
             <div class="thead">
                 <div class="tr">
-                    <div class="th w-10">#</div>
+                    <div class="th w-20">#</div>
                     <div class="th w-40">Ime</div>
                     <div class="th w-20">Rezultat</div>
-                    <div class="th w-20">Odigrao/la</div>
                 </div>
             </div>
             <div class="tbody">
-                <div class="tr" *ngFor="let player of rankedPlayers; let i = index">
-                    <div class="td w-10">{{ i }}</div>
-                    <div class="td w-40">{{ player.name }}</div>
-                    <div class="td w-20">{{ player.score }}</div>
-                    <div class="td w-20">in development</div>
+                <div class="tr" *ngFor="let player of rankedPlayers; let i = index;">
+                    <div class="th w-20">
+                        <span class="avatar" [ngStyle]="{'background-image': 'url(' + player.avatar_url + ')'}"></span>
+                    </div>
+                    <div class="td w-40"><span>{{ player.name }}</span></div>
+                    <div class="td w-20"><span  [ngClass]="{'first': i === 0}">{{ player.score }}</span></div>
                 </div>
             </div>
         </div>

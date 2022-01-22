@@ -6,29 +6,15 @@
     <div class="form-row">
         <div class="form-row-input">
             <label>Ime</label>
-            <input name="name" [(ngModel)]="settings.firstname"/>
-        </div>
-        <div class="form-row-input">
-            <label>Prezime</label>
-            <input name="lastname" [(ngModel)]="settings.lastname"/>
+            <input name="name" required [(ngModel)]="settings.name"/>
         </div>
     </div>
     <div class="form-row">
         <div class="form-row-input">
-            <label>Email</label>
-            <input name="email" [(ngModel)]="settings.email"/>
-        </div>
-        <div class="form-row-input">
-            <label>Lozinka</label>
-            <input name="password" type="password" [(ngModel)]="settings.password"/>
+            <label class="image-upload-label" for="image">Promeni sliku</label>
+            <input #upload id="image" type="file" (ngModelChange)="onImageChange()"  name="image" [(ngModel)]="selectedImage" />
         </div>
     </div>
-        <div class="form-row">
-            <div class="form-row-input">
-                <label class="image-upload-label" for="image">Promeni sliku</label>
-                <input id="image" type="file" name="email" [(ngModel)]="settings.imageUrl" />
-            </div>
-        </div>
     <button class="button-submit" [disabled]="settingsForm.invalid">Sacuvaj</button>
     </form>
 </div>

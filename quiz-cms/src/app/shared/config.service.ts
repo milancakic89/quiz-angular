@@ -5,8 +5,8 @@ import { ApiResponse, ApiService } from "./api.servise";
 
 export interface User{
   _id?: number;
-  avatar_url?: string;
-  name?: string;
+  avatar_url: string;
+  name: string;
   email: string;
   title: string;
   lives: number;

@@ -214,9 +214,10 @@ $headerHeight: 65px;
             width: 40px;
             height: 40px;
             background-image: url("https://firebasestorage.googleapis.com/v0/b/kviz-live.appspot.com/o/1642193033985png-transparent-computer-icons-avatar-user-profile-avatar-heroes-rectangle-black.png?alt=media");
-            border: 1px solid black;
+            border: 1px solid rgb(61, 61, 61);
             background-size: cover;
-            border-radius: 50%;
+            border-radius: 8px;
+            background-color: brown;
             background-size: cover;
         }
     }

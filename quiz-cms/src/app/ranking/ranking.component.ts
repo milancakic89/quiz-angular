@@ -56,6 +56,10 @@ export class RankingComponent implements OnInit {
     }
   }
 
+  public trackByFn(i: number){
+    return i;
+  }
+
   public onSelectFilter(filter: Filter){
     this.filters.forEach(f => f.selected = false);
     filter.selected = true;

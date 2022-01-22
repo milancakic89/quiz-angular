@@ -1,6 +1,6 @@
 .rankings{
     width: 100%;
-    display: flex;
+    height: calc(100vh - 60px);
     flex-direction: column;
     align-items: flex-start;
     .filters{
@@ -35,5 +35,58 @@
 }
 
 .ranking-table{
-    height: calc(100vh - 140px);
+    height: calc(100vh - 160px);
+
+    .thead{
+        .tr{
+            @media screen and (min-width: 350px) {
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+            }
+        }
+    }
+
+    .tbody{
+        padding-bottom: 100px;
+
+        .tr{
+            padding: 3px;
+
+            .avatar{
+                width: 45px;
+                height: 45px;
+                background-size: cover;
+                border-radius: 8px;
+            }
+
+            .th.w-20:first-child{
+                width: auto;
+                min-width: 65px;
+            }
+            .td:last-child{
+                padding-right: 25px;
+                justify-content: flex-start;
+
+                span{
+                    font-size: 20px;
+                    color: rgb(26, 26, 26);
+                    font-weight: 400;
+                    &.first{
+                        font-size: 23px;
+                        font-weight: 900;
+                        color: #000;
+                    }
+                }
+                @media screen and (min-width: 300px) {
+                    justify-content: flex-end;
+                }
+            }
+            @media screen and (min-width: 300px) {
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+            }
+        }
+    }
 }
