@@ -221,7 +221,6 @@ export class AppComponent implements OnInit{
 
   public animateBorderOnNumbers(arr: number[]){
     let result = arr.includes(this.ticketAnimationCounter);
-    console.log(result)
     return result;
   }
 
