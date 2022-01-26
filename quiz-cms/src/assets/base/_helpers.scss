@@ -441,7 +441,7 @@ ng-select {
 .stars-wrapper{
     width: 100%;
     height: 30px;
-    margin: 10px 0;
+    margin: 50px 0 20px 0;
     padding: 0;
     z-index: 10;
     position: relative;
@@ -462,8 +462,8 @@ ng-select {
     }
 
     .question-counter{
-        width: 50px;
-        height: 50px;
+        width: 47px;
+        height: 47px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -476,7 +476,7 @@ ng-select {
         font-weight: 900;
         border-radius: 50%;
         position: absolute;
-        top: -70px;
+        top: -95px;
         left: 50%;
         transform: translateX(-50%);
     }

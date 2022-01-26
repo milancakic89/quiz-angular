@@ -449,10 +449,10 @@
 #countdown {
     position: relative;
     margin: auto;
-    margin-top: -74px;
+    margin-top: -68px;
     height: 50px;
     width: 50px;
-    margin-bottom: -5px;
+    margin-bottom: -18px;
     transform: scale(1.5);
     text-align: center;
 }
@@ -476,7 +476,8 @@ svg circle {
     stroke-dasharray: 113px;
     stroke-dashoffset: 113px;
     stroke-linecap: round;
-    stroke-width: 3px;
+    fill: none;
+    stroke-width: 5px;
     stroke: rgb(255, 174, 0);
     animation: countdown 20s linear;
 }
