@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { User } from '../shared/config.service';
 import { RankingService } from './ranking-service';
 
@@ -52,7 +53,16 @@ export class RankingComponent implements OnInit {
   public async load(){
     const { data, success } = await this.rankingService.getRankingList(100);
     if(success){
-      this.rankedPlayers = data;
+      this.rankedPlayers = data.sort((a,b) => {
+        if(a.score > b.score){
+          return -1;
+        }
+        else if(b.score > a.score){
+          return 1;
+        }else{
+          return 0
+        }
+      });
     }
   }
 

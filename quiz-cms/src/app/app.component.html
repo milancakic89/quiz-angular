@@ -27,7 +27,7 @@
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
-                      (click)="resetAvailable && openDailyReward()"></span>
+                      (click)="openDailyReward()"></span>
             </p>
             <p class="user-score"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>
             <p class="user-ticket"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
