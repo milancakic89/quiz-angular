@@ -162,16 +162,16 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public updateProgressBar() {
     switch (this.score) {
       case 0:
-        this.progressBarPercentage = 6;
+        this.progressBarPercentage = 2;
         break;
       case 1:
-        this.progressBarPercentage = 6;
+        this.progressBarPercentage = 3;
         break;
       case 2:
-        this.progressBarPercentage = 10;
+        this.progressBarPercentage = 4;
         break;
       case 3:
-        this.progressBarPercentage = 14;
+        this.progressBarPercentage = 5;
         break;
       case 4:
         this.progressBarPercentage = 17;
@@ -231,7 +231,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this.score > 14) {
       points = 5;
     }
-    if (this.score < 2) {
+    if (this.score <= 4 ) {
       this.reduceOneLife();
     }
     this.modal.gameResults.next({

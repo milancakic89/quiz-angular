@@ -426,6 +426,7 @@
         &.hide {
             opacity: 0;
             width: 0%;
+            transform: scale(1.2);
         }
     }
 }
