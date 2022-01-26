@@ -27,7 +27,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
   get userContributions() { return this.config.user.getValue().categories as unknown as any }
 
-  public time = 15;
+  public time = 150;
   public score = 0;
 
   public questionCount = 0;
@@ -103,7 +103,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.modal.startGame.next(true)
     this.playService.allowBackButton = false;
     this.score = 0;
-    this.time = 15;
+    this.time = 20;
     this.progressBarPercentage = 0;
     this.questionCount = 0;
     this.getQuestion();
@@ -122,7 +122,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       this.questionCount++;
       this.selectedLetter = '';
       this.questionSelected = false;
-      this.time = 15;
+      this.time = 20;
       this.initTime();
     } else {
       clearInterval(this.timeInterval);
