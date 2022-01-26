@@ -47,6 +47,8 @@ export class AppComponent implements OnInit{
   public seconds = 0;
   public minutesString = '00';
   public secondsString = '00';
+  public ticketReward = 0;
+  public ticketAnimationCounter = 0;
   public successFeedback = true;
   public gameResults: GameData = {
     success: false,
@@ -136,6 +138,7 @@ export class AppComponent implements OnInit{
 
   public openDailyReward(){
     this.dailyModal = true;
+    this.claimDailyReward();
   }
 
   public calculateCountdown(){
@@ -187,12 +190,39 @@ export class AppComponent implements OnInit{
   }
 
   public async claimDailyReward(){
-    const { data, success} = await this.service.claimDailyReward();
+    const { data, success, tickets } = await this.service.claimDailyReward();
     if(success){
-      this.user = data;
-      this.dailyModal = false;
-      this.resetAvailable = false;
+      this.animateReward(tickets, data);
     }
+  }
+
+  public closeDailyReward(){
+    this.dailyModal = false;
+    this.resetAvailable = false;
+  }
+
+  public animateReward(tickets: number, user: User){
+    this.ticketAnimationCounter = 0;
+    this.ticketReward = 0;
+    const animate = () =>{
+      if(this.ticketAnimationCounter >= 20){
+        this.ticketReward = tickets;
+        this.user = user;
+      }else{
+        setTimeout(()=>{
+          this.ticketAnimationCounter++;
+          animate();
+        }, 150)
+      }
+    }
+
+    animate();
+  }
+
+  public animateBorderOnNumbers(arr: number[]){
+    let result = arr.includes(this.ticketAnimationCounter);
+    console.log(result)
+    return result;
   }
 
   public onGameFinish(){

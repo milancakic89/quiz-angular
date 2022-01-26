@@ -287,14 +287,14 @@ $headerHeight: 65px;
                 filter: grayscale(1);
 
                 &:hover {
-                    transform: scale(1);
+                     transform: scale(1);
                 }
             }
         }
 
         .user-chest {
             position: relative;
-
+           
             &:hover {
                 transform: scale(1);
             }
@@ -313,6 +313,7 @@ $headerHeight: 65px;
                 position: relative;
                 margin-right: 0px;
                 animation: animate-icon 2s linear infinite;
+              
 
                 @media screen and (min-width: 768px) {
                     width: 30px;
@@ -338,24 +339,39 @@ $headerHeight: 65px;
 
         @keyframes animate-icon {
             0% {
-                transform: translateY(-3px) rotate(0deg);
+                transform: scale(1) rotateY(0deg);
+            }
+            10%{
+                transform: scale(1.1) rotate(15deg);
+            }
+            20%{
+                transform: scale(1.2) rotate(30deg);
+            }
+            30%{
+                transform: scale(1.3) rotate(15deg);
+            }
+            40%{
+                transform: scale(1.4) rotate(0deg);
+            }
+            50%{
+                transform: scale(1.5) rotate(-15deg);
+            }
+            60%{
+                transform: scale(1.5) rotate(-30deg);
+            }
+            70%{
+                transform: scale(1.5) rotate(-15deg);
+            }
+            80%{
+                transform: scale(1.5) rotate(0deg);
+            }
+            90%{
+                transform: scale(1.2) rotate(0deg);
+            }
+            100%{
+                transform: scale(1.1) rotate(0deg);
             }
 
-            25% {
-                transform: translateY(0px) rotate(-15deg);
-            }
-
-            50% {
-                transform: translateY(+3px) rotate(-20deg);
-            }
-
-            75% {
-                transform: translateY(0px) rotate(-15deg);
-            }
-
-            100% {
-                transform: translateY(-3px) rotate(0deg);
-            }
         }
 
         .user-ticket {
@@ -398,6 +414,8 @@ $headerHeight: 65px;
         height: 100vh !important;
     }
 }
+
+
 
 .logout-button,
 .logout-button a {
@@ -459,8 +477,7 @@ $headerHeight: 65px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 306px;
+    width: 298px;
     height: 340px;
     left: 50%;
     background-image: url('../assets/images/new-theme/question-board.png');
@@ -497,6 +514,43 @@ $headerHeight: 65px;
         width: 90px;
     }
 }
+.daily-items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .reward-item{
+        font-weight: 700;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 87px;
+        height: 87px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 4px solid rgb(53, 24, 0);
+        background-color: rgba(105, 47, 0, 0.6);
+        color: rgb(7, 7, 7);
+        filter: grayscale(0.5);
+
+        &.bordered{
+            border: 4px solid $secondary-blue;
+            filter: grayscale(0);
+           
+        }
+
+        img{
+            width: 40px;
+    margin-right: 5px;
+    height: auto;
+        }
+
+    }
+}
+
+
 .notification {
     position: absolute;
     right: 5px;

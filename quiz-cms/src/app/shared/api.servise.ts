@@ -22,12 +22,12 @@ export class ApiService{
 
 
     public async get<T>(url: string, errorMessageFeedback: string){
-        const { data, success, error } = await this.mapToResponse<T>(this.http.get<any>(this.localApi + url, {
+        const { data, success, error, tickets } = await this.mapToResponse<T>(this.http.get<any>(this.localApi + url, {
             headers: {
                 Authorization: 'Bearer ' + getToken()
             }
         }).toPromise() as any, errorMessageFeedback)
-        return { data, success, error };
+        return { data, success, error, tickets };
     }
 
     public async post<T>(url: string, body: any, errorMessageFeedback: string) {
@@ -56,21 +56,23 @@ export class ApiService{
         return { data, success, error};
     }
 
-    public mapToResponse<T>(promise: Promise<ApiResponse<T>>, errorMessageFeedback: string): Promise<{data: T, success: boolean, error: string, token: string}>{
+    public mapToResponse<T>(promise: Promise<ApiResponse<T>>, errorMessageFeedback: string): Promise<{data: T, success: boolean, error: string, token: string, tickets: number}>{
         return promise.then( (data: any) =>{
             if(data.success){
                 return {
                     data: data.data as any as T,
                     success: data.success,
                     error: data.error,
-                    token: data.token
+                    token: data.token,
+                    tickets: data.tickets
                 }
             }
             return {
                 data: undefined as any,
                 success: false,
                 error: errorMessageFeedback,
-                token: ''
+                token: '',
+                tickets: 0
             }
            
         })
@@ -80,7 +82,8 @@ export class ApiService{
                 data: undefined as any,
                 success: false,
                 error: errorMessageFeedback,
-                token: ''
+                token: '',
+                tickets: 0
             }
             })
     }
