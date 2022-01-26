@@ -98,13 +98,20 @@
     <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new" *ngIf="question.type === 'PICTURE'">
      
   </div>
-    <div id="countdown" *ngIf="time > 0">
-      <div id="countdown-number">{{ time }}</div>
-      <svg>
-        <circle r="18" cx="25" cy="25"></circle>
-      </svg>
-    </div>
+  <div class="timer-wrap">
+        <div id="countdown" *ngIf="time > 0 && !questionSelected">
+          <div id="countdown-number">{{ time }}</div>
+          <svg>
+            <circle r="18" cx="25" cy="25"></circle>
+          </svg>
+        </div>
+  </div>
   <div class="stars-wrapper">
+    <p class="lives-wrapper">
+      <span [ngClass]="{'hide': attempts.length < 1}"></span>
+      <span [ngClass]="{'hide': attempts.length < 2}"></span>
+      <span [ngClass]="{'hide': attempts.length < 3}"></span>
+    </p>
     <p class="question-counter" *ngIf="questionCount">{{ 16 - questionCount}}</p>
     <p class="stars-background"></p>
     <p class="stars-progress" [ngStyle]="{'width': progressBarPercentage + '%'}"></p>
