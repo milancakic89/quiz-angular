@@ -8,16 +8,26 @@
 
 <div class="content" [ngClass]="{'expand': !isLogged}">
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
-        <div *ngIf="gameResults.success && !gameResults.noQuestions">
-            <h3>Cestitamo, osvojili ste {{ gameResults.results }} poen/a</h3>
+            <!--   RESULTS     -->
+        <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">
+            <div class="stars-row">
+                <img src="../assets/images/ic_star.png" *ngFor="let star of stars" />
+            </div>
+           
+            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
         </div>
+
         <div *ngIf="!gameResults.success && !gameResults.noQuestions">
             <h3>Niste osvojili poen, pokusajte ponovo</h3>
             <img src="../assets/images/new-theme/sad-emoji.png" width="200" height="200"/>
+            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
         </div>
+
         <div *ngIf="gameResults.noQuestions">
             <h3>Nema pitanja u bazi</h3>
+            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
         </div>
+            <!--    /RESULTS     -->
     </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">

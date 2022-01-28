@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
@@ -15,7 +15,7 @@ import { SocketService } from './socket-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit{
   title = 'Quiz';
 
   constructor(private config: Configuration, 
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit{
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
   public successFeedback = true;
+  public stars: number[] = [];
   public gameResults: GameData = {
     success: false,
     showModal: false,
@@ -120,6 +121,16 @@ export class AppComponent implements OnInit{
       this.router.navigateByUrl('');
       return;
     }
+  }
+
+  ngAfterViewInit(): void {
+    document.body.requestFullscreen()
+      .then(function () {
+        // element has entered fullscreen mode successfully
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
   }
 
   public countdown(){
@@ -225,23 +236,38 @@ export class AppComponent implements OnInit{
   }
 
   public onGameFinish(){
-    setTimeout(() => {
       this.gameResults.noQuestions = false;
       this.gameResults.results = null;
       this.gameResults.success = false;
       this.gameResults.showModal = false;
-      this.router.navigateByUrl('/profile');
-    }, 1000);
   }
 
   public addToScore(score: number){
     this.user.score += score;
+    this.animateStars(score)
+  }
+
+  public animateStars(amount: number){
+    this.stars = [];
+    let counter = 0;
+
+    const animate = () => {
+      if(counter >= amount){
+        return;
+      }
+      setTimeout(()=>{
+        this.stars.push(1);
+        counter++;
+        animate()
+      }, 500)
+    }
+
+    animate()
+   
   }
 
   private async updateScore(){
     await this.service.updateScore(this.user.score);
-    this.onGameFinish();
-    this.router.navigateByUrl('/profile');
   }
 
   public play(){
