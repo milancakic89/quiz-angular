@@ -45,8 +45,11 @@
     </div>
     
         <div class="scrollable-area" [ngClass]="{'not-logged': !isLogged}">
-            <div class="notification" *ngIf="showFeedback" [ngClass]="successFeedback ? 'success' : 'error'">
-                <span>{{ feedbackMessage }}</span>
+            <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
+                <div class="wrapper">
+                    <span>{{ feedbackMessage }}</span>
+                    <button class="button-yellow-small" (click)="hideFeedback()">Ok</button>
+                </div>
             </div>
             <div class="daily-reward-rulet" *ngIf="dailyModal">
                 <p class="title">Dnevna nagrada</p>

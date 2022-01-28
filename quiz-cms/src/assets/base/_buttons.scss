@@ -1,5 +1,34 @@
 .button {
 
+    &-yellow {
+        width: 100%;
+        max-width: 290px;
+        height: 50px;
+        background-image: url('../images/new-theme/yellow-button.svg');
+        background-size: 100% 100%;
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+            background-image: url('../images/new-theme/yellow-button-hover.svg');
+        }
+
+        &-small {
+            width: 100px;
+            height: 30px;
+            background-image: url('../images/new-theme/yellow-button.svg');
+            background-size: 100% 100%;
+            background-color: transparent;
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+                background-image: url('../images/new-theme/yellow-button-hover.svg');
+            }
+        }
+    }
+
     &-submit,
     &-gray {
         padding: 15px 20px;

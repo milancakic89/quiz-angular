@@ -31,6 +31,7 @@ export class AppComponent implements OnInit{
 
   public user: User = {} as User;
   public showModal = false;
+  public animateBox = false;
   public gameRunning = false;
   public feedbackMessage = 'test';
   public feedbackTimeInSeconds = 5;
@@ -66,7 +67,6 @@ export class AppComponent implements OnInit{
       this.successFeedback = noth.success;
       this.showFeedback = true;
       this.feedbackMessage = noth.message;
-      this.hideFeedback();
     });
     setTimeout(()=>{
       this.lives_timer_delay = true;
@@ -186,10 +186,12 @@ export class AppComponent implements OnInit{
 
   
   public hideFeedback(){
-    setTimeout(()=>{
+    this.animateBox = true;
+    setTimeout(() =>{
       this.showFeedback = false;
       this.feedbackMessage = '';
-    }, 3000)
+    }, 500)
+
   }
 
   public async claimDailyReward(){

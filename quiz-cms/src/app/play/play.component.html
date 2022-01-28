@@ -2,7 +2,7 @@
   <div class="modal-play open">
     <h1>Nemate vise pokusaja</h1>
     <img width="200" height="185" src="../../assets/images/new-theme/no_more_lives.svg"/>
-    <button class="wood-btn" (click)="backToProfile()">Ok</button>
+    <button class="button-yellow" (click)="backToProfile()">Ok</button>
   </div>
 </div>
 <div class="play-game" *ngIf="showModal && lives > 0">
@@ -12,15 +12,15 @@
   <div
     class="dropdown-categories"
     [ngClass]="{ 'close-categories': playCategory }">
-    <a class="wood-btn tournament" routerLink="/tournament">Turnir</a>
-    <div class="wood-btn geography"
+    <a class="button-yellow tournament" routerLink="/tournament">Turnir</a>
+    <div class="button-yellow geography"
       (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')">
       <div>
         <span class="title">Geografija</span>
       </div>
     </div>
     <div
-      class="wood-btn history locked"
+      class="button-yellow history locked"
       (click)="closeModal('ISTORIJA', 'GEOGRAFIJA')"
       [ngClass]="{ locked: !isCategoryAllowed('GEOGRAFIJA') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Geografije"
@@ -32,7 +32,7 @@
     </div>
 
         <div
-             class="wood-btn history locked"
+             class="button-yellow history locked"
              (click)="closeModal('MUZIKA', 'ISTORIJA')"
              [ngClass]="{ locked: !isCategoryAllowed('ISTORIJA') }"
              data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
@@ -43,7 +43,7 @@
         </div>
 
     <div
-      class="wood-btn movies"
+      class="button-yellow movies"
       (click)="closeModal('FILMOVI I SERIJE', 'MUZIKA')"
       [ngClass]="{ locked: !isCategoryAllowed('MUZIKA') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije"
@@ -55,7 +55,7 @@
     </div>
 
     <div
-      class="wood-btn celebrity"
+      class="button-yellow celebrity"
       (click)="closeModal('POZNATE LICNOSTI', 'FILMOVI I SERIJE')"
       [ngClass]="{ locked: !isCategoryAllowed('FILMOVI I SERIJE') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Filmova i serija"
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div
-      class="wood-btn sport"
+      class="button-yellow sport"
       (click)="closeModal('SPORT', 'POZNATE LICNOSTI')"
       [ngClass]="{ locked: !isCategoryAllowed('POZNATE LICNOSTI') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja Poznatih licnosti"
@@ -78,7 +78,7 @@
     </div>
 
     <div
-      class="wood-btn others"
+      class="button-yellow others"
       (click)="closeModal('RAZNO', 'SPORT')"
       [ngClass]="{ locked: !isCategoryAllowed('SPORT') }"
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta"
@@ -116,7 +116,7 @@
     <p class="stars-background"></p>
     <p class="stars-progress" [ngStyle]="{'width': progressBarPercentage + '%'}"></p>
 </div>
-    <button class="wood-btn"
+    <button class="button-yellow"
             *ngFor="let answer of question.answers; let i = index"
         [ngClass]="{
         'disabled-button': questionSelected,
