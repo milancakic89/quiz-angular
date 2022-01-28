@@ -596,7 +596,8 @@ $headerHeight: 65px;
     background-image: url('../assets/images/notification.svg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-
+    width: 310px;
+    height: auto;
     padding: 10px;
     color: rgb(92, 53, 2);
     z-index: 100000;
@@ -607,6 +608,7 @@ $headerHeight: 65px;
     .wrapper {
         width: 100%;
         height: 100%;
+        min-height: 220px;
         justify-content: center;
         align-items: center;
         display: flex;

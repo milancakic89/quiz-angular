@@ -19,7 +19,9 @@
         }
 
         &-small {
-            width: 100px;
+            width: auto;
+            max-width: 100px;
+            min-width: 70px;
             height: 30px;
             overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
