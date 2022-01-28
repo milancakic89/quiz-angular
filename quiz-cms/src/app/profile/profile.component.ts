@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
@@ -12,7 +12,7 @@ import { ProfileService } from './profile.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
 
   constructor(private config: Configuration,
               private router: Router,
@@ -44,6 +44,17 @@ export class ProfileComponent implements OnInit {
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
     this.showInput = false;
+  }
+
+  ngAfterViewInit(): void {
+    
+    document.body.requestFullscreen()
+      .then(function () {
+        // element has entered fullscreen mode successfully
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
   }
 
   ngOnInit(): void {

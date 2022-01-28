@@ -15,7 +15,7 @@ import { SocketService } from './socket-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit{
   title = 'Quiz';
 
   constructor(private config: Configuration, 
@@ -123,15 +123,7 @@ export class AppComponent implements OnInit, AfterViewInit{
     }
   }
 
-  ngAfterViewInit(): void {
-    document.body.requestFullscreen()
-      .then(function () {
-        // element has entered fullscreen mode successfully
-      })
-      .catch(function (error) {
-        console.log(error.message);
-      });
-  }
+
 
   public countdown(){
     clearInterval(this.lives_interval);
