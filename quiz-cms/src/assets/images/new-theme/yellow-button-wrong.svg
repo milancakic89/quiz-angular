@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1.1 (26b7af14f2, 2022-01-19)"
-   sodipodi:docname="yellow-button-hover.svg"
+   sodipodi:docname="yellow-button-wrong.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.2650112"
-     inkscape:cx="336.75591"
-     inkscape:cy="169.95897"
+     inkscape:cx="338.33693"
+     inkscape:cy="-64.031054"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
      inkscape:window-x="0"
@@ -39,12 +39,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(46.120793,-63.063973)" />
+     transform="translate(46.550223,-125.04157)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(46.120793,-63.063973)">
+     transform="translate(46.550223,-125.04157)">
     <g
        id="g120699"
        transform="matrix(0.53819513,0,0,0.83423878,-83.324599,-140.91505)"

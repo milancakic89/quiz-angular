@@ -5,9 +5,13 @@
         max-width: 290px;
         height: 50px;
         background-image: url('../images/new-theme/yellow-button.svg');
-        background-size: 100% 100%;
+        background-size: auto 100%;
         background-color: transparent;
+        background-repeat: no-repeat;
         border: none;
+        border-radius: 25px;
+        overflow: hidden;
+        margin-bottom: 12px;
 
         &:hover {
             cursor: pointer;
@@ -17,10 +21,13 @@
         &-small {
             width: 100px;
             height: 30px;
+            overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
-            background-size: 100% 100%;
+            background-size: auto 100%;
             background-color: transparent;
             border: none;
+            background-repeat: no-repeat;
+            border-radius: 25px;
 
             &:hover {
                 cursor: pointer;
@@ -166,40 +173,3 @@
     transform: rotateZ(0deg) rotateY(0deg); width: 110:62 right 50% 
 
 */
-
-
-
-.wood-btn {
-    width: 90%;
-    max-width: 333px;
-    max-height: 56px;
-    height: 100vh;
-    display: flex;
-    font-weight: 700;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin-bottom: 4px;
-    font-size: 19px;
-    align-self: center;
-    color: rgb(22, 22, 22);
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    background-image: url('../../assets/images/new-theme/regular-question-btn.png');
-
-
-    &.locked {
-        filter: grayscale(1);
-
-        &:hover {
-            cursor: not-allowed;
-            color: rgb(22, 22, 22);
-        }
-    }
-
-    &:hover {
-        cursor: pointer;
-        color: orange;
-    }
-}

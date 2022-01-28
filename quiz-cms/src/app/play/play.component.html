@@ -27,7 +27,6 @@
     >
       <div>
         <span class="title">Istorija</span>
-        <sup *ngIf="!isCategoryAllowed('GEOGRAFIJA')">Dodati {{ questionsLeftToOpen('GEOGRAFIJA') }} pitanja iz Geografije</sup>
       </div>
     </div>
 
@@ -38,7 +37,6 @@
              data-unlock="Otvoreno nakon 10 dodatih pitanja iz Istorije">
           <div>
             <span class="title">Muzika</span>
-            <sup *ngIf="!isCategoryAllowed('ISTORIJA')">Dodati {{ questionsLeftToOpen('ISTORIJA') }} pitanja iz Istorije</sup>
           </div>
         </div>
 
@@ -50,7 +48,6 @@
     >
       <div>
         <span class="title">Filmovi i serije</span>
-        <sup *ngIf="!isCategoryAllowed('MUZIKA')">Dodati {{ questionsLeftToOpen('MUZIKA') }} pitanja iz Muzike</sup>
       </div>
     </div>
 
@@ -62,7 +59,6 @@
     >
       <div>
         <span class="title">Poznate licnosti</span>
-        <sup *ngIf="!isCategoryAllowed('FILMOVI I SERIJE')">Dodati {{ questionsLeftToOpen('FILMOVI I SERIJE') }} pitanja iz Filmova i serija</sup>
       </div>
     </div>
     <div
@@ -73,7 +69,6 @@
     >
       <div>
         <span class="title">Sport</span>
-        <sup *ngIf="!isCategoryAllowed('POZNATE LICNOSTI')">Dodati {{ questionsLeftToOpen('POZNATE LICNOSTI') }} pitanja iz Poznatih licnosti"</sup>
       </div>
     </div>
 
@@ -84,8 +79,7 @@
       data-unlock="Otvoreno nakon 10 dodatih pitanja iz Sporta"
     >
       <div>
-        <span class="title long-text">Razno</span>
-        <sup *ngIf="!isCategoryAllowed('SPORT')">Dodati {{ questionsLeftToOpen('SPORT') }} pitanja iz Sporta</sup>
+        <span class="title">Razno</span>
       </div>
     </div>
   </div>

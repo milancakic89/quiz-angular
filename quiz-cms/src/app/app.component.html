@@ -14,18 +14,18 @@
                 <img src="../assets/images/ic_star.png" *ngFor="let star of stars" />
             </div>
            
-            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
+            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
         </div>
 
         <div *ngIf="!gameResults.success && !gameResults.noQuestions">
             <h3>Niste osvojili poen, pokusajte ponovo</h3>
             <img src="../assets/images/new-theme/sad-emoji.png" width="200" height="200"/>
-            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
+            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
         </div>
 
         <div *ngIf="gameResults.noQuestions">
             <h3>Nema pitanja u bazi</h3>
-            <button class="wood-btn" (click)="onGameFinish()">Ok</button>
+            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
         </div>
             <!--    /RESULTS     -->
     </div>
@@ -63,7 +63,7 @@
 
                 </div>
                
-                <button class="wood-btn" *ngIf="ticketAnimationCounter >= 20" (click)="closeDailyReward()">Ok</button>
+                <button class="button-yellow" *ngIf="ticketAnimationCounter >= 20" (click)="closeDailyReward()">Ok</button>
             </div>
             <router-outlet></router-outlet>
         </div>

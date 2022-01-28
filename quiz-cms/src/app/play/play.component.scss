@@ -293,7 +293,6 @@
         transform: translateX(-50%) rotateX(0deg);
         transform-origin: 0 0;
         background-position: 50% 50%;
-        animation: dropdown 2s ease-out;
         position: relative;
 
         .button-yellow{
@@ -307,33 +306,6 @@
         }
 
 
-
-
-
-        &.close-categories {
-            top: -100vh;
-            animation: hide-categories 1.5s ease-out;
-        }
-    }
-
-    @keyframes hide-categories {
-        0% {
-            top: 50px;
-        }
-
-        100% {
-            top: -100vh;
-        }
-    }
-
-    @keyframes dropdown-categories {
-        0% {
-            top: -100vh;
-        }
-
-        100% {
-            top: 50px;
-        }
     }
 
 
@@ -383,14 +355,15 @@
     max-width: 400px;
     margin: 0 auto;
 
+
     .wrong-answer {
         color: rgb(255, 255, 255) !important;
-        background-image: url('../../assets/images/new-theme/wrong-question-btn.png') !important;
+        background-image: url('../../assets/images/new-theme/yellow-button-wrong.svg') !important;
     }
 
     .correct-answer {
         color: black !important;
-        background-image: url('../../assets/images/new-theme/correct-question-btn.png') !important;
+        background-image: url('../../assets/images/new-theme/yellow-button-correct.svg') !important;
     }
 
     .question-box-new {

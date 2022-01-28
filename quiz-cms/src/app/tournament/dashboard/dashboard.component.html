@@ -3,14 +3,14 @@
         <a class=button-back routerLink="/play"></a>
     </div>
     <div class="dropdown-menu" [ngClass]="{'close': clicked}">
-            <button (click)="createRoom()" class="wood-btn">Kreiraj Turnir</button>
-            <button (click)="roomInput = !roomInput" class="wood-btn">Udji na turnir</button>
+            <button (click)="createRoom()" class="button-yellow">Kreiraj Turnir</button>
+            <button (click)="roomInput = !roomInput" class="button-yellow">Udji na turnir</button>
             <div *ngIf="roomInput">
                 <form #roomform="ngForm" (ngSubmit)="roomform.valid && joinRoom()">
                     <input name="roomName" type="text" required [(ngModel)]="room" />
                     <button type="submit">Udji na turnir</button>
                 </form>
             </div>
-            <button class="wood-btn">Globalni turniri</button>
+            <button class="button-yellow">Globalni turniri</button>
     </div>
 </div>
