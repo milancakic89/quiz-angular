@@ -440,7 +440,7 @@ $headerHeight: 65px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    background-image: url('../assets/images/new-theme/cartoon-bg.png');
+    background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
     background-size: cover;
 
     &.not-logged {
@@ -588,10 +588,10 @@ $headerHeight: 65px;
 
 .notification {
     position: absolute;
+    width: 290px;
+    height: 220px;
     top: 40%;
     left: 50%;
-    width: 0px;
-    height: 0px;
     transform: translate(-50%, -100%) scale(1);
     background-image: url('../assets/images/notification.svg');
     background-size: 100% 100%;
@@ -614,7 +614,7 @@ $headerHeight: 65px;
 
         .button-yellow-small {
             position: absolute;
-            top: calc(100% - 15px);
+            top: calc(100% - 40px);
             left: 50%;
             transform: translateX(-50%);
         }

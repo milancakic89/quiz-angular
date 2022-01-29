@@ -11,68 +11,11 @@
     overflow-x: hidden;
 }
 
-.animation-plane {
-    width: 80px;
-    height: 45px;
-    position: absolute;
-    right: -100px;
-    top: 200px;
-    background-image: url('../../../assets/images/plane.png');
-    background-size: 100% 100%;
-    animation: airplane 16s ease-in infinite;
-}
 
 .facebook{
     min-height: 40px;
 } 
 
-@keyframes airplane {
-    0% {
-        transform: rotateZ(0deg) rotateY(-8deg);
-        right: -100px;
-        width: 80px;
-        height: 45px;
-
-    }
-
-    10% {
-        transform: rotateZ(0deg) rotateY(0deg);
-        width: 110px;
-        height: 62px;
-    }
-
-    20% {
-        right: 100%;
-        width: 110px;
-        height: 62px;
-    }
-
-    30% {
-        transform: rotateY(180deg);
-        right: 100%;
-    }
-
-    40% {
-        transform: rotateY(180deg);
-    }
-
-    50% {
-        transform: rotateY(180deg);
-        width: 110px;
-        height: 62px;
-    }
-
-    60% {
-        transform: rotateY(180deg);
-        right: -110px;
-        width: 80px;
-        height: 45px;
-    }
-
-    100% {
-        right: -110px;
-    }
-}
 
 
 .dropdown-menu {
