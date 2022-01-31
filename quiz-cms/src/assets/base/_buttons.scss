@@ -1,17 +1,31 @@
+button{
+    background-color: transparent;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none !important;
+    color: rgb(31, 15, 0);
+    &:focus{
+        background-color: transparent;
+    }
+}
+
+
 .button {
 
     &-yellow {
         width: 100%;
-        max-width: 290px;
+        max-width: 400px;
         height: 50px;
         background-image: url('../images/new-theme/yellow-button.svg');
-        background-size: auto 100%;
+        background-size: 100% 100%;
         background-color: transparent;
         background-repeat: no-repeat;
         border: none;
+        outline: none;
         border-radius: 25px;
         overflow: hidden;
-        margin-bottom: 12px;
+        margin-bottom: 15px !important;
+        color: rgb(31, 15, 0);
 
         &:hover {
             cursor: pointer;
@@ -25,11 +39,29 @@
             height: 30px;
             overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
+            background-size: 100% 100%;
+            background-color: transparent;
+            border: none;
+            background-repeat: no-repeat;
+            border-radius: 25px;
+
+            &:hover {
+                cursor: pointer;
+                background-image: url('../images/new-theme/yellow-button-hover.svg');
+            }
+        }
+        &-medium {
+            width: auto;
+            white-space: nowrap;
+            padding: 10px 15px;
+            overflow: hidden;
+            background-image: url('../images/new-theme/yellow-button.svg');
             background-size: auto 100%;
             background-color: transparent;
             border: none;
             background-repeat: no-repeat;
             border-radius: 25px;
+            color: rgb(31, 15, 0);
 
             &:hover {
                 cursor: pointer;
@@ -41,7 +73,6 @@
     &-submit,
     &-gray {
         padding: 15px 20px;
-        background-color: red;
         color: #fff;
         border-radius: 5px;
         border-color: none;
@@ -50,7 +81,7 @@
         margin-top: 30px;
 
         &:disabled {
-            background-color: gray;
+            background-image: url('../images/new-theme/yellow-button-wrong.svg');
 
         }
     }
@@ -70,7 +101,7 @@
     }
 
     &-gray {
-        background-color: gray;
+        background-image: url('../images/new-theme/yellow-button-wrong.svg');
         cursor: not-allowed;
     }
 

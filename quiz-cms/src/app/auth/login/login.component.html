@@ -1,5 +1,4 @@
 <div class="login">
-    <div class="animation-plane"></div>
     <div class="login-form-wrapper dropdown-menu">
         <div class="logo-wrapper">
             <img src="../../../assets/images/logo.png" class="logo-img" alt="Kvizcina" />
@@ -8,10 +7,10 @@
         <form class="login-form" #loginForm="ngForm" (submit)="loginForm.valid && onSubmit()">
             <div class="form-row column">
                   
-                    <div class="button-yellow z-10">
+                    <div class=" z-10">
                         <label class="">Email</label>
                     </div>
-                    <div class="button-yellow mb-20 z-9">
+                    <div class=" mb-20 z-9">
                         <input name="email" 
                         type="email"
                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+"
@@ -19,10 +18,10 @@
                         required
                         [ngClass]="{'form-submitted': loginForm.submitted}" /> 
                     </div>
-                    <div class="button-yellow z-8">
+                    <div class=" z-8">
                         <label class="">Lozinka</label>
                     </div>
-                    <div class="button-yellow mb-20 z-7">
+                    <div class=" mb-20 z-7">
                         <input name="password" 
                         required
                         type="password"
@@ -30,16 +29,17 @@
                         [ngClass]="{'form-submitted': loginForm.submitted}"/>
                     </div>
                           
-                    <button class="button-yellow submit z-6" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Uloguj se</button>
-                    <div class="nav-buttons z-5">
-                        <a routerLink='/register' class="button-yellow link z-5">Napravi nalog</a>  
-                        <a routerLink='/reset' class="button-yellow link z-5">Resetuj lozinku</a> 
+                    <button class="button-yellow submit z-6" type="submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Uloguj se</button>
+                    <div class="z-5">
+                        <a routerLink='/register' class="button-yellow-medium link z-5">Napravi nalog</a>  
+                        <a routerLink='/reset' class="button-yellow-medium link z-5">Resetuj lozinku</a> 
                     </div>
 
             </div>
+            
+        <button class="button-yellow facebook" type="button" title="In development" (click)="facebookSignin()">Login with Facebook</button>
         </form>
 
-        <button class="button-yellow facebook" title="In development" (click)="facebookSignin()">Login with Facebook</button>
     </div>
 </div>
 <!-- <div class="login">

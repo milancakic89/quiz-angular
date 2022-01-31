@@ -9,70 +9,23 @@
     background-size: cover;
     height: 100vh;
     overflow-x: hidden;
+
+    .column{
+        align-items: center;
+
+        input,
+        div{
+            width: 100%;
+        }
+    }
 }
 
-.animation-plane {
-    width: 80px;
-    height: 45px;
-    position: absolute;
-    right: -100px;
-    top: 200px;
-    background-image: url('../../../assets/images/plane.png');
-    background-size: 100% 100%;
-    animation: airplane 16s ease-in infinite;
-}
 
 .facebook{
     min-height: 40px;
+    margin-top: 25px;
 } 
 
-@keyframes airplane {
-    0% {
-        transform: rotateZ(0deg) rotateY(-8deg);
-        right: -100px;
-        width: 80px;
-        height: 45px;
-
-    }
-
-    10% {
-        transform: rotateZ(0deg) rotateY(0deg);
-        width: 110px;
-        height: 62px;
-    }
-
-    20% {
-        right: 100%;
-        width: 110px;
-        height: 62px;
-    }
-
-    30% {
-        transform: rotateY(180deg);
-        right: 100%;
-    }
-
-    40% {
-        transform: rotateY(180deg);
-    }
-
-    50% {
-        transform: rotateY(180deg);
-        width: 110px;
-        height: 62px;
-    }
-
-    60% {
-        transform: rotateY(180deg);
-        right: -110px;
-        width: 80px;
-        height: 45px;
-    }
-
-    100% {
-        right: -110px;
-    }
-}
 
 
 .dropdown-menu {
@@ -90,7 +43,11 @@
 
 .link {
     display: flex;
+    text-decoration: none;
     text-align: center;
+    margin-bottom: 10px;
+    font-weight: 800;
+    justify-content: center;
 }
 
 .submit {
@@ -98,7 +55,7 @@
 }
 
 .logo-wrapper {
-    margin: 50px 0;
+    margin: 40px 0 20px 0;
     display: inline-flex;
     position: relative;
     z-index: 100;
@@ -131,6 +88,11 @@
 }
 
 form {
+    background-image: url('../../../assets/images/new-theme/notification-big.svg');
+    background-size: 100% 100%;
+    background-position-x: 50%;
+    padding: 40px;
+    background-repeat: no-repeat;
     input {
         height: 40px;
         width: 80%;
@@ -145,5 +107,9 @@ form {
         font-size: 18px;
         color: #fff;
 
+    }
+
+    button{
+       
     }
 }
