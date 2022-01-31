@@ -197,69 +197,11 @@
     transform-origin: 0 0;
     background-position: 50% 50%;
 
-    button,
-    input,
-    .button-yellow {
-        // position: relative;
-
-        // &::before,
-        // &::after {
-        //     content: "";
-        //     content: "";
-        //     display: inline-block;
-        //     overflow: hidden;
-        //     position: absolute;
-        //     background-color: transparent;
-        //     width: 50px;
-        //     height: 10px;
-        //     background-size: 31px 10px;
-        //     background-image: url('../../assets/images/new-theme/rope.png');
-        // }
-
-        // &::before {
-        //     left: 15px;
-        //     top: 15px;
-        //     transform-origin: 0;
-        //     transform: rotate(-90deg);
-        // }
-
-        // &::after {
-        //     top: 15px;
-        //     right: 15px;
-        //     transform-origin: 100%;
-        //     transform: rotate(90deg);
-        // }
-    }
 
     button:first-child,
     .button-yellow:first-child {
         position: relative;
 
-        // &::before,
-        // &::after {
-        //     content: "";
-        //     display: inline-block;
-        //     position: absolute;
-        //     background-color: transparent;
-        //     width: 600px;
-        //     height: 10px;
-        //     background-image: url('../../assets/images/new-theme/rope.png');
-        //     background-size: contain;
-        // }
-
-        // &::before {
-        //     left: 15px;
-        //     top: 15px;
-        //     transform-origin: 0;
-        //     transform: rotate(-90deg);
-        // }
-
-        // &::after {
-        //     top: 15px;
-        //     right: 15px;
-        //     transform-origin: 100%;
-        //     transform: rotate(90deg);
-        // }
     }
 
     .items {
@@ -307,24 +249,7 @@
     }
 }
 
-// .button-yellow.link {
-//     display: flex !important;
-//     align-items: center;
 
-//     &:before,
-//     &::after {
-//         content: "";
-//         display: inline-block;
-//         position: absolute;
-//         background-color: transparent;
-//         width: 600px;
-//         cursor: auto;
-//         height: 10px;
-//         background-image: url('../../assets/images/new-theme/rope.png');
-//         background-size: contain;
-//     }
-
-// }
 
 ng-select {
 

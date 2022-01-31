@@ -443,8 +443,11 @@ $headerHeight: 65px;
     background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
     background-size: cover;
 
+
+
     &.not-logged {
         height: 100vh !important;
+        background-image: url('../assets/images/new-theme/cartoon-bg-blur.jpg');
     }
 }
 
