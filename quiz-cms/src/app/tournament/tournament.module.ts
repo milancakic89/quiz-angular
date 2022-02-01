@@ -5,6 +5,8 @@ import { TournamentRoutingModule } from './tournament-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { RoomComponent } from './room/room.component';
+import { PlayComponent } from './play/play.component';
+import { WaitingOthersComponent } from './waiting-others/waiting-others.component';
 
 
 
@@ -12,7 +14,9 @@ import { RoomComponent } from './room/room.component';
   declarations: [
     TournamentComponent,
     DashboardComponent,
-    RoomComponent
+    RoomComponent,
+    PlayComponent,
+    WaitingOthersComponent
   ],
   imports: [
     TournamentRoutingModule,

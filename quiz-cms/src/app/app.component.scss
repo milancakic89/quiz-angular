@@ -428,6 +428,10 @@ $headerHeight: 65px;
     width: 100%;
     padding: 0;
     height: 100vh;
+
+    &.overscreen{
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 }
 
 .scrollable-area {
@@ -440,7 +444,7 @@ $headerHeight: 65px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
+    background-image: url('../assets/images/new-theme/cartoon-bg-blur.jpg');
     background-size: cover;
     background-position-x: -5px;
     background-size: 103%;
