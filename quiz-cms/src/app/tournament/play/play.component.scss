@@ -1,5 +1,5 @@
-@import '../../assets/abstract/mixins';
-@import '../../assets/abstract/variables';
+@import '../../../assets/abstract/mixins';
+@import '../../../assets/abstract/variables';
 
 .long-text {
     font-size: 0.7em;
@@ -7,7 +7,7 @@
 
 .play {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -358,12 +358,12 @@
 
     .wrong-answer {
         color: rgb(255, 255, 255) !important;
-        background-image: url('../../assets/images/new-theme/yellow-button-wrong.svg') !important;
+        background-image: url('../../../assets/images/new-theme/yellow-button-wrong.svg') !important;
     }
 
     .correct-answer {
         color: black !important;
-        background-image: url('../../assets/images/new-theme/yellow-button-correct.svg') !important;
+        background-image: url('../../../assets/images/new-theme/yellow-button-correct.svg') !important;
     }
 
     .question-box-new {
@@ -374,7 +374,7 @@
         padding: 6px;
         border: 6px solid rgb(91, 53, 23);
         background-size: cover;
-        background-image: url('../../assets/images/new-theme/question-board.png');
+        background-image: url('../../../assets/images/new-theme/question-board.png');
 
         h6 {
             margin: 0;
