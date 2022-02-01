@@ -5,7 +5,10 @@ import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 
 export type EventType = 'CREATE-ROOM' |
-'JOIN-ROOM' | 'ROOM-CREATED' | 'LEAVE-ROOM';
+'JOIN-ROOM' | 
+'ROOM-CREATED' |
+'LOAD-ROOM-USERS' |
+'LEAVE-ROOM';
 
 export interface Room{
     roomName?: string;

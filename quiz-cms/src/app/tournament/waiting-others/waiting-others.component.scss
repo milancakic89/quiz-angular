@@ -1,0 +1,38 @@
+.waiting-others {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../../assets/images/new-theme/question-board.png');
+    background-size: cover;
+
+    .next-round{
+        position: fixed;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    .table-finished,
+    .table-awaiting {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: auto;
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: 1px solid brown;
+            border-radius: 50%;
+        }
+    }
+}
