@@ -15,14 +15,17 @@ button{
     &-yellow {
         width: 100%;
         max-width: 400px;
-        height: 50px;
-        background-image: url('../images/new-theme/yellow-button.svg');
-        background-size: 100% 100%;
+        height: 60px;
+        font-size: 24px;
+        background-image: url('../images/new-theme/yellow-button.png');
+        background-size: cover;
         background-color: transparent;
         background-repeat: no-repeat;
+        text-transform: none;
         border: none;
         outline: none;
         border-radius: 25px;
+        z-index: 100;
         overflow: hidden;
         margin-bottom: 15px !important;
         color: rgb(31, 15, 0);
@@ -39,11 +42,16 @@ button{
             height: 30px;
             overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
-            background-size: 100% 100%;
+            background-size: cover;
             background-color: transparent;
             border: none;
             background-repeat: no-repeat;
             border-radius: 25px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+            color: #000 !important;
 
             &:hover {
                 cursor: pointer;
