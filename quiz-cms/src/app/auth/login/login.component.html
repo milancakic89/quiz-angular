@@ -29,15 +29,23 @@
                         [ngClass]="{'form-submitted': loginForm.submitted}"/>
                     </div>
                           
-                    <button class="button-yellow submit z-6" type="submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Uloguj se</button>
+                    <a class="button-wood submit z-6" type="submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">
+                        <img src="../../../assets/images/new-theme/login-btn.png" />
+                    </a>
                     <div class="z-5">
-                        <a routerLink='/register' class="button-yellow-medium link z-5">Napravi nalog</a>  
-                        <a routerLink='/reset' class="button-yellow-medium link z-5">Resetuj lozinku</a> 
+                        <a routerLink='/register' class="button-wood link z-5">
+                            <img src="../../../assets/images/new-theme/create-account-btn.png" />
+                        </a>  
+                        <a routerLink='/reset' class="button-wood link z-5">
+                            <img  src="../../../assets/images/new-theme/reset-password.png"/>
+                        </a> 
                     </div>
 
             </div>
             
-        <button class="button-yellow facebook" type="button" title="In development" (click)="facebookSignin()">Login with Facebook</button>
+        <a class="button-wood" type="button" title="In development" (click)="facebookSignin()">
+            <img src="../../../assets/images/new-theme/facebook-btn.png" />
+        </a>
         </form>
 
     </div>
