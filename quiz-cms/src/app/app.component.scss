@@ -444,14 +444,15 @@ $headerHeight: 65px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    background-image: url('../assets/images/new-theme/cartoon-bg-blur.jpg');
-    background-size: cover;
+    background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
+    background-size: 101% 100%;
+    background-position-x: -5px;
 
 
 
     &.not-logged {
         height: 100vh !important;
-        background-image: url('../assets/images/new-theme/cartoon-bg-blur.jpg');
+        background-image: url('../assets/images/new-theme/cartoon-bg.jpg');
     }
 }
 

@@ -12,7 +12,7 @@
 
     .column{
         align-items: center;
-
+        padding: 0px 10px;
         input,
         div{
             width: 100%;
@@ -23,15 +23,12 @@
 
 .facebook{
     min-height: 40px;
-    margin-top: 25px;
+    align-self: center;
+    width: calc(100% - 20px);
 } 
 
 
 
-.dropdown-menu {
-    top: 0;
-    animation: dropdown-login 1.2s ease-out;
-}
 
 // .button-yellow {
 //     z-index: 100;
@@ -51,15 +48,18 @@
 }
 
 .submit {
-    margin-top: -10px !important;
+    margin-top: 10px !important;
 }
 
 .logo-wrapper {
     margin: 40px 0 20px 0;
     display: inline-flex;
     position: relative;
+    width: 180px;
     z-index: 100;
-
+    img{
+        width: 100%;
+    }
 
 }
 
@@ -67,7 +67,7 @@ form {
     background-image: url('../../../assets/images/new-theme/notification-big.svg');
     background-size: 100% 100%;
     background-position-x: 50%;
-    padding: 40px;
+    padding: 30px 30px 40px 30px;
     background-repeat: no-repeat;
     input {
         height: 40px;
