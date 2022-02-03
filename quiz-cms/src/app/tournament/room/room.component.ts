@@ -36,7 +36,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params =>{
       if(params['id']){
         this.room = params['id'];
-        this.socket.emit('JOIN-ROOM', {
+        this.socket.emit('JOIN_ROOM', {
           roomName: this.room,
           name: this.user.name ,
           user_id: this.user._id,
@@ -49,21 +49,21 @@ export class RoomComponent implements OnInit, OnDestroy {
     })
 
     this.socket.socketData.subscribe((data: any) =>{
-      if(data && data.event === 'JOINED-ROOM'){
+      if(data && data.event === 'JOINED_ROOM'){
         this.roomUsers = data.users;
       }
 
-      if(data && data.event === 'LEAVED-ROOM'){
+      if(data && data.event === 'LEAVED_ROOM'){
         this.roomUsers = data.users;
       }
 
-      if(data && data.event === 'ROOM-DONT-EXIST'){
+      if(data && data.event === 'ROOM_DONT_EXIST'){
         console.log('room dont exist')
         this.notification.notification.emit({ success: false, message: 'Turnir nije pronadjen' })
         this.router.navigateByUrl(`/play`);
       }
 
-      //ROOM-DONT-EXIST
+      //ROOM_DONT_EXIST
     })
   }
 

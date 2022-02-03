@@ -4,9 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 
-export type EventType = 'CREATE-ROOM' |
-'JOIN-ROOM' | 
-'ROOM-CREATED' |
+export type EventType = 'CREATE_ROOM' |
+'JOIN_ROOM' | 
+'ROOM_CREATED' |
 'LOAD-ROOM-USERS' |
 'LEAVE-ROOM';
 
@@ -28,22 +28,22 @@ export class SocketService{
     }
     
     public setup(){
-        this.socket.on('CREATE-ROOM', (data: Room) =>{
+        this.socket.on('CREATE_ROOM', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('JOIN-ROOM', (data: Room) =>{
+        this.socket.on('JOIN_ROOM', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('ROOM-CREATED', (data: Room) =>{
+        this.socket.on('ROOM_CREATED', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('JOINED-ROOM', (data: Room) =>{
+        this.socket.on('JOINED_ROOM', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('ROOM-DONT-EXIST', (data: Room) =>{
+        this.socket.on('ROOM_DONT_EXIST', (data: Room) =>{
             this.socketData.next(data)
         });
-        this.socket.on('LEAVED-ROOM', (data: Room) =>{
+        this.socket.on('LEAVED_ROOM', (data: Room) =>{
             console.log('leaving room', data)
             this.socketData.next(data)
         });

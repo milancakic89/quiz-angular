@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.socketData.subscribe((data: any) =>{
-      if(data && data.event === 'ROOM-CREATED' && data.success){
+      if(data && data.event === 'ROOM_CREATED' && data.success){
         this.router.navigateByUrl(`/tournament/room/${data.roomName}`);
       }
     })
