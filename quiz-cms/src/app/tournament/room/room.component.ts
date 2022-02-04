@@ -24,10 +24,15 @@ export class RoomComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   get user() { return this.config.user.getValue() as User }
+  get root() { return this.user._id === this.createdBy}
+
 
   public room = '';
   public roomUsers: RoomUser[] = [];
   public tableReady = false;
+  public createdBy = '';
+
+  
 
   ngOnInit(): void {
     setTimeout(() =>{
@@ -51,10 +56,17 @@ export class RoomComponent implements OnInit, OnDestroy {
     this.socket.socketData.subscribe((data: any) =>{
       if(data && data.event === 'JOINED_ROOM'){
         this.roomUsers = data.users;
+        this.createdBy = data.created_by;
+        console.log(this.roomUsers)
       }
 
       if(data && data.event === 'LEAVED_ROOM'){
         this.roomUsers = data.users;
+      }
+
+      if(data && data.event === 'TOURNAMENT_STARTING'){
+        console.log(data)
+        this.router.navigate([`/tournament/room/${this.room}/play`]);
       }
 
       if(data && data.event === 'ROOM_DONT_EXIST'){
@@ -65,6 +77,11 @@ export class RoomComponent implements OnInit, OnDestroy {
 
       //ROOM_DONT_EXIST
     })
+  }
+
+  public startTournament(){
+    console.log('start room: ' + this.room)
+    this.socket.emit('START_TOURNAMENT', {roomName: this.room})
   }
 
   ngOnDestroy(): void {

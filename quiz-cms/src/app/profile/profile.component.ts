@@ -48,13 +48,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     
-    document.body.requestFullscreen()
-      .then(function () {
-        // element has entered fullscreen mode successfully
-      })
-      .catch(function (error) {
-        console.log(error.message);
-      });
+    // document.body.requestFullscreen()
+    //   .then(function () {
+    //     // element has entered fullscreen mode successfully
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error.message);
+    //   });
   }
 
   ngOnInit(): void {

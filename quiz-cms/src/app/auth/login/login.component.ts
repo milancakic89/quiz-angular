@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    document.exitFullscreen();
+    // document.exitFullscreen();
       this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
