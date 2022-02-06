@@ -22,12 +22,18 @@
             <p class="question-counter" *ngIf="questionCount">{{ 16 - questionCount}}</p>
             <p class="stars-background"></p>
         </div>
-        <button class="button-yellow"
-                *ngFor="let answer of question.answers; let i = index"
-                [ngClass]="{
-        'disabled-button': questionSelected,
-        'wrong-answer': correct === 1 && btnIndex === i,
-        'correct-answer': correct === 2  && btnIndex === i}"
-                (click)="onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+        <ng-container *ngIf="question">
+            <button class="button-yellow"
+            *ngFor="let answer of question.answers; let i = index"
+            [ngClass]="{
+                'disabled-button': questionSelected,
+                'wrong-answer': correct === 1 && btnIndex === i,
+                'correct-answer': correct === 2  && btnIndex === i}"
+            (click)="onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+        </ng-container>
+
     </div>
+</div>
+<div *ngIf="!question">
+    <h3>Sledece pitanje pocinje uskoro</h3>
 </div>
