@@ -60,7 +60,6 @@ button {
             max-width: 100px;
             text-align: center;
             min-width: 70px;
-            font-weight: 600;
             height: 30px;
             overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
@@ -72,7 +71,9 @@ button {
             white-space: nowrap;
             display: flex;
             align-items: center;
+            justify-content: center;
             font-size: 11px;
+            font-weight: 800;
             color: rgb(31, 15, 0) !important;
 
             &:hover {
