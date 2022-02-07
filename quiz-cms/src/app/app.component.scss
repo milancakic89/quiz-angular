@@ -507,47 +507,60 @@ $headerHeight: 65px;
 }
 
 .daily-reward-rulet {
-    opacity: 1;
-    transition: all .3s linear;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 298px;
-    height: 340px;
-    left: 50%;
-    background-image: url('../assets/images/new-theme/question-board.png');
-    background-size: cover;
-    border: 3px solid black;
-    border-radius: 5px;
-    margin: 0 auto;
-    position: absolute;
-    z-index: 1000;
-    backdrop-filter: drop-shadow(2px 4px 6px black);
-    top: 45%;
-    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
 
-    .title {
-        font-size: 28px;
-        font-weight: 700;
-        margin: 5px 0;
-    }
-
-    .reward-image {
-        font-size: 30px;
-        font-weight: 700;
+    &-box {
+        opacity: 1;
+        transition: all .3s linear;
         display: flex;
-        width: 100%;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        width: 298px;
+        height: 340px;
+        left: 50%;
+        background-image: url('../assets/images/new-theme/question-board.png');
+        background-size: cover;
+        border: 3px solid black;
+        border-radius: 5px;
+        margin: 0 auto;
+        position: absolute;
+        z-index: 1000;
+        backdrop-filter: drop-shadow(2px 4px 6px black);
+        top: 45%;
+        transform: translateX(-50%) translateY(-50%);
 
-        img {
-            margin-right: 15px;
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .reward-image {
+            font-size: 30px;
+            font-weight: 700;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                margin-right: 15px;
+            }
+        }
+
+        .small-btn {
+            width: 90px;
         }
     }
 
-    .small-btn {
-        width: 90px;
-    }
+
 }
 
 .daily-items {

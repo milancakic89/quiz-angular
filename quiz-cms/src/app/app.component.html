@@ -51,20 +51,27 @@
                     <button class="button-yellow-small" (click)="hideFeedback()">Ok</button>
                 </div>
             </div>
-            <div class="daily-reward-rulet" *ngIf="dailyModal">
-                <p class="title">Dnevna nagrada</p>
-                <div class="daily-items">
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}"><img src="../assets/images/ic_ticket.svg" alt=""> x3</p>
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}"><img src="../assets/images/ic_ticket.svg" alt=""> x1</p>
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}"><img src="../assets/images/ic_ticket.svg" alt=""> x5</p>
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}"><img src="../assets/images/ic_ticket.svg" alt=""> x4</p>
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}"><img src="../assets/images/ic_ticket.svg" alt=""> x10</p>
-                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}"><img src="../assets/images/ic_ticket.svg" alt=""> x2</p>
-
-                </div>
-               
-                <button class="button-yellow-small" *ngIf="ticketAnimationCounter >= 20" (click)="closeDailyReward()">Ok</button>
+            <div class="daily-reward-rulet"  *ngIf="dailyModal">
+                            <div class="daily-reward-rulet-box">
+                                <p class="title">Dnevna nagrada</p>
+                                <div class="daily-items">
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x3</p>
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x1</p>
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x5</p>
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x4</p>
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x10</p>
+                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}"><img
+                                             src="../assets/images/ic_ticket.svg" alt=""> x2</p>
+                                </div>
+                                <button class="button-yellow-small" *ngIf="ticketAnimationCounter >= 20" (click)="closeDailyReward()">Ok</button>
+                            </div>
             </div>
+
             <router-outlet></router-outlet>
         </div>
 </div>
