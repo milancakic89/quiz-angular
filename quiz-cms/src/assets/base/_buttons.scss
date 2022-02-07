@@ -42,7 +42,7 @@ button {
         z-index: 100;
         overflow: hidden;
         margin-bottom: 15px !important;
-        color: rgb(31, 15, 0);
+        color: rgb(31, 15, 0) !important;
 
         &:hover {
             cursor: pointer;
@@ -67,7 +67,7 @@ button {
             display: flex;
             align-items: center;
             font-size: 11px;
-            color: #000 !important;
+            color: rgb(31, 15, 0) !important;
 
             &:hover {
                 cursor: pointer;
@@ -86,7 +86,7 @@ button {
             border: none;
             background-repeat: no-repeat;
             border-radius: 25px;
-            color: rgb(31, 15, 0);
+            color: rgb(31, 15, 0) !important;
 
             &:hover {
                 cursor: pointer;

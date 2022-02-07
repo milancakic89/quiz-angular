@@ -64,7 +64,7 @@
 
 }
 
-.white-text{
+.white-text {
     color: #fff;
 }
 
@@ -269,35 +269,35 @@ ng-select {
     }
 }
 
-.questions-wrapper{
+.questions-wrapper {
     padding: 20px 0;
 }
 
-.z-10{
+.z-10 {
     z-index: 10 !important;
 }
 
-.z-9{
+.z-9 {
     z-index: 9 !important;
 }
 
-.z-8{
+.z-8 {
     z-index: 8 !important;
 }
 
-.z-7{
+.z-7 {
     z-index: 7 !important;
 }
 
-.z-6{
+.z-6 {
     z-index: 6 !important;
 }
 
-.z-5{
+.z-5 {
     z-index: 5 !important;
 }
 
-.stars-wrapper{
+.stars-wrapper {
     width: 100%;
     height: 30px;
     margin: -36px 0 20px 0;
@@ -306,7 +306,7 @@ ng-select {
     position: relative;
     background-color: #000;
 
-    .stars-background{
+    .stars-background {
         background-image: url('../images/new-theme/stars.png');
         background-size: 100% 100%;
         background-repeat: no-repeat;
@@ -320,7 +320,7 @@ ng-select {
         z-index: 10;
     }
 
-    .question-counter{
+    .question-counter {
         width: 47px;
         height: 47px;
         display: flex;
@@ -340,7 +340,7 @@ ng-select {
         transform: translateX(-50%);
     }
 
-    .stars-progress{
+    .stars-progress {
         background-color: $secondary-blue;
         transition: all .3s linear;
         height: 100%;
@@ -350,4 +350,8 @@ ng-select {
         top: 0;
         z-index: 9;
     }
+}
+
+.question-text-heading{
+    font-size: 22px !important;
 }
