@@ -7,7 +7,7 @@ import { WaitingOthersComponent } from "./waiting-others/waiting-others.componen
 
 const routes: Route[] = [
     {path: '', component: DashboardComponent},
-    { path: 'room/:id/waiting', component: WaitingOthersComponent },
+    { path: 'room/:id/results', component: WaitingOthersComponent },
     { path: 'room/:id/play', component: PlayComponent },
     {path: 'room/:id', component: RoomComponent}
 ]

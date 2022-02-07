@@ -8,6 +8,13 @@ export type EventType = 'CREATE_ROOM' |
 'JOIN_ROOM' | 
 'ROOM_CREATED' |
 'LOAD-ROOM-USERS' |
+'START_TOURNAMENT' |
+'SELECTED_QUESTION_LETTER' |
+'START_TOURNAMENT_QUESTION' |
+'UPDATE_WAITING_STATUS' |
+'TOURNAMENT_FINISHED' |
+'GET_ROOM_QUESTION' |
+'EVERYONE_ANSWERED' |
 'LEAVE-ROOM';
 
 export interface Room{
@@ -41,10 +48,37 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('ROOM_DONT_EXIST', (data: Room) =>{
+            console.log('room dont exist')
             this.socketData.next(data)
         });
         this.socket.on('LEAVED_ROOM', (data: Room) =>{
-            console.log('leaving room', data)
+            this.socketData.next(data)
+        });
+
+        this.socket.on('TOURNAMENT_STARTING', (data: any) =>{
+            this.socketData.next(data)
+        })
+        this.socket.on('START_TOURNAMENT_QUESTION', (data: any) =>{
+            this.socketData.next(data)
+        })
+
+        this.socket.on('SELECTED_QUESTION_LETTER', (data: any) =>{
+            this.socketData.next(data)
+        })
+
+        this.socket.on('UPDATE_WAITING_STATUS', (data: any) =>{
+            this.socketData.next(data)
+        });
+
+        this.socket.on('EVERYONE_ANSWERED', (data: any) =>{
+            this.socketData.next(data)
+        });
+
+        this.socket.on('TOURNAMENT_FINISHED', (data: any) =>{
+            this.socketData.next(data)
+        });
+
+        this.socket.on('GET_ROOM_QUESTION', (data: any) =>{
             this.socketData.next(data)
         });
     }

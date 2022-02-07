@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 import { ApiResponse, ApiService } from "./api.servise";
 
 export interface User{
-  _id?: number;
+  _id?: string;
   avatar_url: string;
   name: string;
   email: string;

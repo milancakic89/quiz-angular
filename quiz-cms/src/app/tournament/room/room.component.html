@@ -2,7 +2,7 @@
     <div class="navigation">
         <a class=button-back routerLink="/play"></a>
     </div>
-    <h5>Tournament code: {{ room }}</h5>
+    <h5>Tournament code: {{ room }} <button *ngIf="root" (click)="startTournament()" >Zapocni turnir</button></h5>
     <div class="table" *ngIf="tableReady">
         <div class="user" *ngFor="let user of roomUsers">
             <div class="image" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}"></div>

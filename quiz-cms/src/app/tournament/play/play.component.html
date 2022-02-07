@@ -1,4 +1,8 @@
-<div class="game-box">
+<div *ngIf="showWaiting" class="waiting-others">
+    <h3>Vas odgovor je {{ correct === 2 ? 'tacan' : 'netacan'}}</h3>
+    <h4>Cekaju se ostali igraci {{ playersAnswered + '/' + totalPlayers}}</h4>
+</div>
+<div class="game-box" *ngIf="question">
     <div class="question-box-wrapper">
         <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
             <h6><span *ngIf="questionCount">{{questionCount}}.</span> {{ question.question }} </h6>
@@ -18,12 +22,18 @@
             <p class="question-counter" *ngIf="questionCount">{{ 16 - questionCount}}</p>
             <p class="stars-background"></p>
         </div>
-        <button class="button-yellow"
-                *ngFor="let answer of question.answers; let i = index"
-                [ngClass]="{
-        'disabled-button': questionSelected,
-        'wrong-answer': correct === 1 && btnIndex === i,
-        'correct-answer': correct === 2  && btnIndex === i}"
-                (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+        <ng-container *ngIf="question">
+            <button class="button-yellow"
+            *ngFor="let answer of question.answers; let i = index"
+            [ngClass]="{
+                'disabled-button': questionSelected,
+                'wrong-answer': correct === 1 && btnIndex === i,
+                'correct-answer': correct === 2  && btnIndex === i}"
+            (click)="onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+        </ng-container>
+
     </div>
+</div>
+<div *ngIf="!question">
+    <h3>Sledece pitanje pocinje uskoro</h3>
 </div>
