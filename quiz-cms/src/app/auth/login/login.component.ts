@@ -33,34 +33,44 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public development = false;
 
   ngOnInit(): void {
-    (window as any).fbAsyncInit = function () {
-      FB.init({
-        appId: '1043385909568285',
-        xfbml: true,
-        version: 'v12.0'
-      });
-      FB.AppEvents.logPageView();
-    };
+    // try{
+    //   (window as any).fbAsyncInit = function () {
+    //     FB.init({
+    //       appId: '1043385909568285',
+    //       xfbml: true,
+    //       version: 'v12.0'
+    //     });
+    //     FB.AppEvents.logPageView();
+    //   };
 
-    (function (d, s, id) {
-      var js: any, fjs: any = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    //   (function (d, s, id) {
+    //     var js: any, fjs: any = d.getElementsByTagName(s)[0];
+    //     if (d.getElementById(id)) { return; }
+    //     js = d.createElement(s); js.id = id;
+    //     js.src = "https://connect.facebook.net/en_US/sdk.js";
+    //     fjs.parentNode.insertBefore(js, fjs);
+    //   }(document, 'script', 'facebook-jssdk'));
+    // }catch(e){
+    //   this.notification.notification.emit({success: false, message: 'Facebook init problem!!!'})
+    // }
+
   }
 
   public facebookSignin(): void {
-    FB.login((response: any) =>{
-      if (response.authResponse) {
-        FB.api('/me', (res: FBResponse) => {
-          this.loginFacebookUser(res.id, res.name)
-        });
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    }, { scope: 'public_profile,email' })
+    try{
+      FB.login((response: any) => {
+        if (response.authResponse) {
+          FB.api('/me', (res: FBResponse) => {
+            this.loginFacebookUser(res.id, res.name)
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      }, { scope: 'public_profile,email' })
+    }catch(e){
+      this.notification.notification.emit({ success: false, message: 'Facebook login problem!!!' })
+    }
+
   }
 
 
@@ -75,7 +85,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public logOut(): void {
-    FB.logout()
+    try{
+      FB.logout()
+    }catch(e){
+      this.notification.notification.emit({ success: false, message: 'Facebook logout problem!!!' })
+    }
+  
   }
 
   public async loginFacebookUser(id: number, name: string){

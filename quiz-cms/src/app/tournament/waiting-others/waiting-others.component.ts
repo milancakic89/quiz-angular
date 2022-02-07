@@ -31,7 +31,9 @@ export class WaitingOthersComponent implements OnInit {
 
   this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
-      this.results = data.data;
+      this.results = data.users;
+      console.log(this.results)
+      console.log(data)
     }
   })
   }
