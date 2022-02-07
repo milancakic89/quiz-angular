@@ -25,9 +25,7 @@ button {
         }
     }
 
-    .title {
-        color: rgb(31, 15, 0) !important;
-    }
+
 
 
 
@@ -49,6 +47,10 @@ button {
         overflow: hidden;
         margin-bottom: 15px !important;
         color: rgb(31, 15, 0) !important;
+
+        .title {
+            color: rgb(31, 15, 0) !important;
+        }
 
         &:hover {
             cursor: pointer;
@@ -76,6 +78,10 @@ button {
             font-weight: 800;
             color: rgb(31, 15, 0) !important;
 
+            .title {
+                color: rgb(31, 15, 0) !important;
+            }
+
             &:hover {
                 cursor: pointer;
                 background-image: url('../images/new-theme/yellow-button-hover.svg');
@@ -94,6 +100,10 @@ button {
             background-repeat: no-repeat;
             border-radius: 25px;
             color: rgb(31, 15, 0) !important;
+
+            .title {
+                color: rgb(31, 15, 0) !important;
+            }
 
             &:hover {
                 cursor: pointer;
