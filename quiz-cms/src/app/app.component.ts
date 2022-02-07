@@ -189,6 +189,7 @@ export class AppComponent implements OnInit{
     this.animateBox = true;
     setTimeout(() =>{
       this.showFeedback = false;
+      this.animateBox = false;
       this.feedbackMessage = '';
     }, 500)
 

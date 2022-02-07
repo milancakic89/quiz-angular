@@ -31,14 +31,15 @@ a {
 }
 
 body {
-
-    background-color: $primary-background;
     width: 100%;
     height: 100vh;
     overflow-y: hidden;
     font-size: 100%;
     margin: 0;
     padding: 0;
+    background-image: url('../images/new-theme/cartoon-bg.png');
+    background-size: 101% 100%;
+    background-position-x: -5px;
 
 }
 

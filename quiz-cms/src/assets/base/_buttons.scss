@@ -1,10 +1,11 @@
-button{
+button {
     background-color: transparent;
     border: none;
     border-radius: 25px;
     text-decoration: none !important;
     color: rgb(31, 15, 0);
-    &:focus{
+
+    &:focus {
         background-color: transparent;
     }
 }
@@ -14,11 +15,12 @@ button{
 
 .button {
 
-    &-wood{
+    &-wood {
         text-align: center;
         width: 240px;
-        margin:  0 auto;
-        img{
+        margin: 0 auto;
+
+        img {
             width: 100%;
         }
     }
@@ -36,6 +38,7 @@ button{
         border: none;
         outline: none;
         border-radius: 25px;
+        font-weight: 900;
         z-index: 100;
         overflow: hidden;
         margin-bottom: 15px !important;
@@ -49,7 +52,9 @@ button{
         &-small {
             width: auto;
             max-width: 100px;
+            text-align: center;
             min-width: 70px;
+            font-weight: 600;
             height: 30px;
             overflow: hidden;
             background-image: url('../images/new-theme/yellow-button.svg');
@@ -69,6 +74,7 @@ button{
                 background-image: url('../images/new-theme/yellow-button-hover.svg');
             }
         }
+
         &-medium {
             width: auto;
             white-space: nowrap;

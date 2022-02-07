@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public title = 'Kviz opsteg znanja';
   public feedbackClass = '';
 
+  public development = false;
+
   ngOnInit(): void {
     (window as any).fbAsyncInit = function () {
       FB.init({
@@ -86,6 +88,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public async onSubmit(){
+    if(this.development){
+      return this.testLogin();
+    }
     const { data, success, token, error } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
     if (success) {
       this.notification.notification.emit({ success: success, message: 'Dobrodosli' });
@@ -93,6 +98,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }else{
       this.notification.notification.emit({ success: false, message: error });
     }
+  }
+
+  public testLogin(){
+    this.config.logged = true;
+    this.config.isRoot = true;
+    this.router.navigateByUrl('/profile');
+    return;
   }
 
 

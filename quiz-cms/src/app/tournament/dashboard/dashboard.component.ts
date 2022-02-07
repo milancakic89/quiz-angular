@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public onClick(path: string){
-    // this.router.navigate([`/${path}`]);
+    this.router.navigate([`/${path}`]);
   }
 
   public createRoom(){
-    this.socketService.emit('CREATE-ROOM', {user_id: this.user._id})
+    this.socketService.emit('CREATE_ROOM', {user_id: this.user._id})
   }
 
   public joinRoom(){
