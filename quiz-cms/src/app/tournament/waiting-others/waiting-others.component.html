@@ -1,13 +1,5 @@
-<div class="waiting-others">
-    <div class="next-round" *ngIf="allAnswered">
-        <h2>Sledeca runda uskoro pocinje</h2>
-    </div>
-    <div class="table-finished">
-        <p class="finished">Zavrsili</p>
-        <div class="avatar" *ngFor="let user of finished" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}"></div>
-    </div>
-    <div class="table-awaiting">
-        <p class="waiting">Cekaju se</p>
-        <div class="avatar" *ngFor="let user of finished" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}"></div>
+<div class="room-results">
+    <div class="user" *ngFor="let player of results">
+        <p>{{ player.name}}</p><p>{{ player.score}}</p>
     </div>
 </div>

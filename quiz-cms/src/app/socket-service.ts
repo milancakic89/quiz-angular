@@ -15,6 +15,7 @@ export type EventType = 'CREATE_ROOM' |
 'TOURNAMENT_FINISHED' |
 'GET_ROOM_QUESTION' |
 'EVERYONE_ANSWERED' |
+'GET_ROOM_RESULTS' |
 'LEAVE-ROOM';
 
 export interface Room{
@@ -79,6 +80,9 @@ export class SocketService{
         });
 
         this.socket.on('GET_ROOM_QUESTION', (data: any) =>{
+            this.socketData.next(data)
+        });
+        this.socket.on('GET_ROOM_RESULTS', (data: any) => {
             this.socketData.next(data)
         });
     }

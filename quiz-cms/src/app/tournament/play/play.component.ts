@@ -81,7 +81,7 @@ export class PlayComponent implements OnInit {
          
       }
       if(data && data.event === 'TOURNAMENT_FINISHED'){
-          this.router.navigateByUrl(`/tournament/${this.room}/results`)
+          this.router.navigateByUrl(`/tournament/room/${this.room}/results`)
       }
 
       //TOURNAMENT_FINISHED

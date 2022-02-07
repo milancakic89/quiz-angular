@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 
 @Component({
@@ -9,32 +10,35 @@ import { SocketService } from 'src/app/socket-service';
 })
 export class WaitingOthersComponent implements OnInit {
 
-  public finished: any = [1,2,3];
-  public awaitingUsers: any = [1,2,3,4,5,6,7];
-  public allAnswered = false;
-  public allUsers = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private socket: SocketService) { }
+  constructor(private router: Router, 
+    private route: ActivatedRoute, 
+    private config: Configuration,
+    private socket: SocketService) { }
+
+  get user() { return this.config.user.getValue()}
+
+  public room = '';
+  public results: any = [];
 
   ngOnInit(): void {
-    this.route.params.subscribe(params =>{
-      if(params['room']){
-        this._room = params['room'];
-        this.socket.emit('LOAD-ROOM-USERS', {})
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.room = params['id'];
+        this.socket.emit('GET_ROOM_RESULTS', { roomName: this.room, user_id: this.user._id });
       }
     });
 
-    this.socket.socketData.subscribe(data =>{
-      this.allUsers = data.users;
-      this.finished = data.users.filter((user: any) => user.finished === true);
-      this.awaitingUsers = data.users.filter((user: any) => user.finished !== true);
-    })
+  this.socket.socketData.subscribe(data =>{
+    if (data && data.event === 'GET_ROOM_RESULTS'){
+      this.results = data.data;
+    }
+  })
   }
 
   public onNextRound(){
-    this.router.navigateByUrl(`/tournament/play/${this._room}/1`);
   }
 
-  private _room = '';
+ 
 
 }
