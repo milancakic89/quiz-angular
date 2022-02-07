@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { ProfileService } from './profile/profile.service';
 import { SocketService } from './socket-service';
+import { PlayService } from './play/play.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit{
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
               private service: AppService,
-              private socketService: SocketService,
+              private playservice: PlayService,
               private profileService: ProfileService,
               private notificationService: NotificationService,
               private feedbackService: FeedbackMessageService,
@@ -231,10 +232,12 @@ export class AppComponent implements OnInit{
   }
 
   public onGameFinish(){
+      this.playservice.allowBackButton = true;  
       this.gameResults.noQuestions = false;
       this.gameResults.results = null;
       this.gameResults.success = false;
       this.gameResults.showModal = false;
+      this.router.navigateByUrl('/profile');
   }
 
   public addToScore(score: number){
