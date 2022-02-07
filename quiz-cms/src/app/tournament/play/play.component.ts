@@ -41,6 +41,7 @@ export class PlayComponent implements OnInit {
 
     this.socket.socketData.subscribe(data =>{
       if(data && data.event === 'UPDATE_WAITING_STATUS'){
+        this.totalPlayers = data.users.length;
         data.users.forEach((user: any) =>{
           if(user.answered){
             this.playersAnswered++;
@@ -68,6 +69,8 @@ export class PlayComponent implements OnInit {
       if(data && data.event === 'EVERYONE_ANSWERED'){
           setTimeout(()=>{
             this.question = null;
+            this.totalPlayers = 0;
+            this.playersAnswered = 0;
             this.questionSelected = null;
             this.correct = 0
             this.showWaiting = false;
