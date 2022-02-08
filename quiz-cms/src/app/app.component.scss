@@ -514,7 +514,7 @@ $headerHeight: 65px;
     top: 0;
     z-index: 100;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.8);
 
     &-box {
         opacity: 1;
@@ -522,15 +522,15 @@ $headerHeight: 65px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 298px;
-        height: 340px;
+        width: 340px;
+        height: 335px;
         left: 50%;
-        background-image: url('../assets/images/new-theme/question-board.png');
-        background-size: cover;
-        border: 3px solid black;
-        border-radius: 20px;
+        background-image: url('../assets/images/new-theme/popup/daily-reward-box.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
         margin: 0 auto;
         position: absolute;
+        padding: 80px 52px 38px 52px;
         z-index: 1000;
         backdrop-filter: drop-shadow(2px 4px 6px black);
         top: 45%;
@@ -576,25 +576,21 @@ $headerHeight: 65px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 87px;
-        height: 87px;
-        margin: 5px;
+        width: 70px;
+        height: 70px;
+        margin: 4px;
         border-radius: 6px;
-        border: 4px solid rgb(53, 24, 0);
-        background-color: rgba(105, 47, 0, 0.6);
-        color: rgb(7, 7, 7);
-        filter: grayscale(0.5);
+        border: 4px solid rgba(53, 24, 0, 0);
 
         &.bordered {
-            border: 4px solid $secondary-blue;
+            border: 4px solid rgb(114, 0, 180);
             filter: grayscale(0);
 
         }
 
         img {
-            width: 40px;
-            margin-right: 5px;
-            height: auto;
+            width: 100%;
+            height: 100%;
         }
 
     }
