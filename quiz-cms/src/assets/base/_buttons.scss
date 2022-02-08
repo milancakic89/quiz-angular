@@ -82,6 +82,10 @@ button {
                 color: rgb(31, 15, 0) !important;
             }
 
+            &.false{
+                filter: grayscale(1);
+            }
+
             &:hover {
                 cursor: pointer;
                 background-image: url('../images/new-theme/yellow-button-hover.svg');

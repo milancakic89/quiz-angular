@@ -51,6 +51,7 @@ export class AppComponent implements OnInit{
   public secondsString = '00';
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
+  public allowRewardBtn = false;
   public successFeedback = true;
   public stars: number[] = [];
   public gameResults: GameData = {
@@ -209,12 +210,14 @@ export class AppComponent implements OnInit{
   }
 
   public animateReward(tickets: number, user: User){
+    this.allowRewardBtn = false;
     this.ticketAnimationCounter = 0;
     this.ticketReward = 0;
     const animate = () =>{
       if(this.ticketAnimationCounter >= 20){
         this.ticketReward = tickets;
         this.user = user;
+        this.allowRewardBtn = true;
       }else{
         setTimeout(()=>{
           this.ticketAnimationCounter++;

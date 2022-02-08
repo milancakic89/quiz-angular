@@ -68,7 +68,7 @@
                                     <p class="reward-item" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}"><img
                                              src="../assets/images/new-theme/popup/reward-2.svg" alt=""></p>
                                 </div>
-                                <button class="button-yellow-small" *ngIf="ticketAnimationCounter >= 20" (click)="closeDailyReward()">Ok</button>
+                                <button class="button-yellow-small {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
                             </div>
             </div>
 
