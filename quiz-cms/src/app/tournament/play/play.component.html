@@ -1,5 +1,5 @@
-<div *ngIf="showWaiting" class="waiting-others">
-    <h4>Cekaju se ostali igraci {{ playersAnswered + '/' + totalPlayers}}</h4>
+<div *ngIf="showWaiting || !question" class="waiting-others">
+    <h4>Cekaju se ostali igraci</h4>
     <h4><img src="../../../assets/images/new-theme/loading-spinner.gif"/> </h4>
 </div>
 <div class="game-box" *ngIf="question">
@@ -33,7 +33,4 @@
         </ng-container>
 
     </div>
-</div>
-<div *ngIf="!question">
-    <h3>Sledece pitanje pocinje uskoro</h3>
 </div>
