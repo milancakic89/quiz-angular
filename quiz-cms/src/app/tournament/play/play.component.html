@@ -1,6 +1,6 @@
 <div *ngIf="showWaiting" class="waiting-others">
-    <h3>Vas odgovor je {{ correct === 2 ? 'tacan' : 'netacan'}}</h3>
     <h4>Cekaju se ostali igraci {{ playersAnswered + '/' + totalPlayers}}</h4>
+    <h4><img src="../../../assets/images/new-theme/loading-spinner.gif"/> </h4>
 </div>
 <div class="game-box" *ngIf="question">
     <div class="question-box-wrapper">
