@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
+import { TournamentService } from '../tournament.service';
 
 @Component({
   selector: 'app-play',
@@ -14,10 +15,14 @@ export class PlayComponent implements OnInit {
   constructor(private socket: SocketService, 
               private route: ActivatedRoute,
               private playService: PlayService,
+              private tournamentService: TournamentService,
               private router: Router,
               private config: Configuration){}
 
   get user(){ return this.config.user.getValue()}
+
+  get room() { return this.tournamentService.room }
+  set room(value) { this.tournamentService.room = value }
 
   public question: any;
   public questionSelected: any;
@@ -27,7 +32,6 @@ export class PlayComponent implements OnInit {
   public progressBarPercentage = 0;
   public answer: any;
   public time = 25;
-  private room = '';
   public showWaiting = false;
   public playersAnswered = 0;
   public totalPlayers = 0;
@@ -37,7 +41,6 @@ export class PlayComponent implements OnInit {
     this.route.params.subscribe(params =>{
       if(params['id']){
         this.playService.allowBackButton = false;
-        this.room = params['id'];
         this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
       }
     });
@@ -101,6 +104,5 @@ export class PlayComponent implements OnInit {
     this.btnIndex = index;
     this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1})
   }
-
 
 }

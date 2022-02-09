@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
+import { TournamentService } from '../tournament.service';
 
 @Component({
   selector: 'app-waiting-others',
@@ -15,26 +16,29 @@ export class WaitingOthersComponent implements OnInit {
   constructor(private router: Router, 
     private route: ActivatedRoute,
     private config: Configuration,
+    private tournamentService: TournamentService,
     private playService: PlayService,
     private socket: SocketService) { }
 
   get user() { return this.config.user.getValue()}
 
-  public room = '';
+  get room() { return this.tournamentService.room }
+  set room(value) { this.tournamentService.room = value }
+
   public results: any = [];
 
   ngOnInit(): void {
     this.playService.allowBackButton = false;
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.room = params['id'];
         this.socket.emit('GET_ROOM_RESULTS', { roomName: this.room, user_id: this.user._id });
       }
     });
 
   this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
-      this.results = data.users;
+        this.results = data.users;
+        this.room = '';
     }
   })
   }

@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { SocketService } from 'src/app/socket-service';
+import { TournamentService } from '../tournament.service';
 
 interface RoomUser{
   name: string;
@@ -19,6 +21,8 @@ export class RoomComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, 
               private socket: SocketService,
+              private playService: PlayService,
+              private tournamentService: TournamentService,
               private notification: NotificationService,
               private config: Configuration,
               private router: Router) { }
@@ -26,8 +30,9 @@ export class RoomComponent implements OnInit, OnDestroy {
   get user() { return this.config.user.getValue() as User }
   get root() { return this.user._id === this.createdBy}
 
+  get room() { return this.tournamentService.room}
+  set room(value){ this.tournamentService.room = value}
 
-  public room = '';
   public roomUsers: RoomUser[] = [];
   public tableReady = false;
   public createdBy = '';
@@ -57,7 +62,6 @@ export class RoomComponent implements OnInit, OnDestroy {
       if(data && data.event === 'JOINED_ROOM'){
         this.roomUsers = data.users;
         this.createdBy = data.created_by;
-        console.log(this.roomUsers)
       }
 
       if(data && data.event === 'LEAVED_ROOM'){
@@ -65,13 +69,12 @@ export class RoomComponent implements OnInit, OnDestroy {
       }
 
       if(data && data.event === 'TOURNAMENT_STARTING'){
-        console.log(data)
         this.router.navigate([`/tournament/room/${this.room}/play`]);
       }
 
       if(data && data.event === 'ROOM_DONT_EXIST'){
-        console.log('room dont exist')
-        this.notification.notification.emit({ success: false, message: 'Turnir nije pronadjen' })
+        this.playService.allowBackButton = true;
+        this.notification.notification.emit({ success: false, message: 'Turnir nije pronadjen: => ' + data.fn  })
         this.router.navigateByUrl(`/play`);
       }
 
@@ -80,7 +83,6 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   public startTournament(){
-    console.log('start room: ' + this.room)
     this.socket.emit('START_TOURNAMENT', {roomName: this.room})
   }
 

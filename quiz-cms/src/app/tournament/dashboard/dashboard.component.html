@@ -7,7 +7,7 @@
             <button (click)="roomInput = !roomInput" class="button-yellow">Udji na turnir</button>
             <div *ngIf="roomInput">
                 <form #roomform="ngForm" (ngSubmit)="roomform.valid && joinRoom()">
-                    <input name="roomName" type="text" required [(ngModel)]="room" />
+                    <input name="roomName" type="text" required [(ngModel)]="enterRoom" />
                     <button type="submit">Udji na turnir</button>
                 </form>
             </div>
