@@ -40,9 +40,9 @@ export class PlayComponent implements OnInit {
   ngOnInit(): void {
     const room = JSON.parse(localStorage.getItem('room') || '');
     this.route.params.subscribe(params =>{
-      if (params['id'] || room){
+      if (params['id']){
         this.playService.allowBackButton = false;
-        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room || room, questionIndex: this.questionIndex -1});
+        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
       }
     });
 
