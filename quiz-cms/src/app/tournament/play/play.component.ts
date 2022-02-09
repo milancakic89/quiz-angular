@@ -20,7 +20,7 @@ export class PlayComponent implements OnInit {
   public question: any;
   public questionSelected: any;
   public correct: any;
-  public questionCount = 0;
+  public questionIndex = 1;
   public btnIndex = 0;
   public progressBarPercentage = 0;
   public answer: any;
@@ -35,7 +35,7 @@ export class PlayComponent implements OnInit {
     this.route.params.subscribe(params =>{
       if(params['id']){
         this.room = params['id'];
-        this.socket.emit('GET_ROOM_QUESTION', {roomName: this.room});
+        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex});
       }
     });
 
@@ -75,8 +75,8 @@ export class PlayComponent implements OnInit {
             this.correct = 0
             this.showWaiting = false;
             this.btnIndex = 0;
-            this.questionCount++;
-            this.socket.emit('GET_ROOM_QUESTION', {roomName: this.room})
+            this.questionIndex++;
+            this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex});
           },1000)
          
       }
@@ -92,7 +92,7 @@ export class PlayComponent implements OnInit {
   public onSelectedAnswer(answer: {letter: string, text: string}, id: string, index: number){
     this.questionSelected = answer;
     this.btnIndex = index;
-    this.socket.emit('SELECTED_QUESTION_LETTER', {letter: answer.letter, roomName: this.room, user_id: this.user._id})
+    this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex})
   }
 
 
