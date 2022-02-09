@@ -280,7 +280,7 @@ $headerHeight: 65px;
         .user-chest {
             font-size: 35px;
             transition: all 2s linear;
-
+            color: #fff;
             &-icon {
                 margin-right: 0px;
                 background-size: contain;
@@ -523,6 +523,7 @@ $headerHeight: 65px;
         flex-direction: column;
         align-items: center;
         width: 90%;
+        max-width: 550px;
         height: auto;
         left: 50%;
         background-image: url('../assets/images/new-theme/popup/daily-reward-box.png');
@@ -530,7 +531,7 @@ $headerHeight: 65px;
         background-repeat: no-repeat;
         margin: 0 auto;
         position: absolute;
-        padding: 22% 14% 10% 14%;
+        padding: 22% 15% 14%;
         z-index: 1000;
         backdrop-filter: drop-shadow(2px 4px 6px black);
         top: 45%;
@@ -576,9 +577,8 @@ $headerHeight: 65px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 28%;
+        width: 33%;
         height: auto;
-        margin: 4px;
         border-radius: 6px;
         border: 4px solid rgba(53, 24, 0, 0);
 
