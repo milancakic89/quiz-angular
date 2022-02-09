@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlayService } from 'src/app/play/play.service';
 import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 
@@ -12,8 +13,9 @@ export class WaitingOthersComponent implements OnInit {
 
 
   constructor(private router: Router, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private config: Configuration,
+    private playService: PlayService,
     private socket: SocketService) { }
 
   get user() { return this.config.user.getValue()}
@@ -32,10 +34,15 @@ export class WaitingOthersComponent implements OnInit {
   this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
       this.results = data.users;
-      console.log(this.results)
-      console.log(data)
     }
   })
+  }
+
+  public onFinish(){
+    this.playService.allowBackButton = true;
+    setTimeout(()=>{
+      this.router.navigateByUrl('/profile')
+    }, 100)
   }
 
   public onNextRound(){

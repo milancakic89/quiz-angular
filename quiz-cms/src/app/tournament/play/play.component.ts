@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlayService } from 'src/app/play/play.service';
 import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 
@@ -11,7 +12,8 @@ import { SocketService } from 'src/app/socket-service';
 export class PlayComponent implements OnInit {
 
   constructor(private socket: SocketService, 
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
+              private playService: PlayService,
               private router: Router,
               private config: Configuration){}
 
@@ -34,6 +36,7 @@ export class PlayComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
       if(params['id']){
+        this.playService.allowBackButton = false;
         this.room = params['id'];
         this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex});
       }

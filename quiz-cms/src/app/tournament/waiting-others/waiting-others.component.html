@@ -1,4 +1,5 @@
 <div class="room-results">
+    <button class="button button-yellow" (click)="onFinish()">Nazad</button>
     <div class="user" *ngFor="let player of results">
         <p>{{ player.name}}</p><p>{{ player.score}}</p>
     </div>
