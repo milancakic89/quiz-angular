@@ -34,6 +34,7 @@
         <div class="left-info">
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
+        <span class="text-white">Room: {{ room }}</span>
         <div class="right-info">
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>

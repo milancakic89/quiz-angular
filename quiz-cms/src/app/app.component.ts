@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ProfileService } from './profile/profile.service';
 import { SocketService } from './socket-service';
 import { PlayService } from './play/play.service';
+import { TournamentService } from './tournament/tournament.service';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +25,14 @@ export class AppComponent implements OnInit{
               private service: AppService,
               private playservice: PlayService,
               private profileService: ProfileService,
+              private tournamentService: TournamentService,
               private notificationService: NotificationService,
               private feedbackService: FeedbackMessageService,
               private router: Router){}
   get isRoot(){return this.config.isRoot}
   get isLogged(){return this.config.logged}
+
+  get room() { return this.tournamentService.room}
 
   public user: User = {} as User;
   public showModal = false;

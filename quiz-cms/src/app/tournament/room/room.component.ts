@@ -46,6 +46,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params =>{
       if(params['id']){
         this.room = params['id'];
+        localStorage.setItem('room', params['id'])
         this.socket.emit('JOIN_ROOM', {
           roomName: this.room,
           name: this.user.name ,
