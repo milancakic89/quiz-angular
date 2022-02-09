@@ -5,7 +5,7 @@
 <div class="game-box" *ngIf="question">
     <div class="question-box-wrapper">
         <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
-            <h6 class="question-text-heading"><span *ngIf="questionCount">{{questionCount}}.</span> {{ question.question }} </h6>
+            <h6 class="question-text-heading"><span>{{questionIndex}}.</span> {{ question.question }} </h6>
         </div>
         <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new"
              *ngIf="question.type === 'PICTURE'">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="stars-wrapper">
-            <p class="question-counter" *ngIf="questionCount">{{ 16 - questionCount}}</p>
+            <p class="question-counter">{{ questionIndex}}</p>
             <p class="stars-background"></p>
         </div>
         <ng-container *ngIf="question">
