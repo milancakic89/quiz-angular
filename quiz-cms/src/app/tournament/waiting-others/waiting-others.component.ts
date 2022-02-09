@@ -24,6 +24,7 @@ export class WaitingOthersComponent implements OnInit {
   public results: any = [];
 
   ngOnInit(): void {
+    this.playService.allowBackButton = false;
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.room = params['id'];

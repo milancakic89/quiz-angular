@@ -38,7 +38,7 @@ export class PlayComponent implements OnInit {
       if(params['id']){
         this.playService.allowBackButton = false;
         this.room = params['id'];
-        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex});
+        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
       }
     });
 
@@ -79,12 +79,16 @@ export class PlayComponent implements OnInit {
             this.showWaiting = false;
             this.btnIndex = 0;
             this.questionIndex++;
-            this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex});
+            this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
           },1000)
          
       }
       if(data && data.event === 'TOURNAMENT_FINISHED'){
+        this.playService.allowBackButton = true;
+        setTimeout(()=>{
           this.router.navigateByUrl(`/tournament/room/${this.room}/results`)
+        },300)
+         
       }
 
       //TOURNAMENT_FINISHED
