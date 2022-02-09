@@ -45,6 +45,7 @@ export class WaitingOthersComponent implements OnInit {
 
   public onFinish(){
     this.playService.allowBackButton = true;
+    this.tournamentService.room = '';
     setTimeout(()=>{
       this.router.navigateByUrl('/profile')
     }, 100)
