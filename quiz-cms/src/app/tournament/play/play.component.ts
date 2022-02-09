@@ -38,7 +38,7 @@ export class PlayComponent implements OnInit {
   public form = null;
 
   ngOnInit(): void {
-    const room = JSON.parse(localStorage.getItem('room') || '');
+    this.socketSetup()
     this.route.params.subscribe(params =>{
       if (params['id']){
         this.playService.allowBackButton = false;
@@ -46,6 +46,12 @@ export class PlayComponent implements OnInit {
       }
     });
 
+    
+    
+  }
+
+  public socketSetup(){
+    this.tournamentService.setupReady = true;
     this.socket.socketData.subscribe(data =>{
       if(data && data.event === 'UPDATE_WAITING_STATUS'){
         this.totalPlayers = data.users.length;
@@ -83,6 +89,7 @@ export class PlayComponent implements OnInit {
             this.correct = 0
             this.showWaiting = false;
             this.btnIndex = 0;
+            console.log('happens: ' + this.room)
             this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex - 1});
           },1000)
          
@@ -97,7 +104,6 @@ export class PlayComponent implements OnInit {
 
       //TOURNAMENT_FINISHED
     })
-    
   }
 
   public onSelectedAnswer(answer: {letter: string, text: string}, id: string, index: number){

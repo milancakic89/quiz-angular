@@ -32,13 +32,19 @@ export class WaitingOthersComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.socket.emit('GET_ROOM_RESULTS', { roomName: this.room, user_id: this.user._id });
+       
       }
     });
 
   this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
-        this.results = data.users;
+      this.results = data.users;
+      this.socket.emit('LEAVE-ROOM', {roomName: this.room})
+      setTimeout(()=>{
         this.room = '';
+      },100)
+        
+        
     }
   })
   }

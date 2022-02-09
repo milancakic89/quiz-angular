@@ -27,12 +27,18 @@ export interface Room{
 @Injectable({providedIn: 'root'})
 export class SocketService{
     public socket: any;
+    public setupReady = false;
 
     public socketData = new BehaviorSubject<any>(null);
 
     constructor(private router: Router){
-        this.socket = io.connect(environment.socketUrl);
-        this.setup();
+        if(!this.setupReady){
+            this.socket = io.connect(environment.socketUrl);
+            this.setup();
+            this.setupReady = true;
+            console.log('setup')
+        }
+      
     }
     
     public setup(){
