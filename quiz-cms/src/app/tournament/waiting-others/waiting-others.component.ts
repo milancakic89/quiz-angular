@@ -40,11 +40,7 @@ export class WaitingOthersComponent implements OnInit {
     if (data && data.event === 'GET_ROOM_RESULTS'){
       this.results = data.users;
       this.socket.emit('LEAVE-ROOM', {roomName: this.room})
-      setTimeout(()=>{
-        this.room = '';
-      },100)
-        
-        
+    
     }
   })
   }
@@ -53,8 +49,17 @@ export class WaitingOthersComponent implements OnInit {
     this.playService.allowBackButton = true;
     this.tournamentService.room = '';
     setTimeout(()=>{
-      this.router.navigateByUrl('/profile')
+      location.href = 'https://kviz-live.web.app';
     }, 100)
+  }
+
+  public onFinishTest() {
+    this.playService.allowBackButton = true;
+    this.socket.emit('LEAVE-ROOM', {roomName: this.room});
+    setTimeout(()=>{
+      this.tournamentService.room = '';
+      this.router.navigateByUrl('/profile')
+    }, 200)
   }
 
   public onNextRound(){

@@ -89,7 +89,6 @@ export class PlayComponent implements OnInit {
             this.correct = 0
             this.showWaiting = false;
             this.btnIndex = 0;
-            console.log('happens: ' + this.room)
             this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex - 1});
           },1000)
          
@@ -108,6 +107,7 @@ export class PlayComponent implements OnInit {
 
   public onSelectedAnswer(answer: {letter: string, text: string}, id: string, index: number){
     this.questionSelected = answer;
+    console.log('letter selected')
     this.btnIndex = index;
     this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1})
   }
