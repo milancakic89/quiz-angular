@@ -89,7 +89,6 @@ export class RoomComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tableReady = false;
-    this.socket.emit('LEAVE-ROOM', {user_id: this.user._id, roomName: this.room})
   }
 
 }

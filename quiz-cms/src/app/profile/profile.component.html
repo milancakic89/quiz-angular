@@ -11,5 +11,6 @@
             <button (click)="onClick('/achievements')" class="button-yellow">Dostignuca</button>
             <button (click)="onClick('/ranking')" class="button-yellow">Tabela</button>
             <button (click)="logout()" class="button-yellow">Izloguj se</button>
+            <button (click)="cleanEmptyRooms()" class="button-yellow" *ngIf="isRoot">Pocisti prazne sobe</button>
     </div>
 </div>

@@ -90,6 +90,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public cleanEmptyRooms(){
+    this.socketService.emit('CLEAN_THE_EMPTY_ROOMS', {})
+  }
 
   public hideAchievementNotification(){
     this.achievementNotification = false;
@@ -149,8 +152,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public logout(){
     this.config.logged = false;
+    this.playService.allowBackButton = true;
     localStorage.clear();
-    this.router.navigateByUrl('')
+    setTimeout(()=>{
+      this.router.navigateByUrl('/login')
+    }, 50)
+    
   }
 
 }

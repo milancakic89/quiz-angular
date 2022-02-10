@@ -16,7 +16,8 @@ export type EventType = 'CREATE_ROOM' |
 'GET_ROOM_QUESTION' |
 'EVERYONE_ANSWERED' |
 'GET_ROOM_RESULTS' |
-'LEAVE-ROOM';
+'CLEAN_THE_EMPTY_ROOMS' |
+'LEAVE_ROOM';
 
 export interface Room{
     roomName?: string;
