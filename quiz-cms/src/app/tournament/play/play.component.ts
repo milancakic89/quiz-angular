@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
@@ -10,7 +11,7 @@ import { TournamentService } from '../tournament.service';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnInit, OnDestroy {
 
   constructor(private socket: SocketService, 
               private route: ActivatedRoute,
@@ -37,22 +38,27 @@ export class PlayComponent implements OnInit {
   public totalPlayers = 0;
   public form = null;
 
+  public subscription: Subscription = null as any;
+
+
   ngOnInit(): void {
     this.socketSetup()
     this.route.params.subscribe(params =>{
       if (params['id']){
         this.playService.allowBackButton = false;
+        console.log('play params subscribe')
         this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
       }
     });
+  }
 
-    
-    
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
   public socketSetup(){
     this.tournamentService.setupReady = true;
-    this.socket.socketData.subscribe(data =>{
+    this.subscription = this.socket.socketData.subscribe(data =>{
       if(data && data.event === 'UPDATE_WAITING_STATUS'){
         this.totalPlayers = data.users.length;
         data.users.forEach((user: any) =>{
@@ -106,10 +112,12 @@ export class PlayComponent implements OnInit {
   }
 
   public onSelectedAnswer(answer: {letter: string, text: string}, id: string, index: number){
-    this.questionSelected = answer;
-    console.log('letter selected')
-    this.btnIndex = index;
-    this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1})
+    if(!this.questionSelected){
+      this.questionSelected = answer;
+      this.btnIndex = index;
+      this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1})
+    }
+   
   }
 
 }

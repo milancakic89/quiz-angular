@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -37,7 +38,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   public tableReady = false;
   public createdBy = '';
 
-  
+  public subscription: Subscription = null as any;
 
   ngOnInit(): void {
     setTimeout(() =>{
@@ -59,7 +60,7 @@ export class RoomComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.socket.socketData.subscribe((data: any) =>{
+    this.subscription = this.socket.socketData.subscribe((data: any) =>{
       if(data && data.event === 'JOINED_ROOM'){
         this.roomUsers = data.users;
         this.createdBy = data.created_by;
@@ -88,6 +89,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe()
     this.tableReady = false;
   }
 
