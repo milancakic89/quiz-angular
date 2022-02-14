@@ -1,9 +1,10 @@
 
 .pirate{
 
-    &-login{
+    &-login,
+    &-profile{
         width: 90%;
-        height: 100vh;
+        height: 100%;
         max-width: 900px;
         margin: 0 auto;
         display: flex;
@@ -37,6 +38,46 @@
 
             .inner{
                 padding: 55px 70px 100px 70px;
+                overflow-y: auto;
+            }
+
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .mt-2{
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+    &-profile{
+        &-form-wrapper{
+            position: relative;
+            width: 100%;
+            padding-top: calc(100% * 1.38);
+            background-image: none;
+            background-size: contain;
+
+            .inner{
+                padding: 10px 0px 100px 0px;
+
+                .button-yellow{
+                    margin-bottom: 5px !important;
+                    height: 67px;
+                    cursor: pointer;
+                }
+
+                .footer-wood{
+                    background-image: url('../images/pirate-theme/headings/footer-wood.png');
+                    background-size: contain;
+                }
+
+                button:hover{
+                    color: red !important;
+                }
             }
 
             form{
@@ -72,6 +113,12 @@
         flex-direction: column;
 
     }
+}
+
+.footer-wood{
+    height: 40px;
+    width: 100%;
+    margin-top: 8px;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 450px){

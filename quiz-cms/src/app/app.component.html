@@ -46,11 +46,11 @@
         </div>
     </div>
     
-        <div class="scrollable-area" [ngClass]="{'not-logged': !isLogged}">
+        <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">
             <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
                 <div class="wrapper">
                     <span>{{ feedbackMessage }}</span>
-                    <button class="button-yellow-small" (click)="hideFeedback()">Ok</button>
+                    <button class="button-danger" (click)="hideFeedback()">Ok</button>
                 </div>
             </div>
             <div class="daily-reward-rulet"  *ngIf="dailyModal">
@@ -69,7 +69,7 @@
                                     <p class="reward-item" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}"><img
                                              src="../assets/images/new-theme/popup/reward-2.svg" alt=""></p>
                                 </div>
-                                <button class="button-yellow-small {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
+                                <button class="button-danger {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
                             </div>
             </div>
 

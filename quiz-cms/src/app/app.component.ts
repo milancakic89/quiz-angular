@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { Feedback, FeedbackMessageService } from './feedback.service';
@@ -57,6 +57,7 @@ export class AppComponent implements OnInit{
   public ticketAnimationCounter = 0;
   public allowRewardBtn = false;
   public successFeedback = true;
+  public centerContent = false;
   public stars: number[] = [];
   public gameResults: GameData = {
     success: false,
@@ -64,8 +65,17 @@ export class AppComponent implements OnInit{
     results: null
   };
 
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerContent = true;
+    }
+  }
 
   ngOnInit(){
+    if(window.innerHeight > 800){
+      this.centerContent = true;
+    }
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
     })

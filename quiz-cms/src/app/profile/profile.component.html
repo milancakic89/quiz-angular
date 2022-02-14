@@ -1,4 +1,4 @@
-<div class="on-game-leave" *ngIf="gameLeaved">
+<!-- <div class="on-game-leave" *ngIf="gameLeaved">
     <p>Napustanjem igre gubite 1 zivot!!!</p>
     <div class="leave-body">
         <span>Trudite se da ne izlazite iz igre dok ona traje!</span>
@@ -13,4 +13,21 @@
             <button (click)="logout()" class="button-yellow">Izloguj se</button>
             <button (click)="cleanEmptyRooms()" class="button-yellow" *ngIf="isRoot">Pocisti prazne sobe</button>
     </div>
+</div> -->
+<div class="pirate-login centralize {{centerLogin}}">
+    <div class="pirate-login-wrapper ">
+        <img class="heading-image" width="auto" height="350" src="../../assets/images/pirate-theme/headings/main-menu.png"/>
+        <div class="pirate-profile-form-wrapper">
+            <div class="inner">
+            <button (click)="onClick('/play')" class="button-yellow">Igraj</button>
+            <button (click)="onClick('/questions')" class="button-yellow">Pitanja</button>
+            <button (click)="onClick('/achievements')" class="button-yellow">Dostignuca</button>
+            <button (click)="onClick('/ranking')" class="button-yellow">Tabela</button>
+            <button (click)="logout()" class="button-yellow">Izloguj se</button>
+            <button (click)="cleanEmptyRooms()" class="button-yellow" *ngIf="isRoot">Pocisti prazne sobe</button>
+            <div class="footer-wood"></div>
+            </div>
+        </div>
+    </div>
+   
 </div>

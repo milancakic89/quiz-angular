@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public name = '';
   public showNameBox = false;
+  public centerLogin = false;
 
   public achievementNotification = false;
 
@@ -57,7 +58,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     //   });
   }
 
+  
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
+  }
+
   ngOnInit(): void {
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
     this.playService.allowBackButton = true;
     this.imageUrl = localStorage.getItem('avatar') || '';
     this.clicked = false;

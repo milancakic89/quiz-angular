@@ -444,7 +444,9 @@ $headerHeight: 65px;
     position: relative;
     background-color: rgb(111, 182, 234);
 
-
+    &.true{
+        justify-content: center;
+    }
 
     &.not-logged {
         height: 100vh !important;
@@ -627,7 +629,7 @@ $headerHeight: 65px;
         display: flex;
         position: relative;
 
-        .button-yellow-small {
+        .button-danger {
             position: absolute;
             top: calc(100% - 40px);
             left: 50%;
