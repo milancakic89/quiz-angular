@@ -35,13 +35,14 @@ button {
         background-size: 100% 100%;
 
         &:hover{
+            cursor: pointer;
             background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Hover.png');
         }
 
         @media screen and (min-width: 300px) and (max-width: 450px){
-            padding: 6px 18px 10px 17px;
+            padding: 3vw 5.5vw 3.5vw 5.2vw;
             font-size: 12px;
-            height: 30px;
+            height: 10vw;
             background-size: 100% 114%;
         }
     }
@@ -57,13 +58,14 @@ button {
         background-size: 100% 100%;
 
         @media screen and (min-width: 300px) and (max-width: 450px){
-            padding: 6px 18px 10px 17px;
+            padding: 3vw 5.5vw 3.5vw 5.2vw;
             font-size: 12px;
-            height: 30px;
+            height: 10vw;
             background-size: 100% 114%;
         }
 
         &:hover{
+            cursor: pointer;
             background-image: url('../../assets/images/pirate-theme/buttons/Button_Red_Hover.png');
         }
     }
