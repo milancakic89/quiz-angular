@@ -5,7 +5,7 @@
             <div *ngIf="roomInput">
                 <form #roomform="ngForm" (ngSubmit)="roomform.valid && joinRoom()">
                     <input name="roomName" placeholder="Sifra turnira" type="text" required [(ngModel)]="enterRoom" />
-                    <button type="button-primary submit">Udji na turnir</button>
+                    <button class="button-primary" type="submit">Udji na turnir</button>
                 </form>
             </div>
             <button class="button-yellow">Globalni turniri</button>

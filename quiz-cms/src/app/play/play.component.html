@@ -5,7 +5,7 @@
     <button class="button-yellow" (click)="backToProfile()">Ok</button>
   </div>
 </div>
-<div class="play-game" *ngIf="showModal && lives > 0">
+<!-- <div class="play-game" *ngIf="showModal && lives > 0">
   <div
     class="dropdown-categories"
     [ngClass]="{ 'close-categories': playCategory }">
@@ -81,7 +81,30 @@
     </div>
     <a class="button-danger" routerLink="/profile">Nazad</a>
   </div>
+</div> -->
+<div class="pirate-login centralize" *ngIf="showModal && lives > 0">
+  <div class="pirate-login-wrapper ">
+      <img class="heading-image" width="auto" height="350" src="../../assets/images/pirate-theme/headings/main-menu.png"/>
+      <div class="pirate-play-form-wrapper">
+          <div class="inner">
+            <a class="button-yellow tournament" routerLink="/tournament">Turnir</a>
+          <button class="button-yellow"  (click)="closeModal('GEOGRAFIJA', 'GEOGRAFIJA')">Geografija</button>
+          <button class="button-yellow" (click)="closeModal('ISTORIJA', 'GEOGRAFIJA')">Istorija</button>
+          <button class="button-yellow" (click)="closeModal('MUZIKA', 'ISTORIJA')">Muzika</button>
+          <button class="button-yellow" (click)="closeModal('FILMOVI I SERIJE', 'MUZIKA')">Filmovi i serije</button>
+          <button class="button-yellow" (click)="closeModal('POZNATE LICNOSTI', 'FILMOVI I SERIJE')">Poznate licnosti</button>
+          <button class="button-yellow" (click)="closeModal('SPORT', 'POZNATE LICNOSTI')">Sport</button>
+          <button class="button-yellow" (click)="closeModal('RAZNO', 'SPORT')">Razno</button>
+          <a class="button-yellow" routerLink="/profile">Nazad</a>
+          </div>
+       
+          <div class="footer-wood"></div>
+      </div>
+  </div>
+ 
 </div>
+
+
 <div class="game-box" *ngIf="!showModal && lives > 0">
   <div class="question-box-wrapper">
     <div class="question-box-new" *ngIf="question.type === 'REGULAR'">

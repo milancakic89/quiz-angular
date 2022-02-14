@@ -53,26 +53,65 @@
         }
     }
 
-    &-profile{
+    &-play{
         &-form-wrapper{
             position: relative;
             width: 100%;
-            padding-top: calc(100% * 1.38);
+            padding-top: calc(100% * 1.68);
             background-image: none;
             background-size: contain;
 
             .inner{
-                padding: 10px 0px 100px 0px;
-
+                padding: 10px 0px 30px 0px;
+                display: flex;
+                flex-direction: column;
                 .button-yellow{
                     margin-bottom: 5px !important;
                     height: 67px;
                     cursor: pointer;
                 }
 
-                .footer-wood{
-                    background-image: url('../images/pirate-theme/headings/footer-wood.png');
-                    background-size: contain;
+                .button-primary{
+                    padding: 3vw 8.5vw 3.5vw 8.5vw;
+                }
+
+                button:hover{
+                    color: red !important;
+                }
+            }
+
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .mt-2{
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+    &-profile{
+        &-form-wrapper{
+            position: relative;
+            width: 100%;
+            padding-top: calc(100% * 1.48);
+            background-image: none;
+            background-size: contain;
+
+            .inner{
+                padding: 10px 0px 30px 0px;
+                display: flex;
+                flex-direction: column;
+                .button-yellow{
+                    margin-bottom: 5px !important;
+                    height: 67px;
+                    cursor: pointer;
+                }
+
+                .button-primary{
+                    padding: 3vw 8.5vw 3.5vw 8.5vw;
                 }
 
                 button:hover{
@@ -117,8 +156,13 @@
 
 .footer-wood{
     height: 40px;
+    position: absolute;
+    top: 100%;
     width: 100%;
-    margin-top: 8px;
+    margin-top:20px;
+    background-image: url('../images/pirate-theme/headings/footer-wood.png');
+    background-size: 100% 100%;
+    
 }
 
 @media only screen and (min-width: 300px) and (max-width: 450px){
