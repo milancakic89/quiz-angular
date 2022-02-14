@@ -16,16 +16,12 @@ export class AuthorizationGuard implements CanActivate {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return new Promise((resolve, reject)=>{
-        //     if(this.config.logged){
-        //         resolve(true)
-        //         return;
-        //     }
-        //    resolve(false)
-        this.config.user.subscribe(user =>{
-            if(user){
-                return resolve(true);
+            if(this.config.logged){
+                resolve(true)
+                return;
             }
-        })
+           resolve(false)
+
         })
 
     }

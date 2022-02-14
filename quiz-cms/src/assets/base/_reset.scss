@@ -125,3 +125,16 @@ button {
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
+    font-size: 20px;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+    font-size: 20px;
+}

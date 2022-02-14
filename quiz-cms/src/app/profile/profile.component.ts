@@ -154,10 +154,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.config.logged = false;
     this.playService.allowBackButton = true;
     localStorage.clear();
-    setTimeout(()=>{
-      this.router.navigateByUrl('/login')
-    }, 50)
-    
+    this.router.navigateByUrl('/login') 
   }
 
 }
