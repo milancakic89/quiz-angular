@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
 import { basicDetails } from 'src/app/shared/basic-details';
@@ -18,9 +18,20 @@ export class RegisterComponent implements OnInit {
 
   get register() { return this._registerDetails}
 
-  public title = basicDetails.title
+  public title = basicDetails.title;
+  public centerLogin = false;
 
   ngOnInit(): void {
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
+  }
+
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
   }
 
   public async onSubmit(){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackMessageService } from 'src/app/feedback.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -17,14 +17,24 @@ export class ResetComponent implements OnInit {
   set email(value){ this._resetDetails.email = value}
 
   public title = 'Kviz opsteg znanja';
+  public centerLogin = false;
 
   ngOnInit(): void {
-    this.notification.notification.emit({ success: false, message: 'Ova opcija je u fazi izrade' });
-    setTimeout(()=>{
-      this.router.navigateByUrl('/')
-    }, 1000);
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
+    // this.notification.notification.emit({ success: false, message: 'Ova opcija je u fazi izrade' });
+    // setTimeout(()=>{
+    //   this.router.navigateByUrl('/')
+    // }, 1000);
   }
 
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
+  }
 
   public onSubmit(){}
 

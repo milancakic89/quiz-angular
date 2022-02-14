@@ -1,4 +1,4 @@
-<div class="login">
+<!-- <div class="login">
     <div class="login-form-wrapper">
         <h4 class="color-white logo">{{ title }}</h4>
         <form class="login-form" #resetForm="ngForm" (submit)="resetForm.valid && onSubmit()">
@@ -18,4 +18,29 @@
             </div>
         </form>
     </div>
+</div> -->
+<div class="pirate-login centralize {{centerLogin}}">
+    <div class="pirate-login-wrapper ">
+        <img class="heading-image" width="auto" height="350" src="../../../assets/images/pirate-theme/headings/heading.png" />
+        <div class="pirate-login-form-wrapper">
+            <div class="inner">
+                <form class="login-form" #resetForm="ngForm" (submit)="resetForm.valid && onSubmit()">
+                    <div class="form-row column">
+                        <p class="form-heading">Resetuj lozinku</p>
+                            <input name="email" 
+                                   type="email"
+                                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+"
+                                   [(ngModel)]="email"
+                                   required
+                                   placeholder="Email"
+                                   [ngClass]="{'form-submitted': resetForm.submitted}" />          
+                            <button class="button-primary submit" name="submit" [ngClass]="{'button-gray': resetForm.invalid}">Resetuj</button>
+                            <a routerLink='/' class="button-danger">Uloguj se</a>  
+                           
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
 </div>
