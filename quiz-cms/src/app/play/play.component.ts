@@ -70,6 +70,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public isCategoryAllowed(category: String) {
+    return true;
     if (category === 'GEOGRAFIJA' || this.config.isRoot) {
       return true;
     }

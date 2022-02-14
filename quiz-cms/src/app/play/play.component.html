@@ -6,9 +6,6 @@
   </div>
 </div>
 <div class="play-game" *ngIf="showModal && lives > 0">
-    <div class="navigation">
-      <a class=button-back (click)="backToProfile()"></a>
-    </div>
   <div
     class="dropdown-categories"
     [ngClass]="{ 'close-categories': playCategory }">
@@ -82,6 +79,7 @@
         <span class="title">Razno</span>
       </div>
     </div>
+    <a class="button-danger" routerLink="/profile">Nazad</a>
   </div>
 </div>
 <div class="game-box" *ngIf="!showModal && lives > 0">
