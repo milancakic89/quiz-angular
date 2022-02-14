@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
@@ -29,10 +29,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public user = null as unknown as User;
   public title = 'Kviz opsteg znanja';
   public feedbackClass = '';
-
+  public centerLogin = false;
   public development = false;
 
   ngOnInit(): void {
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
     // try{
     //   (window as any).fbAsyncInit = function () {
     //     FB.init({
@@ -54,6 +57,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
     //   this.notification.notification.emit({success: false, message: 'Facebook init problem!!!'})
     // }
 
+  }
+
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
   }
 
   public facebookSignin(): void {

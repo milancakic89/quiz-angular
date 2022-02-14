@@ -209,7 +209,13 @@
     }
 
 }
+.d-flex{
+    display: flex;
+}
 
+.centralize.true{
+    justify-content: center !important;
+}
 @keyframes dropdown-login {
     0% {
         top: -520px;

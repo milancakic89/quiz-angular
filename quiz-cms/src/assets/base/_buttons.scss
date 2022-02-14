@@ -25,6 +25,48 @@ button {
         }
     }
 
+    &-primary{
+        align-self: center;
+        width: auto;
+        padding: 10px 25px 15px 25px;
+        color: #fff;
+        font-weight: 700;
+        background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Normal.png');
+        background-size: 100% 100%;
+
+        &:hover{
+            background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Hover.png');
+        }
+
+        @media screen and (min-width: 300px) and (max-width: 450px){
+            padding: 6px 18px 10px 17px;
+            font-size: 12px;
+            height: 30px;
+            background-size: 100% 114%;
+        }
+    }
+
+    &-danger{
+        align-self: center;
+        padding: 10px 25px 15px 25px;
+        width: auto;
+        color: #fff;
+        font-weight: 700;
+
+        background-image: url('../../assets/images/pirate-theme/buttons/Button_Red_Normal.png');
+        background-size: 100% 100%;
+
+        @media screen and (min-width: 300px) and (max-width: 450px){
+            padding: 6px 18px 10px 17px;
+            font-size: 12px;
+            height: 30px;
+            background-size: 100% 114%;
+        }
+
+        &:hover{
+            background-image: url('../../assets/images/pirate-theme/buttons/Button_Red_Hover.png');
+        }
+    }
 
 
 

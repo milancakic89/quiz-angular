@@ -3,6 +3,7 @@
 
 * {
     box-sizing: border-box;
+    background-repeat: no-repeat;
 }
 
 span,
@@ -30,6 +31,9 @@ a {
     font-family: 'Heebo', sans-serif;
 }
 
+::placeholder{
+    color: #fff;
+}
 body {
     width: 100%;
     height: 100vh;
@@ -37,9 +41,7 @@ body {
     font-size: 100%;
     margin: 0;
     padding: 0;
-    background-image: url('../images/new-theme/cartoon-bg.png');
-    background-size: cover;
-    background-position-x: center center;
+   background-color: #000;
 
 }
 

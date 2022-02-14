@@ -48,6 +48,9 @@
 
 .mb-20 {
     margin-bottom: 20px !important;
+    @media screen and (min-width: 300px) {
+        margin-bottom: 8px !important;
+    }
 }
 
 .nav-buttons {
