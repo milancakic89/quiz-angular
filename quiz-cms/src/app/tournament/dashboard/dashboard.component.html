@@ -1,4 +1,4 @@
-<div class="tournaments">
+<!-- <div class="tournaments">
     <div class="dropdown-menu" [ngClass]="{'close': clicked}">
             <button (click)="createRoom()" class="button-yellow">Kreiraj Turnir</button>
             <button (click)="roomInput = !roomInput" class="button-yellow">Udji na turnir</button>
@@ -11,4 +11,26 @@
             <button class="button-yellow">Globalni turniri</button>
             <a class="button-yellow" routerLink="/play">Nazad</a>
     </div>
+</div> -->
+
+<div class="pirate-tournament-login centralize {{centerLogin}}">
+    <div class="pirate-tournament-wrapper ">
+        <img class="heading-image" width="auto" height="350" src="../../assets/images/pirate-theme/headings/main-menu.png"/>
+        <div class="pirate-tournament-form-wrapper">
+            <div class="inner">
+                <button (click)="createRoom()" class="button-yellow">Kreiraj Turnir</button>
+                <button (click)="roomInput = !roomInput" class="button-yellow">Udji na turnir</button>
+                <div *ngIf="roomInput">
+                    <form #roomform="ngForm" (ngSubmit)="roomform.valid && joinRoom()">
+                        <input name="roomName" placeholder="Sifra turnira" type="text" required [(ngModel)]="enterRoom" />
+                        <button class="button-primary" type="submit">Udji na turnir</button>
+                    </form>
+                </div>
+                <button class="button-yellow">Globalni turniri</button>
+                <a class="button-yellow" routerLink="/play">Nazad</a>
+            </div>
+            <div class="footer-wood"></div>
+        </div>
+    </div>
+   
 </div>

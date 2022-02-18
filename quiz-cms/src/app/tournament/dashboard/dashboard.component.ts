@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
@@ -23,8 +23,12 @@ export class DashboardComponent implements OnInit {
   public clicked = false;
   public roomInput = false;
   public enterRoom = '';
+  public centerLogin = false;
 
   ngOnInit(): void {
+    if(window.innerHeight > 650){
+      this.centerLogin = true;
+    }
     this.socketService.socketData.subscribe((data: any) =>{
       if(data && data.event === 'ROOM_CREATED' && data.success){
         this.room = data.roomName
@@ -34,6 +38,13 @@ export class DashboardComponent implements OnInit {
        
       }
     })
+  }
+
+  @HostListener('window:resize')
+  checkCenterLogin(){
+    if(window.innerHeight > 800){
+      this.centerLogin = true;
+    }
   }
 
   public onClick(path: string){

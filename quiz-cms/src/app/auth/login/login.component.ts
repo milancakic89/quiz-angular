@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public development = false;
 
   ngOnInit(): void {
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
     // try{
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:resize')
   checkCenterLogin(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
   }

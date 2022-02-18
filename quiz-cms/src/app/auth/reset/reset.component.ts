@@ -20,7 +20,7 @@ export class ResetComponent implements OnInit {
   public centerLogin = false;
 
   ngOnInit(): void {
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
     // this.notification.notification.emit({ success: false, message: 'Ova opcija je u fazi izrade' });
@@ -31,7 +31,7 @@ export class ResetComponent implements OnInit {
 
   @HostListener('window:resize')
   checkCenterLogin(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
   }

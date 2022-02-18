@@ -22,14 +22,14 @@ export class RegisterComponent implements OnInit {
   public centerLogin = false;
 
   ngOnInit(): void {
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
   }
 
   @HostListener('window:resize')
   checkCenterLogin(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
   }

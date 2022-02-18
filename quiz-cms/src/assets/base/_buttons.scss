@@ -75,9 +75,9 @@ button {
     &-yellow {
         width: 100%;
         max-width: 400px;
-        height: 60px;
+        max-height: 50px;
         min-height: 50px;
-        font-size: 24px;
+        font-size: 17px;
         background-image: url('../images/pirate-theme/buttons/wood-btn.png');
         background-size: 100% 100%;
         background-color: transparent;

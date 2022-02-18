@@ -102,7 +102,9 @@ button {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
+    background-image: url('../images/pirate-theme/reset/Scroll_Bar.png');
+    background-size: contain;
 }
 
 /* Track */
@@ -112,14 +114,12 @@ button {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(0, 91, 119);
-    border-radius: 3px;
+    background-image: url('../images/pirate-theme/reset/Scroll_Bar_Roller.png');
+    background-size: 100% 100%;
+    border-radius: 20px;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

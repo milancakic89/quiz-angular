@@ -34,7 +34,6 @@
         <div class="left-info">
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
-        <span class="text-white">Room: {{ room }}</span>
         <div class="right-info">
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
@@ -45,7 +44,6 @@
             <p class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
         </div>
     </div>
-    
         <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">
             <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
                 <div class="wrapper">
@@ -72,7 +70,6 @@
                                 <button class="button-danger {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
                             </div>
             </div>
-
             <router-outlet></router-outlet>
         </div>
 </div>

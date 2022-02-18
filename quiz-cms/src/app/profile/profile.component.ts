@@ -61,13 +61,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   @HostListener('window:resize')
   checkCenterLogin(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
   }
 
   ngOnInit(): void {
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerLogin = true;
     }
     this.playService.allowBackButton = true;

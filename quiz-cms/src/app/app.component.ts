@@ -67,13 +67,13 @@ export class AppComponent implements OnInit{
 
   @HostListener('window:resize')
   checkCenterLogin(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerContent = true;
     }
   }
 
   ngOnInit(){
-    if(window.innerHeight > 800){
+    if(window.innerHeight > 650){
       this.centerContent = true;
     }
     this.feedbackService.DailyPrice.subscribe(bool =>{
