@@ -11,6 +11,8 @@ import { ProfileService } from './profile/profile.service';
 import { SocketService } from './socket-service';
 import { PlayService } from './play/play.service';
 import { TournamentService } from './tournament/tournament.service';
+import { SettingsService } from './settings/settings.service';
+import { Settings } from './settings/form/form.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit{
               private modal: ModalWrapper,
               private service: AppService,
               private playservice: PlayService,
+              private settings: SettingsService,
               private profileService: ProfileService,
               private tournamentService: TournamentService,
               private notificationService: NotificationService,
@@ -55,6 +58,8 @@ export class AppComponent implements OnInit{
   public secondsString = '00';
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
+  public newName = '';
+  public showNewNameModal = false;
   public allowRewardBtn = false;
   public successFeedback = true;
   public centerContent = false;
@@ -95,6 +100,9 @@ export class AppComponent implements OnInit{
 
     this.config.user.subscribe(user =>{
       if(user){
+        if(user.name === 'Kvizoman'){
+          this.showNewNameModal = true;
+        }
         this.user = user;
         this.spinner = false;
         this.lives = Array(user.lives);
@@ -139,7 +147,20 @@ export class AppComponent implements OnInit{
     }
   }
 
-
+  public async saveName(){
+    if(this.newName === ''){
+      return;
+    }
+    const settings: Settings = {
+      name: this.newName,
+      image: null
+    }
+    const {success} = await this.settings.saveSettings(settings);
+    if(!success){
+      console.log('not saved')
+    }
+    this.showNewNameModal = false;
+  }
 
   public countdown(){
     clearInterval(this.lives_interval);

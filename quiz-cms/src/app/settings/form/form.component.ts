@@ -5,7 +5,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { UploadService } from 'src/app/upload.service';
 import { SettingsService } from '../settings.service';
 
-interface Settings{
+export interface Settings{
   name: string;
   image: any;
 }
