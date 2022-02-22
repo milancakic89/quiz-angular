@@ -24,46 +24,47 @@ button {
         }
     }
 
-    &-primary{
+    &-primary {
         align-self: center;
         width: auto;
-        padding: 10px 25px 15px 25px;
+        padding: 10px 15px 15px 15px;
         color: #fff;
         font-weight: 700;
         background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Normal.png');
         background-size: 100% 100%;
 
-        &:hover{
+        &:hover {
             cursor: pointer;
             background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Hover.png');
         }
 
-        @media screen and (min-width: 300px) and (max-width: 450px){
-            padding: 3vw 5.5vw 3.5vw 5.2vw;
+        @media screen and (min-width: 300px) and (max-width: 667px) {
+            padding: 1vw 5.5vw 1.5vw 5.2vw;
             font-size: 12px;
-            height: 10vw;
+            height: 6vw;
             background-size: 100% 114%;
         }
     }
 
-    &-danger{
+    &-danger {
         align-self: center;
-        padding: 10px 25px 15px 25px;
+        padding: 10px 10px 15px 10px;
         width: auto;
+        font-size: 12px;
         color: #fff;
         font-weight: 700;
 
         background-image: url('../../assets/images/pirate-theme/buttons/Button_Red_Normal.png');
         background-size: 100% 100%;
 
-        @media screen and (min-width: 300px) and (max-width: 450px){
+        @media screen and (min-width: 300px) and (max-width: 450px) {
             padding: 3vw 5.5vw 3.5vw 5.2vw;
             font-size: 12px;
             height: 10vw;
             background-size: 100% 114%;
         }
 
-        &:hover{
+        &:hover {
             cursor: pointer;
             background-image: url('../../assets/images/pirate-theme/buttons/Button_Red_Hover.png');
         }
@@ -123,7 +124,7 @@ button {
                 color: rgb(31, 15, 0) !important;
             }
 
-            &.false{
+            &.false {
                 filter: grayscale(1);
             }
 
