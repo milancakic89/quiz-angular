@@ -28,7 +28,7 @@ button {
         align-self: center;
         width: auto;
         padding: 0px 15px;
-        height: 42px;
+        height: 42px !important;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -53,7 +53,7 @@ button {
     &-danger {
         align-self: center;
         width: auto;
-        height: 42px;
+        height: 42px !important;
         padding: 0px 15px;
         display: flex;
         justify-content: center;

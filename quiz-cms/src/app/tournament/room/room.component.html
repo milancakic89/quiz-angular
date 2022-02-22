@@ -1,7 +1,13 @@
-<div class="room">
+<div class="room" *ngIf="tableReady">
     <img class="banner" src="../../../assets/images/pirate-theme/headings/tournament.png"/>
-    <div class="table" *ngIf="tableReady">
-        <button class="button button-primary" *ngIf="root" (click)="startTournament()">{{ room }}</button>
+    <div class="buttons-wrapper">
+        <button class="button button-danger" *ngIf="root">KOD: {{ room }}</button>
+        <button class="button-primary"
+                (click)="startTournament()">Igraj</button>
+    </div>
+   
+    <div class="table">
+       
         <div class="inner">
             <div class="user" *ngFor="let user of roomUsers">
                 <div class="image" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}"></div>

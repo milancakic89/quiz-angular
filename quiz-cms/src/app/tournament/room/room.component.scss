@@ -11,6 +11,31 @@
 .room {
     display: flex;
     flex-direction: column;
+    position: relative;
+    align-items: center;
+
+    .buttons-wrapper {
+        position: absolute;
+        display: inline-flex;
+        margin: 0 auto;
+        align-items: center;
+        top: 110px;
+        z-index: 600;
+
+        button {
+            margin: 0px;
+
+            &:first-child {
+                &:hover {
+                    background-image: url('../../../assets/images/pirate-theme/buttons/Button_Red_Normal.png');
+                }
+            }
+
+            &:last-child {
+                margin-left: -5px;
+            }
+        }
+    }
 
     h5 {
         text-align: center;
@@ -23,18 +48,12 @@
         background-image: url('../../../assets/images/pirate-theme/popups/Pop_Up_Leaderboard.png');
         background-size: 100% 100%;
 
-        .button-primary {
-            position: absolute !important;
-            z-index: 90;
-            left: 50%;
-            top: -30px;
-            transform: translate(-50%, -50%);
-        }
+
 
         .inner {
             width: 100%;
             height: 100%;
-            padding: 20px;
+            padding: 30px 20px 60px 20px;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
