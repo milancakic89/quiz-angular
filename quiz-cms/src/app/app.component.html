@@ -69,18 +69,24 @@
             <div class="daily-reward-rulet"  *ngIf="dailyModal">
                             <div class="daily-reward-rulet-box">
                                 <div class="daily-items">
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}"><img
-                                             src="../assets/images/new-theme/popup/reward-3.svg" alt=""></p>
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}"><img
-                                             src="../assets/images/new-theme/popup/reward-1.svg" alt=""></p>
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}"><img
-                                             src="../assets/images/new-theme/popup/reward-5.svg" alt=""></p>
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}"><img
-                                             src="../assets/images/new-theme/popup/reward-4.svg" alt=""></p>
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}"><img
-                                             src="../assets/images/new-theme/popup/reward-10.svg" alt=""></p>
-                                    <p class="reward-item" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}"><img
-                                             src="../assets/images/new-theme/popup/reward-2.svg" alt=""></p>
+                                    <p class="reward-item reward-3" [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}">
+                                        <span class="inner-item">3</span>
+                                    </p>
+                                    <p class="reward-item reward-1" [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}">
+                                        <span class="inner-item">1</span>
+                                    </p>
+                                    <p class="reward-item reward-5" [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}">
+                                        <span class="inner-item">5</span>
+                                    </p>
+                                    <p class="reward-item reward-4" [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}">
+                                        <span class="inner-item">4</span>
+                                    </p>
+                                    <p class="reward-item reward-10" [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}">
+                                        <span class="inner-item">10</span>
+                                    </p>
+                                    <p class="reward-item reward-2" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}">
+                                        <span class="inner-item">2</span>
+                                    </p>
                                 </div>
                                 <button class="button-danger {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
                             </div>
