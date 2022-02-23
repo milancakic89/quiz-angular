@@ -1,0 +1,32 @@
+.shop {
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.true{
+        justify-content: center;
+    }
+
+    .heading-image {
+        width: 100%;
+        max-width: 500px;
+        height: 100px;
+        background-image: url('../../assets/images/pirate-theme/headings/Shops_Cap.png');
+        background-size: 100% 100%;
+        background-position: center center;
+        z-index: 10;
+    }
+
+    &-body {
+        margin-top: -80px;
+        width: 95%;
+        max-width: 500px;
+        height: calc(95% * 1.38);
+        max-height: 620px;
+        background-image: url('../../assets/images/pirate-theme/popups/shop-bg.png');
+        background-size: contain;
+        background-position: center 0%;
+    }
+}

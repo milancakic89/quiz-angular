@@ -44,13 +44,17 @@
             <p class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
         </div>
     </div>
-        <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">
+    <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">
+            <!-- IN GAME MODALS-->
+            <!-- NOTIFICATION MESSAGE -->
             <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
                 <div class="wrapper">
                     <span>{{ feedbackMessage }}</span>
                     <button class="button-danger" (click)="hideFeedback()">Ok</button>
                 </div>
             </div>
+
+            <!-- PROVIDE NAME -->
             <div class="provide-name" *ngIf="showNewNameModal">
                 <div class="name-wrapper">
                     <div class="body">
@@ -60,6 +64,8 @@
                 </div>
               
             </div>
+
+            <!-- DAILY REWARD -->
             <div class="daily-reward-rulet"  *ngIf="dailyModal">
                             <div class="daily-reward-rulet-box">
                                 <div class="daily-items">
@@ -79,6 +85,7 @@
                                 <button class="button-danger {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
                             </div>
             </div>
+            <!-- END OF MODALS-->
             <router-outlet></router-outlet>
         </div>
 </div>

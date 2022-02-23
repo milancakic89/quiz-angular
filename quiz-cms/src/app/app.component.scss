@@ -153,6 +153,14 @@ $headerHeight: 65px;
     }
 }
 
+.text-white {
+    color: #fff !important;
+
+    span {
+        color: #fff !important;
+    }
+}
+
 .user-header {
     display: flex;
     position: sticky;
@@ -163,7 +171,6 @@ $headerHeight: 65px;
     overflow: hidden;
     z-index: 1000;
     margin: 0 auto;
-    background-color: rgb(111, 182, 234);
 
     .left-info,
     .right-info {
@@ -255,8 +262,11 @@ $headerHeight: 65px;
             transition: all 2s linear;
             min-width: 70px;
             height: 50px;
+            overflow: hidden;
+            margin-right: 4px;
             display: flex;
-            background: rgb(199, 128, 66);
+            background-color: rgb(79, 49, 45);
+            border: 2px solid rgba(190, 108, 0, 0.8);
             border-radius: 5px;
             justify-content: center;
             align-items: center;
@@ -291,11 +301,15 @@ $headerHeight: 65px;
             min-width: 70px;
             height: 50px;
             display: flex;
-            background: rgb(199, 128, 66);
+            margin-right: 4px;
+            background-color: rgb(79, 49, 45);
+            border: 2px solid rgba(190, 108, 0, 0.8);
             border-radius: 5px;
             justify-content: center;
             align-items: center;
             color: #fff !important;
+            margin-right: 4px;
+
 
             &-icon {
                 margin-right: 0px;
@@ -307,6 +321,7 @@ $headerHeight: 65px;
                 height: 26px !important;
 
 
+
                 @media screen and (min-width: 768px) {
                     margin-right: 10px;
                     width: 35px !important;
@@ -316,6 +331,14 @@ $headerHeight: 65px;
                 @media screen and (min-width: 901px) {
                     width: 40px !important;
                     height: 40px !important;
+                }
+            }
+
+            p {
+                color: #fff;
+
+                span {
+                    color: #fff;
                 }
             }
 
@@ -451,13 +474,22 @@ $headerHeight: 65px;
 .scrollable-area {
     width: 100%;
     max-width: 900px;
-    margin: 0 auto;
+    margin: -60px auto 0 auto;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px);
+    height: calc(100vh + 60px);
     overflow: hidden;
     position: relative;
-    background-color: rgb(111, 182, 234);
+    background: rgba(61, 156, 255, 1);
+    
+
+
+
+
+
+
+    ;
+
 
     &.true {
         justify-content: center;
@@ -465,6 +497,7 @@ $headerHeight: 65px;
 
     &.not-logged {
         height: 100vh !important;
+        margin: 0 auto;
     }
 }
 
