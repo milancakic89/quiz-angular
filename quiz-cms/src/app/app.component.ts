@@ -62,7 +62,7 @@ export class AppComponent implements OnInit{
   public showNewNameModal = false;
   public allowRewardBtn = false;
   public successFeedback = true;
-  public centerContent = false;
+  public centerContent = true;
   public stars: number[] = [];
   public gameResults: GameData = {
     success: false,
