@@ -10,6 +10,8 @@ export class ShopComponent implements OnInit {
   constructor() { }
 
   public centerContent = false;
+  public purchasingModal = false;
+  public purchaseLink = '';
 
   ngOnInit(): void {
     if (window.innerHeight > 650) {
@@ -22,5 +24,11 @@ export class ShopComponent implements OnInit {
     if (window.innerHeight > 650) {
       this.centerContent = true;
     }
+  }
+
+  public purchasing(){
+    setTimeout(()=>{
+      this.purchasingModal = true
+    }, 500)
   }
 }

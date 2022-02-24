@@ -1,3 +1,22 @@
+.purchase{
+    width: 100%;
+    height: calc(100vh - 60px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    a{
+        z-index: 100;
+    }
+
+    iframe{
+        width: 100%;
+        height: 100%;
+        z-index: 90;
+    }
+}
+
+
+
 .shop {
     width: 100%;
     height: calc(100vh - 60px);
@@ -5,12 +24,50 @@
     flex-direction: column;
     align-items: center;
 
-    &.true{
+    &.true {
         justify-content: center;
     }
 
+    .shop-item {
+        width: 30%;
+        padding-top: 30%;
+        position: relative;
+        max-width: 100px;
+        max-height: 100px;
+        margin: 5px;
+
+
+        .inner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: url('../../assets/images/pirate-theme/items/inventory-item.png');
+            background-size: 100% 100%;
+            color: orange;
+
+            span {
+                line-height: 15px;
+                letter-spacing: 1px;
+            }
+
+            img {
+                width: 45%;
+            }
+        }
+    }
+
+
+
     .heading-image {
         width: 100%;
+
         max-width: 500px;
         height: 100px;
         background-image: url('../../assets/images/pirate-theme/headings/Shops_Cap.png');
@@ -22,9 +79,15 @@
     &-body {
         margin-top: -80px;
         width: 95%;
+        display: flex;
+        flex-wrap: wrap;
         max-width: 500px;
+        padding: 20% 10%;
         height: calc(95% * 1.38);
         max-height: 620px;
+        justify-content: space-between;
+        align-content: flex-start;
+        align-items: center;
         background-image: url('../../assets/images/pirate-theme/popups/shop-bg.png');
         background-size: contain;
         background-position: center 0%;
