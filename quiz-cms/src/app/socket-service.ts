@@ -17,6 +17,11 @@ export type EventType = 'CREATE_ROOM' |
 'EVERYONE_ANSWERED' |
 'GET_ROOM_RESULTS' |
 'CLEAN_THE_EMPTY_ROOMS' |
+'ADD_FRIEND' |
+'FRIEND_ALLREADY_REQUESTED' |
+'ADD_FRIEND_FAILED' |
+'ACCEPT_FRIEND' |
+'SAVE_SOCKET' |
 'LEAVE_ROOM';
 
 export interface Room{
@@ -43,11 +48,9 @@ export class SocketService{
     
     public setup(){
         this.socket.on('CREATE_ROOM', (data: Room) =>{
-            console.log('CREATE_ROOM')
             this.socketData.next(data)
         });
         this.socket.on('JOIN_ROOM', (data: Room) =>{
-            console.log('JOIN_ROOM')
             this.socketData.next(data)
         });
         this.socket.on('ROOM_CREATED', (data: Room) =>{
@@ -55,54 +58,55 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('JOINED_ROOM', (data: Room) =>{
-            console.log('JOINED_ROOM')
             this.socketData.next(data)
         });
         this.socket.on('ROOM_DONT_EXIST', (data: Room) =>{
-            console.log('ROOM_DONT_EXIST')
             this.socketData.next(data)
         });
         this.socket.on('LEAVED_ROOM', (data: Room) =>{
             this.socketData.next(data)
-            console.log('LEAVED_ROOM')
         });
 
         this.socket.on('TOURNAMENT_STARTING', (data: any) =>{
             this.socketData.next(data)
-            console.log('TOURNAMENT_STARTING')
         })
         this.socket.on('START_TOURNAMENT_QUESTION', (data: any) =>{
             this.socketData.next(data)
-            console.log('START_TOURNAMENT_QUESTION')
         })
 
         this.socket.on('SELECTED_QUESTION_LETTER', (data: any) =>{
             this.socketData.next(data)
-            console.log('SELECTED_QUESTION_LETTER')
         })
 
         this.socket.on('UPDATE_WAITING_STATUS', (data: any) =>{
             this.socketData.next(data)
-            console.log('UPDATE_WAITING_STATUS')
         });
 
         this.socket.on('EVERYONE_ANSWERED', (data: any) =>{
             this.socketData.next(data)
-            console.log('EVERYONE_ANSWERED')
         });
 
         this.socket.on('TOURNAMENT_FINISHED', (data: any) =>{
             this.socketData.next(data)
-            console.log('TOURNAMENT_FINISHED')
         });
 
         this.socket.on('GET_ROOM_QUESTION', (data: any) =>{
             this.socketData.next(data)
-            console.log('GET_ROOM_QUESTION')
         });
         this.socket.on('GET_ROOM_RESULTS', (data: any) => {
             this.socketData.next(data)
-            console.log('GET_ROOM_RESULTS')
+        });
+        this.socket.on('ADD_FRIEND', (data: any) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('FRIEND_ALLREADY_REQUESTED' , (data: any) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('ADD_FRIEND_FAILED', (data: any) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('ACCEPT_FRIEND', (data: any) => {
+            this.socketData.next(data)
         });
     }
 

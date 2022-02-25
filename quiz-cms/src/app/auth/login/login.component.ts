@@ -113,9 +113,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public async onSubmit(){
-    if(this.development){
-      return this.testLogin();
-    }
     const { data, success, token, error } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
     if (success) {
       this.notification.notification.emit({ success: success, message: 'Dobrodosli' });

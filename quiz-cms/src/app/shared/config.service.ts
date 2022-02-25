@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { SocketService } from "../socket-service";
 import { ApiResponse, ApiService } from "./api.servise";
 
 export interface User{
@@ -111,7 +112,7 @@ export const getToken = () => {
 
 @Injectable({providedIn: 'root'})
 export class Configuration{
-    constructor(private router: Router, private service: ApiService){ }
+    constructor(private router: Router, private service: ApiService, private socketService: SocketService){ }
 
     get user() { return this._user}
     set user(value){this._user.next(value as any as User)}
@@ -146,6 +147,7 @@ export class Configuration{
       isLogged.root = user.roles.some((role: any) => role === 'ADMIN');
       isLogged.logged = true;
       setToken(token);
+      this.socketService.emit('SAVE_SOCKET', {user_id: user._id})
       this._user.next(user);
     }
 
@@ -159,6 +161,7 @@ export class Configuration{
         this.isRoot = data.roles.some((role: any) => role === 'ADMIN');
         this.logged = true;
         this._user.next(data);
+        this.socketService.emit('SAVE_SOCKET', { user_id: data._id })
         return true;
       }
       return false;
