@@ -103,6 +103,10 @@ button {
         margin-bottom: 5px !important;
         color: rgb(31, 15, 0) !important;
 
+        &:hover{
+            color: red !important;
+        }
+
         .title {
             color: rgb(31, 15, 0) !important;
         }

@@ -60,6 +60,11 @@ const routes: Routes = [
     loadChildren: () => import('./shop/shop.module').then(module => module.ShopModule),
     canActivate: [AuthorizationGuard]
   },
+  {
+    path: 'friends',
+    loadChildren: () => import('./friends/friends.module').then(module => module.FriendsModule),
+    canActivate: [AuthorizationGuard]
+  },
   
   { path: '**', redirectTo: ''}
 ];

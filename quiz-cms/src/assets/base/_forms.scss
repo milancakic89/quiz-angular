@@ -19,6 +19,34 @@
     margin: 0 0 15px 0;
 }
 
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    background-size: 100% 100%;
+    background-color: transparent;
+    background-color: rgb(79,49,45);
+    padding: 0px 15px;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+textarea {
+    border: 1px solid $input-border-color;
+    border-radius: 5px;
+    color: gray;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
 form {
     display: flex;
     flex-flow: row wrap;
@@ -39,32 +67,6 @@ form {
 
     }
 
-    label {
-        margin-bottom: 8px;
-    }
-
-    input {
-        height: 40px;
-        width: 100%;
-        margin-bottom: 10px;
-        border-radius: 15px;
-        background-size: 100% 100%;
-        background-color: transparent;
-        background-color: rgb(79,49,45);
-        padding: 0px 15px;
-        font-size: 18px;
-        font-weight: 800;
-        text-align: center;
-        color: rgb(255, 255, 255);
-    }
-
-    textarea {
-        border: 1px solid $input-border-color;
-        border-radius: 5px;
-        color: gray;
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
 
 }
 
