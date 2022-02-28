@@ -30,12 +30,17 @@ export interface Room{
     user_id: string;
 }
 
+export interface SocketResponse{
+    event: EventType;
+    [key: string]: any;
+}
+
 @Injectable({providedIn: 'root'})
 export class SocketService{
     public socket: any;
     public setupReady = false;
 
-    public socketData = new BehaviorSubject<any>(null);
+    public socketData = new BehaviorSubject<SocketResponse>({} as SocketResponse);
     
     constructor(private router: Router){
         if(!this.setupReady){
@@ -47,65 +52,65 @@ export class SocketService{
     }
     
     public setup(){
-        this.socket.on('CREATE_ROOM', (data: Room) =>{
+        this.socket.on('CREATE_ROOM', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
-        this.socket.on('JOIN_ROOM', (data: Room) =>{
+        this.socket.on('JOIN_ROOM', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
-        this.socket.on('ROOM_CREATED', (data: Room) =>{
+        this.socket.on('ROOM_CREATED', (data: SocketResponse) =>{
             console.log('ROOM_CREATED')
             this.socketData.next(data)
         });
-        this.socket.on('JOINED_ROOM', (data: Room) =>{
+        this.socket.on('JOINED_ROOM', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
-        this.socket.on('ROOM_DONT_EXIST', (data: Room) =>{
+        this.socket.on('ROOM_DONT_EXIST', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
-        this.socket.on('LEAVED_ROOM', (data: Room) =>{
+        this.socket.on('LEAVED_ROOM', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
 
-        this.socket.on('TOURNAMENT_STARTING', (data: any) =>{
+        this.socket.on('TOURNAMENT_STARTING', (data: SocketResponse) =>{
             this.socketData.next(data)
         })
-        this.socket.on('START_TOURNAMENT_QUESTION', (data: any) =>{
-            this.socketData.next(data)
-        })
-
-        this.socket.on('SELECTED_QUESTION_LETTER', (data: any) =>{
+        this.socket.on('START_TOURNAMENT_QUESTION', (data: SocketResponse) =>{
             this.socketData.next(data)
         })
 
-        this.socket.on('UPDATE_WAITING_STATUS', (data: any) =>{
+        this.socket.on('SELECTED_QUESTION_LETTER', (data: SocketResponse) =>{
+            this.socketData.next(data)
+        })
+
+        this.socket.on('UPDATE_WAITING_STATUS', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
 
-        this.socket.on('EVERYONE_ANSWERED', (data: any) =>{
+        this.socket.on('EVERYONE_ANSWERED', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
 
-        this.socket.on('TOURNAMENT_FINISHED', (data: any) =>{
+        this.socket.on('TOURNAMENT_FINISHED', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
 
-        this.socket.on('GET_ROOM_QUESTION', (data: any) =>{
+        this.socket.on('GET_ROOM_QUESTION', (data: SocketResponse) =>{
             this.socketData.next(data)
         });
-        this.socket.on('GET_ROOM_RESULTS', (data: any) => {
+        this.socket.on('GET_ROOM_RESULTS', (data: SocketResponse) => {
             this.socketData.next(data)
         });
-        this.socket.on('ADD_FRIEND', (data: any) => {
+        this.socket.on('ADD_FRIEND', (data: SocketResponse) => {
             this.socketData.next(data)
         });
-        this.socket.on('FRIEND_ALLREADY_REQUESTED' , (data: any) => {
+        this.socket.on('FRIEND_ALLREADY_REQUESTED', (data: SocketResponse) => {
             this.socketData.next(data)
         });
-        this.socket.on('ADD_FRIEND_FAILED', (data: any) => {
+        this.socket.on('ADD_FRIEND_FAILED', (data: SocketResponse) => {
             this.socketData.next(data)
         });
-        this.socket.on('ACCEPT_FRIEND', (data: any) => {
+        this.socket.on('ACCEPT_FRIEND', (data: SocketResponse) => {
             this.socketData.next(data)
         });
     }

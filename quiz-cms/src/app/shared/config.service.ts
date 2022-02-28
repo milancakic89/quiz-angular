@@ -24,6 +24,8 @@ export interface User{
   reset_lives_at: number;
   daily_price: number;
   notifications: Notifications;
+  friends: string[];
+  friendRequests: string[];
  
 }
 
