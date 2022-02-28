@@ -10,4 +10,12 @@ export class FriendsService{
         return this.service.post<User[]>('/search-users', {query}, 'Nista nije pronadjeno za ovaj kriterijum')
     }
 
+    public getFriendsRequests(){
+        return this.service.get<User[]>('/friend-requests', '')
+    }
+
+    public getFriendsList(){
+        return this.service.get<User[]>('/friends', '')
+    }
+
 }

@@ -30,7 +30,8 @@ export class ListComponent implements OnInit, OnDestroy {
   public sendingRequest = false;
 
   public friends: User[] = [];
-  public friendRequests = [];
+  public friendRequests: User[] = [];
+  public acceptedFriends: User[] = [];
 
   public searchQueryStream = new Subject<string>();
 
@@ -78,12 +79,31 @@ export class ListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public async getFriendRequests(){}
+  public async getFriendRequests(){
+    const { data, success } = await this.friendsService.getFriendsRequests()
+    if(success){
+      this.friendRequests = data;
+    }
+    console.log(data)
+  }
+
+  public async getFriendsList(){
+    const { data, success } = await this.friendsService.getFriendsList();
+    if(success){
+      this.acceptedFriends = data;
+    }
+    console.log(data)
+  }
 
   public sendFriendRequest(id: string){
     if(!this.sendingRequest || id === this.user._id){
       this.socket.emit('ADD_FRIEND', {user_id: this.user._id, friend_id: id})
     }
   }
+
+  public acceptFriendRequest(id: string){
+    this.socket.emit('ACCEPT_FRIEND', { user_id: this.user._id, friend_id: id })
+  }
+
 
 }
