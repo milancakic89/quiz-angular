@@ -44,6 +44,10 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const subCheck = JSON.stringify(this.socketSubscription)
+    if(subCheck !== '{}'){
+      this.socketSubscription.unsubscribe();
+    }
     this.route.params.subscribe(params =>{
       if(params['query']){
         this.selectedTab = params['query'].toUpperCase();
@@ -60,7 +64,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
         }
       }else{
-        this.load();
+        this.getFriendsList();
       }
     })
     this.config.user.subscribe(user =>{
