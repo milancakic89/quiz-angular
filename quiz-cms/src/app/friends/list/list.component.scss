@@ -12,9 +12,10 @@
         width: 94%;
         margin: 0 auto;
         max-width: 850px;
-        
+
         span {
             display: inline-flex;
+            cursor: pointer;
             height: 100%;
             width: 33.33%;
             justify-content: center;
@@ -44,6 +45,7 @@
             font-size: 18px;
             font-weight: 800;
             color: rgb(31, 15, 0);
+
         }
     }
 
@@ -75,13 +77,23 @@
                 font-size: 13px;
             }
 
-
+            .friend-name{
+                margin-right: auto;
+            }
+            
+            
             .button-primary,
             .button-danger {
                 margin: 0;
-                height: 30px !important;
+                height: 27px !important;
                 font-size: 14px;
+
+            }
+
+            .button-danger {
                 padding-bottom: 5px;
+                margin-top: 3px;
+                height: 29px !important;
             }
 
             .avatar {

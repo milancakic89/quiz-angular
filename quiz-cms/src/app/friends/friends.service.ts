@@ -18,4 +18,8 @@ export class FriendsService{
         return this.service.get<User[]>('/friends', '')
     }
 
+    public removeFriend(id: string){
+        return this.service.post<User[]>('/remove-friend', {remove_id: id} ,'')
+    }
+
 }

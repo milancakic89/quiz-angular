@@ -45,7 +45,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
-        this.load();
+        this.getFriendsList();
       }
     });
 
@@ -53,8 +53,14 @@ export class ListComponent implements OnInit, OnDestroy {
       if(data && data.event === 'ADD_FRIEND' && data.success){
           this.notifications.notification.emit({success: true, message: 'Zahtev uspesno poslat'})
       }
+      if (data && data.event === 'ACCEPT_FRIEND' && data.success) {
+        console.log(data.friendRequest)
+        this.friendRequests = this.friendRequests.filter(user =>{
+          return user._id !== data.friendRequest;
+        })
+      }
       if (data && data.event === 'ADD_FRIEND' && !data.success) {
-        this.notifications.notification.emit({ success: true, message: 'Zahtev nije uspeo' })
+        this.notifications.notification.emit({ success: false, message: 'Zahtev nije uspeo' });
       }
       if (data && data.event === 'ADD_FRIEND_FAILED') {
         this.notifications.notification.emit({ success: false, message: 'Zahtev nije uspeo, pokusajte ponovo' })
@@ -83,9 +89,11 @@ export class ListComponent implements OnInit, OnDestroy {
   public async getFriendRequests(){
     const { data, success } = await this.friendsService.getFriendsRequests()
     if(success){
-      this.friendRequests = data;
+      
+      this.friendRequests = data.filter(user => {
+        return this.acceptedFriends.every(friend => friend._id !== user._id);
+      });
     }
-    console.log(data)
   }
 
   public async getFriendsList(){
@@ -93,7 +101,6 @@ export class ListComponent implements OnInit, OnDestroy {
     if(success){
       this.acceptedFriends = data;
     }
-    console.log(data)
   }
 
   public sendFriendRequest(id: string){
@@ -106,5 +113,18 @@ export class ListComponent implements OnInit, OnDestroy {
     this.socket.emit('ACCEPT_FRIEND', { user_id: this.user._id, friend_id: id })
   }
 
+
+  public async removeFriend(id: string){
+    const { data, success } = await this.friendsService.removeFriend(id);
+    if (success) {
+      this.acceptedFriends = this.acceptedFriends.filter(user =>{
+        return user._id !== id;
+      });
+    }
+  }
+
+  public checkAddButton(id: string){
+    return this.acceptedFriends.some(user => user._id === id)
+  }
 
 }
