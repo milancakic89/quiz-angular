@@ -161,6 +161,10 @@ $headerHeight: 65px;
     }
 }
 
+.wrap{
+    flex-wrap: wrap;
+}
+
 .user-header {
     display: flex;
     position: sticky;
@@ -222,11 +226,11 @@ $headerHeight: 65px;
             display: inline-block;
 
             @media screen and (min-width: 500px) {
-                font-size: 20px;
+                font-size: 14px;
             }
 
             @media screen and (min-width: 768px) {
-                font-size: 35px;
+                font-size: 17px;
             }
 
             b {
@@ -239,6 +243,12 @@ $headerHeight: 65px;
     }
 
     .left-info {
+
+        p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         a {
             width: 40px;
             height: 40px;
@@ -260,7 +270,7 @@ $headerHeight: 65px;
         p {
             font-size: 35px;
             transition: all 2s linear;
-            min-width: 70px;
+            min-width: 50px;
             height: 50px;
             overflow: hidden;
             margin-right: 4px;
@@ -272,10 +282,22 @@ $headerHeight: 65px;
             align-items: center;
             color: #fff !important;
 
+            a{
+                align-self: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .fa-user-group{
+                    font-size: 18px;
+                    color: #fff;
+                }
+            }
+
         }
 
         .hearth-life {
             width: 15px;
+            min-width: 15px;
             height: 15px;
             margin-left: 5px;
             background-image: url('../assets/images/ic_heart.png');
@@ -288,8 +310,9 @@ $headerHeight: 65px;
             }
 
             @media screen and (min-width: 768px) {
-                width: 30px;
-                height: 30px;
+                width: 24px;
+                min-width: 24px;
+                height: 24px;
             }
         }
 
@@ -298,7 +321,7 @@ $headerHeight: 65px;
         .user-chest {
             font-size: 35px;
             transition: all 2s linear;
-            min-width: 70px;
+            min-width: 50px;
             height: 50px;
             display: flex;
             margin-right: 4px;

@@ -35,13 +35,14 @@
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
         <div class="right-info">
+            <p><a routerLink="/friends"><i class="fa-solid fa-user-group"></i></a></p>
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
-            <p><span class="hearth-life" *ngFor="let life of lives"></span></p>
+            <p class="wrap"><span class="hearth-life" *ngFor="let life of lives"></span></p>
             <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
                       (click)="resetAvailable && openDailyReward()"></span>
             </p>
             <p class="user-score text-white"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>
-            <p class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></p>
+            <a routerLink="/shop" class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></a>
         </div>
     </div>
     <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">

@@ -5,7 +5,7 @@ import { SocketService } from "../socket-service";
 import { ApiResponse, ApiService } from "./api.servise";
 
 export interface User{
-  _id?: string;
+  _id: string;
   avatar_url: string;
   name: string;
   email: string;

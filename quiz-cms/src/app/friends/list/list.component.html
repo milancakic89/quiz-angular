@@ -1,0 +1,13 @@
+<div class="friends-list">
+    <div class="search-bar">
+        <label>Pronadji</label>
+        <input [(ngModel)]="searchQuery" (ngModelChange)="searchQueryStream.next($event)"/>
+    </div>
+    <div class="list">
+        <p class="friend" *ngFor="let friend of friends">
+            <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
+            <span class="friend-name">{{ friend.name }}</span>
+            <button class="button-primary" (click)="sendFriendRequest(friend._id)">Dodaj</button>
+        </p>
+    </div>
+</div>
