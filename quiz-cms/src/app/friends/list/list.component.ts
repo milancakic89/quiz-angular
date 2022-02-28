@@ -1,5 +1,6 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Configuration, User } from 'src/app/shared/config.service';
@@ -7,7 +8,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { SocketService } from 'src/app/socket-service';
 import { FriendsService } from '../friends.service';
 
-type Tab = 'Pronadji' | 'Prijatelji' | 'Zahtevi';
+type Tab = 'PRONADJI' | 'PRIJATELJI' | 'ZAHTEVI';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +19,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private friendsService: FriendsService, 
               private socket: SocketService,
+              private route: ActivatedRoute,
               private notifications: NotificationService,
               private config: Configuration) { }
 
@@ -25,7 +27,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public searchQuery = '';
 
-  public selectedTab: Tab = 'Prijatelji';
+  public selectedTab: Tab = 'PRIJATELJI';
 
   public sendingRequest = false;
 
@@ -42,10 +44,28 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params =>{
+      if(params['query']){
+        this.selectedTab = params['query'].toUpperCase();
+        switch (this.selectedTab) {
+          case 'PRIJATELJI':
+            this.getFriendsList();
+            break;
+          case 'PRONADJI':
+            this.load();
+            break;
+          case 'ZAHTEVI':
+            this.getFriendRequests()
+            break;
+
+        }
+      }else{
+        this.load();
+      }
+    })
     this.config.user.subscribe(user =>{
       if(user){
-        this.user = user;
-        this.getFriendsList();
+        this.user = user;      
       }
     });
 
@@ -72,7 +92,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
     this.searchQueryStream.pipe(debounceTime(500))
     .subscribe(query =>{
-      if (this.selectedTab === 'Pronadji'){
+      if (this.selectedTab === 'PRONADJI'){
         this.load();
       }
         
@@ -80,6 +100,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   public async load(){
+
     const { data, success } = await this.friendsService.searchUsers(this.searchQuery)
     if(success){
       this.friends = data.filter(user => user._id !== this.user._id);

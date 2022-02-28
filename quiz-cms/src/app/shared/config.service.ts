@@ -165,6 +165,8 @@ export class Configuration{
         this._user.next(data);
         this.socketService.emit('SAVE_SOCKET', { user_id: data._id })
         return true;
+      }else{
+        localStorage.clear()
       }
       return false;
     }
@@ -175,6 +177,7 @@ export class Configuration{
 
     public logout(){
       this.logged = false;
+      localStorage.clear()
       localStorage.removeItem('access');
       this._user.next(null)
       this.router.navigateByUrl('/')

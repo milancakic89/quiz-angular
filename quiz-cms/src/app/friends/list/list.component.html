@@ -1,22 +1,22 @@
 <div class="friends-list">
     <div class="search-bar">
-        <label>Pronadji</label>
+        <label>PRONADJI</label>
         <input [(ngModel)]="searchQuery" (ngModelChange)="searchQueryStream.next($event)"/>
     </div>
     <div class="friend-tabs">
-        <span (click)="selectedTab = 'Prijatelji'; getFriendsList()" [ngClass]="{'active': selectedTab === 'Prijatelji'}">Prijatelji</span>
-        <span (click)="selectedTab = 'Zahtevi'; getFriendRequests()" [ngClass]="{'active': selectedTab === 'Zahtevi'}">Zahtevi</span>
-        <span (click)="selectedTab = 'Pronadji'; load()" [ngClass]="{'active': selectedTab === 'Pronadji'}">Pronadji</span>
+        <span (click)="selectedTab = 'PRIJATELJI'; getFriendsList()" [ngClass]="{'active': selectedTab === 'PRIJATELJI'}">Prijatelji</span>
+        <span (click)="selectedTab = 'ZAHTEVI'; getFriendRequests()" [ngClass]="{'active': selectedTab === 'ZAHTEVI'}">Zahtevi</span>
+        <span (click)="selectedTab = 'PRONADJI'; load()" [ngClass]="{'active': selectedTab === 'PRONADJI'}">Pronadji</span>
     </div>
     <div class="list">
-        <ng-container *ngIf="selectedTab === 'Prijatelji'">
+        <ng-container *ngIf="selectedTab === 'PRIJATELJI'">
             <p class="friend" *ngFor="let friend of acceptedFriends">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>
                 <button class="button-danger" (click)="removeFriend(friend._id)">Ukloni</button>
             </p>
         </ng-container>
-        <ng-container *ngIf="selectedTab === 'Pronadji'">
+        <ng-container *ngIf="selectedTab === 'PRONADJI'">
             <p class="friend" *ngFor="let friend of friends">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>
@@ -24,7 +24,7 @@
                 <span *ngIf="checkAddButton(friend._id)">Prijatelj</span>
             </p>
         </ng-container>
-        <ng-container *ngIf="selectedTab === 'Zahtevi'">
+        <ng-container *ngIf="selectedTab === 'ZAHTEVI'">
             <p class="friend" *ngFor="let friend of friendRequests">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>

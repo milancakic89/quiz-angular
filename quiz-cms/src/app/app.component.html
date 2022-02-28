@@ -66,6 +66,14 @@
               
             </div>
 
+            <div class="friend-request-modal" *ngIf="showRequestsModal">
+                <div class="name-wrapper">
+                    <div class="body">
+                        <a class="button-primary" (click)="checkFriendRequests()" [routerLink]="['/friends', 'zahtevi']">Pogledaj</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- DAILY REWARD -->
             <div class="daily-reward-rulet"  *ngIf="dailyModal">
                             <div class="daily-reward-rulet-box">

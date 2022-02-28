@@ -59,9 +59,12 @@ export class AppComponent implements OnInit{
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
   public newName = '';
+
   public showNewNameModal = false;
   public allowRewardBtn = false;
   public successFeedback = true;
+  public showRequestsModal = false;
+
   public centerContent = true;
   public stars: number[] = [];
   public gameResults: GameData = {
@@ -103,6 +106,10 @@ export class AppComponent implements OnInit{
         if(user.name === 'Kvizoman'){
           this.showNewNameModal = true;
         }
+        if (user.friendRequests.length > 0 && !localStorage.getItem('modal')){
+          this.showRequestsModal = true;
+        }
+
         this.user = user;
         this.spinner = false;
         this.lives = Array(user.lives);
@@ -145,6 +152,11 @@ export class AppComponent implements OnInit{
       this.router.navigateByUrl('');
       return;
     }
+  }
+
+  public checkFriendRequests(){
+    this.showRequestsModal = false;
+    localStorage.setItem('modal', 'something')
   }
 
   public async saveName(){

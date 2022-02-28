@@ -161,7 +161,7 @@ $headerHeight: 65px;
     }
 }
 
-.wrap{
+.wrap {
     flex-wrap: wrap;
 }
 
@@ -244,11 +244,12 @@ $headerHeight: 65px;
 
     .left-info {
 
-        p{
+        p {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         a {
             width: 40px;
             height: 40px;
@@ -282,12 +283,13 @@ $headerHeight: 65px;
             align-items: center;
             color: #fff !important;
 
-            a{
+            a {
                 align-self: center;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                .fa-user-group{
+
+                .fa-user-group {
                     font-size: 18px;
                     color: #fff;
                 }
@@ -612,18 +614,18 @@ $headerHeight: 65px;
         top: 45%;
         transform: translateX(-50%) translateY(-50%);
 
-        @media  screen and (max-width: 950px) {
+        @media screen and (max-width: 950px) {
             padding: 23% 14% 6%;
         }
 
-        @media  screen and (max-width: 768px) {
+        @media screen and (max-width: 768px) {
             padding: 27% 20% 9%;
         }
 
-        @media  screen and (max-width: 500px) {
+        @media screen and (max-width: 500px) {
             padding: 42% 19% 13%;
         }
-        
+
 
 
         .title {
@@ -672,7 +674,7 @@ $headerHeight: 65px;
         position: relative;
         background-image: url('../assets/images/pirate-theme/items/inventory-item.png');
         background-size: 100% 100%;
-        
+
 
         span {
             position: absolute;
@@ -717,7 +719,8 @@ $headerHeight: 65px;
     }
 }
 
-.provide-name {
+.provide-name,
+.friend-request-modal {
     width: 100%;
     position: fixed;
     left: 0;
@@ -768,6 +771,19 @@ $headerHeight: 65px;
         }
     }
 }
+
+.friend-request-modal {
+    .name-wrapper {
+        margin-top: -100px;
+        background-image: url('../assets/images/pirate-theme/popups/friend-request.png');
+
+        .body{
+            padding-bottom: 10px;
+            justify-content: flex-end;
+        }
+    }
+}
+
 
 .notification {
     position: absolute;
