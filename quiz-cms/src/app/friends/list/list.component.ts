@@ -45,6 +45,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.config.user.subscribe(user =>{
       if(user){
         this.user = user;
+        this.load();
       }
     });
 
