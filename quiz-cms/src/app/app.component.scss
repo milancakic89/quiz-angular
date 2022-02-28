@@ -673,7 +673,9 @@ $headerHeight: 65px;
         padding-top: 33%;
         position: relative;
         background-image: url('../assets/images/pirate-theme/items/inventory-item.png');
+        opacity: .8;
         background-size: 100% 100%;
+        filter: grayscale(1);
 
 
         span {
@@ -696,6 +698,7 @@ $headerHeight: 65px;
         }
 
         &.bordered {
+            opacity: 1;
 
             span {
                 border: 4px solid rgb(255, 192, 75);
@@ -777,7 +780,7 @@ $headerHeight: 65px;
         margin-top: -100px;
         background-image: url('../assets/images/pirate-theme/popups/friend-request.png');
 
-        .body{
+        .body {
             padding-bottom: 10px;
             justify-content: flex-end;
         }
