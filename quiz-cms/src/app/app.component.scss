@@ -673,9 +673,8 @@ $headerHeight: 65px;
         padding-top: 33%;
         position: relative;
         background-image: url('../assets/images/pirate-theme/items/inventory-item.png');
-        opacity: .8;
         background-size: 100% 100%;
-        filter: grayscale(1);
+        filter: grayscale(0.7);
 
 
         span {
@@ -698,11 +697,11 @@ $headerHeight: 65px;
         }
 
         &.bordered {
-            opacity: 1;
+            filter: grayscale(0);
 
             span {
                 border: 4px solid rgb(255, 192, 75);
-                filter: grayscale(0);
+
             }
 
 

@@ -19,6 +19,8 @@ export type EventType = 'CREATE_ROOM' |
 'CLEAN_THE_EMPTY_ROOMS' |
 'ADD_FRIEND' |
 'FRIEND_ALLREADY_REQUESTED' |
+'USER_DISCONECTED' |
+'USER_CONNECTED' |
 'ADD_FRIEND_FAILED' |
 'ACCEPT_FRIEND' |
 'SAVE_SOCKET' |
@@ -55,6 +57,14 @@ export class SocketService{
         this.socket.on('CREATE_ROOM', (data: SocketResponse) =>{
             console.log(data.event)
             console.log(data)
+            this.socketData.next(data)
+        });
+        this.socket.on('USER_DISCONECTED', (data: SocketResponse) => {
+            console.log('USER_DISCONECTED: ', data.socket)
+            this.socketData.next(data)
+        });
+        this.socket.on('USER_CONNECTED', (data: SocketResponse) => {
+            console.log('USER_CONNECTED: ', data.user_id)
             this.socketData.next(data)
         });
         this.socket.on('JOIN_ROOM', (data: SocketResponse) =>{

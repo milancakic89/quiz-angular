@@ -86,6 +86,32 @@ export class ListComponent implements OnInit, OnDestroy {
       if (data && data.event === 'ADD_FRIEND' && !data.success) {
         this.notifications.notification.emit({ success: false, message: 'Zahtev nije uspeo' });
       }
+      if (data && data.event === 'USER_DISCONECTED') {
+          this.acceptedFriends.forEach(user => {
+            if (user.socket === data.socket_id){
+                user.online = false;
+            }
+          });
+        this.friends.forEach(user => {
+          if (user.socket === data.socket_id) {
+               user.online = false;
+          }
+        });
+      }
+      if (data && data.event === 'USER_CONNECTED') {
+        this.acceptedFriends.forEach(user => {
+          if (user._id === data.user_id) {
+              user.online = true;
+              user.socket = data.socket_id
+          }
+        });
+        this.friends.forEach(user => {
+          if (user._id === data.user_id) {
+            user.online = true;
+            user.socket = data.socket_id
+          }
+        });
+      }
       if (data && data.event === 'ADD_FRIEND_FAILED') {
         this.notifications.notification.emit({ success: false, message: 'Zahtev nije uspeo, pokusajte ponovo' })
       }

@@ -26,6 +26,8 @@ export interface User{
   notifications: Notifications;
   friends: string[];
   friendRequests: string[];
+  socket: boolean;
+  online: boolean;
  
 }
 

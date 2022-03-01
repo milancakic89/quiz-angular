@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
-import { Feedback, FeedbackMessageService } from './feedback.service';
+import { FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
 import { Configuration, User } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
-import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
 import { ProfileService } from './profile/profile.service';
 import { SocketService } from './socket-service';
 import { PlayService } from './play/play.service';
