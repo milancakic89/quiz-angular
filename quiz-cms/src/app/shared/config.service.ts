@@ -178,12 +178,15 @@ export class Configuration{
     }
 
     public logout(){
-      this.logged = false;
       localStorage.clear()
       localStorage.removeItem('access');
-      this.socketService.emit('DISCONNECT_USER', {})
-      this._user.next(null)
-      this.router.navigateByUrl('/')
+      this.socketService.emit('DISCONNECT_USER', {});
+      setTimeout(()=>{
+        this.logged = false;
+        this._user.next(null)
+        this.router.navigateByUrl('/')
+      },100)
+
     }
 
     private _user = new BehaviorSubject<User | any>(null);
