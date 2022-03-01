@@ -163,10 +163,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   public logout(){
-    this.config.logged = false;
     this.playService.allowBackButton = true;
-    localStorage.clear();
-    this.router.navigateByUrl('/login') 
+    this.config.logout()
   }
 
 }
