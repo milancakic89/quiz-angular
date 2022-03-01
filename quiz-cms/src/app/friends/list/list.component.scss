@@ -70,6 +70,39 @@
             justify-content: space-between;
             align-items: center;
             padding: 5px 15px 5px 5px;
+            position: relative;
+
+            &.online {
+                &-true {
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        left: 3px;
+                        top: 3px;
+                        background-color: green;
+
+                    }
+                }
+
+                &-false {
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        left: 3px;
+                        top: 3px;
+                        background-color: red;
+
+                    }
+                }
+            }
 
             span {
                 color: #fff;
@@ -77,11 +110,11 @@
                 font-size: 13px;
             }
 
-            .friend-name{
+            .friend-name {
                 margin-right: auto;
             }
-            
-            
+
+
             .button-primary,
             .button-danger {
                 margin: 0;

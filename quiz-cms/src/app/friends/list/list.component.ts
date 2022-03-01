@@ -88,12 +88,12 @@ export class ListComponent implements OnInit, OnDestroy {
       }
       if (data && data.event === 'USER_DISCONECTED') {
           this.acceptedFriends.forEach(user => {
-            if (user.socket === data.socket_id){
+            if (user._id === data.user_id){
                 user.online = false;
             }
           });
         this.friends.forEach(user => {
-          if (user.socket === data.socket_id) {
+          if (user._id === data.user_id) {
                user.online = false;
           }
         });

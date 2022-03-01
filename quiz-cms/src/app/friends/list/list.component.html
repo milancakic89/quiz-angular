@@ -10,14 +10,14 @@
     </div>
     <div class="list">
         <ng-container *ngIf="selectedTab === 'PRIJATELJI'">
-            <p class="friend" *ngFor="let friend of acceptedFriends">
+            <p class="friend online-{{ friend.online }}" *ngFor="let friend of acceptedFriends">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>
                 <button class="button-danger" (click)="removeFriend(friend._id)">Ukloni</button>
             </p>
         </ng-container>
         <ng-container *ngIf="selectedTab === 'PRONADJI'">
-            <p class="friend" *ngFor="let friend of friends">
+            <p class="friend online-{{ friend.online }}" *ngFor="let friend of friends">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>
                 <button class="button-primary" *ngIf="!checkAddButton(friend._id)" (click)="sendFriendRequest(friend._id)">Dodaj</button>
@@ -25,7 +25,7 @@
             </p>
         </ng-container>
         <ng-container *ngIf="selectedTab === 'ZAHTEVI'">
-            <p class="friend" *ngFor="let friend of friendRequests">
+            <p class="friend online-{{ friend.online }}" *ngFor="let friend of friendRequests">
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
                 <span class="friend-name">{{ friend.name }}</span>
                 <button class="button-primary" (click)="acceptFriendRequest(friend._id)">Prihvati</button>

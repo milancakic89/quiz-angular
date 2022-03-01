@@ -181,6 +181,7 @@ export class Configuration{
       this.logged = false;
       localStorage.clear()
       localStorage.removeItem('access');
+      this.socketService.emit('DISCONNECT_USER', {})
       this._user.next(null)
       this.router.navigateByUrl('/')
     }
