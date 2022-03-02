@@ -60,6 +60,10 @@ export class AppComponent implements OnInit, OnDestroy{
   public ticketAnimationCounter = 0;
   public newName = '';
 
+  public invitedToRoomName = '';
+  public invitedBy = '';
+  public invited = false;
+
   public showNewNameModal = false;
   public allowRewardBtn = false;
   public successFeedback = true;
@@ -83,7 +87,15 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+      // this.subscription.unsubscribe();
+  }
+  public acceptTournamentInvitation(){
+    if(this.invitedToRoomName){
+      this.invited = false;
+      this.invitedBy = '';
+      this.router.navigateByUrl(`/tournament/room/${this.invitedToRoomName}`);
+    }
+  
   }
 
   ngOnInit(){
@@ -92,7 +104,15 @@ export class AppComponent implements OnInit, OnDestroy{
     }
     this.subscription = this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
-        console.log(data)
+        console.log('invittion')
+        if(data.user_id !== this.user._id){
+          this.invitedToRoomName = data.roomName;
+          this.invited = true;
+          this.invitedBy = data.userName;
+        }else{
+          console.log('friends invited')
+        }
+        
       }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
@@ -334,7 +354,7 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   public logout(){
-    this.subscription.unsubscribe()
+    // this.subscription.unsubscribe()
     this.config.logout();
   }
 

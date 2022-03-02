@@ -722,7 +722,8 @@ $headerHeight: 65px;
 }
 
 .provide-name,
-.friend-request-modal {
+.friend-request-modal,
+.tournament-invitation {
     width: 100%;
     position: fixed;
     left: 0;
@@ -769,6 +770,47 @@ $headerHeight: 65px;
 
             ::placeholder {
                 color: rgba(255, 255, 255, 0.7);
+            }
+        }
+    }
+
+    .invitation-wrapper{
+        
+        width: 280px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-image: url('../assets/images/new-theme/question-board.png');
+        background-size: 100% 100%;
+
+        h5{
+            font-size: 1.5rem;
+            padding: 10px;
+            color: rgb(121, 63, 8);
+            font-weight: 600;
+            text-align: center;
+
+            span{
+                font-size: 1.6rem;
+                font-weight: 800;
+            }
+        }
+        
+        .footer{
+            display: flex;
+            padding: 10px;
+            justify-content: flex-end;
+            height: 70px;
+            background-image: url('../assets/images/new-theme/question-board.png');
+            background-size: 100% 100%;
+
+            button{
+                margin-bottom: 0 !important;
+            }
+
+            button:last-child{
+                margin-left: 15px;
             }
         }
     }

@@ -105,8 +105,9 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   public onFriendInvite(){
+    console.log('emiting')
     const inviteFriends = this.friends.filter(friend => friend.selected === true);
-    this.socket.emit('INVITE_FRIENDS', { friends: inviteFriends, roomName: this.room});
+    this.socket.emit('INVITE_FRIENDS', { friends: inviteFriends, roomName: this.room, userName: this.user.name});
   }
 
   public startTournament(){
@@ -120,8 +121,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   public async getFriendsList(){
     const { data, success } = await this.friendsService.getFriendsList();
     if (success) {
-      this.friends = data;
-      // this.friends = data.filter(user => user.online === true);
+      this.friends = data.filter(user => user.online === true);
     }
   }
 

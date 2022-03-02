@@ -163,6 +163,11 @@ export class SocketService{
             console.log(data)
             this.socketData.next(data)
         });
+        this.socket.on('TOURNAMENT_INVITATION', (data: SocketResponse) => {
+            console.log(data.event)
+            console.log(data)
+            this.socketData.next(data)
+        });
     }
 
     public emit(eventName: EventType, data: any){

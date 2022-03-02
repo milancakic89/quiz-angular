@@ -66,6 +66,18 @@
               
             </div>
 
+            <!--  TOURNAMENT INVITATION-->
+            <div class="tournament-invitation" *ngIf="invited">
+                <div class="invitation-wrapper">
+                    <h5><span>{{ invitedBy }}</span> vas poziva na turnir</h5>
+                    <div class="footer">
+                        <button class="button-primary" (click)="acceptTournamentInvitation()">Prihvati</button>
+                        <button class="button-danger" (click)="invited = false">Izadji</button>
+                    </div>
+                   
+                </div>
+            </div>
+
             <div class="friend-request-modal" *ngIf="showRequestsModal">
                 <div class="name-wrapper">
                     <div class="body">
