@@ -91,14 +91,7 @@
                 &-false {
                     &:before {
                         content: '';
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        border-radius: 50%;
-                        display: inline-block;
-                        left: 3px;
-                        top: 3px;
-                        background-color: red;
+                        display: none;
 
                     }
                 }
