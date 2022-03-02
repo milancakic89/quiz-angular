@@ -1,9 +1,34 @@
+<div class="friends-list-popup" *ngIf="friendListPopup">
+    <div class="friends-list">
+        <div class="heading">Pozovite prijatelje</div>
+        <div class="body">
+            <div class="user-item" *ngFor="let friend of friends">
+                <user-item [showButton]="false"
+                           [showCheckbox]="true"
+                           (onSelectedChange)="onFriendSelectChange($event, friend)"
+                           [user]="friend">
+                </user-item>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <button class="button button-danger" (click)="friendListPopup = false">Zatvori</button>
+            <button class="button button-primary" [ngClass]="{'disabled': !isButtonEnabled()}" (click)="isButtonEnabled() && onFriendInvite()">Pozovi</button>
+        </div>
+    </div>
+</div>
+
 <div class="room" *ngIf="tableReady">
     <img class="banner" src="../../../assets/images/pirate-theme/headings/tournament.png"/>
     <div class="buttons-wrapper">
         <button class="button button-danger" *ngIf="root">KOD: {{ room }}</button>
         <button class="button-primary"
                 (click)="startTournament()">Igraj</button>
+        <div class="button button-list" (click)="openFriendList()">
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
     </div>
    
     <div class="table">

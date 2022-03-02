@@ -26,6 +26,9 @@ export type EventType =
 'DISCONNECT_USER' |
 'ACCEPT_FRIEND' |
 'SAVE_SOCKET' |
+'INVITE_FRIENDS' |
+'TOURNAMENT_INVITATION' |
+'LEAVED_ROOM' |
 'LEAVE_ROOM';
 
 export interface Room{

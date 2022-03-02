@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RoomComponent } from './room/room.component';
 import { PlayComponent } from './play/play.component';
 import { WaitingOthersComponent } from './waiting-others/waiting-others.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,6 +22,7 @@ import { WaitingOthersComponent } from './waiting-others/waiting-others.componen
   imports: [
     TournamentRoutingModule,
     FormsModule,
+    SharedModule,
     CommonModule
   ]
 })

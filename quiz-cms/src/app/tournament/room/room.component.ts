@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FriendsService } from 'src/app/friends/friends.service';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -23,6 +24,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, 
               private socket: SocketService,
               private playService: PlayService,
+              private friendsService: FriendsService,
               private tournamentService: TournamentService,
               private notification: NotificationService,
               private config: Configuration,
@@ -35,8 +37,10 @@ export class RoomComponent implements OnInit, OnDestroy {
   set room(value){ this.tournamentService.room = value}
 
   public roomUsers: RoomUser[] = [];
+  public friends: User[] = [];
   public tableReady = false;
   public createdBy = '';
+  public friendListPopup = false;
 
   public subscription: Subscription = null as any;
 
@@ -80,12 +84,45 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl(`/play`);
       }
 
+      
+
       //ROOM_DONT_EXIST
     })
   }
 
+  public openFriendList(){
+    this.friendListPopup = true;
+    this.getFriendsList();
+  }
+
+  public closeFriendList(){
+    this.friendListPopup = false;
+  }
+
+  public onFriendSelectChange($event: boolean, friend: User){
+      friend.selected = $event;
+      console.log(this.friends)
+  }
+
+  public onFriendInvite(){
+    const inviteFriends = this.friends.filter(friend => friend.selected === true);
+    this.socket.emit('INVITE_FRIENDS', { friends: inviteFriends, roomName: this.room});
+  }
+
   public startTournament(){
     this.socket.emit('START_TOURNAMENT', {roomName: this.room})
+  }
+
+  public isButtonEnabled(){
+    return this.friends.some(friend => friend.selected === true);
+  }
+
+  public async getFriendsList(){
+    const { data, success } = await this.friendsService.getFriendsList();
+    if (success) {
+      this.friends = data;
+      // this.friends = data.filter(user => user.online === true);
+    }
   }
 
   ngOnDestroy(): void {

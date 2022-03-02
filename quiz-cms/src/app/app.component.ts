@@ -6,23 +6,25 @@ import { GameData, ModalWrapper } from './modal-service';
 import { Configuration, User } from './shared/config.service';
 import { Noth, NotificationService } from './shared/notification.service';
 import { ProfileService } from './profile/profile.service';
-import { SocketService } from './socket-service';
+import { SocketResponse, SocketService } from './socket-service';
 import { PlayService } from './play/play.service';
 import { TournamentService } from './tournament/tournament.service';
 import { SettingsService } from './settings/settings.service';
 import { Settings } from './settings/form/form.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
   title = 'Quiz';
 
   constructor(private config: Configuration, 
               private modal: ModalWrapper,
               private service: AppService,
+              private socketService: SocketService,
               private playservice: PlayService,
               private settings: SettingsService,
               private profileService: ProfileService,
@@ -63,6 +65,8 @@ export class AppComponent implements OnInit{
   public successFeedback = true;
   public showRequestsModal = false;
 
+  public subscription: Subscription = null as unknown as Subscription;
+
   public centerContent = true;
   public stars: number[] = [];
   public gameResults: GameData = {
@@ -78,10 +82,19 @@ export class AppComponent implements OnInit{
     }
   }
 
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
   ngOnInit(){
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
+    this.subscription = this.socketService.socketData.subscribe((data: SocketResponse) =>{
+      if (data && data.event === 'TOURNAMENT_INVITATION') {
+        console.log(data)
+      }
+    })
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
     })
@@ -321,6 +334,7 @@ export class AppComponent implements OnInit{
   }
 
   public logout(){
+    this.subscription.unsubscribe()
     this.config.logout();
   }
 

@@ -1,0 +1,11 @@
+<div class="friend online-{{ user.online }}" (click)="!showButton && onSelectChange()">
+    <div class="checkbox" *ngIf="showCheckbox">
+        <p class="selected {{selected}}" (click)="showButton && onSelectChange()"></p>
+    </div>
+    <div class="user">
+            <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+            <span class="friend-name">{{ user.name }}</span>
+            <button class="button-primary" *ngIf="showButton"
+                    (click)="onButtonClick.emit(user)">{{ buttonText }}</button>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+.friend {
+    display: flex;
+    width: 100%;
+    height: 35px;
+
+    .checkbox {
+        width: 40px;
+        min-width: 40px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .selected{
+            width: 25px;
+            height: 25px;
+            border: 1px solid rgb(82, 47, 23);
+            border-radius: 4px;
+            background-color: transparent;
+
+            &.true {
+                background-color: rgb(82, 47, 23);
+            }
+        }
+    }
+
+
+    .user {
+        border-radius: 25px;
+        background-color: #4f312d;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 35px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 15px 5px 5px;
+        position: relative;
+
+        &.online {
+            &-true {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    left: 3px;
+                    top: 3px;
+                    background-color: rgb(157, 241, 0);
+
+                }
+            }
+
+            &-false {
+                &:before {
+                    content: '';
+                    display: none;
+
+                }
+            }
+        }
+
+        span {
+            color: #fff;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .friend-name {
+            margin-right: auto;
+        }
+
+
+        .button-primary,
+        .button-danger {
+            margin: 0;
+            height: 27px !important;
+            font-size: 14px;
+
+        }
+
+        .button-danger {
+            padding-bottom: 5px;
+            margin-top: 3px;
+            height: 29px !important;
+        }
+
+        .avatar {
+            margin-right: 15px;
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+    }
+
+}

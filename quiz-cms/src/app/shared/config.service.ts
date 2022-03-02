@@ -28,6 +28,7 @@ export interface User{
   friendRequests: string[];
   socket: boolean;
   online: boolean;
+  selected?: boolean;
  
 }
 
