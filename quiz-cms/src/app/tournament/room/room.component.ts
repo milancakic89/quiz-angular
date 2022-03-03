@@ -101,13 +101,13 @@ export class RoomComponent implements OnInit, OnDestroy {
 
   public onFriendSelectChange($event: boolean, friend: User){
       friend.selected = $event;
-      console.log(this.friends)
   }
 
   public onFriendInvite(){
-    console.log('emiting')
     const inviteFriends = this.friends.filter(friend => friend.selected === true);
     this.socket.emit('INVITE_FRIENDS', { friends: inviteFriends, roomName: this.room, userName: this.user.name});
+    this.notification.notification.emit({success: true, message: 'Poziv poslat'});
+    this.friendListPopup = false;
   }
 
   public startTournament(){

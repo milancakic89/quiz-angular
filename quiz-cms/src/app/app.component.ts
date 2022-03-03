@@ -98,19 +98,28 @@ export class AppComponent implements OnInit, OnDestroy{
   
   }
 
+  public allowInvitationRoute(): boolean{
+    const blockRoutes = ['play', 'room'];
+    let allow = true;
+    blockRoutes.forEach(route =>{
+      if(location.href.includes(route)){
+        allow = false;
+      }
+    })
+    return allow;
+
+  }
+
   ngOnInit(){
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
     this.subscription = this.socketService.socketData.subscribe((data: SocketResponse) =>{
-      if (data && data.event === 'TOURNAMENT_INVITATION') {
-        console.log('invittion')
+      if (data && data.event === 'TOURNAMENT_INVITATION' && this.allowInvitationRoute()) {
         if(data.user_id !== this.user._id){
           this.invitedToRoomName = data.roomName;
           this.invited = true;
           this.invitedBy = data.userName;
-        }else{
-          console.log('friends invited')
         }
         
       }
