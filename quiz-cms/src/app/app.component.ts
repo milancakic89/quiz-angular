@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { FeedbackMessageService } from './feedback.service';
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'Quiz';
 
   constructor(private config: Configuration, 
@@ -191,6 +191,24 @@ export class AppComponent implements OnInit, OnDestroy{
       this._initRedirect = false;
       this.router.navigateByUrl('');
       return;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if ('serviceWorker' in navigator) {
+      try {
+        console.log('service worker in js')
+        navigator.serviceWorker.register('service-worker-cache.js', { scope: './' })
+          .then(reg => navigator.serviceWorker.ready)
+          .then(function () {
+            console.log('service worker registered')
+          })
+          .catch(function (error) {
+            console.log('error when registering service worker', error, arguments)
+          });
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
