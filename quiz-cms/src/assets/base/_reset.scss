@@ -1,5 +1,6 @@
 @import '../abstract/mixins';
 @import '../abstract/variables';
+@import url("https://allfont.net/allfont.css?fonts=junglefever");
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300&display=swap');
 
 * {
@@ -23,12 +24,14 @@ a {
 
 
 * {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'JungleFever', arial;
+    text-shadow: 4px 4px 4px #aaa;
 }
 
-::placeholder{
+::placeholder {
     color: #fff;
 }
+
 body {
     width: 100%;
     height: 100vh;
@@ -36,7 +39,7 @@ body {
     font-size: 100%;
     margin: 0;
     padding: 0;
-   background-color: #000;
+    background-color: #000;
 
 }
 
@@ -44,7 +47,8 @@ body {
 .text-white {
     color: #fff;
 }
-p{
+
+p {
     margin: 3px 0;
 }
 
@@ -125,14 +129,15 @@ button {
 /* Handle on hover */
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
-    -webkit-box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px rgb(79, 49, 45) inset !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(79, 49, 45) inset !important;
     font-size: 20px;
 }
-input:-webkit-autofill{
+
+input:-webkit-autofill {
     -webkit-text-fill-color: rgb(255, 255, 255) !important;
     font-size: 20px;
 }
