@@ -1,9 +1,8 @@
-
-.pirate{
+.pirate {
 
     &-login,
     &-profile,
-    &-tournament{
+    &-tournament {
         width: 90%;
         height: 100%;
         max-width: 900px;
@@ -14,88 +13,94 @@
         margin-top: -60px;
 
 
-        &-wrapper{
+        &-wrapper {
             display: flex;
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
             flex-direction: column;
             align-items: center;
             max-width: 370px;
-            margin: 0 auto;
+            margin: -10px auto 0 auto;
             width: 90%;
             height: auto;
-            .heading-image{
+
+            .heading-image {
                 width: 100%;
                 height: auto;
                 margin-bottom: -53px;
             }
 
-           
+
         }
 
-        &-form-wrapper{
+        &-form-wrapper {
             position: relative;
-            width: 87%;
-            padding-top: calc(90% * 1.38);
+            width: 94%;
+            padding-top: calc(88% * 1.38);
             background-image: url('../images/pirate-theme/popups/board-with-bomb.png');
             background-size: contain;
 
-            .inner{
+            .inner {
                 padding: 40px 70px 100px 70px;
                 overflow-y: auto;
             }
 
-            form{
+            form {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
 
-                .mt-2{
+                .mt-2 {
                     margin-top: 15px;
                 }
             }
         }
     }
 
-    &-login{
-        &-form-wrapper{
+    &-login {
+        &-form-wrapper {
             width: 90%;
             padding-top: calc(96% * 1.38);
         }
     }
 
-    &-play{
-        &-form-wrapper{
+    &-play {
+        &-form-wrapper {
             position: relative;
             width: 87%;
             padding-top: calc(90% * 1.38);
             background-image: none;
             background-size: contain;
 
-            .inner{
+            .inner {
                 padding: 10px 0px 30px 0px;
                 display: flex;
                 flex-direction: column;
                 overflow-y: auto;
-                .button-yellow{
+
+                .button-yellow {
                     margin-bottom: 5px !important;
                     height: 67px;
                     cursor: pointer;
                 }
 
-                .button-primary{
+                .button-primary {
                     padding: 3vw 8.5vw 3.5vw 8.5vw;
                 }
 
-                button:hover{
+                button:hover {
                     color: red !important;
                 }
             }
 
-            form{
+            form {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
 
-                .mt-2{
+                .mt-2 {
                     margin-top: 15px;
                 }
             }
@@ -103,66 +108,69 @@
     }
 
     &-profile,
-    &-tournament{
-        &-form-wrapper{
+    &-tournament {
+        &-form-wrapper {
             position: relative;
-            width: 80%;
-            padding-top: calc(80% * 1.48);
+            width: 94%;
+            padding-top: calc(94% * 1.48);
             background-image: none;
             background-size: contain;
 
-            .inner{
+            .inner {
                 padding: 10px 0px 30px 0px;
                 display: flex;
                 flex-direction: column;
-                .button-yellow{
+
+                .button-yellow {
                     margin-bottom: 5px !important;
                     height: 67px;
                     cursor: pointer;
                 }
 
-                .button-primary{
+                .button-primary {
                     padding: 3vw 8.5vw 3.5vw 8.5vw;
                 }
 
-                button:hover{
+                button:hover {
                     color: red !important;
                 }
             }
 
-            form{
+            form {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
 
-                .mt-2{
+                .mt-2 {
                     margin-top: 15px;
                 }
             }
         }
     }
 
-    &-tournament{
+    &-tournament {
 
-        &-form-wrapper{
-            width: 80%;
-            padding-top: calc(75% * 1.38);
+        &-form-wrapper {
+            width: 94%;
+            padding-top: calc(88% * 1.38);
 
-            .inner{
+            .inner {
                 margin-top: 20px;
             }
         }
     }
-    
-    &-form-heading-image{
+
+    &-form-heading-image {
         width: 100%;
         height: 80px;
         background-image: url('../images/pirate-theme/headings/heading.png');
         background-size: 100% auto;
     }
-    &-form-wrapper{
+
+    &-form-wrapper {
         width: 100%;
-        form{
+
+        form {
             flex-direction: column;
             min-height: 500px;
             padding: 45px 45px 100px 45px;
@@ -171,75 +179,74 @@
             background-position-x: 50%;
             background-repeat: no-repeat;
         }
+
         display: flex;
         flex-direction: column;
 
     }
 }
 
-.footer-wood{
+.footer-wood {
     height: 40px;
     position: absolute;
     top: 100%;
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     background-image: url('../images/pirate-theme/headings/footer-wood.png');
     background-size: 100% 100%;
-    
+
 }
 
-@media only screen and (min-width: 300px) and (max-width: 450px){
-    .heading-image{
-        
-    }
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+    .heading-image {}
 
-    .pirate{
-        &-login{
-            &.true{
+    .pirate {
+        &-login {
+            &.true {
                 justify-content: center;
             }
-    
-            &-wrapper{
-             
-                .heading-image{
+
+            &-wrapper {
+
+                .heading-image {
                     width: 100%;
                     margin-bottom: -36px;
                     margin-left: -7px;
                 }
-    
-               
+
+
             }
-    
-            &-form-wrapper{
-    
-                .inner{
+
+            &-form-wrapper {
+
+                .inner {
                     padding: 30px 30px 100px 30px;
                 }
-    
-                form{
-                    .d-flex{
+
+                form {
+                    .d-flex {
                         justify-content: center;
                     }
-                    input{
+
+                    input {
                         max-width: 185px;
                         align-self: center;
                     }
-                    .mt-2{
-                    }
 
-                    .submit{
+                    .mt-2 {}
+
+                    .submit {
                         margin-top: 10px;
                     }
                 }
             }
         }
-        
-        &-form-heading-image{
-        }
-        &-form-wrapper{
-            form{
-            }
-    
+
+        &-form-heading-image {}
+
+        &-form-wrapper {
+            form {}
+
         }
     }
 }

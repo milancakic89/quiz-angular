@@ -1,7 +1,15 @@
 @import '../abstract/mixins';
 @import '../abstract/variables';
-@import url("https://allfont.net/allfont.css?fonts=junglefever");
+@import url("https://db.onlinewebfonts.com/c/17e1555f8a6e076b12c1a74322e77e09?family=Jungle+Fever+NF");
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300&display=swap');
+
+@font-face {
+    font-family: "Jungle Fever NF";
+    src: url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.eot");
+    src: url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.eot?#iefix") format("embedded-opentype"),
+        url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.woff") format("woff"), url("//db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.ttf") format("truetype"),
+        url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.svg#Jungle Fever NF") format("svg");
+}
 
 * {
     box-sizing: border-box;
@@ -24,8 +32,8 @@ a {
 
 
 * {
-    font-family: 'JungleFever', arial;
-    text-shadow: 4px 4px 4px #aaa;
+    font-family: 'Jungle Fever NF', 'M PLUS Rounded 1c', sans-serif;
+    letter-spacing: 2px;
 }
 
 ::placeholder {

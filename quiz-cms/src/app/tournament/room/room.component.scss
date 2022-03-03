@@ -17,7 +17,7 @@
         width: 280px;
         height: 350px;
 
-        .user-item{
+        .user-item {
             margin-bottom: 3px;
         }
     }
@@ -55,10 +55,10 @@
             margin-left: 15px;
         }
 
-        .button-primary{
+        .button-primary {
 
-            &.disabled{
-                
+            &.disabled {
+
                 filter: grayscale(1);
             }
         }
@@ -106,7 +106,10 @@
 .room {
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
     align-items: center;
 
     .buttons-wrapper {
