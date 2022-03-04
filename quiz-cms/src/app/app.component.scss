@@ -817,6 +817,7 @@ $headerHeight: 65px;
 }
 
 .friend-request-modal {
+    transform: scale(1.2);
     .name-wrapper {
         margin-top: -100px;
         background-image: url('../assets/images/pirate-theme/popups/friend-request.png');
@@ -829,10 +830,11 @@ $headerHeight: 65px;
 
             .footer{
                 display: flex;
-                justify-content: flex-end;
+                align-items: center;
+                justify-content: center;
 
-                button:last-child{
-                    margin-left: 15px;
+                button{
+                    margin: 0px 5px !important;
                 }
             }
         }

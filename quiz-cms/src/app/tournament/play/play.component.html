@@ -5,7 +5,7 @@
 <div class="game-box" *ngIf="question">
     <div class="question-box-wrapper">
         <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
-            <h6 class="question-text-heading"><span>{{questionIndex}}.</span> {{ question.question }} </h6>
+            <h6 class="question-text-heading question-font"><span>{{questionIndex}}.</span> {{ question.question }} </h6>
         </div>
         <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new"
              *ngIf="question.type === 'PICTURE'">
@@ -23,7 +23,7 @@
             <p class="stars-background"></p>
         </div>
         <ng-container *ngIf="question">
-            <button class="button-yellow"
+            <button class="button-yellow question-font"
             *ngFor="let answer of question.answers; let i = index"
             [ngClass]="{
                 'disabled-button': questionSelected,
