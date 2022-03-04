@@ -12,6 +12,7 @@ import { TournamentService } from './tournament/tournament.service';
 import { SettingsService } from './settings/settings.service';
 import { Settings } from './settings/form/form.component';
 import { Subscription } from 'rxjs';
+import { Device, getConfiguration } from './device-configuration';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get isLogged(){return this.config.logged}
 
   get room() { return this.tournamentService.room}
+
+  public device: Device = {
+    width: 0,
+    height: 0,
+    deviceFounded: false
+  }
 
   public user: User = {} as User;
   public showModal = false;
@@ -201,6 +208,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.device = getConfiguration()
+      console.log(this.device)
+    }, 250)
     if ('serviceWorker' in navigator) {
       try {
         console.log('service worker in js')

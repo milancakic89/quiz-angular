@@ -10,11 +10,9 @@ function cacheAssets( assets ) {
             resolve()
           })
           .catch(err => {
-            console.log('error when syncing assets', err)
             reject()
           })
       }).catch(err => {
-        console.log('error when opening cache', err)
         reject()
       })
   });

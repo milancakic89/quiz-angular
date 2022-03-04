@@ -1,0 +1,283 @@
+.device {
+
+    &-width {
+
+        &-320 {
+            &.device-height {
+                &-480 {
+                    * {
+                        font-size: 14px !important;
+                    }
+
+                    .button-primary,
+                    .button-danger {
+                        font-size: 9px !important;
+                        height: 26px !important;
+                        margin-top: 0 !important;
+                        margin-bottom: 3px;
+                    }
+
+                    .pirate-login {
+                        .pirate-login-wrapper {
+                            top: 45px;
+
+                            .heading-image {
+                                height: 120px !important;
+                                width: auto !important;
+                                margin-top: 20px !important;
+                                margin-bottom: -23px !important;
+                            }
+
+                            .pirate-profile-form-wrapper {
+                                width: 66% !important;
+                                padding-top: calc(65% * 1.48) !important;
+                            }
+
+                            .pirate-login-form-wrapper {
+                                width: 80%;
+                                padding-top: calc(75% * 1.38);
+
+                                .inner {
+                                    padding: 30px 30px 55px 30px;
+                                }
+
+                                .mt-2 {
+                                    margin-top: 6px !important;
+                                }
+
+
+                            }
+                        }
+                    }
+
+                    .room {
+                        .banner {
+                            margin: -12px auto -41px auto;
+                            width: 282px;
+                        }
+
+                        .table {
+                            width: 233px !important;
+                            height: 315px !important;
+                        }
+
+                        .buttons-wrapper{
+                            top: 75px !important;
+                        }
+                    }
+                }
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+
+            }
+        }
+
+        &-360 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+        &-375 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+
+        &-384 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+
+        &-390 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+
+        &-400 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+        &-411 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+
+        &-414 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+        &-428 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+        &-480 {
+
+            &.device-height {
+                &-480 {}
+
+                &-533 {}
+
+                &-568 {}
+
+                &-640 {}
+
+                &-667 {}
+
+                &-695 {}
+
+                &-718 {}
+
+                &-740 {}
+            }
+        }
+
+    }
+
+
+}

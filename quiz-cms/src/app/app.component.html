@@ -7,7 +7,7 @@
     </h1>
 </div>
 
-<div class="content" [ngClass]="{'expand': !isLogged}">
+<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged}">
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
             <!--   RESULTS     -->
         <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">
