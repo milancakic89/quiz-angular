@@ -16,6 +16,10 @@ export class ProfileService{
         return this.service.get<User>('/reset-lives', '')
     }
 
+    public removeNotification(){
+        return this.service.post<User>('/remove-notification', {}, '')
+    }
+
     public calculateResetTime(future_ms: number){
         let total_seconds = future_ms;
         let counter = 0;

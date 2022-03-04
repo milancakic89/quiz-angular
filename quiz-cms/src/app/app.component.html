@@ -72,7 +72,7 @@
                     <h5><span>{{ invitedBy }}</span> vas poziva na turnir</h5>
                     <div class="footer">
                         <button class="button-primary" (click)="acceptTournamentInvitation()">Prihvati</button>
-                        <button class="button-danger" (click)="invited = false">Izadji</button>
+                        <button class="button-danger" (click)="removeNotification()">Izadji</button>
                     </div>
                    
                 </div>
@@ -81,7 +81,10 @@
             <div class="friend-request-modal" *ngIf="showRequestsModal">
                 <div class="name-wrapper">
                     <div class="body">
-                        <a class="button-primary" (click)="checkFriendRequests()" [routerLink]="['/friends', 'zahtevi']">Pogledaj</a>
+                        <div class="footer">
+                            <a class="button-primary" (click)="checkFriendRequests()">Pogledaj</a>
+                            <button class="button button-danger" (click)="removeNotification()">Izadji</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -822,8 +822,19 @@ $headerHeight: 65px;
         background-image: url('../assets/images/pirate-theme/popups/friend-request.png');
 
         .body {
-            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
             justify-content: flex-end;
+            padding-bottom: 10px;
+
+            .footer{
+                display: flex;
+                justify-content: flex-end;
+
+                button:last-child{
+                    margin-left: 15px;
+                }
+            }
         }
     }
 }

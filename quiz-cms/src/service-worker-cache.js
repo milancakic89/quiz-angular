@@ -7,7 +7,6 @@ function cacheAssets( assets ) {
         // the API does all the magic for us
         cache.addAll(assets)
           .then(() => {
-            console.log('all assets added to cache')
             resolve()
           })
           .catch(err => {
@@ -52,7 +51,6 @@ cacheAssets(assets)
 // this is the service worker which intercepts all http requests
 self.addEventListener('fetch', function fetcher(event) {
     var request = event.request;
-    console.log(request.url)
     // check if request 
   if (request.url.includes('assets')) {
         // contentful asset detected

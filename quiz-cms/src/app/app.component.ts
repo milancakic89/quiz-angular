@@ -89,6 +89,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
       // this.subscription.unsubscribe();
   }
+
+  public async removeNotification(){
+    await this.profileService.removeNotification();
+    this.showRequestsModal = false;
+  }
+
   public acceptTournamentInvitation(){
     if(this.invitedToRoomName){
       this.invited = false;
@@ -146,7 +152,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         if(user.name === 'Kvizoman'){
           this.showNewNameModal = true;
         }
-        if (user.friendRequests.length > 0 && !localStorage.getItem('modal')){
+        if (user.requestNotification){
           this.showRequestsModal = true;
         }
 
@@ -212,9 +218,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public checkFriendRequests(){
+  public async checkFriendRequests(){
+    const {success, data } = await this.profileService.removeNotification();
+    if(success){
+      this.config.user.next(data);
+    }
     this.showRequestsModal = false;
-    localStorage.setItem('modal', 'something')
+    this.router.navigate(['/friends', 'zahtevi']);
   }
 
   public async saveName(){
