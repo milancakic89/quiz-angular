@@ -52,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy{
   public resetAvailable = false;
   public lives_interval: any = undefined;
   public loadingPercent = 0;
+  public loadingInterval = null as unknown as any;
   public minutes = 0;
   public seconds = 0;
   public minutesString = '00';
@@ -87,6 +88,7 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
+    clearInterval(this.loadingInterval)
       // this.subscription.unsubscribe();
   }
   public acceptTournamentInvitation(){
@@ -102,7 +104,12 @@ export class AppComponent implements OnInit, OnDestroy{
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
-    this.subscription = this.socketService.socketData.subscribe((data: SocketResponse) =>{
+    this.loadingInterval = setInterval(()=>{
+      if(this.spinner && this.loadingPercent < 100){
+        this.loadingPercent += 5;
+      }
+    }, 500)
+    this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         console.log('invittion')
         if(data.user_id !== this.user._id){
