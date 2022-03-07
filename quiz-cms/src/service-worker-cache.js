@@ -36,6 +36,9 @@ var assets = [
   '/assets/images/pirate-theme/popups/Pop_Up_Leaderboard.png',
   '/assets/images/pirate-theme/popups/shop-bg.png',
   '/assets/images/pirate-theme/items/inventory-item.png',
+  '/assets/images/pirate-theme/items/Load_Bar_Empty.png',
+  '/assets/images/pirate-theme/items/Load_Bar_Full.png',
+  '/assets/images/pirate-theme/items/Spin_Outer.png',
   '/assets/images/new-theme/question-board.png',
 ]; // list of urls to be cached
 
