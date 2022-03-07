@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public showFeedback = false;
   public resetAvailable = false;
   public lives_interval: any = undefined;
-  public loadingPercent = 0;
+  public loadingPercent = 80;
   public minutes = 0;
   public seconds = 0;
   public minutesString = '00';

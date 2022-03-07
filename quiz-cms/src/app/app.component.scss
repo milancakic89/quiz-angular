@@ -2,12 +2,21 @@
 
 $headerHeight: 65px;
 
-.spinner {
+.spinner-wrapper {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 100000;
     background-color: rgba(0, 0, 0, 0.6);
     background-image: url('../assets/images/pirate-theme/bcg-pattern.png');
+    background-size: 75% auto;
+    background-repeat: repeat;
+}
+
+.spinner {
+
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
     position: fixed;
     top: 0;
     left: 0;
@@ -15,27 +24,45 @@ $headerHeight: 65px;
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(2px);
 
-    h1 {
-        width: 100%;
-        max-width: 400px;
-        height: 50px;
-        padding: 0;
-        margin: 0px 10px;
+    .spinner-center {
+        width: 270px;
+        height: 270px;
+        transition: all;
         position: relative;
         text-align: center;
+        background-image: url('../assets/images/pirate-theme/items/Spin_Outer.png');
+        background-size: 100% 100%;
+        padding: 40px;
+        display: flex;
+        margin-top: -120px;
+        align-items: center;
+        animation: animation 3s linear infinite;
 
-        .image {
+        .bar-wrapper {
             width: 100%;
-            height: 100%;
+            height: 30px;
             background-size: 100% 100%;
-            background-image: url('../assets/images/new-theme/loading-bar.png');
+            background-image: url('../assets/images/pirate-theme/items/Load_Bar_Empty.png');
+            filter: drop-shadow(0 0 1.75rem rgb(71, 71, 71));
+            border-radius: 25px;
             z-index: 10;
             margin: 0;
-            padding: 0;
-            position: absolute;
-            left: 0;
-            top: 0;
+            overflow: hidden;
+            position: relative;
+            animation: animation-back 3s linear infinite;
+
+            .bar {
+                width: 100%;
+                height: 31px;
+                background-image: url('../assets/images/pirate-theme/items/Load_Bar_Full.png');
+                background-size: 105% 100%;
+                border-radius: 30px;
+                position: absolute;
+                top: -3px;
+                left: -100%;
+            }
         }
 
         .loading-bar {
@@ -62,6 +89,27 @@ $headerHeight: 65px;
             z-index: 15;
             transform: translateX(-50%);
         }
+    }
+}
+
+@keyframes animation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes animation-back {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
     }
 }
 
@@ -775,8 +823,8 @@ $headerHeight: 65px;
         }
     }
 
-    .invitation-wrapper{
-        
+    .invitation-wrapper {
+
         width: 280px;
         height: 250px;
         display: flex;
@@ -785,20 +833,20 @@ $headerHeight: 65px;
         background-image: url('../assets/images/new-theme/question-board.png');
         background-size: 100% 100%;
 
-        h5{
+        h5 {
             font-size: 1.5rem;
             padding: 10px;
             color: rgb(121, 63, 8);
             font-weight: 600;
             text-align: center;
 
-            span{
+            span {
                 font-size: 1.6rem;
                 font-weight: 800;
             }
         }
-        
-        .footer{
+
+        .footer {
             display: flex;
             padding: 10px;
             justify-content: flex-end;
@@ -806,11 +854,11 @@ $headerHeight: 65px;
             background-image: url('../assets/images/new-theme/question-board.png');
             background-size: 100% 100%;
 
-            button{
+            button {
                 margin-bottom: 0 !important;
             }
 
-            button:last-child{
+            button:last-child {
                 margin-left: 15px;
             }
         }
@@ -819,6 +867,7 @@ $headerHeight: 65px;
 
 .friend-request-modal {
     transform: scale(1.2);
+
     .name-wrapper {
         margin-top: -100px;
         background-image: url('../assets/images/pirate-theme/popups/friend-request.png');
@@ -829,12 +878,12 @@ $headerHeight: 65px;
             justify-content: flex-end;
             padding-bottom: 10px;
 
-            .footer{
+            .footer {
                 display: flex;
                 align-items: center;
                 justify-content: center;
 
-                button{
+                button {
                     margin: 0px 5px !important;
                 }
             }

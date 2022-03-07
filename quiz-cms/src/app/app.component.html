@@ -1,13 +1,18 @@
-<div class="spinner" *ngIf="spinner">
-    <h1>
+<div class="spinner-wrapper" *ngIf="true">
+    <div class="spinner">
         <!-- <p class="image"></p>
-        <p class="loading-bar" [ngStyle]="{'width': loadingPercent + '%'}"></p>
-        <p class="loading-text">Ucitava se</p> -->
-        <img src="../assets/images/new-theme/loading-spinner.gif"/>
-    </h1>
+            <p class="loading-bar" [ngStyle]="{'width': loadingPercent + '%'}"></p>
+            <p class="loading-text">Ucitava se</p> -->
+        <div class="spinner-center">
+            <div class="bar-wrapper">
+                <p class="bar" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged}">
+
+<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged}" *ngIf="!spinner">
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
             <!--   RESULTS     -->
         <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">
