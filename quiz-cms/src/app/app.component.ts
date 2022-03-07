@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { FeedbackMessageService } from './feedback.service';
@@ -12,13 +12,14 @@ import { TournamentService } from './tournament/tournament.service';
 import { SettingsService } from './settings/settings.service';
 import { Settings } from './settings/form/form.component';
 import { Subscription } from 'rxjs';
+import { Device, getConfiguration } from './device-configuration';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'Quiz';
 
   constructor(private config: Configuration, 
@@ -36,6 +37,12 @@ export class AppComponent implements OnInit, OnDestroy{
   get isLogged(){return this.config.logged}
 
   get room() { return this.tournamentService.room}
+
+  public device: Device = {
+    width: 0,
+    height: 0,
+    deviceFounded: false
+  }
 
   public user: User = {} as User;
   public showModal = false;
@@ -91,6 +98,12 @@ export class AppComponent implements OnInit, OnDestroy{
     clearInterval(this.loadingInterval)
       // this.subscription.unsubscribe();
   }
+
+  public async removeNotification(){
+    await this.profileService.removeNotification();
+    this.showRequestsModal = false;
+  }
+
   public acceptTournamentInvitation(){
     if(this.invitedToRoomName){
       this.invited = false;
@@ -98,6 +111,18 @@ export class AppComponent implements OnInit, OnDestroy{
       this.router.navigateByUrl(`/tournament/room/${this.invitedToRoomName}`);
     }
   
+  }
+
+  public allowInvitationRoute(): boolean{
+    const blockRoutes = ['play', 'room'];
+    let allow = true;
+    blockRoutes.forEach(route =>{
+      if(location.href.includes(route)){
+        allow = false;
+      }
+    })
+    return allow;
+
   }
 
   ngOnInit(){
@@ -116,8 +141,6 @@ export class AppComponent implements OnInit, OnDestroy{
           this.invitedToRoomName = data.roomName;
           this.invited = true;
           this.invitedBy = data.userName;
-        }else{
-          console.log('friends invited')
         }
         
       }
@@ -144,7 +167,7 @@ export class AppComponent implements OnInit, OnDestroy{
         if(user.name === 'Kvizoman'){
           this.showNewNameModal = true;
         }
-        if (user.friendRequests.length > 0 && !localStorage.getItem('modal')){
+        if (user.requestNotification){
           this.showRequestsModal = true;
         }
 
@@ -192,9 +215,35 @@ export class AppComponent implements OnInit, OnDestroy{
     }
   }
 
-  public checkFriendRequests(){
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.device = getConfiguration()
+      console.log(this.device)
+    }, 250)
+    if ('serviceWorker' in navigator) {
+      try {
+        console.log('service worker in js')
+        navigator.serviceWorker.register('service-worker-cache.js', { scope: './' })
+          .then(reg => navigator.serviceWorker.ready)
+          .then(function () {
+            console.log('service worker registered')
+          })
+          .catch(function (error) {
+            console.log('error when registering service worker', error, arguments)
+          });
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  }
+
+  public async checkFriendRequests(){
+    const {success, data } = await this.profileService.removeNotification();
+    if(success){
+      this.config.user.next(data);
+    }
     this.showRequestsModal = false;
-    localStorage.setItem('modal', 'something')
+    this.router.navigate(['/friends', 'zahtevi']);
   }
 
   public async saveName(){

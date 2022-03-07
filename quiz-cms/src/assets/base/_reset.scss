@@ -1,6 +1,15 @@
 @import '../abstract/mixins';
 @import '../abstract/variables';
+@import url("https://db.onlinewebfonts.com/c/17e1555f8a6e076b12c1a74322e77e09?family=Jungle+Fever+NF");
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300&display=swap');
+
+@font-face {
+    font-family: "Jungle Fever NF";
+    src: url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.eot");
+    src: url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.eot?#iefix") format("embedded-opentype"),
+        url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.woff") format("woff"), url("//db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.ttf") format("truetype"),
+        url("https://db.onlinewebfonts.com/t/17e1555f8a6e076b12c1a74322e77e09.svg#Jungle Fever NF") format("svg");
+}
 
 * {
     box-sizing: border-box;
@@ -23,12 +32,14 @@ a {
 
 
 * {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'Jungle Fever NF', 'M PLUS Rounded 1c', sans-serif;
+    letter-spacing: 2px;
 }
 
-::placeholder{
+::placeholder {
     color: #fff;
 }
+
 body {
     width: 100%;
     height: 100vh;
@@ -36,7 +47,7 @@ body {
     font-size: 100%;
     margin: 0;
     padding: 0;
-   background-color: #000;
+    background-color: #000;
 
 }
 
@@ -44,7 +55,8 @@ body {
 .text-white {
     color: #fff;
 }
-p{
+
+p {
     margin: 3px 0;
 }
 
@@ -88,6 +100,16 @@ a {
     text-decoration: none;
 }
 
+.question-font {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    letter-spacing: 1px;
+}
+
+.question-box-new{
+    background-position: center;
+    background-size: auto 100%;
+}
+
 input,
 textarea {
     border: none;
@@ -125,14 +147,15 @@ button {
 /* Handle on hover */
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
-    -webkit-box-shadow: 0 0 0 30px rgb(79,49,45) inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px rgb(79, 49, 45) inset !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(79, 49, 45) inset !important;
     font-size: 20px;
 }
-input:-webkit-autofill{
+
+input:-webkit-autofill {
     -webkit-text-fill-color: rgb(255, 255, 255) !important;
     font-size: 20px;
 }

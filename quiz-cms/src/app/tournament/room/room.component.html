@@ -23,8 +23,9 @@
     <div class="buttons-wrapper">
         <button class="button button-danger" *ngIf="root">KOD: {{ room }}</button>
         <button class="button-primary"
+                *ngIf="root"
                 (click)="startTournament()">Igraj</button>
-        <div class="button button-list" (click)="openFriendList()">
+        <div class="button button-list" *ngIf="root" (click)="openFriendList()">
             <p></p>
             <p></p>
             <p></p>
