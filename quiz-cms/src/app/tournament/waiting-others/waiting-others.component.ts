@@ -40,9 +40,9 @@ export class WaitingOthersComponent implements OnInit {
     if (data && data.event === 'GET_ROOM_RESULTS'){
       this.results = data.users.sort((userA: User, userB: User) => {
         if(userA.score > userB.score){
-          return 1;
-        }else if(userB.score > userA.score){
           return -1;
+        }else if(userB.score > userA.score){
+          return 1;
         }else{
           return 0;
         }
