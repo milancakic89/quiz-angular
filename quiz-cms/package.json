@@ -23,6 +23,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@ng-select/ng-select": "^7.3.0",
     "angularx-social-login": "^4.0.1",
+    "cordova": "^11.0.0",
     "firebase": "^9.6.0",
     "font-awesome": "^4.7.0",
     "googleapis": "^92.0.0",
