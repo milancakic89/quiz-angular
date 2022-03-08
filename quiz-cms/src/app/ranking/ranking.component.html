@@ -1,14 +1,4 @@
 <div class="rankings">
-    <div class="navigation">
-        <a class=button-back routerLink="/profile"></a>
-    </div>
-    <!-- <div class="filters">
-        <h4 class="heading-big">Rezultat: </h4>
-        <span class="filter-button" 
-              (click)="onSelectFilter(filter)"
-              [ngClass]="{'selected': filter.selected}" 
-              *ngFor="let filter of filters">{{ filter.label }}</span>
-    </div> -->
         <div class="table ranking-table">
             <div class="thead">
                 <div class="tr">
@@ -23,7 +13,7 @@
                         <span class="avatar" [ngStyle]="{'background-image': 'url(' + player.avatar_url + ')'}"></span>
                     </div>
                     <div class="td w-40"><span>{{ player.name }}</span></div>
-                    <div class="td w-20"><span  [ngClass]="{'first': i === 0}">{{ player.score }}</span></div>
+                    <div class="td w-20"><span class="score"  [ngClass]="{'first': i === 0}">{{ player.score }}</span></div>
                 </div>
             </div>
         </div>

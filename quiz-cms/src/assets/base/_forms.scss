@@ -1,6 +1,6 @@
 @import '../abstract/variables';
 
-.inner{
+.inner {
     position: absolute;
     left: 0;
     top: 0;
@@ -10,11 +10,11 @@
     flex-direction: column;
 }
 
-.form-heading{
+.form-heading {
     font-size: 26px;
     text-align: center;
     font-weight: 900;
-    color: rgb(79,49,45);
+    color: rgb(79, 49, 45);
     padding: 0;
     margin: 0 0 15px 0;
 }
@@ -30,7 +30,7 @@ input {
     border-radius: 15px;
     background-size: 100% 100%;
     background-color: transparent;
-    background-color: rgb(79,49,45);
+    background-color: rgb(79, 49, 45);
     padding: 0px 15px;
     font-size: 18px;
     font-weight: 800;
@@ -107,9 +107,10 @@ input.form-submitted:focus {
             align-items: center;
             justify-content: space-between;
             background-color: transparent;
-            background-image: url('../images/new-theme/question-board.png');
             background-size: cover;
             min-height: 55px;
+            background-color: $primary-braon;
+            color: #fff;
 
             .th,
             .td {
@@ -123,7 +124,7 @@ input.form-submitted:focus {
             }
 
             .td {
-                color: rgb(0, 0, 0);
+                color: rgb(255, 255, 255);
                 font-weight: 600;
             }
         }
@@ -205,17 +206,17 @@ input.form-submitted:focus {
     }
 }
 
-@media only screen and (min-width:300px) and (max-width: 450px){
+@media only screen and (min-width:300px) and (max-width: 450px) {
 
-    .form-heading{
+    .form-heading {
         font-size: 16px;
     }
-    
-form {
 
-    input {
-        height: 30px;
+    form {
+
+        input {
+            height: 30px;
+        }
+
     }
-
-}
 }

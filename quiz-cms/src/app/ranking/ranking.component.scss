@@ -1,17 +1,20 @@
-.rankings{
+.rankings {
     width: 100%;
     height: calc(100vh - 60px);
     flex-direction: column;
     align-items: flex-start;
-    .filters{
+
+    .filters {
         padding: 5px;
         width: 100%;
         display: flex;
         margin-top: 70px;
-        h4{
+
+        h4 {
             font-weight: 600;
         }
-        .filter-button{
+
+        .filter-button {
             padding: 5px 10px;
             display: inline-block;
             border-radius: 5px;
@@ -23,22 +26,26 @@
             display: flex;
             align-items: center;
 
-            &:hover{
+            &:hover {
                 background-color: rgb(0, 64, 94);
             }
         }
 
-        .selected{
+        .selected {
             background-color: rgb(0, 64, 94);
         }
     }
 }
 
-.ranking-table{
+.ranking-table {
     height: calc(100vh - 160px);
+    background-image: url('../../assets/images/pirate-theme/popups/Pop_Up_Leaderboard.png');
+    background-size: 100% 100%;
+    padding: 46px 20px 100px 30px;
+    overflow: hidden;
 
-    .thead{
-        .tr{
+    .thead {
+        .tr {
             @media screen and (min-width: 350px) {
                 display: flex;
                 flex-wrap: nowrap;
@@ -47,41 +54,51 @@
         }
     }
 
-    .tbody{
-        padding-bottom: 100px;
+    .tbody {
 
-        .tr{
+        overflow-y: auto;
+
+        .tr {
             padding: 3px;
+            border-radius: 25px;
 
-            .avatar{
+            .avatar {
                 width: 45px;
                 height: 45px;
                 background-size: cover;
-                border-radius: 8px;
+                border-radius: 50%;
             }
 
-            .th.w-20:first-child{
+            .td {
+                color: #fff;
+            }
+
+            .th.w-20:first-child {
                 width: auto;
                 min-width: 65px;
             }
-            .td:last-child{
+
+            .td:last-child {
                 padding-right: 25px;
                 justify-content: flex-start;
 
-                span{
+                span {
                     font-size: 20px;
-                    color: rgb(26, 26, 26);
+                    color: rgb(202, 202, 202);
                     font-weight: 400;
-                    &.first{
+
+                    &.first {
                         font-size: 23px;
                         font-weight: 900;
-                        color: #000;
+                        color: rgb(255, 150, 13);
                     }
                 }
+
                 @media screen and (min-width: 300px) {
                     justify-content: flex-end;
                 }
             }
+
             @media screen and (min-width: 300px) {
                 display: flex;
                 flex-wrap: nowrap;
