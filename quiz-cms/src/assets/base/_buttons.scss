@@ -96,6 +96,7 @@ button {
         background-repeat: no-repeat;
         text-transform: none;
         border: none;
+        position: relative;
         outline: none;
         font-weight: 900;
         z-index: 100;
@@ -103,9 +104,46 @@ button {
         margin-bottom: 5px !important;
         color: rgb(31, 15, 0) !important;
 
-        &:hover{
+        &:hover {
             color: red !important;
+
         }
+
+        &.wrong-answer {
+            color: red !important;
+
+            &:before {
+                content: '';
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                border-radius: 50%;
+                transform: translateY(-50%);
+                background-color: red;
+            }
+        }
+
+        &.correct-answer {
+            color: rgb(1, 199, 100) !important;
+
+            &:before {
+                content: '';
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                border-radius: 50%;
+                transform: translateY(-50%);
+                background-color: rgb(1, 199, 100);
+            }
+        }
+
+
 
         .title {
             color: rgb(31, 15, 0) !important;
@@ -141,7 +179,6 @@ button {
 
             &:hover {
                 cursor: pointer;
-                background-image: url('../images/new-theme/yellow-button-hover.svg');
             }
         }
 
@@ -163,7 +200,6 @@ button {
 
             &:hover {
                 cursor: pointer;
-                background-image: url('../images/new-theme/yellow-button-hover.svg');
             }
         }
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlayService } from 'src/app/play/play.service';
-import { Configuration } from 'src/app/shared/config.service';
+import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 import { TournamentService } from '../tournament.service';
 
@@ -38,7 +38,16 @@ export class WaitingOthersComponent implements OnInit {
 
   this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
-      this.results = data.users;
+      this.results = data.users.sort((userA: User, userB: User) => {
+        if(userA.score > userB.score){
+          return 1;
+        }else if(userB.score > userA.score){
+          return -1;
+        }else{
+          return 0;
+        }
+
+      });
       this.socket.emit('LEAVE_ROOM', {roomName: this.room})
     
     }

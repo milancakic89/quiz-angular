@@ -39,6 +39,10 @@ var assets = [
   '/assets/images/pirate-theme/items/Load_Bar_Empty.png',
   '/assets/images/pirate-theme/items/Load_Bar_Full.png',
   '/assets/images/pirate-theme/items/Spin_Outer.png',
+  '/assets/images/pirate-theme/items/character.png',
+  '/assets/images/pirate-theme/items/Cup_Bronze.png',
+  '/assets/images/pirate-theme/items/Cup_Gold.png',
+  '/assets/images/pirate-theme/items/Cup_Silver.png',
   '/assets/images/new-theme/question-board.png',
 ]; // list of urls to be cached
 

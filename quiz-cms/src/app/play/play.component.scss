@@ -295,7 +295,7 @@
         background-position: 50% 50%;
         position: relative;
 
-        .button-yellow{
+        .button-yellow {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -357,13 +357,11 @@
 
 
     .wrong-answer {
-        color: rgb(255, 255, 255) !important;
-        background-image: url('../../assets/images/new-theme/yellow-button-wrong.svg') !important;
+        color: rgb(255, 0, 0) !important;
     }
 
     .correct-answer {
-        color: black !important;
-        background-image: url('../../assets/images/new-theme/yellow-button-correct.svg') !important;
+        color: rgb(0, 167, 28) !important;
     }
 
     .question-box-new {
@@ -397,6 +395,8 @@
     position: relative;
     margin: auto;
     margin-top: -68px;
+    left: 30%;
+    top: -10%;
     height: 50px;
     width: 50px;
     margin-bottom: -18px;

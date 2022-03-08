@@ -1,6 +1,11 @@
 <div class="room-results">
     <button class="button button-danger" (click)="onFinish()">Nazad</button>
-    <div class="user" *ngFor="let player of results">
-        <p>{{ player.name}}</p><p>{{ player.score}}</p>
+    <div class="user" *ngFor="let player of results; let i = index">
+        <div class="title">
+            <p class="title-score title-{{i}}"></p>
+            <p>{{ player.name}}</p>
+        </div>
+       
+        <p class="result-score">{{ player.score}}</p>
     </div>
 </div>

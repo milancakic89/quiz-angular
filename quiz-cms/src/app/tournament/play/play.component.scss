@@ -1,7 +1,7 @@
 @import '../../../assets/abstract/mixins';
 @import '../../../assets/abstract/variables';
 
-.waiting-others{
+.waiting-others {
     position: fixed;
     display: flex;
     left: 0;
@@ -15,8 +15,12 @@
     align-items: center;
     background-color: rgba(0, 0, 0, .8);
 
-    h4{
+    h4 {
         text-align: center;
+
+        img {
+            width: 70%;
+        }
     }
 }
 
@@ -376,13 +380,12 @@
 
 
     .wrong-answer {
-        color: rgb(255, 255, 255) !important;
-        background-image: url('../../../assets/images/new-theme/yellow-button-wrong.svg') !important;
+        color: rgb(255, 0, 0) !important;
+
     }
 
     .correct-answer {
-        color: black !important;
-        background-image: url('../../../assets/images/new-theme/yellow-button-correct.svg') !important;
+        color: rgb(3, 149, 64) !important;
     }
 
     .question-box-new {
