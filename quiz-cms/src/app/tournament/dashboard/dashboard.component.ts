@@ -59,4 +59,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/tournament/room/${this.enterRoom}`);
   }
 
+  public goToOneOnOneRoom(){
+    this.router.navigateByUrl('/tournament/one-on-one');
+  }
+
 }

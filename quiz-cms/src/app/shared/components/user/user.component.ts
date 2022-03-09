@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from '../config.service';
+import { User } from '../../config.service';
+
 
 @Component({
   selector: 'user-item',

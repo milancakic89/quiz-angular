@@ -29,7 +29,8 @@ export type EventType =
 'INVITE_FRIENDS' |
 'TOURNAMENT_INVITATION' |
 'LEAVED_ROOM' |
-'LEAVE_ROOM';
+'LEAVE_ROOM' |
+'OPONENT_FOUND' ;
 
 export interface Room{
     roomName?: string;
@@ -168,6 +169,14 @@ export class SocketService{
             console.log(data)
             this.socketData.next(data)
         });
+        this.socket.on('OPONENT_FOUND', (data: SocketResponse) => {
+            console.log(data.event)
+            console.log(data)
+            this.socketData.next(data)
+        });
+
+
+        
     }
 
     public emit(eventName: EventType, data: any){
