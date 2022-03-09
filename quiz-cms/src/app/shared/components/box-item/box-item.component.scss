@@ -1,5 +1,5 @@
-@import '../../../assets/abstract/variables';
-@import '../../../assets/abstract/mixins';
+@import '../../../../assets/abstract/variables';
+@import '../../../../assets/abstract/mixins';
 
 .box-item {
     &-wrapper {
@@ -18,7 +18,7 @@
         cursor: pointer;
 
         &.achievement {
-            background-image: url('../../../assets/images/medal.svg');
+            background-image: url('../../../../assets/images/medal.svg');
         }
 
         &.gray {

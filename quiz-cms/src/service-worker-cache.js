@@ -44,6 +44,16 @@ var assets = [
   '/assets/images/pirate-theme/items/Cup_Gold.png',
   '/assets/images/pirate-theme/items/Cup_Silver.png',
   '/assets/images/new-theme/question-board.png',
+  '/assets/images/pirate-theme/avatars/avatar-1.png',
+  '/assets/images/pirate-theme/avatars/avatar-2.png',
+  '/assets/images/pirate-theme/avatars/avatar-3.png',
+  '/assets/images/pirate-theme/avatars/avatar-4.png',
+  '/assets/images/pirate-theme/avatars/avatar-5.png',
+  '/assets/images/pirate-theme/avatars/avatar-6.png',
+  '/assets/images/pirate-theme/avatars/avatar-7.png',
+  '/assets/images/pirate-theme/avatars/avatar-8.jpeg',
+  '/assets/images/pirate-theme/avatars/avatar-9.jpeg',
+  '/assets/images/pirate-theme/avatars/avatar-10.png',
 ]; // list of urls to be cached
 
 // cache responses of provided urls

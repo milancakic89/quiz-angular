@@ -17,7 +17,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   get user() { return this.config.user.getValue() as User }
 
   public joined = false;
-  public oponent = null;
+  public oponent: User = null as unknown as User;
   public start = false;
 
   ngOnInit(): void {
@@ -27,8 +27,11 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
          this.joined = true;
       }
       if (data && data.event === 'OPONENT_FOUND') {
-        console.log('joined 1 on 1 room')
-        this.oponent = data.oponent;
+        setTimeout(()=>{
+          this.oponent = data.oponent;
+          this.startOneOnOne();
+        }, 3000)
+        
       }
     })
     this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id });
