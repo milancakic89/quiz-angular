@@ -1,5 +1,5 @@
 <div class="searching-players">
-    <div class="searching" *ngIf="!start">
+    <div class="searching" *ngIf="!joined">
         <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></div>
         <p>VS</p>
         <div class="animated">
@@ -7,12 +7,16 @@
         </div>
     </div>
 
-    <div class="searching founded" *ngIf="start">
+    <div class="searching founded" *ngIf="joined">
         <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></div>
         <p>VS</p>
         <div class="avatar" [ngStyle]="{'background-image': 'url(' + oponent.avatar_url + ')'}" *ngIf="oponent !== null"></div>
+        <div class="options">
+            <button class="buton button-primary" (click)="onAccept()">Prihvati</button>
+            <button class="buton button-danger" (click)="onDecline()">Odbij</button>
+        </div>
+        
     </div>
-
 </div>
 
 

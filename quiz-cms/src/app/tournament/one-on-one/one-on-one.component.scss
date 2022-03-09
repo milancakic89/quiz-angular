@@ -19,9 +19,22 @@
         align-items: center;
         display: flex;
 
-        p{
+        p {
             color: $primary-braon;
             font-size: 32px;
+        }
+
+        &.founded {
+            position: relative;
+
+            .options {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 100%);
+                display: flex;
+                width: auto;
+            }
         }
 
         .animated {
@@ -34,7 +47,7 @@
                 position: absolute;
                 left: 50%;
 
-                &.founded{
+                &.founded {
                     animation: none;
                 }
 

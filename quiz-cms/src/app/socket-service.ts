@@ -30,6 +30,8 @@ export type EventType =
 'TOURNAMENT_INVITATION' |
 'LEAVED_ROOM' |
 'LEAVE_ROOM' |
+'OPONENT_ACCEPTED' |
+'OPONENT_DECLINED' |
 'OPONENT_FOUND' ;
 
 export interface Room{
