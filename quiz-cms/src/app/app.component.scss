@@ -705,10 +705,18 @@ $headerHeight: 65px;
 
 }
 
+.button-primary{
+    &.false{
+        filter: grayscale(1);
+    }
+}
+
+
 .daily-items {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    min-width: 185px;
     justify-content: space-between;
     margin-bottom: 10px;
 
