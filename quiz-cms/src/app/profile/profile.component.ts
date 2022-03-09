@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.load();
   }
 
+
   public async load(){
     const { data, success } = await this.config.refreshUser()
     if(success){
