@@ -3,15 +3,14 @@
         <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></div>
         <p>VS</p>
         <div class="animated">
-            <div class="avatar avatar-2" *ngIf="oponent === null"></div>
-            <div class="avatar founded" [ngStyle]="{'background-image': 'url(' + oponent.avatar_url + ')'}" *ngIf="oponent !== null"></div>
+            <div class="avatar avatar-2"></div>
         </div>
     </div>
 
     <div class="searching founded" *ngIf="start">
-        <div class="avatar"></div>
+        <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></div>
         <p>VS</p>
-        <div class="avatar"></div>
+        <div class="avatar" [ngStyle]="{'background-image': 'url(' + oponent.avatar_url + ')'}" *ngIf="oponent !== null"></div>
     </div>
 
 </div>

@@ -30,7 +30,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         setTimeout(()=>{
           this.oponent = data.oponent;
           this.startOneOnOne();
-        }, 3000)
+        }, 1000)
         
       }
     })
@@ -39,6 +39,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.socketService.emit('LEAVE_ROOM', { roomName: '1on1'})
   }
 
   public startOneOnOne(){
