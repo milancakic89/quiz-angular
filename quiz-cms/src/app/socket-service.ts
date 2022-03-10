@@ -33,6 +33,7 @@ export type EventType =
 'LEAVE_ONE_ON_ONE' |
 'OPONENT_ACCEPTED' |
 'OPONENT_DECLINED' |
+'ONLINE_USERS_COUNT' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -52,6 +53,7 @@ export class SocketService{
     public setupReady = false;
 
     public socketData = new BehaviorSubject<SocketResponse>({} as SocketResponse);
+    public online = 0;
     
     constructor(private router: Router){
         if(!this.setupReady){
@@ -181,6 +183,11 @@ export class SocketService{
             console.log(data.event)
             console.log(data)
             this.socketData.next(data)
+        }); 
+        this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
+            console.log(data.event)
+            console.log(data)
+            this.online = data.online;
         });  
     }
 

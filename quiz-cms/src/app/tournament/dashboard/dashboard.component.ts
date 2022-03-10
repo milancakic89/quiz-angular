@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 import { TournamentService } from '../tournament.service';
@@ -9,7 +10,7 @@ import { TournamentService } from '../tournament.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private config: Configuration,
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
     if(window.innerHeight > 650){
       this.centerLogin = true;
     }
-    this.socketService.socketData.subscribe((data: any) =>{
+    this.subscription = this.socketService.socketData.subscribe((data: any) =>{
       if(data && data.event === 'ROOM_CREATED' && data.success){
         this.room = data.roomName
         setTimeout(()=>{
@@ -39,11 +40,15 @@ export class DashboardComponent implements OnInit {
        
       }
       if (data && data.event === 'LEAVE_ONE_ON_ONE') {
+        console.log('from server')
          this.buttonReady = true;
       }
     })
-    this.buttonReady = false;
-    this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
+      this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   @HostListener('window:resize')
@@ -68,5 +73,7 @@ export class DashboardComponent implements OnInit {
   public goToOneOnOneRoom(){
     this.router.navigateByUrl('/tournament/one-on-one');
   }
+
+  private subscription: Subscription = null as unknown as Subscription;
 
 }

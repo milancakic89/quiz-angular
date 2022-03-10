@@ -17,6 +17,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
     private config: Configuration) { }
   
   get user() { return this.config.user.getValue() as User }
+  get onlineUsers(){return this.socketService.online}
 
   public joined = false;
   public oponent: User = null as unknown as User;

@@ -143,6 +143,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         
       }
+      if (data && data.event === 'ONLINE_USERS_COUNT') {
+        if (data.user_id !== this.user._id) {
+          this.invitedToRoomName = data.roomName;
+          this.invited = true;
+          this.invitedBy = data.userName;
+        }
+
+      }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
