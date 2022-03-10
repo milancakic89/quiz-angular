@@ -1,12 +1,18 @@
-form{
+form {
     display: flex;
     flex-direction: column;
 
-    input{
+    input {
         height: 35px;
     }
 
-    button{
+    button {
         align-self: center;
+    }
+}
+
+.button-yellow{
+    &.false{
+        filter: grayscale(1);
     }
 }

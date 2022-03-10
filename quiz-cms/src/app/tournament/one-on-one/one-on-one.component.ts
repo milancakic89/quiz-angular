@@ -43,7 +43,6 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.socketService.emit('LEAVE_ROOM', { roomName: '1on1'})
   }
 
   public startOneOnOne(){
@@ -58,8 +57,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onDecline() {
-    this.socketService.emit('OPONENT_DECLINED', { roomName: this.room, user_id: this.user._id });
-    this.router.navigateByUrl('/tournament');
+      this.router.navigateByUrl('/tournament');  
   }
 
   private subscription: Subscription = null as unknown as Subscription;

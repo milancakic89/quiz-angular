@@ -136,7 +136,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 500)
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
-        console.log('invittion')
         if(data.user_id !== this.user._id){
           this.invitedToRoomName = data.roomName;
           this.invited = true;

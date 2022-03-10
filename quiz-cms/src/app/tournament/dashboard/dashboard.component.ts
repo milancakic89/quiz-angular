@@ -24,12 +24,12 @@ export class DashboardComponent implements OnInit {
   public roomInput = false;
   public enterRoom = '';
   public centerLogin = false;
+  public buttonReady = false;
 
   ngOnInit(): void {
     if(window.innerHeight > 650){
       this.centerLogin = true;
     }
-    this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
     this.socketService.socketData.subscribe((data: any) =>{
       if(data && data.event === 'ROOM_CREATED' && data.success){
         this.room = data.roomName
@@ -38,7 +38,12 @@ export class DashboardComponent implements OnInit {
         },10)
        
       }
+      if (data && data.event === 'LEAVE_ONE_ON_ONE') {
+         this.buttonReady = true;
+      }
     })
+    this.buttonReady = false;
+    this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
   }
 
   @HostListener('window:resize')

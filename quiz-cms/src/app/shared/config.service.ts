@@ -77,7 +77,8 @@ export interface SignupResponse {
 const isLogged = {
   logged: false,
   root: false,
-  gameRunning: false
+  gameRunning: false,
+  roomCleaned: false
 }
 
 export const logged = () =>{
