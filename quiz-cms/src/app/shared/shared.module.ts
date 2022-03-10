@@ -18,6 +18,6 @@ import { PlayComponent } from './components/play/play.component';
   imports: [
     CommonModule
   ],
-  exports: [BoxItemComponent, UserComponent]
+  exports: [BoxItemComponent, UserComponent, PlayComponent]
 })
 export class SharedModule { }

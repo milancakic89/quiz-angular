@@ -7,7 +7,7 @@ import { SocketService } from 'src/app/socket-service';
 import { TournamentService } from 'src/app/tournament/tournament.service';
 
 @Component({
-  selector: 'app-play',
+  selector: 'play-component',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
@@ -24,8 +24,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   get user() { return this.config.user.getValue() }
 
-  get room() { return this.tournamentService.room }
-  set room(value) { this.tournamentService.room = value }
+  @Input() room = '';
 
   public question: any;
   public questionSelected: any;
@@ -44,14 +43,8 @@ export class PlayComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.socketSetup()
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.playService.allowBackButton = false;
-        console.log('play params subscribe')
-        this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex - 1 });
-      }
-    });
+    this.playService.allowBackButton = false;
+    this.socketSetup();
   }
 
   ngOnDestroy(): void {
@@ -59,7 +52,6 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public socketSetup() {
-    this.tournamentService.setupReady = true;
     this.subscription = this.socket.socketData.subscribe(data => {
       if (data && data.event === 'UPDATE_WAITING_STATUS') {
         this.totalPlayers = data.users.length;
@@ -72,6 +64,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       if (data && data.event === 'GET_ROOM_QUESTION') {
         this.question = data.question;
+        console.log(data)
       }
 
       if (data && data.event === 'SELECTED_QUESTION_LETTER') {
@@ -108,9 +101,9 @@ export class PlayComponent implements OnInit, OnDestroy {
         }, 300)
 
       }
-
       //TOURNAMENT_FINISHED
     })
+    this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex - 1 });
   }
 
   public onSelectedAnswer(answer: { letter: string, text: string }, id: string, index: number) {

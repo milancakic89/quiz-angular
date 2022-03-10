@@ -1,4 +1,4 @@
-<div class="searching-players">
+<div class="searching-players" *ngIf="!bothAccepted">
     
     <div class="searching" *ngIf="!joined">
         <p class="online-users">online <span>{{onlineUsers}}</span></p>
@@ -25,5 +25,9 @@
         
     </div>
 </div>
+<div class="play" *ngIf="bothAccepted">
+    <play-component [room]="room" (onTournamentFinish)="tournamentFinish($event)">
 
+    </play-component>
+</div>
 

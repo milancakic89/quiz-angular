@@ -1,5 +1,15 @@
 @import '../../../assets/abstract/variables';
 
+.play {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
 .searching-players {
     width: 100%;
     height: 100vh;
