@@ -20,6 +20,19 @@
         display: flex;
         position: relative;
 
+        .accepted-true {
+            border: 4px solid rgb(1, 160, 54) !important;
+        }
+
+        .options {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            display: flex;
+            width: auto;
+        }
+
         p {
             color: $primary-braon;
             font-size: 32px;
@@ -28,14 +41,7 @@
         &.founded {
             position: relative;
 
-            .options {
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translate(-50%, 100%);
-                display: flex;
-                width: auto;
-            }
+
         }
 
         .animated {
@@ -47,6 +53,7 @@
             .avatar {
                 position: absolute;
                 left: 50%;
+
 
                 &.founded {
                     animation: none;

@@ -23,6 +23,8 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponent: User = null as unknown as User;
   public start = false;
   public room = '';
+  public oponentAccepted = false;
+  public acceptGame = false;
 
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe((data) =>{
@@ -33,10 +35,21 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
       if (data && data.event === 'OPONENT_FOUND') {
         setTimeout(()=>{
           this.oponent = data.oponent;
-          this.room = data.room;
+          this.room = data.roomName;
           this.startOneOnOne();
         }, 1000)
         
+      }
+      if (data && data.event === 'OPONENT_ACCEPTED') {
+        this.oponentAccepted = true;
+      }
+      if (data && data.event === 'OPONENT_DECLINED') {
+        console.log(data)
+        this.acceptGame = false;
+        setTimeout(()=>{
+          this.joined = false;
+            this.oponent = null as unknown as User;
+        }, 500)
       }
     })
     this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id });
@@ -54,11 +67,16 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onAccept(){
-    this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, user_id: this.user._id });
+    this.acceptGame = true;
+    this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, user_id: this.user._id, oponent_id: this.oponent._id });
   }
 
   public onDecline() {
-      this.router.navigateByUrl('/tournament');  
+    this.socketService.emit('OPONENT_DECLINED', {oponent_id: this.oponent._id, user_id: this.user._id }); 
+  }
+
+  public onExit(){
+    this.router.navigateByUrl('/tournament');  
   }
 
   private subscription: Subscription = null as unknown as Subscription;

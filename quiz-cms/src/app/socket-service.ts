@@ -33,6 +33,8 @@ export type EventType =
 'LEAVE_ONE_ON_ONE' |
 'OPONENT_ACCEPTED' |
 'OPONENT_DECLINED' |
+'JOINED_ROOM' |
+'TOURNAMENT_STARTING' |
 'ONLINE_USERS_COUNT' |
 'OPONENT_FOUND' ;
 
@@ -42,6 +44,11 @@ export interface Room{
     user_id: string;
 }
 
+interface Socket{
+    on: (event: EventType, data: any) => any;
+    emit: (event: EventType, data: any) => any;
+}
+
 export interface SocketResponse{
     event: EventType;
     [key: string]: any;
@@ -49,7 +56,7 @@ export interface SocketResponse{
 
 @Injectable({providedIn: 'root'})
 export class SocketService{
-    public socket: any;
+    public socket: Socket = null as unknown as Socket;
     public setupReady = false;
 
     public socketData = new BehaviorSubject<SocketResponse>({} as SocketResponse);
@@ -95,11 +102,7 @@ export class SocketService{
             console.log(data)
             this.socketData.next(data)
         });
-        this.socket.on('ROOM_DONT_EXIST', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
-            this.socketData.next(data)
-        });
+
         this.socket.on('LEAVED_ROOM', (data: SocketResponse) =>{
             console.log(data.event)
             console.log(data)
@@ -152,26 +155,18 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('ADD_FRIEND', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('FRIEND_ALLREADY_REQUESTED', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('ADD_FRIEND_FAILED', (data: SocketResponse) => {
             this.socketData.next(data)
         });
         this.socket.on('ACCEPT_FRIEND', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('TOURNAMENT_INVITATION', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('OPONENT_FOUND', (data: SocketResponse) => {
@@ -179,14 +174,18 @@ export class SocketService{
             console.log(data)
             this.socketData.next(data)
         });
-        this.socket.on('LEAVE_ONE_ON_ONE' , (data: SocketResponse) => {
+        this.socket.on('OPONENT_ACCEPTED', (data: SocketResponse) => {
             console.log(data.event)
             console.log(data)
             this.socketData.next(data)
+        });
+        this.socket.on('OPONENT_DECLINED', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('LEAVE_ONE_ON_ONE' , (data: SocketResponse) => {
+            this.socketData.next(data)
         }); 
         this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.online = data.online;
         });  
     }
