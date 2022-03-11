@@ -64,7 +64,9 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       if (data && data.event === 'GET_ROOM_QUESTION') {
         this.question = data.question;
+        console.log('***********')
         console.log(data)
+        console.log('***********')
       }
 
       if (data && data.event === 'SELECTED_QUESTION_LETTER') {

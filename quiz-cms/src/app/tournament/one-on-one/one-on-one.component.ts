@@ -42,7 +42,6 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         
       }
       if (data && data.event === 'OPONENT_ACCEPTED') {
-        this.acceptGame = true;
         this.oponentAccepted = true;
       }
       if (data && data.event === 'BOTH_ACCEPTED') {
@@ -76,6 +75,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onAccept(){
+    this.acceptGame = true;
     this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, user_id: this.user._id, oponent_id: this.oponent._id });
   }
 
