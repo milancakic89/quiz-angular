@@ -1,7 +1,7 @@
+<div class="navigation">
+    <a class=button-back routerLink="/profile"></a>
+</div>
 <div class="achievements" *ngIf="user">
-    <div class="navigation">
-        <a class=button-back routerLink="/profile"></a>
-    </div>
     <box-item *ngFor="let achievement of achievements"
               [description]="achievement.category"
               class="achievement"
