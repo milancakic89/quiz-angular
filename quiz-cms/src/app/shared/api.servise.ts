@@ -38,6 +38,7 @@ export class ApiService{
         const { data, success, error, token} = await this.mapToResponse<T>(this.http.post(this.localApi + url, config, {
             headers: {
                 Authorization: 'Bearer ' + getToken(),
+                ContentType: "application/json"
             }
         }).toPromise() as any, errorMessageFeedback)
         return { data, success, error, token};
