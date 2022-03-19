@@ -158,7 +158,7 @@ export class Configuration{
     }
 
     public async refreshUser(){
-      return this.service.post<User>('/refresh', {}, '')
+      return this.service.get<User>('/refresh', '')
     }
 
     public async attemptAutoLogin(){
