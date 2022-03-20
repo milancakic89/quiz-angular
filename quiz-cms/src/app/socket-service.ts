@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
+import { Configuration } from './shared/config.service';
 
 export type EventType = 
 'CREATE_ROOM' |
@@ -38,6 +39,7 @@ export type EventType =
 'ONLINE_USERS_COUNT' |
 'BOTH_ACCEPTED' |
 'JOIN_ONE_ON_ONE' |
+'REFRESH_USER' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -64,7 +66,7 @@ export class SocketService{
     public socketData = new BehaviorSubject<SocketResponse>({} as SocketResponse);
     public online = 0;
     
-    constructor(private router: Router){
+    constructor(private router: Router, private config: Configuration){
         if(!this.setupReady){
             this.socket = io.connect(environment.socketUrl);
             this.setup();
@@ -194,6 +196,9 @@ export class SocketService{
         }); 
         this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
             this.online = data.online;
+        });
+        this.socket.on('REFRESH_USER', (data: SocketResponse) => {
+            this.socketData.next(data)
         });  
     }
 

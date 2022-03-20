@@ -158,7 +158,7 @@ export class Configuration{
     }
 
     public async refreshUser(){
-      return this.service.get<User>('/refresh', '')
+      return this.socketService.socket.emit('REFRESH_USER', {user_id: this._user.getValue()._id})
     }
 
     public async attemptAutoLogin(){

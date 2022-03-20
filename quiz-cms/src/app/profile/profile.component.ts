@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
 import { PlayService } from '../play/play.service';
@@ -12,7 +13,7 @@ import { ProfileService } from './profile.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(private config: Configuration,
               private router: Router,
@@ -40,6 +41,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public centerLogin = false;
 
   public achievementNotification = false;
+  public subscription: Subscription = null as unknown as Subscription;
 
 
   public onChangeAvatar(){
@@ -47,15 +49,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.showInput = false;
   }
 
-  ngAfterViewInit(): void {
-    
-    // document.body.requestFullscreen()
-    //   .then(function () {
-    //     // element has entered fullscreen mode successfully
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error.message);
-    //   });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   
@@ -78,10 +73,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
   public async load(){
-    const { data, success } = await this.config.refreshUser()
-    if(success){
+    this.subscription = this.config.user.subscribe(data =>{
       this.user = data;
-      this.config.user.next(data);
       if(Date.now() >= data.daily_price){
         this.feedbackService.DailyPrice.emit(true);
       }
@@ -98,9 +91,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       if (this.user.lives === 0) {
         this.onResetLives();
       }
-     
-
-    }
+    })
+    this.config.refreshUser()
   }
 
   public cleanEmptyRooms(){

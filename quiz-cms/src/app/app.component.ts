@@ -13,6 +13,7 @@ import { SettingsService } from './settings/settings.service';
 import { Settings } from './settings/form/form.component';
 import { Subscription } from 'rxjs';
 import { Device, getConfiguration } from './device-configuration';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -149,7 +150,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.invited = true;
           this.invitedBy = data.userName;
         }
-
+      }
+      if (data && data.event === 'REFRESH_USER') {
+        this.config.user = data.data;
       }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
