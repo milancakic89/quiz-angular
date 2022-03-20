@@ -42,6 +42,9 @@ export type EventType =
 'REFRESH_USER' |
 'AUTOLOGIN' |
 'AUTOLOGINFAILED' |
+'GET_FRIEND_LIST' |
+'GET_FRIEND_REQUESTS' |
+'GET_ALL_USERS' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -174,6 +177,15 @@ export class SocketService{
         this.socket.on('AUTOLOGINFAILED', (data: SocketResponse) => {
             this.socketData.next(data)
             console.log('failed autologin')
+        });
+        this.socket.on('GET_ALL_USERS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('GET_FRIEND_LIST', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('GET_FRIEND_REQUESTS', (data: SocketResponse) => {
+            this.socketData.next(data)
         });
     }
 

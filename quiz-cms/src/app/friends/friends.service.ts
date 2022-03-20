@@ -1,21 +1,24 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "../shared/api.servise";
-import { User } from "../shared/config.service";
+import { Configuration, User } from "../shared/config.service";
+import { SocketService } from "../socket-service";
 
 @Injectable({providedIn: 'root'})
 export class FriendsService{
-    constructor(private service: ApiService){}
+    constructor(private service: ApiService,
+                private config: Configuration,
+                private socketService: SocketService){}
 
     public searchUsers(query: string){
-        return this.service.post<User[]>('/search-users', {query}, 'Nista nije pronadjeno za ovaj kriterijum')
+        this.socketService.socket.emit('GET_ALL_USERS', {Authorization: this.config.token, query: query})
     }
 
     public getFriendsRequests(){
-        return this.service.get<User[]>('/friend-requests', '')
+        this.socketService.socket.emit('GET_FRIEND_REQUESTS', {Authorization: this.config.token})
     }
 
     public getFriendsList(){
-        return this.service.get<User[]>('/friends', '')
+        this.socketService.socket.emit('GET_FRIEND_LIST', {Authorization: this.config.token})
     }
 
     public removeFriend(id: string){

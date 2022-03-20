@@ -118,6 +118,20 @@ export class ListComponent implements OnInit, OnDestroy {
       if(data && data.event === 'FRIEND_ALLREADY_REQUESTED'){
         this.notifications.notification.emit({ success: true, message: 'Zahtev za prijateljstvo vec postoji' })
       }
+      if(data && data.event === 'GET_ALL_USERS'){
+        console.log(data)
+        this.friends = data.data.filter((user: User) => user._id !== this.user._id);
+      }
+      if(data && data.event === 'GET_FRIEND_REQUESTS'){
+        console.log(data)
+        this.friendRequests = data.data.filter((user: User) => {
+          return this.acceptedFriends.every(friend => friend._id !== user._id);
+        });
+      }
+      if(data && data.event === 'GET_FRIEND_LIST'){
+        console.log(data)
+        this.acceptedFriends = data.data
+      }
     })
 
     this.searchQueryStream.pipe(debounceTime(500))
@@ -130,28 +144,15 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   public async load(){
-
-    const { data, success } = await this.friendsService.searchUsers(this.searchQuery)
-    if(success){
-      this.friends = data.filter(user => user._id !== this.user._id);
-    }
+  this.friendsService.searchUsers(this.searchQuery)
   }
 
   public async getFriendRequests(){
-    const { data, success } = await this.friendsService.getFriendsRequests()
-    if(success){
-      
-      this.friendRequests = data.filter(user => {
-        return this.acceptedFriends.every(friend => friend._id !== user._id);
-      });
-    }
+    this.friendsService.getFriendsRequests()
   }
 
   public async getFriendsList(){
-    const { data, success } = await this.friendsService.getFriendsList();
-    if(success){
-      this.acceptedFriends = data;
-    }
+    this.friendsService.getFriendsList();
   }
 
   public sendFriendRequest(id: string){

@@ -121,6 +121,7 @@ export class Configuration{
     constructor(private router: Router, private service: ApiService, private socketService: SocketService){ }
 
     get user() { return this._user}
+    get userValue(): User{ return this._user.getValue()}
     set user(value){this._user.next(value as any as User)}
 
     get isRoot(){return isRoot()}

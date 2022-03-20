@@ -84,6 +84,10 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl(`/play`);
       }
 
+      if(data && data.event === 'GET_ALL_USERS'){
+        this.friends = data.data.filter((user: User) => user.online === true);
+      }
+
       
 
       //ROOM_DONT_EXIST
@@ -119,10 +123,7 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   public async getFriendsList(){
-    const { data, success } = await this.friendsService.getFriendsList();
-    if (success) {
-      this.friends = data.filter(user => user.online === true);
-    }
+    this.friendsService.getFriendsList();
   }
 
   ngOnDestroy(): void {
