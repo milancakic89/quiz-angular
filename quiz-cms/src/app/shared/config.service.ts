@@ -161,18 +161,9 @@ export class Configuration{
       return this.socketService.socket.emit('REFRESH_USER', {user_id: this._user.getValue()._id})
     }
 
-    public async attemptAutoLogin(){
-      const { data, success } = await this.service.post<User>('/autologin', {}, 'Automatsko logovanje nije uspelo')
-      if (success) {
-        this.isRoot = data.roles.some((role: any) => role === 'ADMIN');
-        this.logged = true;
-        this._user.next(data);
-        this.socketService.emit('SAVE_SOCKET', { user_id: data._id })
-        return true;
-      }else{
-        localStorage.clear()
-      }
-      return false;
+    public attemptAutoLogin(){
+      console.log('autologin atempt')
+      this.socketService.socket.emit('AUTOLOGIN', {Authorization: this.token})
     }
 
     public getToken(){

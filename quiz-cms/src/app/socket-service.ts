@@ -40,6 +40,8 @@ export type EventType =
 'BOTH_ACCEPTED' |
 'JOIN_ONE_ON_ONE' |
 'REFRESH_USER' |
+'AUTOLOGIN' |
+'AUTOLOGINFAILED' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -71,6 +73,7 @@ export class SocketService{
             this.socket = io.connect(environment.socketUrl);
             this.setup();
             this.setupReady = true;
+            console.log('socket ready')
         }
       
     }
@@ -78,84 +81,55 @@ export class SocketService{
     public setup(){
 
         this.socket.on('CREATE_ROOM', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('USER_DISCONECTED', (data: SocketResponse) => {
-            console.log('USER_DISCONECTED: ', data.socket)
             this.socketData.next(data)
         });
         this.socket.on('USER_CONNECTED', (data: SocketResponse) => {
-            console.log('USER_CONNECTED: ', data.user_id)
             this.socketData.next(data)
         });
         this.socket.on('JOIN_ROOM', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('ROOM_CREATED', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
-            console.log('ROOM_CREATED')
             this.socketData.next(data)
         });
         this.socket.on('JOINED_ROOM', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
 
         this.socket.on('LEAVED_ROOM', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
 
         this.socket.on('TOURNAMENT_STARTING', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         })
         this.socket.on('START_TOURNAMENT_QUESTION', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         })
 
         this.socket.on('SELECTED_QUESTION_LETTER', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         })
 
         this.socket.on('UPDATE_WAITING_STATUS', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
 
         this.socket.on('EVERYONE_ANSWERED', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
 
         this.socket.on('TOURNAMENT_FINISHED', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
 
         this.socket.on('GET_ROOM_QUESTION', (data: SocketResponse) =>{
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('GET_ROOM_RESULTS', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('ADD_FRIEND', (data: SocketResponse) => {
@@ -174,18 +148,12 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('OPONENT_FOUND', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('OPONENT_ACCEPTED', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('BOTH_ACCEPTED', (data: SocketResponse) => {
-            console.log(data.event)
-            console.log(data)
             this.socketData.next(data)
         });
         this.socket.on('OPONENT_DECLINED', (data: SocketResponse) => {
@@ -199,7 +167,14 @@ export class SocketService{
         });
         this.socket.on('REFRESH_USER', (data: SocketResponse) => {
             this.socketData.next(data)
-        });  
+        }); 
+        this.socket.on('AUTOLOGIN', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('AUTOLOGINFAILED', (data: SocketResponse) => {
+            this.socketData.next(data)
+            console.log('failed autologin')
+        });
     }
 
     public emit(eventName: EventType, data: any){

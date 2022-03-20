@@ -154,6 +154,16 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if (data && data.event === 'REFRESH_USER') {
         this.config.user = data.data;
       }
+      if (data && data.event === 'AUTOLOGIN') {
+          this.config.user = data.data;
+          this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
+          this.config.logged = true;
+          this.socketService.emit('SAVE_SOCKET', { user_id: data.data._id });
+          this.router.navigateByUrl('/profile')
+      }
+      if (data && data.event === 'AUTOLOGINFAILED') {
+          localStorage.clear();
+    }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
@@ -318,7 +328,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       setTimeout(()=>{
         this.loadingPercent = 50;
       },100)
-      await this.config.attemptAutoLogin();
+      this.config.attemptAutoLogin();
       this.loadingPercent = 90;
       setTimeout(()=>{
         this.spinner = false;
