@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { SocialAuthService, FacebookLoginProvider } from 'angularx-social-login';
+import { SocketService } from 'src/app/socket-service';
+import { Subscription } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 declare var FB: any;
@@ -21,6 +24,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private config: Configuration, 
               private router: Router,
+              private socketService: SocketService,
               private notification: NotificationService) { }
 
   get login() { return this._loginDetails; }
@@ -31,11 +35,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public feedbackClass = '';
   public centerLogin = false;
   public development = false;
+  public subscription: Subscription = null as unknown as Subscription;
 
   ngOnInit(): void {
     if(window.innerHeight > 650){
       this.centerLogin = true;
     }
+    this.subscription = this.socketService.socketData.subscribe(response =>{
+      if(response && response.event === 'LOGIN'){
+        this.config.saveUser(response.data.data, response.data.token)
+        this.router.navigateByUrl('/profile')
+      }
+    })
     // try{
     //   (window as any).fbAsyncInit = function () {
     //     FB.init({
@@ -112,13 +123,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public async onSubmit(){
-    const { data, success, token, error } = await this.config.login(this._loginDetails.email, this._loginDetails.password) as any;
-    if (success) {
-      this.config.saveUser(data, token);
-    }else{
-      this.notification.notification.emit({ success: false, message: error });
-    }
+  public onSubmit(){
+    console.log('login')
+    this.socketService.socket.emit('LOGIN', {email: this._loginDetails.email, password: this._loginDetails.password})
   }
 
   public testLogin(){
