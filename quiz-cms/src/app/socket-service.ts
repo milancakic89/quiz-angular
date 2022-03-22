@@ -41,6 +41,7 @@ export type EventType =
 'JOIN_ONE_ON_ONE' |
 'REFRESH_USER' |
 'AUTOLOGIN' |
+'REGISTER' |
 'LOGIN' |
 'AUTOLOGINFAILED' |
 'GET_FRIEND_LIST' |
@@ -176,6 +177,9 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('LOGIN', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('REGISTER', (data: SocketResponse) => {
             this.socketData.next(data)
         });
         this.socket.on('AUTOLOGINFAILED', (data: SocketResponse) => {
