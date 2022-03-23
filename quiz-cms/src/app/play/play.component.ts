@@ -1,4 +1,5 @@
 import { NonNullAssert } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalWrapper } from '../modal-service';
@@ -6,6 +7,7 @@ import { QuestionService } from '../questions/questions.service';
 import { Answers, Question } from '../questions/types';
 import { Configuration } from '../shared/config.service';
 import { NotificationService } from '../shared/notification.service';
+import { SocketService } from '../socket-service';
 import { PlayService } from './play.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     private config: Configuration,
     private notificationService: NotificationService,
     private playService: PlayService,
+    private socketService: SocketService,
     private questionService: QuestionService) { }
 
   get attempts() { return this._attempts }
@@ -56,6 +59,40 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.config.user.subscribe(user => {
       if (user) {
         this.lives = user.lives;
+      }
+    })
+
+    this.socketService.socketData.subscribe(data =>{
+      if(data && data.event === 'GET_QUESTION'){
+        this.correct = 0;
+        this.showCorrect = false;
+        this.btnIndex = null;
+        this.question = data.question;
+        this.questionCount++;
+        this.selectedLetter = '';
+        this.questionSelected = false;
+        this.time = 20;
+        this.initTime();
+      }
+
+      if (data && data.event === 'UPDATE_QUESTION') {
+        if (data.correct) {
+          this.score++;
+          this.updateProgressBar();
+          this.correct = 2
+            setTimeout(() => {
+              if (this.attempts.length) {
+                this.getQuestion();
+              } else {
+                this.gameOver('You have missed 3 times');
+              }
+
+            }, this.nextQuestionInterval)
+        } else {
+          this.correct = 1;
+          this.reduceAttempts();
+          return false;
+        } 
       }
     })
   }
@@ -114,25 +151,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this.questionCount >= 15 || !this.attempts.length) {
       return this.gameOver('End of game');
     }
-    const { data, success } = await this.questionService.getSingleQuestion(this.playCategory)
-    if (success) {
-      this.correct = 0;
-      this.showCorrect = false;
-      this.btnIndex = null;
-      this.question = data;
-      this.questionCount++;
-      this.selectedLetter = '';
-      this.questionSelected = false;
-      this.time = 20;
-      this.initTime();
-    } else {
-      clearInterval(this.timeInterval);
-      this.notificationService.notification.emit({
-        success: false,
-        message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-      })
-      this.router.navigateByUrl('/profile')
-    }
+    this.socketService.socket.emit('GET_QUESTION', { category: this.playCategory })
   }
 
   public initTime() {
@@ -149,7 +168,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public async timeWarning() {
     this.questionSelected = true;
     this.stopTime();
-    await this.updateQuestion(this.question.answers[0].text);
     setTimeout(() => {
       if (this.attempts.length) {
         this.getQuestion();
@@ -266,45 +284,12 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.questionSelected = true;
     this.selectedLetter = answer.letter;
     this.stopTime();
-    const correct = await this.updateQuestion(answer.text);
     this.btnIndex = btnIndex;
-    if(correct){
-      this.correct = 2;
-    }else{
-      this.correct = 1;
-    }
-    setTimeout(() => {
-      if (this.attempts.length) {
-        this.getQuestion();
-      } else {
-        this.gameOver('You have missed 3 times');
-      }
-
-    }, this.nextQuestionInterval)
+    this.updateQuestion()
   }
 
-  public async updateQuestion(correct: string) {
-    const { data, success } = await this.playService.checkQuestion(this.question._id, correct)
-    if (success) {
-      if (data) {
-        this.score++;
-        this.updateProgressBar();
-        return true;
-      } else {
-        this.reduceAttempts();
-        return false;
-      }      
-    } else {
-      clearInterval(this.timeInterval)
-      this.playService.allowBackButton = true;
-      this.notificationService.notification.emit({
-        success: false,
-        message: 'Neuspelo izvlacenje pitanja iz baze, pokusajte ponovo'
-      });
-      //todo set user not playing in DB and then router him
-      // this.router.navigateByUrl('/profile');
-      return false;
-    }
+  public async updateQuestion() {
+    this.socketService.socket.emit('UPDATE_QUESTION', { question_id: this.question._id})
   }
 
   public backToProfile(){

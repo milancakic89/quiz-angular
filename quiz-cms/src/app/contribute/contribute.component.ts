@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
@@ -7,6 +7,7 @@ import { NotificationService } from '../shared/notification.service';
 import { Configuration } from '../shared/config.service';
 import { finalize } from "rxjs/operators";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { SocketService } from '../socket-service';
 
 export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
 @Component({
@@ -19,6 +20,7 @@ export class ContributeComponent implements OnInit {
   constructor(private questionService: QuestionService, 
               private config: Configuration,
               private storage: AngularFireStorage,
+              private socketService: SocketService,
               private notificationService: NotificationService,
               private http: HttpClient) { }
 
@@ -46,6 +48,11 @@ export class ContributeComponent implements OnInit {
   public selectedCategory: Category = 'GEOGRAFIJA';
 
   ngOnInit(): void {
+    this.socketService.socketData.subscribe(data =>{
+      if (data && (data.event === 'ADD_QUESTION' || data.event === 'ADD_IMAGE_QUESTION')){
+        this.notificationService.notification.emit({success: true, message: 'Pitanje uspesno dodato'})
+      }
+    })
   }
 
 
@@ -121,19 +128,12 @@ export class ContributeComponent implements OnInit {
     this._newQuestion.image = this.upload.nativeElement.files[0];
   }
 
-  public async addQuestion(question: Question){
-    const { success } = await this.questionService.addQuestion(question);
-    if(success){
-      this.notificationService.notification.emit({success: true,message: 'Pitanje upesno dodato'})
-    }
+  public addQuestion(question: Question){
+    this.socketService.socket.emit('ADD_QUESTION', {data: question})
   }
 
-  public async addImageQuestion(question: any) {
-
-    const { success } = await this.questionService.addImageQuestion(question);
-    if (success) {
-      this.notificationService.notification.emit({ success: true, message: 'Pitanje upesno dodato' })
-    }
+  public addImageQuestion(question: any) {
+    this.socketService.socket.emit('ADD_IMAGE_QUESTION', { data: question })
   }
 
 

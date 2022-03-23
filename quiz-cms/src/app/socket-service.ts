@@ -47,6 +47,10 @@ export type EventType =
 'GET_FRIEND_LIST' |
 'GET_FRIEND_REQUESTS' |
 'GET_ALL_USERS' |
+'ADD_QUESTION' |
+'GET_QUESTION' |
+'UPDATE_QUESTION' |
+'ADD_IMAGE_QUESTION' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -193,6 +197,15 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('GET_FRIEND_REQUESTS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('ADD_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('ADD_IMAGE_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('UPDATE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
         });
     }
