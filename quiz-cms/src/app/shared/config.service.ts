@@ -110,7 +110,7 @@ export const setToken = (value: string) => {
 }
 
 export const getToken = () => {
-  return localStorage.getItem('access')
+  return localStorage.getItem('access');
 }
 
 
@@ -159,17 +159,13 @@ export class Configuration{
     }
 
     public async refreshUser(){
-      return this.socketService.socket.emit('REFRESH_USER', {user_id: this._user.getValue()._id})
+      return this.socketService.emit('REFRESH_USER', {user_id: this._user.getValue()._id})
     }
 
     public attemptAutoLogin(){
-      console.log('autologin atempt')
-      this.socketService.socket.emit('AUTOLOGIN', {Authorization: this.token})
+      this.socketService.emit('AUTOLOGIN', {})
     }
 
-    public getToken(){
-      return 
-    }
 
     public logout(){
       localStorage.clear()

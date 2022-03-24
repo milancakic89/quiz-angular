@@ -129,12 +129,12 @@ export class ContributeComponent implements OnInit {
   }
 
   public addQuestion(question: Question){
-    this.socketService.socket.emit('ADD_QUESTION', {data: question})
+    this.socketService.emit('ADD_QUESTION', { question: question })
   }
 
-  public addImageQuestion(question: any) {
-    this.socketService.socket.emit('ADD_IMAGE_QUESTION', { data: question })
-  }
+  // public addImageQuestion(question: any) {
+  //   this.socketService.emit('ADD_QUESTION', { question: question, _id: this.config.userValue._id })
+  // }
 
 
   private _newQuestion = {

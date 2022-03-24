@@ -124,8 +124,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public onSubmit(){
-    console.log('login')
-    this.socketService.socket.emit('LOGIN', {email: this._loginDetails.email, password: this._loginDetails.password})
+    this.socketService.emit('LOGIN', {email: this._loginDetails.email, password: this._loginDetails.password})
   }
 
   public testLogin(){

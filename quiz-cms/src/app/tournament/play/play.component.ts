@@ -46,7 +46,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params =>{
       if (params['id']){
         this.playService.allowBackButton = false;
-        console.log('play params subscribe')
         this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex -1});
       }
     });

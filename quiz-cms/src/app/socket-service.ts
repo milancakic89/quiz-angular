@@ -51,6 +51,7 @@ export type EventType =
 'GET_QUESTION' |
 'UPDATE_QUESTION' |
 'ADD_IMAGE_QUESTION' |
+'GET_QUESTIONS' |
 'OPONENT_FOUND' ;
 
 export interface Room{
@@ -82,10 +83,11 @@ export class SocketService{
             this.socket = io.connect(environment.socketUrl);
             this.setup();
             this.setupReady = true;
-            console.log('socket ready')
         }
       
     }
+
+    get token() { return localStorage.getItem('access')}
     
     public setup(){
 
@@ -188,7 +190,6 @@ export class SocketService{
         });
         this.socket.on('AUTOLOGINFAILED', (data: SocketResponse) => {
             this.socketData.next(data)
-            console.log('failed autologin')
         });
         this.socket.on('GET_ALL_USERS', (data: SocketResponse) => {
             this.socketData.next(data)
@@ -208,9 +209,16 @@ export class SocketService{
         this.socket.on('UPDATE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
         });
+        this.socket.on('GET_QUESTIONS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
     }
 
     public emit(eventName: EventType, data: any){
+        if(this.token){
+            const token = this.token;
+            data.Authorization = token;
+        }
         this.socket.emit(eventName, data)
     }
 }

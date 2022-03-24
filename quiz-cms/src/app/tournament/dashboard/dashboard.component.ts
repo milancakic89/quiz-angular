@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
        
       }
       if (data && data.event === 'LEAVE_ONE_ON_ONE') {
-        console.log('from server')
          this.buttonReady = true;
       }
     })

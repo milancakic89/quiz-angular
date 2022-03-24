@@ -78,7 +78,6 @@ export class ListComponent implements OnInit, OnDestroy {
           this.notifications.notification.emit({success: true, message: 'Zahtev uspesno poslat'})
       }
       if (data && data.event === 'ACCEPT_FRIEND' && data.success) {
-        console.log(data.friendRequest)
         this.friendRequests = this.friendRequests.filter(user =>{
           return user._id !== data.friendRequest;
         })
@@ -119,17 +118,14 @@ export class ListComponent implements OnInit, OnDestroy {
         this.notifications.notification.emit({ success: true, message: 'Zahtev za prijateljstvo vec postoji' })
       }
       if(data && data.event === 'GET_ALL_USERS'){
-        console.log(data)
         this.friends = data.data.filter((user: User) => user._id !== this.user._id);
       }
       if(data && data.event === 'GET_FRIEND_REQUESTS'){
-        console.log(data)
         this.friendRequests = data.data.filter((user: User) => {
           return this.acceptedFriends.every(friend => friend._id !== user._id);
         });
       }
       if(data && data.event === 'GET_FRIEND_LIST'){
-        console.log(data)
         this.acceptedFriends = data.data
       }
     })

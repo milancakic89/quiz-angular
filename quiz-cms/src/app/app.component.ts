@@ -162,8 +162,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.router.navigateByUrl('/profile')
       }
       if (data && data.event === 'AUTOLOGINFAILED') {
-          localStorage.clear();
-    }
+         localStorage.clear();
+      }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
       this.resetAvailable = bool;
@@ -242,14 +242,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 250)
     if ('serviceWorker' in navigator) {
       try {
-        console.log('service worker in js')
         navigator.serviceWorker.register('service-worker-cache.js', { scope: './' })
           .then(reg => navigator.serviceWorker.ready)
           .then(function () {
             console.log('service worker registered')
           })
           .catch(function (error) {
-            console.log('error when registering service worker', error, arguments)
           });
       } catch (e) {
         console.log(e)
@@ -316,15 +314,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public async refreshUser(){
-    const { data, success } = await this.config.refreshUser();
-    if(success){
-      this.config.user.next(data);
-    }
+    this.socketService.emit('REFRESH_USER', {})
   }
 
   public async autologin(){
     this.spinner = true;
-    if(localStorage.getItem('access') && !this.config.logged){
+    if(localStorage.getItem('access')){
       setTimeout(()=>{
         this.loadingPercent = 50;
       },100)

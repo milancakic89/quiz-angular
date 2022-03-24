@@ -30,7 +30,6 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe((data) =>{
       if (data && data.event === 'JOIN_ROOM' ){
-         console.log('joined 1 on 1 room')
         //  this.joined = true;
       }
       if (data && data.event === 'OPONENT_FOUND') {
@@ -45,14 +44,13 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         this.oponentAccepted = true;
       }
       if (data && data.event === 'BOTH_ACCEPTED') {
-       console.log('both accepted in component')
         setTimeout(()=>{
           this.bothAccepted = true;
         },300)  
        
       }
       if (data && data.event === 'OPONENT_DECLINED') {
-        console.log(data)
+
         this.acceptGame = false;
         setTimeout(()=>{
           this.joined = false;

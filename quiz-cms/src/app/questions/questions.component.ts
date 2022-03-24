@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Configuration, User } from '../shared/config.service';
 import { NotificationService } from '../shared/notification.service';
+import { SocketService } from '../socket-service';
 import { QuestionService } from './questions.service';
 import { Category, Question, QuestionStatus } from './types';
 
@@ -14,6 +15,7 @@ export class QuestionsComponent implements OnInit {
 
   constructor(private questionService: QuestionService,
     private notificationService: NotificationService,
+    private socketService: SocketService,
     private config: Configuration) { }
 
   get isRoot() { return this.config.isRoot }
@@ -42,25 +44,27 @@ export class QuestionsComponent implements OnInit {
         this.user = user;
       }
     })
+    this.socketService.socketData.subscribe(data =>{
+      if(data && data.event === 'GET_QUESTIONS'){
+        if(this.filterStatus){
+          this.questions = data.data.filter((item: Question) => item.status === this.filterStatus);;
+        }else{
+          this.questions = data.data;
+        }
+       
+        localStorage.setItem('questions', JSON.stringify(data))
+      }
+    })
     this.load();
   }
 
-  public async load() {
-    const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
-    if (success) {
-      this.questions = data;
-      this.filterStatus = 'SVA';
-      localStorage.setItem('questions', JSON.stringify(data))
-    }
+  public load() {
+    this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter})
   }
 
   public async filter(status: QuestionStatus){
-    const { data, success } = await this.questionService.getQuestions(this.selectedFilter);
-    if (success) {
-      this.filterStatus = status;
-      this.questions = data.filter(item => item.status === status);
-      localStorage.setItem('questions', JSON.stringify(data))
-    }
+    this.filterStatus = status;
+    this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter })
   }
 
   public async updateQuestionText(id: string) {

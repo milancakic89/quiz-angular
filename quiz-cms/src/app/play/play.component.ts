@@ -91,7 +91,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
         } else {
           this.correct = 1;
           this.reduceAttempts();
-          return false;
         } 
       }
     })
@@ -151,7 +150,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this.questionCount >= 15 || !this.attempts.length) {
       return this.gameOver('End of game');
     }
-    this.socketService.socket.emit('GET_QUESTION', { category: this.playCategory })
+    this.socketService.emit('GET_QUESTION', { category: this.playCategory })
   }
 
   public initTime() {
@@ -289,7 +288,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public async updateQuestion() {
-    this.socketService.socket.emit('UPDATE_QUESTION', { question_id: this.question._id})
+    this.socketService.emit('UPDATE_QUESTION', { question_id: this.question._id})
   }
 
   public backToProfile(){

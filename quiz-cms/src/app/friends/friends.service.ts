@@ -10,15 +10,15 @@ export class FriendsService{
                 private socketService: SocketService){}
 
     public searchUsers(query: string){
-        this.socketService.socket.emit('GET_ALL_USERS', {Authorization: this.config.token, query: query})
+        this.socketService.emit('GET_ALL_USERS', {Authorization: this.config.token, query: query})
     }
 
     public getFriendsRequests(){
-        this.socketService.socket.emit('GET_FRIEND_REQUESTS', {Authorization: this.config.token})
+        this.socketService.emit('GET_FRIEND_REQUESTS', {Authorization: this.config.token})
     }
 
     public getFriendsList(){
-        this.socketService.socket.emit('GET_FRIEND_LIST', {Authorization: this.config.token})
+        this.socketService.emit('GET_FRIEND_LIST', {Authorization: this.config.token})
     }
 
     public removeFriend(id: string){

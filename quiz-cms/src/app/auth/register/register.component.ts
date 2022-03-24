@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public async onSubmit(){
-    this.socketService.socket.emit('REGISTER', { email: this._registerDetails.email, password: this._registerDetails.password})
+    this.socketService.emit('REGISTER', { email: this._registerDetails.email, password: this._registerDetails.password})
     
   }
 
