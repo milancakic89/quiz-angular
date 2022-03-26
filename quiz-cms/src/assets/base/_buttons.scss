@@ -9,7 +9,11 @@ button {
     }
 }
 
-
+button[disabled],
+input[type="button"][disabled],
+input[type="submit"][disabled]{
+    filter: grayscale(1) !important;
+}
 
 
 .button {
@@ -41,6 +45,8 @@ button {
             cursor: pointer;
             background-image: url('../../assets/images/pirate-theme/buttons/Button_Green_Hover.png');
         }
+
+      
 
         @media screen and (min-width: 300px) and (max-width: 667px) {
             font-size: 12px;

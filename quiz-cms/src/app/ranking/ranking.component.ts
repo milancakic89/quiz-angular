@@ -1,6 +1,8 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../shared/config.service';
+import { SocketService } from '../socket-service';
 import { RankingService } from './ranking-service';
 
 interface Filter{
@@ -16,7 +18,7 @@ interface Filter{
 })
 export class RankingComponent implements OnInit {
 
-  constructor(private rankingService: RankingService) { }
+  constructor(private socketService: SocketService) { }
 
   public rankedPlayers: User[] = []
   public filters: Filter[] = [
@@ -47,23 +49,25 @@ export class RankingComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.socketService.socketData.subscribe(data =>{
+      if(data && data.event === 'GET_RANKING_LIST'){
+        this.rankedPlayers = data.data.sort((a:User, b: User) => {
+          if(a.score > b.score){
+            return -1;
+          }
+          else if(b.score > a.score){
+            return 1;
+          }else{
+            return 0
+          }
+        });
+      }
+    })
     this.load() 
   }
 
   public async load(){
-    const { data, success } = await this.rankingService.getRankingList(100);
-    if(success){
-      this.rankedPlayers = data.sort((a,b) => {
-        if(a.score > b.score){
-          return -1;
-        }
-        else if(b.score > a.score){
-          return 1;
-        }else{
-          return 0
-        }
-      });
-    }
+    this.socketService.emit('GET_RANKING_LIST', {})
   }
 
   public trackByFn(i: number){

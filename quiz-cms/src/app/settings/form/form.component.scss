@@ -2,7 +2,8 @@
     width: 100%;
     height: calc(100vh - 60px);
     background-image: url('../../../assets/images/new-theme/question-board.png');
-    background-size: cover;
+    background-size: contain;
+    text-align: center;
     padding: 20px;
     overflow-y: auto;
 }
@@ -20,6 +21,8 @@ input[type="file"] {
 }
 
 form{
+    justify-content: center;
+    padding-top: 80px;
     input{
         border: none;
         border-bottom: 3px solid black;
@@ -27,6 +30,8 @@ form{
 }
 
 .form-row{
+    justify-content: center;
+    align-items: center;
     @media screen and (max-width: 500px) {
         flex-direction: column;
     }

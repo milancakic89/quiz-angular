@@ -56,7 +56,8 @@ export class FormComponent implements OnInit {
     const { success, error } = await this.service.saveSettings(this._settings)
     if(success){
       this.notifications.notification.emit({success: true, message: 'Uspesno sacuvano'})
-      this.user.avatar_url = this.settings.image
+      this.user.avatar_url = this.settings.image;
+      this.router.navigateByUrl('/profile')
     }
   }
 

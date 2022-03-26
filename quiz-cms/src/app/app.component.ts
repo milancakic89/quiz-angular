@@ -154,6 +154,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if (data && data.event === 'REFRESH_USER') {
         this.config.user = data.data;
       }
+      if (data && data.event === 'GET_DAILY_REWARD') {
+        this.animateReward(data.tickets, data.data);
+    }
       if (data && data.event === 'AUTOLOGIN') {
           this.config.user = data.data;
           this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
@@ -347,10 +350,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public async claimDailyReward(){
-    const { data, success, tickets } = await this.service.claimDailyReward();
-    if(success){
-      this.animateReward(tickets, data);
-    }
+    this.socketService.emit('GET_DAILY_REWARD', {})
   }
 
   public closeDailyReward(){

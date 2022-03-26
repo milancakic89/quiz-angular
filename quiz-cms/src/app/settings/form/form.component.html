@@ -1,7 +1,4 @@
 <div class="settings">
-    <div class="navigation">
-        <a class=button-back (click)="backToProfile()"></a>
-    </div>
     <form #settingsForm="ngForm" (submit)="settingsForm.valid && onFormSubmit()">
     <div class="form-row">
         <div class="form-row-input">
@@ -11,10 +8,10 @@
     </div>
     <div class="form-row">
         <div class="form-row-input">
-            <label class="image-upload-label" for="image">Promeni sliku</label>
+            <label class="button-danger" for="image">Promeni sliku</label>
             <input #upload id="image" type="file" (ngModelChange)="onImageChange()"  name="image" [(ngModel)]="selectedImage" />
         </div>
     </div>
-    <button class="button-submit" [disabled]="settingsForm.invalid">Sacuvaj</button>
+    <button class="button-primary" [disabled]="settingsForm.invalid">Sacuvaj</button>
     </form>
 </div>

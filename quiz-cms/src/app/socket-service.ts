@@ -52,7 +52,18 @@ export type EventType =
 'UPDATE_QUESTION' |
 'ADD_IMAGE_QUESTION' |
 'GET_QUESTIONS' |
-'OPONENT_FOUND' ;
+'GET_RANKING_LIST' |
+'CHECK_QUESTION' |
+'DELETE_QUESTION' |
+'GET_DAILY_REWARD' |
+'RESET_PLAYING_STATE' |
+'RESET_LIVES' |
+'UPDATE_SCORE' |
+'OPONENT_FOUND' |
+'UPDATE_SETTINGS' |
+'REMOVE_NOTIFICATION' |
+'GET_ACHIEVEMENTS' |
+'REDUCE_LIVES';
 
 export interface Room{
     roomName?: string;
@@ -210,6 +221,36 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('GET_QUESTIONS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('GET_RANKING_LIST', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('DELETE_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('CHECK_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('GET_DAILY_REWARD', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('RESET_LIVES', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('RESET_PLAYING_STATE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('UPDATE_SCORE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('UPDATE_SETTINGS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('REMOVE_NOTIFICATION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('REDUCE_LIVES', (data: SocketResponse) => {
             this.socketData.next(data)
         });
     }

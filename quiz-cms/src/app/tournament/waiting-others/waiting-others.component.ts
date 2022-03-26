@@ -58,7 +58,7 @@ export class WaitingOthersComponent implements OnInit {
     this.playService.allowBackButton = true;
     this.tournamentService.room = '';
     setTimeout(()=>{
-      location.href = 'https://kviz-live.web.app';
+      this.router.navigateByUrl('/profile')
     }, 100)
   }
 
