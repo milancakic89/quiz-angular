@@ -101,7 +101,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public async removeNotification(){
-    await this.profileService.removeNotification();
+    this.socketService.emit('REMOVE_NOTIFICATION', {})
     this.showRequestsModal = false;
   }
 
@@ -161,11 +161,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.config.user = data.data;
           this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
           this.config.logged = true;
+          this.spinner = false;
           this.socketService.emit('SAVE_SOCKET', { user_id: data.data._id });
           this.router.navigateByUrl('/profile')
       }
       if (data && data.event === 'AUTOLOGINFAILED') {
          localStorage.clear();
+         this.spinner = false;
       }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
@@ -259,10 +261,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public async checkFriendRequests(){
-    const {success, data } = await this.profileService.removeNotification();
-    if(success){
-      this.config.user.next(data);
-    }
+    this.socketService.emit('REMOVE_NOTIFICATION', {})
     this.showRequestsModal = false;
     this.router.navigate(['/friends', 'zahtevi']);
   }
@@ -327,11 +326,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.loadingPercent = 50;
       },100)
       this.config.attemptAutoLogin();
-      this.loadingPercent = 90;
-      setTimeout(()=>{
-        this.spinner = false;
-        this.router.navigateByUrl('/profile')
-      },300)
+
      }else{
       this.spinner = false;
      }
@@ -345,6 +340,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.showFeedback = false;
       this.animateBox = false;
       this.feedbackMessage = '';
+     
     }, 500)
 
   }

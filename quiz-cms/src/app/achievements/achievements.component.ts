@@ -1,6 +1,8 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Configuration } from '../shared/config.service';
 import { NotificationService } from '../shared/notification.service';
+import { SocketService } from '../socket-service';
 import { AchievementsService } from './achievements.service';
 
 export interface Achievement{
@@ -18,9 +20,7 @@ export interface Achievement{
 })
 export class AchievementsComponent implements OnInit {
 
-  constructor(private config: Configuration, 
-              private service: AchievementsService, 
-              private notificationService: NotificationService) { }
+  constructor(private config: Configuration, private socketService: SocketService) { }
 
   public user: any = null;
 
@@ -30,15 +30,17 @@ export class AchievementsComponent implements OnInit {
     this.config.user.subscribe((user: any) =>{
       this.user = user;
     })
+    this.socketService.socketData.subscribe(data =>{
+      if(data && data.event === 'GET_ACHIEVEMENTS'){
+              this.achievements = data.data;
+              this.achievements.sort();
+      }
+    })
     this.load();
   }
 
   public async load(){
-    // const { data, success} = await this.service.getAchievements();
-    // if(success){
-    //   this.achievements = data;
-    //   this.achievements.sort();
-    // }
+    this.socketService.emit('GET_ACHIEVEMENTS', {})
   }
 
 }

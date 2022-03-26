@@ -253,6 +253,9 @@ export class SocketService{
         this.socket.on('REDUCE_LIVES', (data: SocketResponse) => {
             this.socketData.next(data)
         });
+        this.socket.on('GET_ACHIEVEMENTS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
     }
 
     public emit(eventName: EventType, data: any){
