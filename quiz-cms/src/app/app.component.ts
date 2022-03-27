@@ -168,6 +168,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if (data && data.event === 'AUTOLOGINFAILED') {
          localStorage.clear();
          this.spinner = false;
+         
       }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
@@ -319,14 +320,21 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public async autologin(){
     this.spinner = true;
     if(localStorage.getItem('access')){
-      setTimeout(()=>{
-        this.loadingPercent = 50;
-      },100)
-      this.config.attemptAutoLogin();
+        setTimeout(()=>{
+          this.loadingPercent = 50;
+        },100)
+        setTimeout(()=>{
+          if(this.config.logged){
+            localStorage.clear()
+            this.router.navigateByUrl('/login');
+          }
+        }, 6000)
+         this.config.attemptAutoLogin();
 
      }else{
       this.spinner = false;
      }
+    
 
   }
 

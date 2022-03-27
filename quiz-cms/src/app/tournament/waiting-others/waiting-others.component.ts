@@ -31,7 +31,7 @@ export class WaitingOthersComponent implements OnInit {
     this.playService.allowBackButton = false;
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.socket.emit('GET_ROOM_RESULTS', { roomName: this.room, user_id: this.user._id });
+        this.socket.emit('GET_ROOM_RESULTS', { roomName: params['id'], user_id: this.user._id });
        
       }
     });
