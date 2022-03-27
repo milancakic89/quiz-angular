@@ -63,6 +63,8 @@ export type EventType =
 'UPDATE_SETTINGS' |
 'REMOVE_NOTIFICATION' |
 'GET_ACHIEVEMENTS' |
+'UPLOAD_IMAGE' |
+'MATCH_FOUND' |
 'REDUCE_LIVES';
 
 export interface Room{
@@ -254,6 +256,12 @@ export class SocketService{
             this.socketData.next(data)
         });
         this.socket.on('GET_ACHIEVEMENTS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('MATCH_FOUND', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('UPLOAD_IMAGE', (data: SocketResponse) => {
             this.socketData.next(data)
         });
     }

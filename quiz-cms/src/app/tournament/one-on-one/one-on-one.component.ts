@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 
@@ -14,6 +15,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   constructor(
     private socketService: SocketService,
     private router: Router,
+    private playService: PlayService,
     private config: Configuration) { }
   
   get user() { return this.config.user.getValue() as User }
@@ -32,8 +34,9 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
       if (data && data.event === 'JOIN_ROOM' ){
         //  this.joined = true;
       }
-      if (data && data.event === 'OPONENT_FOUND') {
+      if (data && data.event === 'MATCH_FOUND') {
         setTimeout(()=>{
+          console.log(data)
           this.oponent = data.oponent;
           this.room = data.roomName;
           this.startOneOnOne();
@@ -58,7 +61,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         }, 500)
       }
     })
-    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id });
+    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
   }
 
   ngOnDestroy(): void {
@@ -74,7 +77,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onAccept(){
     this.acceptGame = true;
-    this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, user_id: this.user._id, oponent_id: this.oponent._id });
+    this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, me: this.user, oponent: this.oponent });
   }
 
   public onDecline() {
@@ -86,7 +89,10 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public tournamentFinish($event: any){
-    this.router.navigateByUrl(`/tournament/room/${this.room}/results`)
+    this.playService.allowBackButton = true;
+    setTimeout(()=>{
+        this.router.navigateByUrl(`/tournament/room/${this.room}/results`)
+    },300)
   }
 
   private subscription: Subscription = null as unknown as Subscription;

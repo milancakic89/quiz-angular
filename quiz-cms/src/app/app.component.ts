@@ -132,7 +132,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.loadingInterval = setInterval(()=>{
       if(this.spinner && this.loadingPercent < 100){
-        this.loadingPercent += 5;
+        this.loadingPercent += 2;
       }
     }, 500)
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
@@ -274,10 +274,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       name: this.newName,
       image: null
     }
-    const {success} = await this.settings.saveSettings(settings);
-    if(!success){
-      console.log('not saved')
-    }
+    this.socketService.emit('UPDATE_SETTINGS', {settings})
     this.showNewNameModal = false;
   }
 

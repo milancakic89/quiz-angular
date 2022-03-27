@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { SocketService } from 'src/app/socket-service';
 import { UploadService } from 'src/app/upload.service';
 import { SettingsService } from '../settings.service';
 
@@ -19,6 +20,7 @@ export class FormComponent implements OnInit {
 
   constructor(private router: Router,
               private notifications: NotificationService,
+              private socketService: SocketService,
               private uploadService: UploadService,
               private service: SettingsService,
               private config: Configuration) { }
@@ -36,6 +38,13 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this._settings.name = this.user.name;
     this._settings.image = this.user.avatar_url;
+    this.socketService.socketData.subscribe(data =>{
+      if(data && data.event === 'UPDATE_SETTINGS'){
+        this.notifications.notification.emit({success: true, message: 'Uspesno sacuvano'})
+        this.user.avatar_url = this.settings.image;
+        this.router.navigateByUrl('/profile')
+      }
+    })
   }
 
   public backToProfile() {
@@ -52,13 +61,10 @@ export class FormComponent implements OnInit {
     if(this.selectedImage){
       imageUrl = await this.uploadService.uploadImage(this._settings.image)
       this._settings.image = imageUrl;
+      this.socketService.emit('UPDATE_SETTINGS', {settings: this._settings})
     }
-    const { success, error } = await this.service.saveSettings(this._settings)
-    if(success){
-      this.notifications.notification.emit({success: true, message: 'Uspesno sacuvano'})
-      this.user.avatar_url = this.settings.image;
-      this.router.navigateByUrl('/profile')
-    }
+   
+
   }
 
   private _settings: Settings = {
