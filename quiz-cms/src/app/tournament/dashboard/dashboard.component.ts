@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
          this.buttonReady = true;
       }
     })
-      this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
+    this.socketService.emit('LEAVE_ONE_ON_ONE', { user_id: this.user._id })
   }
 
   ngOnDestroy(): void {

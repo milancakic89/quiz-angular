@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,6 +22,8 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   get user() { return this.config.user.getValue() as User }
   get onlineUsers(){return this.socketService.online}
 
+  get root(){return this.config.isRoot}
+
   public joined = false;
   public oponent: User = null as unknown as User;
   public start = false;
@@ -28,11 +31,15 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponentAccepted = false;
   public acceptGame = false;
   public bothAccepted = false;
+  public code = {};
 
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe((data) =>{
       if (data && data.event === 'JOIN_ROOM' ){
         //  this.joined = true;
+      }
+      if (data && data.event === 'TRACK_ONE_ON_ONE') {
+        this.code = data.data;
       }
       if (data && data.event === 'MATCH_FOUND') {
         setTimeout(()=>{

@@ -35,11 +35,20 @@
         </div>
             <!--    /RESULTS     -->
     </div>
+    <div class="json-info" *ngIf="isLogged">
+        <p><span>EMITED: {{EMMITED}}</span> <span (click)="showCode = !showCode">toggle</span></p>
+        <p><span>RECEIVED: {{RECEIVED_EVENT}}</span></p>
+        <div *ngIf="showCode">
+            <code > {{ code | json }} </code>
+        </div>
+       
+    </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
         <div class="right-info">
+            <p>v 1.0</p>
             <p><a routerLink="/friends"><i class="fa-solid fa-user-group"></i></a></p>
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p class="wrap"><span class="hearth-life" *ngFor="let life of lives"></span></p>

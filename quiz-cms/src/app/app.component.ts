@@ -38,6 +38,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get isLogged(){return this.config.logged}
 
   get room() { return this.tournamentService.room}
+  get EMMITED(){return this.socketService.EMITED}
+  get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
 
   public device: Device = {
     width: 0,
@@ -68,6 +70,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
   public newName = '';
+
+  public code = {}
+  public showCode = false;
 
   public invitedToRoomName = '';
   public invitedBy = '';
@@ -153,6 +158,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (data && data.event === 'REFRESH_USER') {
         this.config.user = data.data;
+      }
+
+      if (data && data.event === 'TRACK_ONE_ON_ONE') {
+          this.code = data.data;
       }
       if (data && data.event === 'GET_DAILY_REWARD') {
         this.animateReward(data.tickets, data.data);
