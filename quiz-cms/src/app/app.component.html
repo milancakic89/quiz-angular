@@ -39,7 +39,7 @@
         <p><span>EMITED: {{EMMITED}}</span> <span (click)="showCode = !showCode">toggle</span></p>
         <p><span>RECEIVED: {{RECEIVED_EVENT}}</span></p>
         <div *ngIf="showCode">
-            <code > {{ code | json }} </code>
+            <pre > {{ RECEIVED_DARA | json }} </pre>
         </div>
        
     </div>

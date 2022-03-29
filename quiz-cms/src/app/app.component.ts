@@ -40,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get room() { return this.tournamentService.room}
   get EMMITED(){return this.socketService.EMITED}
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
+  get RECEIVED_DARA() { return this.socketService.RECEIVED_DATA }
 
   public device: Device = {
     width: 0,
@@ -333,7 +334,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.loadingPercent = 50;
         },100)
         setTimeout(()=>{
-          if(this.config.logged){
+          if(!this.config.logged){
             localStorage.clear()
             this.router.navigateByUrl('/login');
           }
