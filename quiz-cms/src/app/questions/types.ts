@@ -11,10 +11,11 @@ export interface Question{
     correct_text: string;
     opened?: boolean;
     imageUrl?: any;
+    posted_by?: string;
     firebasePath?: string;
 }
 
-export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';
+export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'MUZIKA' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';
   
 export interface Answers{
     text: string;
