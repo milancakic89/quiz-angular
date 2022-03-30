@@ -35,7 +35,7 @@
         </div>
             <!--    /RESULTS     -->
     </div>
-    <div class="json-info" *ngIf="isLogged">
+    <div class="json-info" *ngIf="isLogged && isRoot">
         <p><span>EMITED: {{EMMITED}}</span> <span (click)="showCode = !showCode">toggle</span></p>
         <p><span>RECEIVED: {{RECEIVED_EVENT}}</span></p>
         <div *ngIf="showCode">
