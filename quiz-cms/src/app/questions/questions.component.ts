@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Configuration, User } from '../shared/config.service';
 import { NotificationService } from '../shared/notification.service';
 import { SocketService } from '../socket-service';
@@ -11,7 +13,7 @@ import { Category, Question, QuestionStatus } from './types';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit, OnDestroy {
 
   constructor(private questionService: QuestionService,
     private notificationService: NotificationService,
@@ -25,6 +27,9 @@ export class QuestionsComponent implements OnInit {
   public updateQuestion = '';
   public showUpdateButton = true;
   public filterStatus = '';
+  public mixed: Question[] = [] as unknown as Question[];
+  public uploadCounter = 0;
+  public subscription: Subscription = null as unknown as Subscription;
 
   public filters = [
     { title: 'SVE', value: '' },
@@ -44,19 +49,23 @@ export class QuestionsComponent implements OnInit {
         this.user = user;
       }
     })
-    this.socketService.socketData.subscribe(data =>{
+    this.subscription = this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'GET_QUESTIONS'){
         if(this.filterStatus){
           this.questions = data.data.filter((item: Question) => item.status === this.filterStatus);;
         }else{
           this.questions = data.data;
         }
-       
         localStorage.setItem('questions', JSON.stringify(data))
       }
     })
     this.load();
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 
   public load() {
     this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter})
