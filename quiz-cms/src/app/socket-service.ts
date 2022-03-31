@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 import { Configuration } from './shared/config.service';
 import { AppComponent } from './app.component';
 
-export type EventType =
+export type EventType = 'connection' |
     'CREATE_ROOM' |
     'JOIN_ROOM' |
     'ROOM_CREATED' |
@@ -41,6 +41,7 @@ export type EventType =
     'BOTH_ACCEPTED' |
     'JOIN_ONE_ON_ONE' |
     'REFRESH_USER' |
+    'AUTOLOGIN_AVAILABLE' |
     'AUTOLOGIN' |
     'REGISTER' |
     'LOGIN' |
@@ -109,6 +110,10 @@ export class SocketService {
     get token() { return localStorage.getItem('access') }
 
     public setup() {
+
+        this.socket.on('AUTOLOGIN_AVAILABLE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
 
         this.socket.on('CREATE_ROOM', (data: SocketResponse) => {
             this.socketData.next(data)
