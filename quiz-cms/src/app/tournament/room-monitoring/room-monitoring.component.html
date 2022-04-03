@@ -1,0 +1,25 @@
+<div class="room" *ngIf="oneOnOneRoom">
+    <h5>Users in queue</h5>
+    <div class="room-users">
+    <p class="user-item" *ngFor="let user of oneOnOneRoom.oneOnOneUsers">
+        <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+        <span class="name">{{ user.name }}</span>
+        <span class="playing-{{user.playing}}">{{ user.playing ? 'O' : 'X'}}</span>
+    </p>
+    </div>
+    <div class="flex">
+        <h5>Next match</h5>
+        <div class="next-match">
+            <p class="user-item" *ngFor="let user of oneOnOneRoom.nextMatch">
+                <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url +')'}"></span>
+                <span>{{ user.name }}</span>
+                <span>{{ user.playing ? 'O' : 'X'}}</span>
+            </p>
+        </div>
+        <div class="next-match">
+            <h5>Online users:</h5>
+            <h5>{{ oneOnOneRoom.onlineUsers }}</h5>
+        </div>
+    </div>
+    
+</div>

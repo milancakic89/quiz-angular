@@ -21,6 +21,7 @@
                 <button (click)="buttonReady && goToOneOnOneRoom()" class="button-yellow {{buttonReady}}">1 na 1</button>
                 <button (click)="createRoom()" class="button-yellow">Kreiraj Turnir</button>
                 <button (click)="roomInput = !roomInput" class="button-yellow">Udji na turnir</button>
+                <a class="button-yellow" [routerLink]="['monitoring']">Monitoring</a>
                 <div *ngIf="roomInput">
                     <form #roomform="ngForm" (ngSubmit)="roomform.valid && joinRoom()">
                         <input name="roomName" placeholder="Sifra turnira" type="text" required [(ngModel)]="enterRoom" />

@@ -9,6 +9,7 @@ import { PlayComponent } from './play/play.component';
 import { WaitingOthersComponent } from './waiting-others/waiting-others.component';
 import { SharedModule } from '../shared/shared.module';
 import { OneOnOneComponent } from './one-on-one/one-on-one.component';
+import { RoomMonitoringComponent } from './room-monitoring/room-monitoring.component';
 
 
 
@@ -19,7 +20,8 @@ import { OneOnOneComponent } from './one-on-one/one-on-one.component';
     RoomComponent,
     PlayComponent,
     WaitingOthersComponent,
-    OneOnOneComponent
+    OneOnOneComponent,
+    RoomMonitoringComponent
   ],
   imports: [
     TournamentRoutingModule,

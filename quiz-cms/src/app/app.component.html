@@ -48,7 +48,6 @@
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
         </div>
         <div class="right-info">
-            <p>v 1.0</p>
             <p><a routerLink="/friends"><i class="fa-solid fa-user-group"></i></a></p>
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
             <p class="wrap"><span class="hearth-life" *ngFor="let life of lives"></span></p>

@@ -1,0 +1,64 @@
+.room{
+    width: 100%;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    border: 1px solid gray;
+    background-color: rgb(248, 144, 26);
+
+    .flex{
+        display: flex;
+        width: 100%;
+        border: 1px solid gray;
+        flex-wrap: wrap;
+        min-height: 100px;
+        h5{
+            width: 100%;
+            text-align: center;
+        }
+
+        .next-match{
+            width: 50%;
+            min-height: 100px;
+            display: flex;
+            border: 1px solid gray;
+            flex-direction: column;
+        }
+    }
+}
+
+.room-users{
+    height: 400px;
+    display: flex;
+
+    .user-item{
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 3px 8px;
+        border-radius: 25px;
+        height: 30px;
+        background-color: rgb(78, 29, 0);
+        color: #fff;
+        .avatar{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin-right: 5px;
+        }
+
+        .name{
+            margin-right: 10px;
+        }
+
+        .playing-true{
+            color: red;
+        }
+
+        .playing-false{
+            color: green;
+        }
+    }
+}
