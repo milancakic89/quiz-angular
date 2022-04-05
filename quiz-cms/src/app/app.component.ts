@@ -62,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public showFeedback = false;
   public resetAvailable = false;
   public lives_interval: any = undefined;
-  public loadingPercent = 0;
+  public loadingPercent = 20;
   public loadingInterval = null as unknown as any;
   public minutes = 0;
   public seconds = 0;
@@ -137,13 +137,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.centerContent = true;
     }
     this.spinner = true;
-    this.loadingInterval = setInterval(()=>{
-      if(this.spinner && this.loadingPercent < 100){
-        this.loadingPercent += 2;
-      }else{
-        clearInterval(this.loadingInterval)
-      }
-    }, 500)
+    setTimeout(()=>{
+      this.spinner = false;
+    }, 4000)
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         if(data.user_id !== this.user._id){
