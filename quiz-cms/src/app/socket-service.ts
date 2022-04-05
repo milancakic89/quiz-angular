@@ -387,7 +387,9 @@ export class SocketService {
         if (this.token) {
             const token = this.token;
             data.Authorization = token;
+            console.log(token)
         }
+       
         this.socket.emit(eventName, data)
     }
 }

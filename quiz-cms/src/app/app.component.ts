@@ -140,6 +140,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loadingInterval = setInterval(()=>{
       if(this.spinner && this.loadingPercent < 100){
         this.loadingPercent += 2;
+      }else{
+        clearInterval(this.loadingInterval)
       }
     }, 500)
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
