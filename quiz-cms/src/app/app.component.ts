@@ -71,6 +71,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
   public newName = '';
+  public autologinReceived = false;
 
   public code = {}
   public showCode = false;
@@ -138,7 +139,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.spinner = true;
     setTimeout(()=>{
-      this.spinner = false;
+      if(!this.autologinReceived){
+        this.spinner = false;
+      }
+     
     }, 4000)
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
@@ -162,6 +166,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (data && data.event === 'AUTOLOGIN_AVAILABLE') {
           if (localStorage.getItem('access')) {
+              this.autologinReceived = true;
               this.loadingPercent = 50;
               this.config.attemptAutoLogin();
           }else{
