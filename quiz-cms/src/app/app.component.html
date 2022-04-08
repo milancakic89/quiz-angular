@@ -5,7 +5,7 @@
             <p class="loading-text">Ucitava se</p> -->
         <div class="spinner-center">
             <div class="bar-wrapper">
-                <p class="bar" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
+                <p class="bar" [class.connected]="autologinReceived" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
             </div>
         </div>
     </div>
