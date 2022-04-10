@@ -66,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public showFeedback = false;
   public resetAvailable = false;
   public lives_interval: any = undefined;
-  public loadingPercent = 0;
+  public loadingPercent = 20;
   public loadingInterval = null as unknown as any;
   public minutes = 0;
   public seconds = 0;
@@ -75,6 +75,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public ticketReward = 0;
   public ticketAnimationCounter = 0;
   public newName = '';
+  public autologinReceived = false;
 
   public code = {}
   public showCode = false;
@@ -142,9 +143,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
-    this.loadingInterval = setInterval(()=>{
-      if(this.spinner && this.loadingPercent < 100){
-        this.loadingPercent += 2;
+    this.spinner = true;
+    setTimeout(()=>{
+      if(!this.autologinReceived){
+        this.spinner = false;
       }
     }, 500);
     this.router.events.pipe(
@@ -183,6 +185,16 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.config.user = data.data;
       }
 
+      if (data && data.event === 'AUTOLOGIN_AVAILABLE') {
+          if (localStorage.getItem('access')) {
+              this.autologinReceived = true;
+              this.loadingPercent = 50;
+              this.config.attemptAutoLogin();
+          }else{
+            this.spinner = false;
+          }
+      }
+
       if (data && data.event === 'TRACK_ONE_ON_ONE') {
           this.code = data.data;
       }
@@ -200,7 +212,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if (data && data.event === 'AUTOLOGINFAILED') {
          localStorage.clear();
          this.spinner = false;
-         
+         this.router.navigateByUrl('/login')  
       }
     })
     this.feedbackService.DailyPrice.subscribe(bool =>{
@@ -263,8 +275,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.modal.startGame.subscribe(bool =>{
         this.gameRunning = bool;
     });
-
-    this.autologin();
 
     if(this._initRedirect && !location.href.includes('privacy-and-terms')){
       this._initRedirect = false;
@@ -347,27 +357,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public async refreshUser(){
     this.socketService.emit('REFRESH_USER', {})
-  }
-
-  public async autologin(){
-    this.spinner = true;
-    if(localStorage.getItem('access')){
-        setTimeout(()=>{
-          this.loadingPercent = 50;
-        },100)
-        setTimeout(()=>{
-          if(!this.config.logged){
-            localStorage.clear()
-            this.router.navigateByUrl('/login');
-          }
-        }, 6000)
-         this.config.attemptAutoLogin();
-
-     }else{
-      this.spinner = false;
-     }
-    
-
   }
 
   

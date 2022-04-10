@@ -5,7 +5,7 @@
             <p class="loading-text">Ucitava se</p> -->
         <div class="spinner-center">
             <div class="bar-wrapper">
-                <p class="bar" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
+                <p class="bar" [class.connected]="autologinReceived" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
         </div>
             <!--    /RESULTS     -->
     </div>
-    <div class="json-info" *ngIf="isLogged">
+    <div class="json-info" *ngIf="isLogged && isRoot">
         <p><span>EMITED: {{EMMITED}}</span> <span (click)="showCode = !showCode">toggle</span></p>
         <p><span>RECEIVED: {{RECEIVED_EVENT}}</span></p>
         <div *ngIf="showCode">
