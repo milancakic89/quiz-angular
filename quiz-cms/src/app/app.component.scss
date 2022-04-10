@@ -16,21 +16,27 @@ $headerHeight: 65px;
     width: 100%;
     padding: 10px;
     position: fixed;
+    max-width: 900px;
+    background: rgb(69, 39, 0);
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     .icon{
         width: 40px;
         height: 40px;
-        border: 2px solid gray;
+        
+        border: 2px solid rgb(99, 48, 2);
         background-position: center center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: 30px;
+        border-radius: 4px;
 
         &.active{
-            border: 2px solid rgb(99, 48, 2);
+            border: 2px solid gray;
         }
 
         &-home{
