@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AppService } from './app.service';
 import { FeedbackMessageService } from './feedback.service';
 import { GameData, ModalWrapper } from './modal-service';
@@ -14,6 +14,7 @@ import { Settings } from './settings/form/form.component';
 import { Subscription } from 'rxjs';
 import { Device, getConfiguration } from './device-configuration';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
               private socketService: SocketService,
               private playservice: PlayService,
               private settings: SettingsService,
+              private activatedRoute: ActivatedRoute,
               private profileService: ProfileService,
               private tournamentService: TournamentService,
               private notificationService: NotificationService,
@@ -41,6 +43,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get EMMITED(){return this.socketService.EMITED}
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
   get RECEIVED_DARA() { return this.socketService.RECEIVED_DATA }
+
+  public showNavigation = true;
 
   public device: Device = {
     width: 0,
@@ -85,6 +89,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public showRequestsModal = false;
 
   public subscription: Subscription = null as unknown as Subscription;
+  public eventSubscription:  Subscription = null as unknown as Subscription;
 
   public centerContent = true;
   public stars: number[] = [];
@@ -103,7 +108,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     clearInterval(this.loadingInterval)
-      // this.subscription.unsubscribe();
+      this.subscription.unsubscribe();
+      this.eventSubscription.unsubscribe();
   }
 
   public async removeNotification(){
@@ -140,7 +146,23 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if(this.spinner && this.loadingPercent < 100){
         this.loadingPercent += 2;
       }
-    }, 500)
+    }, 500);
+    this.router.events.pipe(
+      filter(events => events instanceof NavigationEnd),
+      map(evt => this.activatedRoute),
+      map(route => {
+          while (route.firstChild) {
+              route = route.firstChild;
+          }
+          return route;
+      }))
+      .pipe(
+          filter(route => route.outlet === 'primary'),
+          mergeMap(route => route.data)
+      ).subscribe(x => {
+          x['showNavigation'] === true ? this.showNavigation = true : this.showNavigation = false;
+      })
+
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         if(data.user_id !== this.user._id){

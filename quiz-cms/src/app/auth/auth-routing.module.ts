@@ -5,9 +5,9 @@ import { RegisterComponent } from "./register/register.component";
 import { ResetComponent } from "./reset/reset.component";
 
 const routes: Route[] = [
-    {path: '', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'reset', component: ResetComponent},
+    {path: '', component: LoginComponent, data: {showNavigation: false}},
+    {path: 'register', component: RegisterComponent, data: {showNavigation: false}},
+    {path: 'reset', component: ResetComponent, data: {showNavigation: false}},
     
 ]
 

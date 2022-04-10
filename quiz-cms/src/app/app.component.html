@@ -10,9 +10,15 @@
         </div>
     </div>
 </div>
+<div class="bottom-navigation" *ngIf="showNavigation">
+    <a class="icon icon-home" routerLink="/profile" routerLinkActive="active"></a>
+    <a class="icon icon-battle" routerLink="/tournament" routerLinkActive="active"></a>
+    <a class="icon icon-profile" routerLink="/friends" routerLinkActive="active"></a>
+    <a class="icon icon-rules" routerLink="/questions" routerLinkActive="active"></a>
+</div>
 
 
-<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged}" *ngIf="!spinner">
+<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged, 'bottom-padding': showNavigation}" *ngIf="!spinner">
     <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
             <!--   RESULTS     -->
         <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">

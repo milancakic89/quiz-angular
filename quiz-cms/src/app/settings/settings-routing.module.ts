@@ -3,7 +3,7 @@ import { Route, RouterModule } from "@angular/router";
 import { FormComponent } from "./form/form.component";
 
 const routes: Route[] = [
-    {path: '', component: FormComponent}
+    {path: '', component: FormComponent, data: {showNavigation: true}}
 ]
 
 @NgModule({

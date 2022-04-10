@@ -4,7 +4,7 @@ import { ContributeComponent } from "./contribute.component";
 
 
 const routes: Route[] = [
-    {path: '', component: ContributeComponent}
+    {path: '', component: ContributeComponent, data: {showNavigation: true}}
 ]
 
 @NgModule({

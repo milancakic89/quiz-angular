@@ -12,6 +12,42 @@ $headerHeight: 65px;
     background-repeat: repeat;
 }
 
+.bottom-navigation{
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+
+    .icon{
+        width: 40px;
+        height: 40px;
+        border: 2px solid gray;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        &.active{
+            border: 2px solid rgb(99, 48, 2);
+        }
+
+        &-home{
+            background-image: url('../assets/images/pirate-theme/icons/Icon_Home.png');
+        }
+        &-battle{
+            background-image: url('../assets/images/pirate-theme/icons/Icon_Daggers.png');
+        }
+        &-profile{
+            background-image: url('../assets/images/pirate-theme/icons/Icon_Profile.png');
+        }
+        &-rules{
+            background-image: url('../assets/images/pirate-theme/icons/Icon_Rules.png');
+        }
+    }
+}
+
 .spinner {
 
     width: 100%;
@@ -539,6 +575,10 @@ $headerHeight: 65px;
     width: 100%;
     padding: 0;
     height: 100vh;
+
+    .bottom-padding{
+        padding: 0 0 60px 0;
+    }
 
     &.overscreen {
         background-color: rgba(0, 0, 0, 0.5);

@@ -3,7 +3,7 @@ import { Route, RouterModule } from "@angular/router";
 import { ShopComponent } from "./shop.component";
 
 const routes: Route[] = [
-    {path: '', component: ShopComponent}
+    {path: '', component: ShopComponent, data: {showNavigation: true}}
 ]
 
 @NgModule({

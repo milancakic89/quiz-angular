@@ -9,12 +9,12 @@ import { RoomComponent } from "./room/room.component";
 import { WaitingOthersComponent } from "./waiting-others/waiting-others.component";
 
 const routes: Route[] = [
-    { path: '', component: DashboardComponent},
-    { path: 'one-on-one', component: OneOnOneComponent },
-    { path: 'monitoring', component: RoomMonitoringComponent },
-    { path: 'room/:id/results', component: WaitingOthersComponent, canDeactivate: [PlayGuard] },
-    { path: 'room/:id/play', component: PlayComponent, canDeactivate: [PlayGuard] },
-    { path: 'room/:id', component: RoomComponent}
+    { path: '', component: DashboardComponent, data: {showNavigation: true}},
+    { path: 'one-on-one', component: OneOnOneComponent, data: {showNavigation: false}},
+    { path: 'monitoring', component: RoomMonitoringComponent, data: {showNavigation: true} },
+    { path: 'room/:id/results', component: WaitingOthersComponent, canDeactivate: [PlayGuard], data: {showNavigation: false} },
+    { path: 'room/:id/play', component: PlayComponent, canDeactivate: [PlayGuard], data: {showNavigation: false} },
+    { path: 'room/:id', component: RoomComponent, data: {showNavigation: false}}
 ]
 @NgModule({
     imports: [RouterModule.forChild(routes)],

@@ -4,8 +4,8 @@ import { PolicyComponent } from "./policy/policy.component";
 import { TermsComponent } from "./terms/terms.component";
 
 const routes: Route [] = [
-    { path: 'privacy', component: PolicyComponent},
-    { path: 'terms', component: TermsComponent },
+    { path: 'privacy', component: PolicyComponent, data: {showNavigation: false}},
+    { path: 'terms', component: TermsComponent, data: {showNavigation: false} },
     { path: '', redirectTo: 'privacy' }
 ]
 @NgModule({
