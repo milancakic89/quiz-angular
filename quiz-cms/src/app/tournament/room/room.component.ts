@@ -84,7 +84,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl(`/play`);
       }
 
-      if(data && data.event === 'GET_ALL_USERS'){
+      if (data && data.event === 'GET_FRIEND_LIST'){
         this.friends = data.data.filter((user: User) => user.online === true);
       }
 
