@@ -48,7 +48,7 @@ export class WaitingOthersComponent implements OnInit {
         }
 
       });
-      this.socket.emit('LEAVE_ROOM', {roomName: this.room})
+      this.socket.emit('LEAVE_ROOM', {roomName: this.room, user_id: this.user._id})
     
     }
   })
@@ -64,7 +64,7 @@ export class WaitingOthersComponent implements OnInit {
 
   public onFinishTest() {
     this.playService.allowBackButton = true;
-    this.socket.emit('LEAVE_ROOM', {roomName: this.room});
+    this.socket.emit('LEAVE_ROOM', {roomName: this.room, user_id: this.user._id});
     setTimeout(()=>{
       this.tournamentService.room = '';
       this.router.navigateByUrl('/profile')
