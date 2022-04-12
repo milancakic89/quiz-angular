@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 import { Configuration } from './shared/config.service';
@@ -68,6 +68,7 @@ export type EventType = 'connection' |
     'UPLOAD_IMAGE' |
     'MATCH_FOUND' |
     'TRACK_ONE_ON_ONE' |
+    'TRACK_QUEUE_MANAGER' |
     'REDUCE_LIVES';
 
 export interface Room {
@@ -96,7 +97,7 @@ export class SocketService {
 
     public EMITED = '';
     public RECEIVED_EVENT = '';
-    public RECEIVED_DATA = null;
+    public RECEIVED_DATA = new BehaviorSubject({});
 
     constructor(private router: Router, private config: Configuration) {
         if (!this.setupReady) {
@@ -117,268 +118,216 @@ export class SocketService {
 
         this.socket.on('CREATE_ROOM', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('USER_DISCONECTED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('USER_CONNECTED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('JOIN_ROOM', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ROOM_CREATED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('JOINED_ROOM', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
 
         this.socket.on('LEAVED_ROOM', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
 
         this.socket.on('TOURNAMENT_STARTING', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         })
         this.socket.on('START_TOURNAMENT_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         })
 
         this.socket.on('SELECTED_QUESTION_LETTER', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         })
 
         this.socket.on('UPDATE_WAITING_STATUS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
 
         this.socket.on('EVERYONE_ANSWERED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
 
         this.socket.on('TOURNAMENT_FINISHED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
 
         this.socket.on('GET_ROOM_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_ROOM_RESULTS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ADD_FRIEND', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('FRIEND_ALLREADY_REQUESTED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ADD_FRIEND_FAILED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ACCEPT_FRIEND', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('TOURNAMENT_INVITATION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('OPONENT_FOUND', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('OPONENT_ACCEPTED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('BOTH_ACCEPTED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('OPONENT_DECLINED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('LEAVE_ONE_ON_ONE', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
             this.online = data.online;
         });
         this.socket.on('REFRESH_USER', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('AUTOLOGIN', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('LOGIN', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('REGISTER', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('AUTOLOGINFAILED', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_ALL_USERS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_FRIEND_LIST', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_FRIEND_REQUESTS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ADD_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('ADD_IMAGE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('UPDATE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_QUESTIONS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_RANKING_LIST', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('DELETE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('CHECK_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('GET_DAILY_REWARD', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('RESET_LIVES', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('RESET_PLAYING_STATE', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+
         });
         this.socket.on('UPDATE_SCORE', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('UPDATE_SETTINGS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('REMOVE_NOTIFICATION', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('REDUCE_LIVES', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('GET_ACHIEVEMENTS', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('MATCH_FOUND', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('UPLOAD_IMAGE', (data: SocketResponse) => {
             this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
         });
         this.socket.on('TRACK_ONE_ON_ONE', (data: SocketResponse) => {
             this.socketData.next(data)
+
+        });
+        this.socket.on('TRACK_QUEUE_MANAGER', (data: SocketResponse) => {
+            this.socketData.next(data)
             this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA = data.data
+            this.RECEIVED_DATA.next(data.data)
+
         });
     }
 

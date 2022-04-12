@@ -42,9 +42,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get room() { return this.tournamentService.room}
   get EMMITED(){return this.socketService.EMITED}
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
-  get RECEIVED_DARA() { return this.socketService.RECEIVED_DATA }
+  get RECEIVED_DATA() { return this.socketService.RECEIVED_DATA }
 
   public showNavigation = true;
+  public RECEICED_TEMP = {} as unknown as any;
 
   public device: Device = {
     width: 0,
@@ -77,7 +78,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public newName = '';
   public autologinReceived = false;
 
-  public code = {}
   public showCode = false;
 
   public invitedToRoomName = '';
@@ -143,6 +143,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
+    this.RECEIVED_DATA.subscribe(data =>{
+      this.RECEICED_TEMP = data;
+    })
     this.spinner = true;
     setTimeout(()=>{
       if(!this.autologinReceived){
@@ -193,10 +196,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           }else{
             this.spinner = false;
           }
-      }
-
-      if (data && data.event === 'TRACK_ONE_ON_ONE') {
-          this.code = data.data;
       }
       if (data && data.event === 'GET_DAILY_REWARD') {
         this.animateReward(data.tickets, data.data);

@@ -118,14 +118,17 @@ export class ListComponent implements OnInit, OnDestroy {
         this.notifications.notification.emit({ success: true, message: 'Zahtev za prijateljstvo vec postoji' })
       }
       if(data && data.event === 'GET_ALL_USERS'){
+        this.friends = [];
         this.friends = data.data.filter((user: User) => user._id !== this.user._id);
       }
       if(data && data.event === 'GET_FRIEND_REQUESTS'){
+        this.friendRequests = []
         this.friendRequests = data.data.filter((user: User) => {
           return this.acceptedFriends.every(friend => friend._id !== user._id);
         });
       }
       if(data && data.event === 'GET_FRIEND_LIST'){
+        this.acceptedFriends = [];
         this.acceptedFriends = data.data
       }
     })

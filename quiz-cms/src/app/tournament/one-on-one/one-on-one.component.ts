@@ -31,16 +31,13 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponentAccepted = false;
   public acceptGame = false;
   public bothAccepted = false;
-  public code = {};
 
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe((data) =>{
       if (data && data.event === 'JOIN_ROOM' ){
         //  this.joined = true;
       }
-      if (data && data.event === 'TRACK_ONE_ON_ONE') {
-        this.code = data.data;
-      }
+
       if (data && data.event === 'MATCH_FOUND') {
         this.room = data.roomName;
         this.oponent = data.oponent;
