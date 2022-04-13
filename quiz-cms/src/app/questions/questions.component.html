@@ -1,30 +1,16 @@
 
 
 <div class="page-content questions-wrapper">
-    <div class="navigation">
-        <div class="nav-links">
-            <a class="button-back" routerLink="/profile"></a>
-            <a class="button-contribute" routerLink="/contribute"></a>
-        </div>
-           
-            <div class="filters">
-                <ng-select [items]="filters"
-                           bindLabel="title"
-                           bindValue="value"
-                           [clearable]="false"
-                           [(ngModel)]="selectedFilter"
-                           (ngModelChange)="load()">
-
-                </ng-select>
-            </div>
-    </div>
-    <p>Ukupno({{questions.length}})</p>
-    <p class="filter"><span [ngClass]="filterStatus === 'SVA' ? 'active': ''" (click)="load()">Sva </span>
-        <span class="button-danger"  [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
-        <span  class="button-danger" [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span>
-        <span class="button-danger"  [ngClass]="filterStatus === 'ODBIJENO' ? 'active' : ''" (click)="filter('ODBIJENO')">Odobijeno</span></p>
+    <p class="amount">Ukupno({{questions.length}})</p>
+    <p class="question-tabs"><span [ngClass]="filterStatus === '' ? 'active': ''" (click)="filter(''); load()">Sva </span>
+        <span [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
+        <span [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span></p>
     <div class="table questions-table">
-        <div class="thead">
+        <p class="question-item" *ngFor="let question of questions;">
+            <span class="icon">?</span>
+            <span>{{ cutLongText(question.question) }}</span>
+        </p>
+        <!-- <div class="thead">
             <div class="tr">
                 <div class="th w-40">Pitanje</div>
                 <div class="th w-20">Odgovor</div>
@@ -63,7 +49,7 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     
 </div>

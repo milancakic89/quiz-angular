@@ -26,10 +26,10 @@ export class RoomMonitoringComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe(data => {
-      if(data && data.event === 'TRACK_ONE_ON_ONE'){
-        console.log('got new data')
-        this.oneOnOneRoom.nextMatch = [];
-        this.oneOnOneRoom.oneOnOneUsers = [];
+      if(data && data.event === 'TRACK_QUEUE_MANAGER'){
+        this.oneOnOneRoom.nextMatch = data.data.players;
+        console.log(data.data)
+        this.oneOnOneRoom.oneOnOneUsers = data.data.queue;
         this.oneOnOneRoom.onlineUsers = 0;
         setTimeout(()=>{
           this.oneOnOneRoom = data.data;

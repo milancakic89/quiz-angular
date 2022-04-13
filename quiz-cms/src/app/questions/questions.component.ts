@@ -66,6 +66,14 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public cutLongText(str: string){
+    if(str.length > 39){
+      return str.slice(0, 40) + '...';
+    }
+    return str;
+    
+  }
+
 
   public load() {
     this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter})

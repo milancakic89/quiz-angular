@@ -68,6 +68,7 @@ export type EventType = 'connection' |
     'UPLOAD_IMAGE' |
     'MATCH_FOUND' |
     'TRACK_ONE_ON_ONE' |
+    'TRACK_QUEUE_MANAGER' |
     'REDUCE_LIVES';
 
 export interface Room {
@@ -375,7 +376,7 @@ export class SocketService {
             this.RECEIVED_EVENT = data.event
             this.RECEIVED_DATA = data.data
         });
-        this.socket.on('TRACK_ONE_ON_ONE', (data: SocketResponse) => {
+        this.socket.on('TRACK_QUEUE_MANAGER', (data: SocketResponse) => {
             this.socketData.next(data)
             this.RECEIVED_EVENT = data.event
             this.RECEIVED_DATA = data.data
@@ -387,7 +388,6 @@ export class SocketService {
         if (this.token) {
             const token = this.token;
             data.Authorization = token;
-            console.log(token)
         }
        
         this.socket.emit(eventName, data)

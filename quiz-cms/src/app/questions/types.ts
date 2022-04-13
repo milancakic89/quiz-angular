@@ -26,4 +26,4 @@ export interface DB{
   questions: Question[]
 }
 
-export type QuestionStatus = 'ODOBRENO' | 'NA CEKANJU' | 'ODBIJENO';
+export type QuestionStatus = '' | 'ODOBRENO' | 'NA CEKANJU' | 'ODBIJENO';

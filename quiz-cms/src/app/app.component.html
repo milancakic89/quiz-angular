@@ -41,14 +41,6 @@
         </div>
             <!--    /RESULTS     -->
     </div>
-    <div class="json-info" *ngIf="isLogged && isRoot">
-        <p><span>EMITED: {{EMMITED}}</span> <span (click)="showCode = !showCode">toggle</span></p>
-        <p><span>RECEIVED: {{RECEIVED_EVENT}}</span></p>
-        <div *ngIf="showCode">
-            <pre > {{ RECEIVED_DARA | json }} </pre>
-        </div>
-       
-    </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
             <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
@@ -64,7 +56,7 @@
             <a routerLink="/shop" class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></a>
         </div>
     </div>
-    <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged}">
+    <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged, 'scroll-height': !showNavigation}">
             <!-- IN GAME MODALS-->
             <!-- NOTIFICATION MESSAGE -->
             <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">

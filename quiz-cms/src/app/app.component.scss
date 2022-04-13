@@ -267,6 +267,7 @@ $headerHeight: 65px;
     height: $headerHeight;
     width: 100%;
     max-width: 900px;
+    background-color: #452700;
     height: 60px;
     overflow: hidden;
     z-index: 1000;
@@ -599,27 +600,21 @@ $headerHeight: 65px;
 .scrollable-area {
     width: 100%;
     max-width: 900px;
-    margin: -60px auto 0 auto;
-    padding-top: 80px;
+    margin: 0px auto 0 auto;
     display: flex;
     flex-direction: column;
-    height: calc(100vh + 60px);
+    height: calc(100vh - 120px);
     overflow: hidden;
     position: relative;
     background: rgba(61, 156, 255, 1);
 
-
-
-
-
-
-
-    ;
-
-
-    &.true {
-        justify-content: center;
+    &.scroll-height{
+        height: calc(100vh - 60px);
     }
+
+    // &.true {
+    //     justify-content: center;
+    // }
 
     &.not-logged {
         height: 100vh !important;
