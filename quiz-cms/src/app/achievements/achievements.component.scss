@@ -1,9 +1,9 @@
 .achievements{
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 120px);
     display: flex;
     justify-content: center;
     overflow-y: auto;
-    padding: 0 5px;
+    padding: 10px 5px;
     flex-wrap: wrap;
 }

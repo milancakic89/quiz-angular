@@ -324,7 +324,7 @@ export class SocketService {
         this.socket.on('UPLOAD_IMAGE', (data: SocketResponse) => {
             this.socketData.next(data)
         });
-        this.socket.on('TRACK_ONE_ON_ONE', (data: SocketResponse) => {
+        this.socket.on('TRACK_QUEUE_MANAGER', (data: SocketResponse) => {
             this.socketData.next(data)
 
         });
@@ -341,7 +341,6 @@ export class SocketService {
         if (this.token) {
             const token = this.token;
             data.Authorization = token;
-            console.log(token)
         }
        
         this.socket.emit(eventName, data)
