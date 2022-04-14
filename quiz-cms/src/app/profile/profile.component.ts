@@ -104,10 +104,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   public async resetPlayingState(){
-    const { success } = await this.playService.resetPlayingState();
-    if(success){
-      this.reduceOneLife();
-    }
+    this.socketService.emit('RESET_PLAYING_STATE', {});
   }
 
   public closeNameBox(){
