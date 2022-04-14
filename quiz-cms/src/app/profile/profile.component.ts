@@ -125,18 +125,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   public async onResetLives(){
-    const { data, success } = await this.service.resetLives()
-    if(success){
-      this.config.user.next(data);
-    }
+    this.service.resetLives()
+
   }
 
   public async reduceOneLife() {
-    const { data, success } = await this.playService.reduceOneLife()
-    if (success) {
-      this.user = data;
-      this.config.user.next(data);
-    }
+    this.playService.reduceOneLife()
   }
 
   // public calculateResetTime(timeInMs: number){

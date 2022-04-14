@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { AppService } from "../app.service";
 import { ApiService } from "../shared/api.servise";
 import { User } from "../shared/config.service";
+import { SocketService } from "../socket-service";
 
 @Injectable({providedIn: 'root'})
 export class ProfileService{
-    constructor(private service: ApiService, private appService: AppService){}
+    constructor(private service: ApiService, private appService: AppService, private socketService: SocketService){}
     
 
     public updateName(name: string){
@@ -13,7 +14,7 @@ export class ProfileService{
     }
 
     public resetLives(){
-        return this.service.get<User>('/reset-lives', '')
+        return this.socketService.emit('RESET_LIVES', {})
     }
 
     public removeNotification(){

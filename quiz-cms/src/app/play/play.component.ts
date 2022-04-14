@@ -318,10 +318,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public async reduceOneLife() {
-    const { data, success } = await this.playService.reduceOneLife()
-    if (success) {
-      // this.config.user.next(data)
-    }
+    this.playService.reduceOneLife()
   }
 
   private reduceAttempts() {
