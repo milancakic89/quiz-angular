@@ -2,6 +2,7 @@ import { NonNullAssert } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ModalWrapper } from '../modal-service';
 import { QuestionService } from '../questions/questions.service';
 import { Answers, Question } from '../questions/types';
@@ -54,6 +55,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public correct = 0;
   public showCorrect = false;
   public btnIndex: any = null;
+  public subscription: Subscription = null as unknown as Subscription;
 
   ngOnInit() {
     this.config.user.subscribe(user => {
@@ -64,7 +66,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
     
 
-    this.socketService.socketData.subscribe(data =>{
+    this.subscription = this.socketService.socketData.subscribe(data =>{
       if (data && data.event === 'GET_QUESTION'){
         this.correct = 0;
         this.showCorrect = false;
@@ -78,8 +80,9 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       }
 
       if (data && data.event === 'CHECK_PRACTICE_QUESTION') {
-        console.log('received')
-        if (data.correct) {
+        console.log(data)
+        if (data.data) {
+          console.log('correct')
           this.score++;
           this.updateProgressBar();
           this.correct = 2
@@ -92,8 +95,17 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
             }, this.nextQuestionInterval)
         } else {
+          console.log('incorrect')
           this.correct = 1;
           this.reduceAttempts();
+          setTimeout(() => {
+            if (this.attempts.length) {
+              this.getQuestion();
+            } else {
+              this.gameOver('You have missed 3 times');
+            }
+
+          }, this.nextQuestionInterval)
         } 
       }
     })
@@ -136,6 +148,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   ngOnDestroy() {
     this.modal.startGame.next(false);
     this.playService.allowBackButton = true;
+    this.subscription.unsubscribe();
     clearInterval(this.timeInterval);
   }
 
@@ -153,6 +166,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     if (this.questionCount >= 15 || !this.attempts.length) {
       return this.gameOver('End of game');
     }
+    console.log('getting another question')
     this.socketService.emit('GET_QUESTION', { category: this.playCategory })
   }
 
