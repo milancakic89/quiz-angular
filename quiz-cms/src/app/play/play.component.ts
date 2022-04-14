@@ -62,12 +62,14 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       }
     })
 
+    
+
     this.socketService.socketData.subscribe(data =>{
       if (data && data.event === 'GET_QUESTION'){
         this.correct = 0;
         this.showCorrect = false;
         this.btnIndex = null;
-        this.question = data.question;
+        this.question = data.data;
         this.questionCount++;
         this.selectedLetter = '';
         this.questionSelected = false;
@@ -75,7 +77,8 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
         this.initTime();
       }
 
-      if (data && data.event === 'UPDATE_QUESTION') {
+      if (data && data.event === 'CHECK_PRACTICE_QUESTION') {
+        console.log('received')
         if (data.correct) {
           this.score++;
           this.updateProgressBar();
@@ -288,7 +291,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public async updateQuestion() {
-    this.socketService.emit('UPDATE_QUESTION', { question_id: this.question._id})
+    this.socketService.emit('CHECK_PRACTICE_QUESTION', { question_id: this.question._id, correct: this.selectedLetter})
   }
 
   public backToProfile(){

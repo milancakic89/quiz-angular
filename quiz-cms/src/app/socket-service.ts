@@ -68,6 +68,7 @@ export type EventType = 'connection' |
     'UPLOAD_IMAGE' |
     'MATCH_FOUND' |
     'TRACK_ONE_ON_ONE' |
+    'CHECK_PRACTICE_QUESTION' |
     'TRACK_QUEUE_MANAGER' |
     'REDUCE_LIVES';
 
@@ -332,6 +333,11 @@ export class SocketService {
             this.socketData.next(data)
             this.RECEIVED_EVENT = data.event
             this.RECEIVED_DATA.next(data.data)
+
+        });
+
+        this.socket.on('CHECK_PRACTICE_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
 
         });
     }
