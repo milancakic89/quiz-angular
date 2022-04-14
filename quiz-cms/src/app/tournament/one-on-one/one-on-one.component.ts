@@ -40,11 +40,9 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
       if (data && data.event === 'MATCH_FOUND') {
         this.room = data.roomName;
-        this.oponent = data.oponent;
+        this.oponent = data.data.oponent;
+        console.log(data.data)
         setTimeout(()=>{
-          console.log(data)
-          
-
           this.startOneOnOne();
         }, 1000)
         

@@ -287,19 +287,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.device = getConfiguration()
       console.log(this.device)
     }, 250)
-    if ('serviceWorker' in navigator) {
-      try {
-        navigator.serviceWorker.register('service-worker-cache.js', { scope: './' })
-          .then(reg => navigator.serviceWorker.ready)
-          .then(function () {
-            console.log('service worker registered')
-          })
-          .catch(function (error) {
-          });
-      } catch (e) {
-        console.log(e)
-      }
-    }
   }
 
   public async checkFriendRequests(){
