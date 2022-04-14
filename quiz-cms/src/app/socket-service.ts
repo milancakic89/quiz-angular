@@ -270,6 +270,11 @@ export class SocketService {
             this.socketData.next(data)
 
         });
+        
+        this.socket.on('GET_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
         this.socket.on('GET_QUESTIONS', (data: SocketResponse) => {
             this.socketData.next(data)
 

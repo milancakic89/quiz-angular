@@ -63,7 +63,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     })
 
     this.socketService.socketData.subscribe(data =>{
-      if(data && data.event === 'GET_QUESTION'){
+      if (data && data.event === 'GET_QUESTION'){
         this.correct = 0;
         this.showCorrect = false;
         this.btnIndex = null;
