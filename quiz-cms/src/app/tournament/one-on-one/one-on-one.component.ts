@@ -81,11 +81,11 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onAccept(){
     this.acceptGame = true;
-    this.socketService.emit('OPONENT_ACCEPTED', { roomName: this.room, me: this.user, oponent: this.oponent });
+    this.socketService.emit('OPONENT_ACCEPTED', { oponentID: this.oponent._id, roomName: this.room});
   }
 
   public onDecline() {
-    this.socketService.emit('OPONENT_DECLINED', {oponent_id: this.oponent._id, user_id: this.user._id }); 
+    this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room }); 
   }
 
   public onExit(){
