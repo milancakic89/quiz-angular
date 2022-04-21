@@ -89,7 +89,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           this.correct = 0
           this.showWaiting = false;
           this.btnIndex = 0;
-          this.socket.emit('GET_ROOM_QUESTION', { roomName: this.room, questionIndex: this.questionIndex - 1 });
+          this.socket.emit('GET_ROOM_QUESTION', {roomName: this.room, questionIndex: this.questionIndex - 1 });
         }, 1000)
 
       }
@@ -109,7 +109,7 @@ export class PlayComponent implements OnInit, OnDestroy {
     if (!this.questionSelected) {
       this.questionSelected = answer;
       this.btnIndex = index;
-      this.socket.emit('SELECTED_QUESTION_LETTER', { letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1 })
+      this.socket.emit('SELECTED_QUESTION_LETTER', { match: true, letter: answer.letter, roomName: this.room, user_id: this.user._id, questionIndex: this.questionIndex - 1 })
     }
 
   }

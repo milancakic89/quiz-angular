@@ -52,7 +52,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
       if (data && data.event === 'BOTH_ACCEPTED') {
         this.oponentAccepted = true;
         setTimeout(()=>{
-          // this.bothAccepted = true;
+           this.bothAccepted = true;
         },300)  
        
       }
