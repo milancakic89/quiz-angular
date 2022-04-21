@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
@@ -10,7 +11,7 @@ import { TournamentService } from '../tournament.service';
   templateUrl: './waiting-others.component.html',
   styleUrls: ['./waiting-others.component.scss']
 })
-export class WaitingOthersComponent implements OnInit {
+export class WaitingOthersComponent implements OnInit, OnDestroy {
 
 
   constructor(private router: Router, 
@@ -27,6 +28,14 @@ export class WaitingOthersComponent implements OnInit {
 
   public results: any = [];
 
+  public subscription: Subscription = null as unknown as Subscription;
+
+  ngOnDestroy(): void {
+      if(this.subscription){
+        this.subscription.unsubscribe();
+      }
+  }
+
   ngOnInit(): void {
     this.playService.allowBackButton = false;
     this.route.params.subscribe(params => {
@@ -36,7 +45,7 @@ export class WaitingOthersComponent implements OnInit {
       }
     });
 
-  this.socket.socketData.subscribe(data =>{
+  this.subscription = this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
       this.results = data.users.sort((userA: User, userB: User) => {
         if(userA.score > userB.score){

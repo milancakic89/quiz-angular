@@ -69,7 +69,10 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+   
   }
 
   public startOneOnOne(){
@@ -81,7 +84,6 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onAccept(){
     this.acceptGame = true;
-    console.log('emiting: ' + this.room)
     this.socketService.emit('OPONENT_ACCEPTED', { oponentID: this.oponent._id, roomName: this.room});
   }
 
@@ -96,6 +98,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public tournamentFinish($event: any){
     this.playService.allowBackButton = true;
     setTimeout(()=>{
+      
         this.router.navigateByUrl(`/tournament/room/${this.room}/results`)
     },300)
   }
