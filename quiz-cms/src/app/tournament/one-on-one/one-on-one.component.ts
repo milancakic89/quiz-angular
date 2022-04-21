@@ -39,9 +39,8 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
       }
 
       if (data && data.event === 'MATCH_FOUND') {
-        this.room = data.roomName;
+        this.room = data.data.roomName;
         this.oponent = data.data.oponent;
-        console.log(data.data)
         setTimeout(()=>{
           this.startOneOnOne();
         }, 1000)
@@ -51,8 +50,9 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         this.oponentAccepted = true;
       }
       if (data && data.event === 'BOTH_ACCEPTED') {
+        this.oponentAccepted = true;
         setTimeout(()=>{
-          this.bothAccepted = true;
+          // this.bothAccepted = true;
         },300)  
        
       }
@@ -81,6 +81,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onAccept(){
     this.acceptGame = true;
+    console.log('emiting: ' + this.room)
     this.socketService.emit('OPONENT_ACCEPTED', { oponentID: this.oponent._id, roomName: this.room});
   }
 
