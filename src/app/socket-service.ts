@@ -70,6 +70,7 @@ export type EventType = 'connection' |
     'TRACK_ONE_ON_ONE' |
     'CHECK_PRACTICE_QUESTION' |
     'TRACK_QUEUE_MANAGER' |
+    'REMOVE_FRIEND' |
     'REDUCE_LIVES';
 
 export interface Room {
@@ -323,6 +324,9 @@ export class SocketService {
             this.socketData.next(data)
         });
         this.socket.on('UPLOAD_IMAGE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+        this.socket.on('REMOVE_FRIEND', (data: SocketResponse) => {
             this.socketData.next(data)
         });
         this.socket.on('TRACK_QUEUE_MANAGER', (data: SocketResponse) => {

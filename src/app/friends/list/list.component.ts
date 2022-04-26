@@ -111,6 +111,10 @@ export class ListComponent implements OnInit, OnDestroy {
           }
         });
       }
+
+      if (data && data.event === 'REMOVE_FRIEND') {
+        this.getFriendsList();
+      }
       if (data && data.event === 'ADD_FRIEND_FAILED') {
         this.notifications.notification.emit({ success: false, message: 'Zahtev nije uspeo, pokusajte ponovo' })
       }
@@ -166,12 +170,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
 
   public async removeFriend(id: string){
-    const { data, success } = await this.friendsService.removeFriend(id);
-    if (success) {
-      this.acceptedFriends = this.acceptedFriends.filter(user =>{
-        return user._id !== id;
-      });
-    }
+    this.socket.emit('REMOVE_FRIEND', {remove_id: id});
   }
 
   public checkAddButton(id: string){
