@@ -1,0 +1,8 @@
+/dist
+/node_modules
+
+environment-hidden-dev.ts
+environment-hidden-prod.ts
+
+*github
+
