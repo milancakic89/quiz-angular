@@ -25,7 +25,7 @@
 }
 
 .banner {
-    max-width: 300px;
+    max-width: 400px;
     width: 90%;
     margin: 0 auto;
     height: 160px;
@@ -40,13 +40,13 @@
 }
 
 .pick-category {
-    max-width: 300px;
+    max-width: 400px;
     margin: -30px auto 0 auto;
     width: 90%;
-    height: calc(100vh - 315px);
+    height: auto;
     background-image: url('../../assets/images/new-theme/question-board.png');
     background-size: 100% 100%;
-    padding: 30px 10px;
+    padding: 40px 10px;
     z-index: 8;
 
     &.flex-wrapper {

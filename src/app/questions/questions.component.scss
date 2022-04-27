@@ -30,6 +30,7 @@
         display: inline-flex;
         cursor: pointer;
         height: 100%;
+        font-size: 11px;
         width: 33.33%;
         justify-content: center;
         align-items: center;
@@ -142,10 +143,8 @@
         min-height: 35px;
         margin-right: 20px;
         font-weight: 700;
-        font-family: 'sans-serif';
         border-radius: 50%;
         font-size: 30px;
-        font-weight: 800;
         text-align: center;
         border: 1px solid brown;
         display: flex;
