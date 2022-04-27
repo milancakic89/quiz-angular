@@ -1,6 +1,8 @@
 @import '../../assets/abstract/variables';
 
 .page-content {
+    display: flex;
+    flex-direction: column;
 
     @media screen and (min-width: 901px) {
         padding: 30px 100px;
@@ -18,6 +20,46 @@
     }
 }
 
-.mt-2{
+.mt-2 {
     margin-top: 20px;
+}
+
+.banner {
+    max-width: 300px;
+    width: 90%;
+    margin: 0 auto;
+    height: 160px;
+    background-image: url('../../assets/images/new-theme/question-board.png');
+    background-size: 100% 100%;
+    padding: 30px 10px;
+    z-index: 10;
+
+    h5 {
+        text-align: center;
+    }
+}
+
+.pick-category {
+    max-width: 300px;
+    margin: -30px auto 0 auto;
+    width: 90%;
+    height: calc(100vh - 315px);
+    background-image: url('../../assets/images/new-theme/question-board.png');
+    background-size: 100% 100%;
+    padding: 30px 10px;
+    z-index: 8;
+
+    &.flex-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        button {
+            margin-bottom: 30px;
+            min-width: 190px;
+            height: 50px !important;
+            font-size: 12px;
+            color: rgb(94, 45, 3);
+        }
+    }
 }

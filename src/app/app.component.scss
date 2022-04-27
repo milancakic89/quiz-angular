@@ -12,7 +12,7 @@ $headerHeight: 65px;
     background-repeat: repeat;
 }
 
-.bottom-navigation{
+.bottom-navigation {
     width: 100%;
     padding: 10px;
     position: fixed;
@@ -25,31 +25,53 @@ $headerHeight: 65px;
     display: flex;
     justify-content: space-around;
 
-    .icon{
+    .icon {
         width: 40px;
         height: 40px;
-        
+
         border: 2px solid rgb(99, 48, 2);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: 30px;
         border-radius: 4px;
 
-        &.active{
+        &.active {
             border: 2px solid gray;
         }
 
-        &-home{
+        &-home {
             background-image: url('../assets/images/pirate-theme/icons/Icon_Home.png');
         }
-        &-battle{
+
+        &-battle {
             background-image: url('../assets/images/pirate-theme/icons/Icon_Daggers.png');
         }
-        &-profile{
+
+        &-profile {
             background-image: url('../assets/images/pirate-theme/icons/Icon_Profile.png');
         }
-        &-rules{
+
+        &-rules {
             background-image: url('../assets/images/pirate-theme/icons/Icon_Rules.png');
+        }
+
+        &-plus {
+            transform: translateY(-75%);
+            border-radius: 50%;
+            display: flex;
+            height: 50px;
+            width: 50px;
+            flex-direction: column;
+            padding-left: 3px;
+            padding-bottom: 1px;
+            justify-content: center;
+            align-items: center;
+            background-color: #452700;
+            border-color: #ab7802;
+            color: #ffffff;
+            font-size: 30px;
+            -webkit-box-shadow: 0px 4px 8px 2px #2828288a;
+            box-shadow: 0px 4px 8px 2px #2828288a;
         }
     }
 }
@@ -588,7 +610,7 @@ $headerHeight: 65px;
     padding: 0;
     height: 100vh;
 
-    .bottom-padding{
+    .bottom-padding {
         padding: 0 0 60px 0;
     }
 
@@ -608,7 +630,7 @@ $headerHeight: 65px;
     position: relative;
     background: rgba(61, 156, 255, 1);
 
-    &.scroll-height{
+    &.scroll-height {
         height: calc(100vh - 60px);
     }
 

@@ -1,11 +1,11 @@
 
 <div class="page-content modal-contribute" *ngIf="questionType === 'MODAL'">
-    <div class="navigation">
-        <a class=button-back routerLink="/questions"></a>
+    <div class="banner">
+        <h5>Postavite pitanje drugima</h5>
     </div>
-    <div class="flex-wrapper">
-            <box-item title="Sa slikom" (onClick)="changeType('PICTURE')"></box-item>
-            <box-item title="Samo pitamnje sa odgovorom" (onClick)="changeType('REGULAR')"></box-item>
+    <div class="flex-wrapper pick-category">
+        <button class="button-primary" title="Samo pitamnje sa odgovorom" (onClick)="changeType('REGULAR')">Pitanje</button>
+        <button class="button-primary" title="Sa slikom" (onClick)="changeType('PICTURE')">Pitanje sa slikom</button>
     </div>
 
 </div>
