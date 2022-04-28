@@ -4,16 +4,14 @@
         <h5>Postavite pitanje drugim takmicarima</h5>
     </div>
     <div class="flex-wrapper pick-category">
-        <button class="button-primary" title="Samo pitamnje sa odgovorom" (click)="changeType('REGULAR')">Pitanje</button>
+        <button class="button-primary" title="Samo pitanje sa odgovorom" (click)="changeType('REGULAR')">Text pitanje</button>
         <button class="button-primary" title="Sa slikom" (click)="changeType('PICTURE')">Pitanje sa slikom</button>
+        <button class="button-primary" disabled title="Sa slovima">Pitanje sa slovima (uskoro)</button>
     </div>
 
 </div>
 
 <div class="page-content contribute" *ngIf="questionType === 'PICTURE'">
-    <div class="navigation">
-        <a class=button-back routerLink="/questions"></a>
-    </div>
     <form #questionImageForm="ngForm" enctype="multipart/form-data" (submit)="questionImageForm.valid && onFormSubmit(questionImageForm)">
         <div class="form-row column">
             <label for="upload" class="blue-heading">{{ selectedImage ? '' : 'Izaberite sliku'}}</label>
@@ -84,7 +82,6 @@
 </div>
 
 <div class="page-content" *ngIf="questionType === 'REGULAR'">
-<a class=button-back routerLink="/questions"></a>
     <form action="" #questionForm="ngForm" (submit)="questionForm.valid && onFormSubmit(questionForm)">
         <div class="form-row column">
             <label for="" class="blue-heading">Pitanje</label>
@@ -142,7 +139,7 @@
                 </ng-select>
             </div>
             <div class="form-row-input">
-                <label for="" class="blue-heading">Kategorija</label>
+                <label for="" class="blue-heading">Oblas</label>
                 <ng-select  name="category" 
                             [items]="categories"
                             bindLabel="title"
