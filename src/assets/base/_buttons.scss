@@ -31,8 +31,7 @@ input[type="submit"][disabled]{
     &-primary {
         align-self: center;
         width: auto;
-        padding: 0px 15px;
-        height: 42px !important;
+        padding: 10px 15px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -49,9 +48,8 @@ input[type="submit"][disabled]{
       
 
         @media screen and (min-width: 300px) and (max-width: 667px) {
-            font-size: 12px;
-            height: 42px;
-            padding: 0px 15px;
+            font-size: 10px;
+            padding: 10px 15px;
             background-size: 100% 114%;
         }
     }
@@ -59,8 +57,7 @@ input[type="submit"][disabled]{
     &-danger {
         align-self: center;
         width: auto;
-        height: 42px !important;
-        padding: 0px 15px;
+        padding: 10px 15px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -72,8 +69,7 @@ input[type="submit"][disabled]{
         background-size: 100% 114%;
 
         @media screen and (min-width: 300px) and (max-width: 450px) {
-            font-size: 12px;
-            height: 42px;
+            font-size: 10px;
             background-size: 100% 114%;
         }
 
