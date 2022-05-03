@@ -1,0 +1,35 @@
+<div class="stepper">
+    <div class="heading">
+        <h4>Dodajte pitanje</h4>
+    </div>
+    <div class="body step-{{step}}" *ngIf="step === 1">
+        <h5>Kategorija</h5>
+        <ng-select name="category"
+            [items]="categories"
+            bindLabel="title"
+            bindValue="value"
+            required
+            [clearable]="false"
+            [(ngModel)]="selectedCategory">
+        </ng-select>
+    </div>
+    <div class="body step-{{step}}" *ngIf="step === 2">
+        <br/>
+        <button class="button-primary">Odaberite sliku</button>
+
+        <h5>Odgovor</h5>
+        <input name="correct" [(ngModel)]="correct" required/>
+    </div>
+    <div class="body step-{{step}}" *ngIf="step === 3">
+        <h5>Upisite netacne odgovore</h5>
+        <input name="incorect-1" [(ngModel)]="incorect.one"/>
+        <input name="incorect-2" [(ngModel)]="incorect.two"/>
+        <input name="incorect-3" [(ngModel)]="incorect.three"/>
+    </div>
+    <div class="footer">
+        <button class="button-danger" (click)="cancel()" *ngIf="step === 1">Odustani</button>
+        <button class="button-danger" (click)="stepBack()" *ngIf="step !== 1">Nazad</button>
+        <button class="button-primary" (click)="nextStep()" *ngIf="step !== 3">Dalje</button>
+        <button class="button-primary" *ngIf="step === 3">Objavi</button>
+    </div>
+</div>

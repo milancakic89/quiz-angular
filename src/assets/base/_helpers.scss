@@ -6,7 +6,7 @@
 
 .page-content {
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 140px);
     padding: 20px 0;
 }
 
@@ -364,4 +364,54 @@ ng-select {
 
 play-component{
     width: 100%;
+}
+
+
+.stepper{
+    width: 90%;
+    margin: 0 auto;
+    align-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(158, 86, 4);
+
+    h4{
+        font-size: 18px;
+    }
+
+    h5{
+        font-size: 14px;
+    }
+
+    .heading{
+        text-align: center;
+        padding: 5px 10px;
+        color: #fff;
+        background-color: orange;
+    }
+
+    .body{
+        margin-top: auto;
+        min-height: 200px;
+        padding: 5px 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        input{
+            height: 30px;
+        }
+    }
+
+    .footer{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        padding: 5px 10px;
+
+        button:last-child{
+            margin-left: 8px;
+        }
+    }
 }

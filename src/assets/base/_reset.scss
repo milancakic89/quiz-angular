@@ -113,7 +113,7 @@ a {
 input,
 textarea {
     border: none;
-
+    max-height: 100px;
     &:focus {
         border: none;
         outline: none;

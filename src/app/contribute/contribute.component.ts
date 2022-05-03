@@ -56,7 +56,9 @@ export class ContributeComponent implements OnInit {
   }
 
  
-
+  public onCancel(){
+    this.questionType = 'MODAL';
+  }
 
   public changeType(type: QuestionType){
     this.questionType = type;

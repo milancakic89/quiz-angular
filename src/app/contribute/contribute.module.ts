@@ -5,12 +5,16 @@ import { ContributeRoutingModule } from './contribute-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { AddQuestionStepperComponent } from './add-question-stepper/add-question-stepper.component';
+import { AddImageQuestionComponent } from './add-image-question/add-image-question.component';
 
 
 
 @NgModule({
   declarations: [
-    ContributeComponent
+    ContributeComponent,
+    AddQuestionStepperComponent,
+    AddImageQuestionComponent
   ],
   imports: [
     CommonModule,
