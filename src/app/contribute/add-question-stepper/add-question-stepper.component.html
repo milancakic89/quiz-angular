@@ -19,9 +19,9 @@
                       cols="30" 
                       rows="10" 
                       required
-                      [(ngModel)]="question_text"></textarea>
+                      [(ngModel)]="newQuestion.question_text"></textarea>
         <h5>Odgovor</h5>
-        <input name="correct" [(ngModel)]="correct" required/>
+        <input name="correct" [(ngModel)]="newQuestion.correct_text" required/>
     </div>
     <div class="body step-{{step}}" *ngIf="step === 3">
         <h5>Upisite netacne odgovore</h5>
@@ -32,7 +32,7 @@
     <div class="footer">
         <button class="button-danger" (click)="cancel()" *ngIf="step === 1">Odustani</button>
         <button class="button-danger" (click)="stepBack()" *ngIf="step !== 1">Nazad</button>
-        <button class="button-primary" (click)="nextStep()" *ngIf="step !== 3">Dalje</button>
-        <button class="button-primary" *ngIf="step === 3">Objavi</button>
+        <button class="button-primary" [disabled]="checkDisabled()" (click)="nextStep()" *ngIf="step !== 3">Dalje</button>
+        <button class="button-primary" [disabled]="checkDisabled()" (click)="addQuestion()" *ngIf="step === 3">Objavi</button>
     </div>
 </div>

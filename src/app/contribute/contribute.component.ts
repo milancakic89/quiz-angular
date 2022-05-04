@@ -8,6 +8,7 @@ import { Configuration } from '../shared/config.service';
 import { finalize } from "rxjs/operators";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SocketService } from '../socket-service';
+import { Router } from '@angular/router';
 
 export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
 @Component({
@@ -19,6 +20,7 @@ export class ContributeComponent implements OnInit {
 
   constructor(private questionService: QuestionService, 
               private config: Configuration,
+              private router: Router,
               private storage: AngularFireStorage,
               private socketService: SocketService,
               private notificationService: NotificationService,
@@ -60,9 +62,14 @@ export class ContributeComponent implements OnInit {
     this.questionType = 'MODAL';
   }
 
+  public onUpload(){
+    this.router.navigateByUrl('/profile')
+  }
+
   public changeType(type: QuestionType){
     this.questionType = type;
   }
+
 
   public onFormSubmit(form: NgForm){
     if(this._newQuestion.correct === 'A'){

@@ -156,5 +156,6 @@
         <button class="button-primary mt-2" [disabled]="questionForm.invalid">Posalji</button>
     </form> -->
     <add-question-stepper [categories]="categories"
+                         (uploaded)="onUpload()"
                          (canceled)="onCancel()"></add-question-stepper>
 </div>
