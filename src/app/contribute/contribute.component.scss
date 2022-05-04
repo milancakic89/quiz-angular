@@ -34,26 +34,28 @@
 
 .banner {
     max-width: 400px;
+    border-radius: 5px;
     width: 90%;
     margin: -40px auto 0 auto;
-    background-image: url('../../assets/images/new-theme/question-board.png');
-    background-size: 100% 100%;
-    padding: 30px 10px;
+    padding: 10px;
     z-index: 10;
+    background-color: brown;
 
     h5 {
         text-align: center;
+        font-size: 14px;
+        color: #fff;
     }
 }
 
 .pick-category {
     max-width: 400px;
-    margin: 0px auto 0 auto;
+    margin: -20px auto 0 auto;
     width: 90%;
     height: auto;
-    background-image: url('../../assets/images/new-theme/question-board.png');
+    background-color: orange;
     background-size: 100% 100%;
-    padding: 40px 10px;
+    padding: 40px 10px 20px 10px;
     z-index: 8;
 
     &.flex-wrapper {
@@ -65,8 +67,8 @@
             margin-bottom: 10px;
             min-width: 210px;
             padding: 0px 25px;
-            height: 60px !important;
-            font-size: 12px;
+            height: 50px !important;
+            font-size: 11px;
             color: rgb(0, 0, 0);
         }
     }

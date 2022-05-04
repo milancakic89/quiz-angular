@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/questions/types';
 import { SocketService } from 'src/app/socket-service';
 
-type Letter = 'A' | 'B' | 'C' | 'D';
+export type Letter = 'A' | 'B' | 'C' | 'D';
 @Component({
   selector: 'add-question-stepper',
   templateUrl: './add-question-stepper.component.html',
