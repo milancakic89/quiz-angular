@@ -1,8 +1,16 @@
 # Kvizcina
 
-Serbian question quiz with questions expanding.
+Question quiz.
 
-## Gameplay
+## Game
 
-Players can play selected category. Some of categories are locked until player contribute 5 required questions to open certain category. Idea is that beside quiz questions, players can also answer other players questions, and in a same time expanding question database so that question repetition is reduced to a minimum.
-
+Play live against random oponent in 1vs1.
+Play with friends using general or personal questions.
+Add general question for everyone ( spending ticket )
+Add personal question ( free )
+Track achievements
+Add, remove, accept friends
+Track question status
+Edit profile
+Pick daily reward
+Buy items in a shop ( spending tickets )
