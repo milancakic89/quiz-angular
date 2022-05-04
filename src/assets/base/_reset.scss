@@ -16,6 +16,12 @@
     background-repeat: no-repeat;
 }
 
+body{
+    @media screen and (orientation: landscape) {
+        transform: rotate(-90deg);
+    }
+}
+
 span,
 p,
 h1,
