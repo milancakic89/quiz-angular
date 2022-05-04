@@ -67,6 +67,11 @@ export class FormComponent implements OnInit {
 
   }
 
+  public logout(){
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
+  }
+
   private _settings: Settings = {
     name: '',
     image: null,

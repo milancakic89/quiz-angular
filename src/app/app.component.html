@@ -3,9 +3,6 @@
 </div>
 <div class="spinner-wrapper" *ngIf="spinner">
     <div class="spinner">
-        <!-- <p class="image"></p>
-            <p class="loading-bar" [ngStyle]="{'width': loadingPercent + '%'}"></p>
-            <p class="loading-text">Ucitava se</p> -->
         <div class="spinner-center">
             <div class="bar-wrapper">
                 <p class="bar" [class.connected]="autologinReceived" [ngStyle]="{'left': -(100 - loadingPercent) + '%'}"></p>
