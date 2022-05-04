@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.config.saveUser(response.data.data, response.data.token)
         this.router.navigateByUrl('/profile')
       }
+      if(response && response.event === 'ACCOUNT_NOT_ACTIVATED' ){
+        this.notification.notification.emit({success: false, message: 'Nalog nije aktiviran. Proverite email'});
+      }
     })
     // try{
     //   (window as any).fbAsyncInit = function () {

@@ -71,6 +71,9 @@ export type EventType = 'connection' |
     'CHECK_PRACTICE_QUESTION' |
     'TRACK_QUEUE_MANAGER' |
     'REMOVE_FRIEND' |
+    'INCORRECT_LOGIN_DETAILS' |
+    'EMAIL_ALLREADY_EXIST' |
+    'ACCOUNT_NOT_ACTIVATED' |
     'REDUCE_LIVES';
 
 export interface Room {

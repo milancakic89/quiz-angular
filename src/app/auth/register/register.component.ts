@@ -31,8 +31,14 @@ export class RegisterComponent implements OnInit {
     }
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'REGISTER'){
-        this.notification.notification.emit({success: true, message: 'Nalog kreiran'});
+        this.notification.notification.emit({success: true, message: 'Nalog kreiran. Proverite email'});
         this.router.navigateByUrl('/login')
+      }
+      if(data && data.event === 'INCORRECT_LOGIN_DETAILS'){
+        this.notification.notification.emit({success: false, message: 'Proverite unete podatke'});
+      }
+      if(data && data.event === 'EMAIL_ALLREADY_EXIST' ){
+        this.notification.notification.emit({success: false, message: 'Email vec postoji'});
       }
     })
   }
@@ -45,6 +51,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public async onSubmit(){
+    alert('submitted')
     this.socketService.emit('REGISTER', { email: this._registerDetails.email, password: this._registerDetails.password})
     
   }
