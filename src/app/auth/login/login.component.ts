@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Configuration, SignupResponse, User } from 'src/app/shared/config.service';
@@ -20,7 +20,7 @@ interface FBResponse{
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private config: Configuration, 
               private router: Router,
@@ -71,6 +71,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     //   this.notification.notification.emit({success: false, message: 'Facebook init problem!!!'})
     // }
 
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
   @HostListener('window:resize')

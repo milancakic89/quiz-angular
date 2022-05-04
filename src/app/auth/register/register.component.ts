@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FeedbackMessageService } from 'src/app/feedback.service';
@@ -12,7 +12,7 @@ import { SocketService } from 'src/app/socket-service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(private config: Configuration, 
               private notification: NotificationService,
@@ -43,6 +43,12 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+  }
+
   @HostListener('window:resize')
   checkCenterLogin(){
     if(window.innerHeight > 650){
@@ -51,7 +57,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public async onSubmit(){
-    alert('submitted')
     this.socketService.emit('REGISTER', { email: this._registerDetails.email, password: this._registerDetails.password})
     
   }
