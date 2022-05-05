@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
       }
 
       if (data && data.event === 'EMAIL_NOT_EXIST') {
-        this.notification.notification.emit({ success: false, message: 'Nalog nije pronadjen. Proverite unete podatke' })
+        this.notification.notification.emit({ success: false, message: 'Proverite unete podatke' })
       }
 
     })
