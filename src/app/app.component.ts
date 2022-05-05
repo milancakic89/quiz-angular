@@ -148,10 +148,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     })
     this.spinner = true;
     setTimeout(()=>{
-      if(!this.autologinReceived){
+      if (!localStorage.getItem('access')){
         this.spinner = false;
       }
-    }, 500);
+    }, 1000);
     this.router.events.pipe(
       filter(events => events instanceof NavigationEnd),
       map(evt => this.activatedRoute),
