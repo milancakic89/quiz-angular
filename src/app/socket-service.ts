@@ -13,6 +13,7 @@ export type EventType = 'connection' |
     'ROOM_CREATED' |
     'RESET_PASSWORD' |
     'RESET_PASSWORD_FAILED' |
+    'RESET_PASSWORD_CONFIRMATION' |
     'EMAIL_NOT_EXIST' |
     'LOAD-ROOM-USERS' |
     'START_TOURNAMENT' |
@@ -130,6 +131,10 @@ export class SocketService {
         });
 
         this.socket.on('RESET_PASSWORD', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('RESET_PASSWORD_CONFIRMATION', (data: SocketResponse) => {
             this.socketData.next(data)
         });
 

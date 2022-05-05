@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ResetComponent } from './reset/reset.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -12,7 +13,8 @@ import { ResetComponent } from './reset/reset.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ResetComponent
+    ResetComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

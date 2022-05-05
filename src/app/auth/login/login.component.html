@@ -24,7 +24,7 @@
                                 [(ngModel)]="login.password"
                                 [ngClass]="{'form-submitted': loginForm.submitted}"/>
                             </div>
-                            <button class="button-primary submit z-6" type="submit" name="submit" [ngClass]="{'button-gray': loginForm.invalid}">Uloguj se</button>
+                            <button class="button-primary submit z-6" type="submit" name="submit" [disabled]=" loginForm.invalid">Uloguj se</button>
                                 <a routerLink='/register' class="button-danger">Napravi nalog</a>  
                                 <a routerLink='/reset' class="button-danger mt-2">Resetuj lozinku</a> 
                 

@@ -1,24 +1,4 @@
-<!-- <div class="login">
-    <div class="login-form-wrapper">
-        <h4 class="color-white logo">{{ title }}</h4>
-        <form class="login-form" #resetForm="ngForm" (submit)="resetForm.valid && onSubmit()">
-            <div class="form-row column">
-                    <label class="color-white">Enter email to reset password</label>
-                    <input name="email" 
-                           type="email"
-                           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+"
-                           [(ngModel)]="email"
-                           required
-                           [ngClass]="{'form-submitted': resetForm.submitted}" />          
-                    <button class="button-submit" name="submit" [ngClass]="{'button-gray': resetForm.invalid}">Resetuj</button>
-                    <div class="nav-buttons">
-                        <a routerLink='/' class="login-nav-link">Uloguj se</a>  
-                    </div>
-                   
-            </div>
-        </form>
-    </div>
-</div> -->
+
 <div class="pirate-login centralize {{centerLogin}}">
     <div class="pirate-login-wrapper ">
         <img class="heading-image" width="auto" height="350" src="../../../assets/images/pirate-theme/headings/heading.png" />
@@ -34,7 +14,7 @@
                                    required
                                    placeholder="Email"
                                    [ngClass]="{'form-submitted': resetForm.submitted}" />          
-                            <button class="button-primary submit" name="submit" [ngClass]="{'button-gray': resetForm.invalid}">Resetuj</button>
+                            <button class="button-primary submit" name="submit" [disabled]="resetForm.invalid">Resetuj</button>
                             <a routerLink='/' class="button-danger">Uloguj se</a>  
                            
                     </div>
