@@ -30,7 +30,7 @@ export class ResetComponent implements OnInit {
 
     this.subscription = this.socket.socketData.subscribe( data =>{
       if(data && data.event === 'RESET_PASSWORD'){
-        this.notification.notification.emit({ success: true, message: 'Proverite email' })
+        this.notification.notification.emit({ success: true, message: 'Uspesno. Proverite email' })
       }
       if (data && data.event === 'RESET_PASSWORD_FAILED') {
         this.notification.notification.emit({ success: false, message: 'Resetovanje nije uspelo' })

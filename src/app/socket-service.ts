@@ -129,6 +129,18 @@ export class SocketService {
             this.socketData.next(data)
         });
 
+        this.socket.on('RESET_PASSWORD', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('RESET_PASSWORD_FAILED', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('EMAIL_NOT_EXIST' , (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
         this.socket.on('INCORRECT_LOGIN_DETAILS', (data: SocketResponse) => {
             this.socketData.next(data)
         });
