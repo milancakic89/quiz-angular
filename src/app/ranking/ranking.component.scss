@@ -63,8 +63,8 @@
             border-radius: 25px;
 
             .avatar {
-                width: 45px;
-                height: 45px;
+                width: 30px;
+                height: 30px;
                 background-size: cover;
                 border-radius: 50%;
             }
@@ -75,7 +75,7 @@
 
             .th.w-20:first-child {
                 width: auto;
-                min-width: 65px;
+                min-width: 46px;
             }
 
             .td:last-child {
@@ -83,12 +83,12 @@
                 justify-content: flex-start;
 
                 span {
-                    font-size: 20px;
+                    font-size: 14px;
                     color: rgb(202, 202, 202);
                     font-weight: 400;
 
                     &.first {
-                        font-size: 23px;
+                        font-size: 16px;
                         font-weight: 900;
                         color: rgb(255, 150, 13);
                     }
