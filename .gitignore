@@ -1,6 +1,8 @@
 /dist
 /node_modules
 
+.firebase
+
 environment-hidden-dev.ts
 environment-hidden-prod.ts
 

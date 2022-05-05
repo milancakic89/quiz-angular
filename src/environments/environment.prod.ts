@@ -7,5 +7,6 @@ export const environment = {
   refresh_token: config.refresh_token,
   firebase: config.firebaseConfig,
   facebookAppId: config.facebookAppId,
-  socketUrl: config.socketUrl
+  socketUrl: config.socketUrl,
+  baseUrl: 'https:kviz-live.web.app'
 };

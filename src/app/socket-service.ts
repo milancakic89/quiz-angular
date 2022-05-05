@@ -7,9 +7,13 @@ import { Configuration } from './shared/config.service';
 import { AppComponent } from './app.component';
 
 export type EventType = 'connection' |
+    '' |
     'CREATE_ROOM' |
     'JOIN_ROOM' |
     'ROOM_CREATED' |
+    'RESET_PASSWORD' |
+    'RESET_PASSWORD_FAILED' |
+    'EMAIL_NOT_EXIST' |
     'LOAD-ROOM-USERS' |
     'START_TOURNAMENT' |
     'SELECTED_QUESTION_LETTER' |
@@ -118,6 +122,18 @@ export class SocketService {
     public setup() {
 
         this.socket.on('AUTOLOGIN_AVAILABLE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('EMAIL_ALLREADY_EXIST', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('INCORRECT_LOGIN_DETAILS', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('ACCOUNT_NOT_ACTIVATED', (data: SocketResponse) => {
             this.socketData.next(data)
         });
 

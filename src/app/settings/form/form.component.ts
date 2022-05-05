@@ -5,6 +5,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { SocketService } from 'src/app/socket-service';
 import { UploadService } from 'src/app/upload.service';
 import { SettingsService } from '../settings.service';
+import { environment } from 'src/environments/environment';
 
 export interface Settings{
   name: string;
@@ -69,7 +70,12 @@ export class FormComponent implements OnInit {
 
   public logout(){
     localStorage.clear();
-    this.router.navigateByUrl('/login');
+    this.config.user.next(null)
+    this.config.logged = false;
+    setTimeout(() =>{
+      this.router.navigateByUrl('')
+    },10)
+    
   }
 
   private _settings: Settings = {

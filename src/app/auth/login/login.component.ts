@@ -46,30 +46,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.config.saveUser(response.data.data, response.data.token)
         this.router.navigateByUrl('/profile')
       }
-      if(response && response.event === 'ACCOUNT_NOT_ACTIVATED' ){
+      if (response && response.event === 'ACCOUNT_NOT_ACTIVATED' ){
         this.notification.notification.emit({success: false, message: 'Nalog nije aktiviran. Proverite email'});
       }
     })
-    // try{
-    //   (window as any).fbAsyncInit = function () {
-    //     FB.init({
-    //       appId: '1043385909568285',
-    //       xfbml: true,
-    //       version: 'v12.0'
-    //     });
-    //     FB.AppEvents.logPageView();
-    //   };
-
-    //   (function (d, s, id) {
-    //     var js: any, fjs: any = d.getElementsByTagName(s)[0];
-    //     if (d.getElementById(id)) { return; }
-    //     js = d.createElement(s); js.id = id;
-    //     js.src = "https://connect.facebook.net/en_US/sdk.js";
-    //     fjs.parentNode.insertBefore(js, fjs);
-    //   }(document, 'script', 'facebook-jssdk'));
-    // }catch(e){
-    //   this.notification.notification.emit({success: false, message: 'Facebook init problem!!!'})
-    // }
 
   }
 
