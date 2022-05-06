@@ -261,9 +261,6 @@ export class SocketService {
             this.socketData.next(data)
 
         });
-        this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
-            this.online = data.online;
-        });
         this.socket.on('REFRESH_USER', (data: SocketResponse) => {
             this.socketData.next(data)
 
@@ -338,6 +335,10 @@ export class SocketService {
 
         });
         this.socket.on('RESET_PLAYING_STATE', (data: SocketResponse) => {
+            this.socketData.next(data)
+
+        });
+        this.socket.on('ONLINE_USERS_COUNT', (data: SocketResponse) => {
             this.socketData.next(data)
 
         });
