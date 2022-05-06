@@ -1,7 +1,7 @@
 <div class="searching-players" *ngIf="!bothAccepted">
     
     <div class="searching" *ngIf="!joined">
-        <p class="online-users">online <span>{{onlineUsers}}</span></p>
+        <p class="online-users">online <span>{{online}}</span></p>
         <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></div>
         <p>VS</p>
         <div class="animated">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="searching founded" *ngIf="joined">
-        <p class="online-users">online: <span>{{onlineUsers}}</span></p>
+        <p class="online-users">online: <span>{{online}}</span></p>
         <div class="avatar accepted-{{acceptGame}}" [ngStyle]="{'background-image': 'url(' + user?.avatar_url + ')'}"></div>
         <p>VS</p>
         <div class="avatar accepted-{{oponentAccepted}}" [ngStyle]="{'background-image': 'url(' + oponent?.avatar_url + ')'}" *ngIf="oponent !== null"></div>

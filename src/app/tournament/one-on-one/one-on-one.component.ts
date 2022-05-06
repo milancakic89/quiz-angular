@@ -32,12 +32,12 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponentAccepted = false;
   public acceptGame = false;
   public bothAccepted = false;
-  public onlineUsers = 0;
+  public online = 0;
   public onlineSubscription: Subscription = null as unknown as Subscription;
 
   ngOnInit(): void {
     this.onlineSubscription = this.appService.onlineUsers.subscribe(onlineCounter =>{
-      this.onlineUsers = onlineCounter;
+      this.online = onlineCounter;
     })
     this.subscription = this.socketService.socketData.subscribe((data) =>{
       if (data && data.event === 'JOIN_ROOM' ){
