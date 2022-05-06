@@ -178,11 +178,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         
       }
       if (data && data.event === 'ONLINE_USERS_COUNT') {
-        if (data.user_id !== this.user._id) {
-          this.invitedToRoomName = data.roomName;
-          this.invited = true;
-          this.invitedBy = data.userName;
-        }
+          this.service.onlineUsers.next(data.data);
       }
       if (data && data.event === 'REFRESH_USER') {
         this.config.user = data.data;

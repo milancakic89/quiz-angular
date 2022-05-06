@@ -7,6 +7,8 @@ import { SocketService } from "./socket-service";
 @Injectable({providedIn: 'root'})
 export class AppService{
     constructor(private service: SocketService){}
+
+    public onlineUsers = new BehaviorSubject<number>(0);
  
     public updateScore(score: number){
         return this.service.emit('UPDATE_SCORE', {score});

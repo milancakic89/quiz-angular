@@ -2,6 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 import { PlayService } from 'src/app/play/play.service';
 import { Configuration, User } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
@@ -16,11 +17,11 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   constructor(
     private socketService: SocketService,
     private router: Router,
+    private appService: AppService,
     private playService: PlayService,
     private config: Configuration) { }
   
   get user() { return this.config.user.getValue() as User }
-  get onlineUsers(){return this.socketService.online}
 
   get root(){return this.config.isRoot}
 
@@ -31,8 +32,13 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponentAccepted = false;
   public acceptGame = false;
   public bothAccepted = false;
+  public onlineUsers = 0;
+  public onlineSubscription: Subscription = null as unknown as Subscription;
 
   ngOnInit(): void {
+    this.onlineSubscription = this.appService.onlineUsers.subscribe(onlineCounter =>{
+      this.onlineUsers = onlineCounter;
+    })
     this.subscription = this.socketService.socketData.subscribe((data) =>{
       if (data && data.event === 'JOIN_ROOM' ){
         //  this.joined = true;
