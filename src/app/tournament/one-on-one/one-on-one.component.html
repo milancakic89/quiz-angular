@@ -16,7 +16,7 @@
         <p class="online-users">online: <span>{{online}}</span></p>
         <div class="avatar accepted-{{acceptGame}}" [ngStyle]="{'background-image': 'url(' + user?.avatar_url + ')'}"></div>
         <p>VS</p>
-        <div class="avatar accepted-{{oponentAccepted}}" [ngStyle]="{'background-image': 'url(' + oponent?.avatar_url + ')'}" *ngIf="oponent !== null"></div>
+        <div class="avatar accepted-{{oponentAccepted}} declined-{{oponentDeclined}}" [ngStyle]="{'background-image': 'url(' + oponent?.avatar_url + ')'}" *ngIf="oponent !== null"></div>
         <div class="options">
             <button class="buton button-primary" (click)="onAccept()">Prihvati</button>
             <button class="buton button-danger" (click)="onDecline()">Odbij</button>

@@ -32,6 +32,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   public oponentAccepted = false;
   public acceptGame = false;
   public bothAccepted = false;
+  public oponentDeclined = false;
   public online = 0;
   public onlineSubscription: Subscription = null as unknown as Subscription;
 
@@ -63,11 +64,12 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
        
       }
       if (data && data.event === 'OPONENT_DECLINED') {
-
         this.acceptGame = false;
+        this.oponentDeclined = true;
         setTimeout(()=>{
-          this.joined = false;
+            this.joined = false;
             this.oponent = null as unknown as User;
+          this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
         }, 500)
       }
     })
@@ -94,7 +96,13 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onDecline() {
-    this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room }); 
+    this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room });
+    this.acceptGame = false;
+    this.joined = false;
+    setTimeout(() => {
+      this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
+    }, 200)
+  
   }
 
   public onExit(){
