@@ -100,6 +100,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
     this.acceptGame = false;
     this.joined = false;
     setTimeout(() => {
+      this.oponentDeclined = false;
       this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
     }, 200)
   
