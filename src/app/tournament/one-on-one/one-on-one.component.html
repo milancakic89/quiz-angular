@@ -18,8 +18,9 @@
         <p>VS</p>
         <div class="avatar accepted-{{oponentAccepted}} declined-{{oponentDeclined}}" [ngStyle]="{'background-image': 'url(' + oponent?.avatar_url + ')'}" *ngIf="oponent !== null"></div>
         <div class="options">
-            <button class="buton button-primary" (click)="onAccept()">Prihvati</button>
-            <button class="buton button-danger" (click)="onDecline()">Odbij</button>
+            <button *ngIf="!oponentDeclined" class="buton button-primary" (click)="onAccept()">Prihvati</button>
+            <button *ngIf="oponentDeclined" class="buton button-primary" (click)="onKeepSearching()">Trazi</button>
+            <button *ngIf="!oponentDeclined" class="buton button-danger" (click)="onDecline()">Odbij</button>
             <button class="buton button-danger" (click)="onExit()">Izadji</button>
         </div>
         
