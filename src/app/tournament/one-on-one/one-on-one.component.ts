@@ -66,12 +66,9 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
       if (data && data.event === 'OPONENT_DECLINED') {
         this.acceptGame = false;
         this.oponentDeclined = true;
-        setTimeout(()=>{
-            this.oponent = null as unknown as User;
-        }, 500)
       }
     })
-    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
+    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url, score: this.user.score });
   }
 
   ngOnDestroy(): void {
@@ -101,7 +98,8 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onKeepSearching(){
     this.oponentDeclined = false;
-    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', user_id: this.user._id, avatar_url: this.user.avatar_url });
+    this.oponent = null as unknown as User;
+    this.socketService.emit('JOIN_ROOM', { roomName: '1on1', score: this.user.score , user_id: this.user._id, avatar_url: this.user.avatar_url });
   }
 
   public onExit(){
