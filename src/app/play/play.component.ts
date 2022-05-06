@@ -1,7 +1,7 @@
 import { NonNullAssert } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalWrapper } from '../modal-service';
 import { QuestionService } from '../questions/questions.service';
@@ -22,6 +22,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     private router: Router,
     private config: Configuration,
     private notificationService: NotificationService,
+    private route: ActivatedRoute,
     private playService: PlayService,
     private socketService: SocketService,
     private questionService: QuestionService) { }
@@ -64,7 +65,13 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       }
     })
 
-    
+    this.route.params.subscribe(params =>{
+      if(params['category']){
+        this.playCategory = params['category'];
+        this.showModal = false;
+        this.initGame();
+      }
+    })
 
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if (data && data.event === 'GET_QUESTION'){
@@ -277,6 +284,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     this.score = 0;
     this.attempts = [1, 1, 1]
     this.modal.startGame.next(false)
+    this.router.navigateByUrl('/play')
   }
 
   public closeModal(category: string, allowedCategory: string) {
@@ -285,6 +293,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
       return;
     }
     this.playCategory = category;
+    this.router.navigateByUrl(`/play/${category}`);
 
     setTimeout(() => {
       this.showModal = false;
