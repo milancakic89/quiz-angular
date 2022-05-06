@@ -103,6 +103,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onExit(){
+    this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room });
     this.router.navigateByUrl('/tournament');  
   }
 
