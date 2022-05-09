@@ -98,12 +98,17 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
 
   public onKeepSearching(){
     this.oponentDeclined = false;
+    this.joined = false;
+    this.acceptGame = false;
     this.oponent = null as unknown as User;
     this.socketService.emit('JOIN_ROOM', { roomName: '1on1', score: this.user.score , user_id: this.user._id, avatar_url: this.user.avatar_url });
   }
 
   public onExit(){
     this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room });
+    this.oponentDeclined = false;
+    this.joined = false;
+    this.acceptGame = false;
     this.router.navigateByUrl('/tournament');  
   }
 
