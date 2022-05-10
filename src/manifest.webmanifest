@@ -1,8 +1,8 @@
 {
   "name": "Kviz live",
   "short_name": "Kviz live",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#000",
+  "background_color": "#000",
   "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
