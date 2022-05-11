@@ -79,6 +79,7 @@ export type EventType = 'connection' |
     'INCORRECT_LOGIN_DETAILS' |
     'EMAIL_ALLREADY_EXIST' |
     'ACCOUNT_NOT_ACTIVATED' |
+    'ADD_WORD_QUESTION' |
     'REDUCE_LIVES';
 
 export interface Room {

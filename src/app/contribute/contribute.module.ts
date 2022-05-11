@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { AddQuestionStepperComponent } from './add-question-stepper/add-question-stepper.component';
 import { AddImageQuestionComponent } from './add-image-question/add-image-question.component';
+import { AddWordQuestionComponent } from './add-word-question/add-word-question.component';
 
 
 
@@ -14,7 +15,8 @@ import { AddImageQuestionComponent } from './add-image-question/add-image-questi
   declarations: [
     ContributeComponent,
     AddQuestionStepperComponent,
-    AddImageQuestionComponent
+    AddImageQuestionComponent,
+    AddWordQuestionComponent
   ],
   imports: [
     CommonModule,

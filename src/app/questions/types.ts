@@ -7,7 +7,7 @@ export interface Question{
     status?: QuestionStatus;
     answers: Answers[];
     type?: QuestionType;
-    correct_letter: string;
+    correct_letter?: string;
     correct_text: string;
     opened?: boolean;
     imageUrl?: any;

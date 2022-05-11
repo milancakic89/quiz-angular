@@ -1,0 +1,21 @@
+<div class="stepper">
+    <div class="heading">
+        <h4>Korak {{ step }} od 1</h4>
+    </div>
+    <div class="body step-{{step}}" *ngIf="step === 1">
+        <h5>Pitanje</h5>
+                <input name="question"
+                       placeholder="npr Koji fudbaler je u pitanju"
+                       [(ngModel)]="newQuestion.question_text"
+                       required />
+                <h5>Odgovor</h5>
+                <input name="correct" 
+                       placeholder="Kristiano Ronaldo" 
+                       [(ngModel)]="newQuestion.correct_text" required />
+    </div>
+    <div class="footer">
+        <button class="button-danger" (click)="cancel()" *ngIf="step === 1">Odustani</button>
+        <button class="button-primary" [disabled]="checkDisabled()" (click)="addQuestion()"
+                *ngIf="step === 1">Objavi</button>
+    </div>
+</div>

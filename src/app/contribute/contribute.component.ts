@@ -10,7 +10,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SocketService } from '../socket-service';
 import { Router } from '@angular/router';
 
-export type QuestionType = 'PICTURE' | 'REGULAR' | 'MODAL';
+export type QuestionType = 'PICTURE' | 'REGULAR' | 'WORD' |'MODAL';
 @Component({
   selector: 'app-contribute',
   templateUrl: './contribute.component.html',

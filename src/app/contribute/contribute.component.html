@@ -22,3 +22,8 @@
                          (uploaded)="onUpload()"
                          (canceled)="onCancel()"></add-question-stepper>
 </div>
+
+<div class="page-content contribute" *ngIf="questionType === 'WORD'">
+    <add-word-question (uploaded)="onUpload()"
+                        (canceled)="onCancel()"></add-word-question>
+</div>
