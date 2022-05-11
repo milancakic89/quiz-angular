@@ -109,6 +109,10 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
   }
 
   public onExit(){
+    this.playService.allowBackButton = true;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     this.socketService.emit('OPONENT_DECLINED', { oponentID: this.oponent._id, roomName: this.room });
     this.oponentDeclined = false;
     this.joined = false;

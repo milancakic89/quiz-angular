@@ -14,7 +14,7 @@ const routes: Route[] = [
     { path: 'monitoring', component: RoomMonitoringComponent, data: {showNavigation: true} },
     { path: 'room/:id/results', component: WaitingOthersComponent, canDeactivate: [PlayGuard], data: {showNavigation: false} },
     { path: 'room/:id/play', component: PlayComponent, canDeactivate: [PlayGuard], data: {showNavigation: false} },
-    { path: 'room/:id', component: RoomComponent, data: {showNavigation: false}}
+    { path: 'room/:id', component: RoomComponent, data: {showNavigation: true}}
 ]
 @NgModule({
     imports: [RouterModule.forChild(routes)],

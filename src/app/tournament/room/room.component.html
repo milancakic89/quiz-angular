@@ -24,7 +24,8 @@
         <button class="button button-danger" *ngIf="root">KOD: {{ room }}</button>
         <button class="button-primary"
                 *ngIf="root"
-                (click)="startTournament()">Igraj</button>
+                [disabled]="roomUsers.length < 2"
+                (click)="roomUsers.length > 1 && startTournament()">Igraj</button>
         <div class="button button-list" *ngIf="root" (click)="openFriendList()">
             <p></p>
             <p></p>
