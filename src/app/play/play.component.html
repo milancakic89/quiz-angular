@@ -28,7 +28,7 @@
 
 <div class="game-box" *ngIf="!showModal && lives > 0">
   <div class="question-box-wrapper">
-    <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
+    <div class="question-box-new" *ngIf="question.type === 'REGULAR' || question.type === 'WORD'">
         <h6 class="question-text-heading question-font"><span *ngIf="questionCount">{{questionCount}}.</span> {{ question.question }} </h6>
     </div>
     <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new" *ngIf="question.type === 'PICTURE'">
@@ -52,15 +52,28 @@
     <p class="stars-background"></p>
     <p class="stars-progress" [ngStyle]="{'width': progressBarPercentage + '%'}"></p>
 </div>
-    <button class="button-yellow question-font"
-            *ngFor="let answer of question.answers; let i = index"
-        [ngClass]="{
-        'disabled-button': questionSelected,
-        'wrong-answer': correct === 1 && btnIndex === i,
-        'correct-answer': correct === 2  && btnIndex === i}"
-         (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)">
-        {{ answer.text }}
-    </button>
+<ng-container *ngIf="question.type !== 'WORD'">
+      <button class="button-yellow question-font"
+              *ngFor="let answer of question.answers; let i = index"
+              [ngClass]="{
+              'disabled-button': questionSelected,
+              'wrong-answer': correct === 1 && btnIndex === i,
+              'correct-answer': correct === 2  && btnIndex === i}"
+              (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+</ng-container>
+<ng-container *ngIf="question.type === 'WORD'">
+    <div class="letters">
+      <ng-container *ngFor="let letter of wordLetters">
+        <span class="empty-letter-box" (click)="addLetter(letter)">{{ letter }}</span>
+      </ng-container>
+    </div>
+      <div class="answer" >
+        <p *ngFor="let letters of question.answers; let i = index">
+          <span *ngFor="let letter of letters; let j = index" (click)="removeLetter(i, j)">{{ letter }}</span>
+        </p>
+      </div>
+</ng-container>
+
     
   </div>
 </div>

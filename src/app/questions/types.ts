@@ -5,7 +5,7 @@ export interface Question{
     question: string;
     category?: Category;
     status?: QuestionStatus;
-    answers: Answers[];
+    answers: any;
     type?: QuestionType;
     correct_letter?: string;
     correct_text: string;
@@ -18,6 +18,8 @@ export interface Question{
     answered_correctly?: number;
     deny_reason?: string;
 }
+
+export type Letters = string[];
 
 export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'MUZIKA' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';
   

@@ -16,7 +16,7 @@ import { PlayService } from './play.service';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnDestroy, OnChanges, OnInit {
+export class PlayComponent implements OnDestroy, OnInit {
 
   constructor(private modal: ModalWrapper,
     private router: Router,
@@ -56,7 +56,11 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   public correct = 0;
   public showCorrect = false;
   public btnIndex: any = null;
+  public disable = false;
   public subscription: Subscription = null as unknown as Subscription;
+  public wordAnswer: any = [];
+  public wordLetters = []; //[]
+  public letters: any = [];//[[]]
 
   ngOnInit() {
     this.config.user.subscribe(user => {
@@ -75,6 +79,7 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if (data && data.event === 'GET_QUESTION'){
+        this.disable = false;
         this.correct = 0;
         this.showCorrect = false;
         this.btnIndex = null;
@@ -84,12 +89,28 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
         this.questionSelected = false;
         this.time = 20;
         this.initTime();
+        if(this.question.type === 'WORD'){
+          this.question.answers.forEach((arr: string[], i: number) =>{
+            this.letters.push([])
+          })
+          setTimeout(() =>{
+            this.question.answers.forEach((arr: string[], i: number) => {
+              arr.forEach(letter => {
+                this.letters[i].push(null)
+              })
+            })
+          },10)
+
+          this.wordLetters = this.question.answers.flat();
+          setTimeout(() => {
+            console.log(this.letters)
+          }, 500)
+          
+        }
       }
 
       if (data && data.event === 'CHECK_PRACTICE_QUESTION') {
-        console.log(data)
         if (data.data) {
-          console.log('correct')
           this.score++;
           this.updateProgressBar();
           this.correct = 2
@@ -102,7 +123,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
             }, this.nextQuestionInterval)
         } else {
-          console.log('incorrect')
           this.correct = 1;
           this.reduceAttempts();
           setTimeout(() => {
@@ -118,13 +138,20 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
     })
   }
 
-  ngOnChanges(): void {
-    this.modal.startGame.subscribe(bool => {
-      if (bool) {
-        this.initGame();
-      }
-    })
+  public addLetter(letter: string){
+      let founded = false;
+      this.letters.forEach((arr: string[], index: number) =>{
+          arr.forEach((l: string) =>{
+            if(!founded && !l){
+              founded = true;
+              l = letter;
+            }
+          })
+      })
+  }
 
+  public removeLetter(index1: number, index2: number){
+      console.log(index1, index2)
   }
 
   public isCategoryAllowed(category: String) {
@@ -170,10 +197,17 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   public async getQuestion() {
+
     if (this.questionCount >= 15 || !this.attempts.length) {
       return this.gameOver('End of game');
     }
-    console.log('getting another question')
+    if (this.disable) {
+      return;
+    }
+    this.disable = true;
+    this.letters = [];
+    this.wordAnswer = [];
+    this.wordLetters = [];
     this.socketService.emit('GET_QUESTION', { category: this.playCategory })
   }
 
@@ -297,7 +331,6 @@ export class PlayComponent implements OnDestroy, OnChanges, OnInit {
 
     setTimeout(() => {
       this.showModal = false;
-      this.initGame();
     }, 1600)
 
   }
