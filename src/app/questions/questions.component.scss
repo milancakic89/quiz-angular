@@ -1,10 +1,11 @@
 @import '../../assets/abstract/variables';
 
 
-.questions-wrapper{
+.questions-wrapper {
     margin-bottom: auto;
     padding: 0;
 }
+
 .approved,
 .pending,
 .denied {
@@ -120,32 +121,44 @@
     }
 }
 
-.amount{
+.amount {
     text-align: center;
     color: rgb(66, 40, 2);
 }
-.questions-table{
+
+.questions-table {
     background-color: rgb(227, 187, 117) !important;
+    padding-bottom: 80px;
 }
-.question-item{
-    padding: 5px;
+
+.question-item {
+    padding: 5px 25px 5px 5px;
     display: flex;
     width: 100%;
     align-items: center;
     background-color: rgb(79, 36, 3);
     border-radius: 25px;
+    font-size: 10px;
+    color: #fff;
+    position: relative;
 
-
-    .icon{
-        width: 35px;
-        height: 35px;
-        min-width: 35px;
-        min-height: 35px;
-        margin-right: 20px;
+    .question-text{
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    
+    
+    .icon {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        min-height: 22px;
+        margin-right: 6px;
         font-weight: 700;
         border-radius: 50%;
-        font-size: 30px;
+        font-size: 13px;
         text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
         border: 1px solid brown;
         display: flex;
         justify-content: center;
@@ -153,11 +166,38 @@
         background-color: #fff;
         color: rgb(78, 36, 1);
     }
-    span:last-child{
+
+    span:last-child {
         color: #fff;
         white-space: nowrap;
         overflow: hidden;
         padding-right: 3px;
+    }
+
+    .status {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        margin: 0 3px 0 auto;
+        position: absolute;
+        right: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.ODOBRENO {
+            background-color: rgb(6, 185, 6);
+        }
+
+        &.NA.CEKANJU {
+            background-color: rgb(252, 196, 11);
+        }
+
+        &.ODBIJENO {
+            background-color: red;
+        }
     }
 }
 
@@ -168,6 +208,10 @@
     margin-top: 2px;
     width: 95%;
     height: calc(100vh - 198px) !important;
+
+    a {
+        width: 100%;
+    }
 
     .tbody {
         height: auto;

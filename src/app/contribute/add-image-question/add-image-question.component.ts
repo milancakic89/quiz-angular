@@ -56,7 +56,6 @@ export class AddImageQuestionComponent implements OnInit {
   }
 
   public onAddCategory(category: Letter) {
-    console.log(category)
     this._newQuestion.category = category;
   }
 

@@ -9,7 +9,8 @@
         <a [routerLink]="[question._id]" *ngFor="let question of questions;">
         <p class="question-item" >
             <span class="icon">?</span>
-            <span>{{ question.question }}</span>
+            <span class="question-text">{{ question.question }}</span>
+            <span class="status {{ question.status}}"></span>
         </p>
         </a>
     </div>

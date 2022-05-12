@@ -13,6 +13,10 @@ export interface Question{
     imageUrl?: any;
     posted_by?: string;
     firebasePath?: string;
+    question_picked?: string;
+    answered_wrong?: number;
+    answered_correctly?: number;
+    deny_reason?: string;
 }
 
 export type Category =  'GEOGRAFIJA' | 'ISTORIJA' | 'FILMOVI I SERIJE' | 'MUZIKA' | 'POZNATE LICNOSTI' | 'SPORT' | 'RAZNO';

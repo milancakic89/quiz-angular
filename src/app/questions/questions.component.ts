@@ -74,7 +74,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     
   }
 
-
   public load() {
     this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter})
   }
@@ -82,69 +81,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   public async filter(status: QuestionStatus){
     this.filterStatus = status;
     this.socketService.emit('GET_QUESTIONS', { filter: this.selectedFilter })
-  }
-
-  public async updateQuestionText(id: string) {
-    this.showUpdateButton = false;
-    const { success } = await this.questionService.updateQuestionText(id, this.updateQuestion);
-    if (success) {
-      this.showUpdateButton = true;
-      this.questions.forEach(question => {
-        if (question._id === id) {
-          question.question = this.updateQuestion;
-          question.status = 'NA CEKANJU';
-          this.updateQuestion = '';
-          question.opened = false;
-          this.notificationService.notification.emit({
-            success: true,
-            message: 'Uspesno promenjeno.'
-          })
-        }
-      })
-    } else {
-      this.showUpdateButton = true;
-    }
-  }
-
-  public async publish(id: string) {
-    const { data, success } = await this.questionService.publish(id)
-    if (success) {
-      this.notificationService.notification.emit({
-        success: true,
-        message: 'Uspesno promenjeno.'
-      });
-      this.questions.forEach(question => {
-        if (question._id === id) {
-          question.status = 'ODOBRENO';
-        }
-      })
-    }
-  }
-
-  public async unpublish(id: string) {
-    const { data, success } = await this.questionService.unpublish(id)
-    if (success) {
-      this.notificationService.notification.emit({
-        success: true,
-        message: 'Uspesno promenjeno.'
-      })
-      this.questions.forEach(question => {
-        if (question._id === id) {
-          question.status = 'NA CEKANJU';
-        }
-      })
-    }
-  }
-
-  public async onDeleteQuesion(id: string) {
-    const { success } = await this.questionService.deleteQuestion(id);
-    if (success) {
-      this.notificationService.notification.emit({
-        success: true,
-        message: 'Uspesno obrisano.'
-      })
-      this.questions = this.questions.filter(q => q._id !== id)
-    }
   }
 
 }

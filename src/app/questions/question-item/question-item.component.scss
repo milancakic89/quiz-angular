@@ -140,6 +140,7 @@
     border-radius: 25px;
 
 
+
     .icon {
         width: 35px;
         height: 35px;
@@ -193,9 +194,61 @@
     }
 }
 
-.back-nav{
+.back-nav {
     display: flex;
     padding: 6px 10px;
+    margin-bottom: 10px;
     width: 100%;
     color: Brown;
+}
+
+.questions-wrapper {
+    background-color: orange;
+    border: 4px solid rgb(109, 54, 4);
+    padding: 10px 10px 80px 10px;
+    overflow-y: auto;
+
+    .question-info-item {
+        padding: 10px 5px;
+        margin-bottom: 5px;
+        background-color: rgb(109, 54, 4);
+        color: #fff;
+
+        input {
+            height: 30px;
+            margin-top: 10px;
+        }
+
+        .title {
+            color: rosybrown;
+        }
+
+        .ODOBRENO {
+            color: green;
+        }
+
+        .ODBIJENO {
+            color: red;
+        }
+
+        .NA.CEKANJU {
+            color: ORANGE;
+        }
+    }
+
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+
+        button {
+            width: 157px;
+            margin: 0 auto;
+
+            &.button-primary {
+                color: #000;
+            }
+        }
+    }
 }

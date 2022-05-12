@@ -1,4 +1,38 @@
-<div class="page-content questions-wrapper">
+<div class="page-content questions-wrapper" *ngIf="question">
     <a class="back-nav" routerLink="/questions">Nazad</a>
-    <p>Question here</p>
+    <div class="question-info-item">
+        <p class="title">Pitanje</p>
+        <p>{{ question.question }}</p>
+    </div>
+      <div class="question-info-item">
+        <p class="title">Odgovor</p>
+        <p>{{ question.correct_text }}</p>
+    </div>
+    <div class="question-info-item">
+        <p class="title">Status</p>
+        <p class="{{ question.status }}">{{ question.status }}</p>
+    </div>
+    <div class="question-info-item">
+        <p class="title">Pojavilo se u kvizu</p>
+        <p>{{ question.question_picked }}</p>
+    </div>
+        <div class="question-info-item">
+            <p class="title">Odgovoreno tacno</p>
+            <p>{{ question.answered_correctly }}</p>
+        </div>
+        <div class="question-info-item">
+            <p class="title">Odgovoreno netacno</p>
+            <p>{{ question.answered_wrong }}</p>
+        </div>
+        <div class="question-info-item" *ngIf="question.status !== 'NA CEKANJU'">
+                <p class="title">Razlog odbijanja</p>
+                <p>{{ question.deny_reason }}</p>
+                <input name="reason" *ngIf="root" [(ngModel)]="denyReason"/>
+        </div>
+        
+        <div class="footer">
+            <button class="button-primary" *ngIf="root" [disabled]="question.status === 'ODOBRENO'" (click)="publishQuestion()">Odobri pitanje</button>
+            <button class="button-primary" *ngIf="root" [disabled]="question.status === 'NA CEKANJU'"  (click)="unpublishQuestion()">Odbij pitanje</button>
+            <button class="button-danger" (click)="deleteQuestion()">Obrisi pitanje</button>
+        </div>
 </div>

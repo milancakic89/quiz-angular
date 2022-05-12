@@ -55,6 +55,7 @@ export class ContributeComponent implements OnInit, OnDestroy {
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if (data && (data.event === 'ADD_QUESTION' || data.event === 'ADD_IMAGE_QUESTION')){
         this.notificationService.notification.emit({success: true, message: 'Pitanje uspesno dodato'})
+        this.router.navigateByUrl('/profile')
       }
     })
   }
@@ -69,9 +70,6 @@ export class ContributeComponent implements OnInit, OnDestroy {
     this.questionType = 'MODAL';
   }
 
-  public onUpload(){
-    this.router.navigateByUrl('/profile')
-  }
 
   public changeType(type: QuestionType){
     this.questionType = type;

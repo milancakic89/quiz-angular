@@ -80,6 +80,9 @@ export type EventType = 'connection' |
     'EMAIL_ALLREADY_EXIST' |
     'ACCOUNT_NOT_ACTIVATED' |
     'ADD_WORD_QUESTION' |
+    'LOAD_SINGLE_QUESTION' |
+    'PUBLISH_QUESTION' |
+    'UNPUBLISH_QUESTION' |
     'REDUCE_LIVES';
 
 export interface Room {
@@ -298,6 +301,10 @@ export class SocketService {
             this.socketData.next(data)
 
         });
+        this.socket.on('LOAD_SINGLE_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+
+        });
         this.socket.on('ADD_IMAGE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
 
@@ -315,6 +322,17 @@ export class SocketService {
             this.socketData.next(data)
 
         });
+
+        this.socket.on('PUBLISH_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+
+        });
+
+        this.socket.on('UNPUBLISH_QUESTION', (data: SocketResponse) => {
+            this.socketData.next(data)
+
+        });
+
         this.socket.on('GET_RANKING_LIST', (data: SocketResponse) => {
             this.socketData.next(data)
 
