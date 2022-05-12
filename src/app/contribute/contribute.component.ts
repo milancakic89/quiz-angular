@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../questions/questions.service';
 import { Category, Question } from '../questions/types';
@@ -9,6 +9,7 @@ import { finalize } from "rxjs/operators";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SocketService } from '../socket-service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 export type QuestionType = 'PICTURE' | 'REGULAR' | 'WORD' |'MODAL';
 @Component({
@@ -16,7 +17,7 @@ export type QuestionType = 'PICTURE' | 'REGULAR' | 'WORD' |'MODAL';
   templateUrl: './contribute.component.html',
   styleUrls: ['./contribute.component.scss']
 })
-export class ContributeComponent implements OnInit {
+export class ContributeComponent implements OnInit, OnDestroy {
 
   constructor(private questionService: QuestionService, 
               private config: Configuration,
@@ -35,6 +36,7 @@ export class ContributeComponent implements OnInit {
 
   public selectedImage = null;
 
+
   public items = ['A','B','C','D'];
   public categories = 
     [
@@ -50,13 +52,18 @@ export class ContributeComponent implements OnInit {
   public selectedCategory: Category = 'GEOGRAFIJA';
 
   ngOnInit(): void {
-    this.socketService.socketData.subscribe(data =>{
+    this.subscription = this.socketService.socketData.subscribe(data =>{
       if (data && (data.event === 'ADD_QUESTION' || data.event === 'ADD_IMAGE_QUESTION')){
         this.notificationService.notification.emit({success: true, message: 'Pitanje uspesno dodato'})
       }
     })
   }
 
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+  }
  
   public onCancel(){
     this.questionType = 'MODAL';
@@ -159,6 +166,8 @@ export class ContributeComponent implements OnInit {
     letter_d: '',
     correct: 'A'
   }
+
+  private subscription: Subscription = null as unknown as Subscription;
 
 }
 

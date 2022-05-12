@@ -8,8 +8,10 @@
                        placeholder="npr Koji fudbaler je u pitanju"
                        [(ngModel)]="newQuestion.question_text"
                        required />
+                       
                 <h5>Odgovor</h5>
-                <input name="correct" 
+                <input name="correct"
+                       required
                        placeholder="Kristiano Ronaldo" 
                        [(ngModel)]="newQuestion.correct_text" required />
     </div>

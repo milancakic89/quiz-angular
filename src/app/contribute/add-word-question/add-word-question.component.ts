@@ -20,24 +20,7 @@ export class AddWordQuestionComponent implements OnInit {
   @Output() canceled = new EventEmitter();
   @Output() uploaded = new EventEmitter()
 
-  public selectedCategory = null as any;
-  public selectedTitle = null as any;
-  public question_text = '';
-  public correct = '';
-  public incorect = {
-    one: '',
-    two: '',
-    three: ''
-  }
-  public selectQuestionTitle = [
-    'Poznata licnost',
-    'Predmet',
-    'Mesto'
-  ];
-
-  ngOnInit(): void {
-    this.selectedCategory = this.categories[0].title;
-  }
+  ngOnInit(): void {}
 
   public nextStep() {
     if (this.step < 3) {
@@ -56,17 +39,16 @@ export class AddWordQuestionComponent implements OnInit {
   }
 
   public checkDisabled() {
-    if (this.step === 1 && !this._newQuestion.question_text) {
+    if (!this._newQuestion.question_text) {
       return true;
     }
-    if (this.step === 1 && !this._newQuestion.correct_text) {
+    if (!this._newQuestion.correct_text) {
       return true;
     }
     return false;
   }
 
   public addQuestion() {
-    
     this.uploadQuestion();
   }
 

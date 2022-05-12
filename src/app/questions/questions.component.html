@@ -6,10 +6,11 @@
         <span [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
         <span [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span></p>
     <div class="table questions-table">
-        <p class="question-item" *ngFor="let question of questions;">
+        <a [routerLink]="[question._id]" *ngFor="let question of questions;">
+        <p class="question-item" >
             <span class="icon">?</span>
             <span>{{ question.question }}</span>
         </p>
+        </a>
     </div>
-    
 </div>
