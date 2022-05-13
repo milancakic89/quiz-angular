@@ -66,17 +66,24 @@
               (click)="!questionSelected && onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
 </ng-container>
 <ng-container *ngIf="question.type === 'WORD'">
-    <div class="letters">
-      <ng-container *ngFor="let topLetter of topLetters; let l = index">
-        <span class="letter-box {{ topLetter.in_use }}"  (click)="!topLetter.in_use && addLetter(topLetter)">{{ topLetter.label }}</span>
-      </ng-container>
-    </div>
-      <div class="answer" >
-        <p class="word-container" *ngFor="let letterBox of bottomLetterBoxes; let i = index">
-          <span class="letter-box" *ngFor="let letter of letterBox; let j = index" (click)="removeLetter(letter)">{{ letter.label ? letter.label : ' ' }}</span>
-        </p>
-      </div>
-      <button class="button-primary">Prijavi odgovor</button>
+  <div class="word-wrapper">
+        <div class="letters">
+          <ng-container *ngFor="let topLetter of topLetters; let l = index">
+            <span class="letter-box {{ topLetter.in_use }}" (click)="!topLetter.in_use && addLetter(topLetter)">{{
+              topLetter.label }}</span>
+          </ng-container>
+        </div>
+        <div class="answer">
+          <p class="word-container"
+              [class.true]="correct === 2 && disable"
+              [class.false]="correct === 1 && disable"
+             *ngFor="let letterBox of bottomLetterBoxes; let i = index">
+            <span class="letter-box" *ngFor="let letter of letterBox; let j = index" (click)="removeLetter(letter)">{{
+              letter.label ? letter.label : ' ' }}</span>
+          </p>
+        </div>
+        <button class="button-primary" (click)="updateWordQuestion()">Prijavi odgovor</button>
+  </div>
 </ng-container>
 
     

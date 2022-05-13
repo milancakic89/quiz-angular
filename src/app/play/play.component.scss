@@ -378,7 +378,7 @@
             font-size: 15px;
         }
 
-        &.word{
+        &.word {
             height: 170px;
         }
 
@@ -452,16 +452,42 @@ svg circle {
     .letter-box {
         background-color: brown;
 
-        &.true{
+        &.true {
             background-color: grey;
         }
     }
 }
 
-.word-container{
+.answer {
+    margin-bottom: 15px;
+}
+
+.word-container {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+
+    &.true {
+
+        .letter-box {
+            background-color: rgb(0, 116, 42);
+        }
+    }
+
+    &.false {
+
+        .letter-box {
+            background-color: rgb(189, 0, 0);
+        }
+    }
+}
+
+.word-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 325px);
 }
 
 

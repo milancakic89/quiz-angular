@@ -125,6 +125,7 @@ export class PlayComponent implements OnDestroy, OnInit {
           this.updateProgressBar();
           this.correct = 2
             setTimeout(() => {
+              this.disable = false;
               if (this.attempts.length) {
                 this.getQuestion();
               } else {
@@ -136,6 +137,7 @@ export class PlayComponent implements OnDestroy, OnInit {
           this.correct = 1;
           this.reduceAttempts();
           setTimeout(() => {
+            this.disable = false;
             if (this.attempts.length) {
               this.getQuestion();
             } else {
@@ -371,7 +373,22 @@ export class PlayComponent implements OnDestroy, OnInit {
   }
 
   public async updateQuestion() {
-    this.socketService.emit('CHECK_PRACTICE_QUESTION', { question_id: this.question._id, correct: this.selectedLetter})
+    this.socketService.emit('CHECK_PRACTICE_QUESTION', { question_id: this.question._id, correct: this.selectedLetter, isWord: false})
+  }
+
+  public async updateWordQuestion() {
+    this.disable = true;
+    let result = '';
+    this.bottomLetterBoxes.forEach((box, i) =>{
+      if(i !== 0){
+        result += ' ';
+      }
+      box.forEach(letterBox =>{
+          result += letterBox.label;
+      })
+    });
+
+    this.socketService.emit('CHECK_PRACTICE_QUESTION', { question_id: this.question._id, correct: result, isWord: true })
   }
 
   public backToProfile(){
