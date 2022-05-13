@@ -378,6 +378,10 @@
             font-size: 15px;
         }
 
+        &.word{
+            height: 170px;
+        }
+
 
     }
 }
@@ -443,7 +447,7 @@ svg circle {
 }
 
 .letters {
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 
     .letter-box {
         background-color: brown;

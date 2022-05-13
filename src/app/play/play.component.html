@@ -28,8 +28,12 @@
 
 <div class="game-box" *ngIf="!showModal && lives > 0">
   <div class="question-box-wrapper">
-    <div class="question-box-new" *ngIf="question.type === 'REGULAR' || question.type === 'WORD'">
+    <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
         <h6 class="question-text-heading question-font"><span *ngIf="questionCount">{{questionCount}}.</span> {{ question.question }} </h6>
+    </div>
+    <div class="question-box-new word" *ngIf="question.type === 'WORD'">
+      <h6 class="question-text-heading question-font"><span *ngIf="questionCount">{{questionCount}}.</span> {{
+        question.question }} </h6>
     </div>
     <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new" *ngIf="question.type === 'PICTURE'">
      
@@ -72,6 +76,7 @@
           <span class="letter-box" *ngFor="let letter of letterBox; let j = index" (click)="removeLetter(letter)">{{ letter.label ? letter.label : ' ' }}</span>
         </p>
       </div>
+      <button class="button-primary">Prijavi odgovor</button>
 </ng-container>
 
     

@@ -14,7 +14,7 @@ import { PlayService } from './play.service';
 interface Letter{
   label: string | null;
   in_use: boolean;
-  id: string;
+  id: string | null;
 }
 @Component({
   selector: 'app-play',
@@ -104,7 +104,7 @@ export class PlayComponent implements OnDestroy, OnInit {
             this.question.answers.forEach((arr: string[], i: number) => {
               arr.forEach((letter, j) => {
                 let id = this.generateId();
-                this.bottomLetterBoxes[i].push( {label: null, in_use: false, id} );
+                this.bottomLetterBoxes[i].push( {label: null, in_use: false, id: null} );
                 this.topLetters.push({ label: letter, in_use: false, id })
               })
             })
@@ -162,13 +162,10 @@ export class PlayComponent implements OnDestroy, OnInit {
               bottomLetter.in_use = true;
               topLetter.in_use = true;
               bottomLetter.label = topLetter.label;
+              bottomLetter.id = topLetter.id;
             }
           })
       })
-
-      setTimeout(() => {
-        console.log(this.bottomLetterBoxes)
-      }, 200 )
   }
 
   public removeLetter(bottomLetter: Letter){
@@ -176,16 +173,9 @@ export class PlayComponent implements OnDestroy, OnInit {
     if(letter){
       bottomLetter.in_use = false;
       bottomLetter.label = null;
+      bottomLetter.id = null;
       letter.in_use = false;
     }
-    
-    // this.topLetters.forEach(letter =>{
-    //   if(letter.id === applyLetter.id){
-    //     letter.in_use = false;
-    //     applyLetter.in_use = false;
-    //     applyLetter.label = null
-    //   }
-    // })
   }
 
   public isCategoryAllowed(category: String) {
