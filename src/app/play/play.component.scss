@@ -441,3 +441,41 @@ svg circle {
         stroke-dashoffset: 113px;
     }
 }
+
+.letters {
+    margin-bottom: 80px;
+
+    .letter-box {
+        background-color: brown;
+
+        &.true{
+            background-color: grey;
+        }
+    }
+}
+
+.word-container{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.letter-box {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    margin: 4px;
+    padding-left: 1px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    align-items: center;
+    background-color: orange;
+    color: #fff;
+
+    &:hover {
+        opacity: .8;
+    }
+}

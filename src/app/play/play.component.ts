@@ -11,6 +11,11 @@ import { NotificationService } from '../shared/notification.service';
 import { SocketService } from '../socket-service';
 import { PlayService } from './play.service';
 
+interface Letter{
+  label: string | null;
+  in_use: boolean;
+  id: string;
+}
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -59,8 +64,9 @@ export class PlayComponent implements OnDestroy, OnInit {
   public disable = false;
   public subscription: Subscription = null as unknown as Subscription;
   public wordAnswer: any = [];
-  public wordLetters = []; //[]
-  public letters: any = [];//[[]]
+
+  public topLetters: Letter[] = []; //[]
+  public bottomLetterBoxes: Letter[][] = [];//[[]]
 
   ngOnInit() {
     this.config.user.subscribe(user => {
@@ -87,25 +93,29 @@ export class PlayComponent implements OnDestroy, OnInit {
         this.questionCount++;
         this.selectedLetter = '';
         this.questionSelected = false;
-        this.time = 20;
+        this.time = 2000;
         this.initTime();
+        const leters = []
         if(this.question.type === 'WORD'){
           this.question.answers.forEach((arr: string[], i: number) =>{
-            this.letters.push([])
+            this.bottomLetterBoxes.push([])
           })
           setTimeout(() =>{
             this.question.answers.forEach((arr: string[], i: number) => {
-              arr.forEach(letter => {
-                this.letters[i].push(null)
+              arr.forEach((letter, j) => {
+                let id = this.generateId();
+                this.bottomLetterBoxes[i].push( {label: null, in_use: false, id} );
+                this.topLetters.push({ label: letter, in_use: false, id })
               })
             })
           },10)
 
-          this.wordLetters = this.question.answers.flat();
           setTimeout(() => {
-            console.log(this.letters)
-          }, 500)
-          
+            console.log({
+              top: this.topLetters,
+              bottom: this.bottomLetterBoxes
+            })
+          }, 1000)
         }
       }
 
@@ -138,20 +148,44 @@ export class PlayComponent implements OnDestroy, OnInit {
     })
   }
 
-  public addLetter(letter: string){
+  public generateId(){
+    return '_' + Math.random().toString(36).substring(2, 9);
+  }
+
+  public addLetter(topLetter: Letter){
       let founded = false;
-      this.letters.forEach((arr: string[], index: number) =>{
-          arr.forEach((l: string) =>{
-            if(!founded && !l){
+      this.bottomLetterBoxes.forEach((bottomLetterBox) =>{
+        bottomLetterBox.forEach(bottomLetter =>{
+          if(founded){return}
+          if (!bottomLetter.in_use){
               founded = true;
-              l = letter;
+              bottomLetter.in_use = true;
+              topLetter.in_use = true;
+              bottomLetter.label = topLetter.label;
             }
           })
       })
+
+      setTimeout(() => {
+        console.log(this.bottomLetterBoxes)
+      }, 200 )
   }
 
-  public removeLetter(index1: number, index2: number){
-      console.log(index1, index2)
+  public removeLetter(bottomLetter: Letter){
+    const letter = this.topLetters.find(item => item.id === bottomLetter.id);
+    if(letter){
+      bottomLetter.in_use = false;
+      bottomLetter.label = null;
+      letter.in_use = false;
+    }
+    
+    // this.topLetters.forEach(letter =>{
+    //   if(letter.id === applyLetter.id){
+    //     letter.in_use = false;
+    //     applyLetter.in_use = false;
+    //     applyLetter.label = null
+    //   }
+    // })
   }
 
   public isCategoryAllowed(category: String) {
@@ -190,7 +224,7 @@ export class PlayComponent implements OnDestroy, OnInit {
     this.modal.startGame.next(true)
     this.playService.allowBackButton = false;
     this.score = 0;
-    this.time = 20;
+    this.time = 2000;
     this.progressBarPercentage = 0;
     this.questionCount = 0;
     this.getQuestion();
@@ -205,9 +239,9 @@ export class PlayComponent implements OnDestroy, OnInit {
       return;
     }
     this.disable = true;
-    this.letters = [];
+    this.bottomLetterBoxes = [];
     this.wordAnswer = [];
-    this.wordLetters = [];
+    this.topLetters = [];
     this.socketService.emit('GET_QUESTION', { category: this.playCategory })
   }
 
