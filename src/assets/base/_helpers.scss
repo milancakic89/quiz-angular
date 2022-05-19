@@ -209,13 +209,15 @@
     }
 
 }
-.d-flex{
+
+.d-flex {
     display: flex;
 }
 
-.centralize.true{
+.centralize.true {
     justify-content: center !important;
 }
+
 @keyframes dropdown-login {
     0% {
         top: -520px;
@@ -358,16 +360,16 @@ ng-select {
     }
 }
 
-.question-text-heading{
+.question-text-heading {
     font-size: 17px !important;
 }
 
-play-component{
+play-component {
     width: 100%;
 }
 
 
-.stepper{
+.stepper {
     width: 90%;
     margin: 0 auto;
     align-self: center;
@@ -376,22 +378,22 @@ play-component{
     flex-direction: column;
     background-color: orange;
 
-    h4{
+    h4 {
         font-size: 18px;
     }
 
-    h5{
+    h5 {
         font-size: 14px;
     }
 
-    .heading{
+    .heading {
         text-align: center;
         padding: 5px 10px;
         color: #fff;
         background-color: brown;
     }
 
-    .body{
+    .body {
         margin-top: auto;
         min-height: 200px;
         padding: 5px 10px;
@@ -399,19 +401,51 @@ play-component{
         display: flex;
         flex-direction: column;
 
-        input{
+        input {
             height: 30px;
         }
     }
 
-    .footer{
+    .footer {
         display: flex;
         width: 100%;
         justify-content: flex-end;
         padding: 5px 10px;
 
-        button:last-child{
+        button:last-child {
             margin-left: 8px;
         }
     }
 }
+
+.avatar {
+    position: relative;
+
+    &-border {
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100% 100%;
+        }
+    }
+
+    &.border {
+
+        &-1 {
+
+          
+
+        }
+    }
+
+}
+
+.border-1 {}

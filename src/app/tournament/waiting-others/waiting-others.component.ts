@@ -48,6 +48,7 @@ export class WaitingOthersComponent implements OnInit, OnDestroy {
   this.subscription = this.socket.socketData.subscribe(data =>{
     if (data && data.event === 'GET_ROOM_RESULTS'){
       this.results = data.users.sort((userA: User, userB: User) => {
+        console.log(data)
         if(userA.score > userB.score){
           return -1;
         }else if(userB.score > userA.score){

@@ -37,7 +37,7 @@ export class PlayComponent implements OnDestroy, OnInit {
 
   get userContributions() { return this.config.user.getValue().categories as unknown as any }
 
-  public time = 150;
+  public time = 25;
   public score = 0;
 
   public questionCount = 0;
@@ -93,7 +93,7 @@ export class PlayComponent implements OnDestroy, OnInit {
         this.questionCount++;
         this.selectedLetter = '';
         this.questionSelected = false;
-        this.time = 2000;
+        this.time = 25;
         this.initTime();
         const leters = []
         if(this.question.type === 'WORD'){
@@ -216,7 +216,7 @@ export class PlayComponent implements OnDestroy, OnInit {
     this.modal.startGame.next(true)
     this.playService.allowBackButton = false;
     this.score = 0;
-    this.time = 2000;
+    this.time = 25;
     this.progressBarPercentage = 0;
     this.questionCount = 0;
     this.getQuestion();
