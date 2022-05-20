@@ -67,7 +67,8 @@ export class RoomComponent implements OnInit, OnDestroy {
     this.subscription = this.socket.socketData.subscribe((data: any) =>{
       if(data && data.event === 'JOINED_ROOM'){
         this.roomUsers = data.users;
-        this.createdBy = data.created_by;
+        this.createdBy = data.created_by.toString();
+        console.log('createdBy: ' + this.createdBy)
       }
 
       if(data && data.event === 'LEAVED_ROOM'){

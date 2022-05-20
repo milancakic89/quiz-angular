@@ -304,14 +304,15 @@ $headerHeight: 65px;
         justify-content: center;
 
         .reset-timer {
-            width: 70px;
+            max-width: 75px;
             border: 2px solid rgba(121, 41, 16, 0.596);
             outline: 2px solid rgba(88, 27, 9, 0.616);
+            font-size: 12px;
             padding: 2px 5px;
             border-radius: 5px;
             position: relative;
-            background-image: url('../assets/images/new-theme/question-board.png');
             white-space: nowrap;
+            min-width: 70px;
 
             &::before {
                 content: '';
