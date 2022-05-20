@@ -181,7 +181,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.service.onlineUsers.next(data.data);
       }
       if (data && data.event === 'REFRESH_USER') {
-        this.config.user = data.data;
+        this.config.user.next(data.data)
       }
 
       if (data && data.event === 'AUTOLOGIN_AVAILABLE') {
@@ -325,9 +325,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public calculateCountdown(){
       this.seconds--;
       if(this.seconds < 0){
-        if(this.minutes === 0){
-          clearInterval(this.lives_interval);
+        if(this.minutes <= 0){
           this.refreshUser();
+          clearInterval(this.lives_interval);
           return;
         }
         this.seconds = 59;
