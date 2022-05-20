@@ -48,7 +48,10 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+    
   }
 
   public socketSetup() {
@@ -79,7 +82,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       }
 
-      if (data && data.event === 'EVERYONE_ANSWERED') {
+      if (data && data.event === 'EVERYONE_ANSWERED' && this.questionSelected) {
         this.questionIndex++;
         setTimeout(() => {
           this.question = null;
