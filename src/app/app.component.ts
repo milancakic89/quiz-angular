@@ -181,7 +181,32 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.service.onlineUsers.next(data.data);
       }
       if (data && data.event === 'REFRESH_USER') {
-        this.config.user.next(data.data)
+        console.log('received refresh')
+          this.config.user.next(data.data);
+          const user = data.data;
+        if (user) {
+          if (user.name === 'Kvizoman') {
+            this.showNewNameModal = true;
+          }
+          if (user.requestNotification) {
+            this.showRequestsModal = true;
+          }
+
+          this.user = user;
+          this.spinner = false;
+          this.lives = Array(user.lives);
+          if (this.user.lives === 0) {
+            const timer = this.profileService.calculateResetTime(this.user.lives_timer_ms);
+            this.minutes = timer.minutes;
+            this.seconds = timer.seconds;
+            this.minutesString = this.prefixNumberWithZero(this.minutes);
+            this.secondsString = this.prefixNumberWithZero(this.seconds);
+            this.showLivesTimer = true;
+            this.countdown();
+          } else {
+            this.showLivesTimer = false;
+          }
+        }
       }
 
       if (data && data.event === 'AUTOLOGIN_AVAILABLE') {
@@ -226,32 +251,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.spinner = false;
         this.loadingPercent = 10;
     }
-
-    this.config.user.subscribe(user =>{
-      if(user){
-        if(user.name === 'Kvizoman'){
-          this.showNewNameModal = true;
-        }
-        if (user.requestNotification){
-          this.showRequestsModal = true;
-        }
-
-        this.user = user;
-        this.spinner = false;
-        this.lives = Array(user.lives);
-        if(this.user.lives === 0){
-          const timer = this.profileService.calculateResetTime(this.user.lives_timer_ms);
-          this.minutes = timer.minutes;
-          this.seconds = timer.seconds;
-          this.minutesString = this.prefixNumberWithZero(this.minutes);
-          this.secondsString = this.prefixNumberWithZero(this.seconds);
-          this.showLivesTimer = true;
-          this.countdown();
-        }else{
-          this.showLivesTimer = false;
-        }
-      }
-    })
 
     this.modal.gameResults.subscribe(gameData =>{
       if(gameData){
@@ -327,6 +326,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if(this.seconds < 0){
         if(this.minutes <= 0){
           this.refreshUser();
+          console.log('trigered refresh')
           clearInterval(this.lives_interval);
           return;
         }
@@ -338,7 +338,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public async refreshUser(){
-    this.socketService.emit('REFRESH_USER', {})
+    this.config.refreshUser();
   }
 
   
