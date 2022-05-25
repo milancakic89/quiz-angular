@@ -28,8 +28,9 @@ export interface User{
   friendRequests: string[];
   socket: boolean;
   online: boolean;
-  selected?: boolean;
- 
+  selected?: boolean; 
+  avatar_border?: string;
+
 }
 
 interface Notifications{
