@@ -405,7 +405,6 @@ export class SocketService {
 
         this.socket.on('BUY_ITEM', (data: SocketResponse) => {
             this.socketData.next(data)
-
         });
     }
 

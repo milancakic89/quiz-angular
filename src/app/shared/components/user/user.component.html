@@ -5,6 +5,10 @@
     <div class="user">
             <span class="ranking-number" *ngIf="shouldShow('ranking')">{{ ranking }}. </span>
             <span class="user-avatar fire-avatar" >
+                <img *ngIf="user.avatar_border === 'nature'" src="../../../../assets/images/avatars/border-2.png" />
+                <img *ngIf="user.avatar_border === 'iron-crown'" src="../../../../assets/images/avatars/border-3.png" />
+                <img *ngIf="user.avatar_border === 'master'" src="../../../../assets/images/avatars/border-3.png" />
+                <img *ngIf="user.avatar_border === 'portal'" src="../../../../assets/images/avatars/border-4.png" />
                 <img *ngIf="user.avatar_border === 'slime'" src="../../../../assets/images/avatars/border-rect-2.png"/>
                 <img *ngIf="user.avatar_border === 'regular' || !user.avatar_border" src="../../../../assets/images/avatars/border-rect-1.png" />
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>

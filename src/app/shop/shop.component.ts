@@ -23,7 +23,7 @@ export class ShopComponent implements OnInit {
     }
     this.subscription = this.sockerService.socketData.subscribe(data => {
       if(data && data.event === 'BUY_ITEM' ){
-        this.config.userValue.avatar_border = data.item;
+        this.config.user.next(data.data)
       }
     })
   }
