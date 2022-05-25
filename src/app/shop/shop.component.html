@@ -1,31 +1,52 @@
 
 <div class="shop {{centerContent}}">
-    <div class="heading-image"></div>
     <div class="shop-body">
-        <h4 class="mx-auto">Avatar borders</h4>
+        <h4 class="mx-auto">Ram za sliku</h4>
         <div class="shop-item-new">
             <img class="border" src="../../assets/images/avatars/border-2.png" />
             <span>Prirodnjak</span>
-            <button class="button-primary">Kupi za 10 <img src="../../assets/images/ic_ticket.svg"></button>
+            <button class="button-primary" (click)="buyItem('prirodnjak')">10 x <img src="../../assets/images/ic_ticket.svg"></button>
         </div>
 
         <div class="shop-item-new">
             <img class="border" src="../../assets/images/avatars/border-3.png" />
             <span>Poglavica</span>
-            <button class="button-primary">Kupi za 10 <img src="../../assets/images/ic_ticket.svg"></button>
+            <button class="button-primary" (click)="buyItem('poglavica')">10 x <img src="../../assets/images/ic_ticket.svg"></button>
         </div>
+                <div class="shop-item-new">
+                    <img class="border" src="../../assets/images/avatars/border-rect-2.png" />
+                    <span>Ljiga</span>
+                    <button class="button-primary" (click)="buyItem('slime')">20 x <img
+                             src="../../assets/images/ic_ticket.svg"></button>
+                </div>
 
         <div class="shop-item-new rare">
             <img class="border" src="../../assets/images/avatars/border-4.png" />
             <span>Vestica</span>
-            <button class="button-primary">Kupi za 50 <img src="../../assets/images/ic_ticket.svg"></button>
+            <button class="button-primary" (click)="buyItem('vestica')">50 x <img src="../../assets/images/ic_ticket.svg"></button>
         </div>
 
         <div class="shop-item-new epic">
             <img class="border" src="../../assets/images/avatars/border-rect-1.png" />
             <span>Lep ko slika</span>
-            <button class="button-primary">Kupi za 100 <img src="../../assets/images/ic_ticket.svg"></button>
+            <button class="button-primary" (click)="buyItem('lep-ko-slika')">100 x <img src="../../assets/images/ic_ticket.svg"></button>
         </div>
+        <h4 class="mx-auto">Dodaci</h4>
+        <div class="shop-item-new life">
+            <img class="border" src="../../assets/images/ic_heart.png" />
+            <span>1 Zivot</span>
+            <button class="button-primary" (click)="buyItem('1xzivot')">18 x <img src="../../assets/images/ic_ticket.svg"></button>
+        </div>
+            <div class="shop-item-new life">
+                    <img class="border" src="../../assets/images/ic_heart.png" />
+                    <span>2 Zivota</span>
+                    <button class="button-primary" (click)="buyItem('2xzivot')">30 x <img src="../../assets/images/ic_ticket.svg"></button>
+            </div>
+            <div class="shop-item-new life">
+                <img class="border" src="../../assets/images/ic_heart.png" />
+                <span>3 Zivota</span>
+                <button class="button-primary" (click)="buyItem('3xzivot')">40 x <img src="../../assets/images/ic_ticket.svg"></button>
+            </div>
         <!-- <a class="shop-item" href="https://secure.2checkout.com/order/checkout.php?PRODS=38091180&QTY=1&CART=1&CARD=1">
             <div class="inner">
                 <img src="../../assets/images/ic_ticket.svg" />

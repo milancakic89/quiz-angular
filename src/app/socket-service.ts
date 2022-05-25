@@ -83,6 +83,7 @@ export type EventType = 'connection' |
     'LOAD_SINGLE_QUESTION' |
     'PUBLISH_QUESTION' |
     'UNPUBLISH_QUESTION' |
+    'BUY_ITEM' |
     'REDUCE_LIVES';
 
 export interface Room {
