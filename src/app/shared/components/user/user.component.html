@@ -3,8 +3,13 @@
         <p class="selected {{selected}}" (click)="showButton && onSelectChange()"></p>
     </div>
     <div class="user">
-            <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+            <span class="ranking-number" *ngIf="shouldShow('ranking')">{{ ranking }}. </span>
+            <span class="user-avatar fire-avatar" >
+                <img src="../../../../assets/images/avatars/border-rect-2.png"/>
+                <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+            </span>
             <span class="friend-name">{{ user.name }}</span>
+            <span class="score" *ngIf="shouldShow('score')">{{ user.score }}</span>
             <button class="button-primary" *ngIf="showButton"
                     (click)="onButtonClick.emit(user)">{{ buttonText }}</button>
     </div>

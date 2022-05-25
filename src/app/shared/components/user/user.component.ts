@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../config.service';
 
-
+type Components = 'avatar' | 'score' | 'online' | 'delete' | 'info' | 'checkbox' | 'ranking';
 @Component({
   selector: 'user-item',
   templateUrl: './user.component.html',
@@ -13,8 +13,10 @@ export class UserComponent implements OnInit {
 
   @Input() public user: User = null as unknown as  User;
   @Input() public showButton = true;
+  @Input() public ranking: number = 0;
   @Input() public buttonText = 'buttonText';
   @Input() public showCheckbox = false;
+  @Input() public showComponents: Components[] = [];
 
   public selected = false;
   
@@ -23,6 +25,10 @@ export class UserComponent implements OnInit {
   @Output() public onSelectedChange = new EventEmitter<boolean>()
 
   ngOnInit(): void {
+  }
+
+  public shouldShow(component: Components){
+    return this.showComponents.includes(component)
   }
 
   public onSelectChange(){

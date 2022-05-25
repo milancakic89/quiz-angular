@@ -1,6 +1,8 @@
 .rankings {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-bottom: 60px;
     flex-direction: column;
     align-items: flex-start;
 
@@ -43,105 +45,4 @@
     background-size: 100% 110%;
     padding: 46px 20px 30px 30px;
     overflow: hidden;
-
-    .thead {
-        .tr {
-            @media screen and (min-width: 350px) {
-                display: flex;
-                flex-wrap: nowrap;
-                flex-direction: row;
-            }
-        }
-    }
-
-    .tbody {
-
-        overflow-y: auto;
-
-        .tr {
-            padding: 3px;
-            border-radius: 25px;
-
-            .avatar {
-                padding: 2px;
-                width: 50px;
-                height: 50px;
-                position: relative;
-                background-size: cover;
-                border-radius: 50%;
-                padding: 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                img {
-                    position: absolute;
-                    width: 70px;
-                    height: 50px;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: 10;
-                }
-
-                span {
-                    width: 40px;
-                    height: 40px;
-                    display: inline-block;
-                    min-width: 50px;
-                    min-height: 40px;
-                    position: relative;
-                    border-radius: 50%;
-                    overflow: hidden;
-                    z-index: 1;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        position: relative;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-
-
-            }
-
-            .td {
-                color: #fff;
-            }
-
-            .th.w-20:first-child {
-                min-width: 60px;
-            }
-
-            .td:last-child {
-                padding-right: 25px;
-                justify-content: flex-start;
-
-                span {
-                    font-size: 14px;
-                    color: rgb(202, 202, 202);
-                    font-weight: 400;
-
-                    &.first {
-                        font-size: 16px;
-                        font-weight: 900;
-                        color: rgb(255, 150, 13);
-                    }
-                }
-
-                @media screen and (min-width: 300px) {
-                    justify-content: flex-end;
-                }
-            }
-
-            @media screen and (min-width: 300px) {
-                display: flex;
-                flex-wrap: nowrap;
-                flex-direction: row;
-            }
-        }
-    }
 }

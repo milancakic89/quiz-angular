@@ -1,29 +1,7 @@
 <div class="rankings">
-        <div class="table ranking-table">
-            <div class="thead">
-                <div class="tr">
-                    <div class="th w-20">#</div>
-                    <div class="th w-40">Ime</div>
-                    <div class="th w-20">Rezultat</div>
-                </div>
-            </div>
-            <div class="tbody">
-                <div class="tr" *ngFor="let player of rankedPlayers; let i = index;">
-                    <div class="th w-20">
-                        <span class="avatar">
-                            <img src="../../assets/images/avatars/border-1.png" />
-                            <span class="image">
-                                <img [src]="player.avatar_url" />
-                            </span>
-                           
-                        </span>
-                        
-                    </div>
-                    <div class="td w-40"><span>{{ player.name }}</span></div>
-                    <div class="td w-20"><span class="score"  [ngClass]="{'first': i === 0}">{{ player.score }}</span></div>
-                </div>
-            </div>
-        </div>
-
-   
+                <user-item [showComponents]="['avatar', 'info', 'score', 'ranking']"
+                            [ranking]="i + 1"
+                            *ngFor="let player of rankedPlayers; let i = index;"
+                           [user]="player"
+                           [showButton]="false"></user-item>
 </div>
