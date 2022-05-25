@@ -401,6 +401,12 @@ export class SocketService {
             this.socketData.next(data)
 
         });
+
+
+        this.socket.on('BUY_ITEM', (data: SocketResponse) => {
+            this.socketData.next(data)
+
+        });
     }
 
     public emit(eventName: EventType, data: any) {
