@@ -3,8 +3,7 @@
         <div class="heading">Pozovite prijatelje</div>
         <div class="body">
             <div class="user-item" *ngFor="let friend of friends">
-                <user-item [showButton]="false"
-                           [showCheckbox]="true"
+                <user-item [showComponents]="['name', 'checkbox']"
                            (onSelectedChange)="onFriendSelectChange($event, friend)"
                            [user]="friend">
                 </user-item>

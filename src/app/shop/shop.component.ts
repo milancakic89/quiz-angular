@@ -1,20 +1,25 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Configuration } from '../shared/config.service';
+import { NotificationService } from '../shared/notification.service';
 import { SocketService } from '../socket-service';
+import { ShopItem } from './types';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
 
-  constructor(private sockerService: SocketService, private config: Configuration) { }
+  constructor(private sockerService: SocketService,
+              private notifications: NotificationService,
+              private config: Configuration) { }
 
   public centerContent = false;
   public purchasingModal = false;
   public purchaseLink = '';
+  public shopItem = ShopItem;
   private subscription: Subscription = null as unknown as Subscription;
 
   ngOnInit(): void {
@@ -23,9 +28,16 @@ export class ShopComponent implements OnInit {
     }
     this.subscription = this.sockerService.socketData.subscribe(data => {
       if(data && data.event === 'BUY_ITEM' ){
-        this.config.user.next(data.data)
+        this.config.user.next(data.data);
+        this.notifications.notification.emit({success: true, message: 'Kupljeno'});
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
   @HostListener('window:resize')
@@ -41,7 +53,7 @@ export class ShopComponent implements OnInit {
     }, 500)
   }
 
-  public buyItem(item: string){
-    this.sockerService.emit('BUY_ITEM', {item})
+  public buyItem(item: ShopItem){
+    this.sockerService.emit('BUY_ITEM', {item, section: 'borders'})
   }
 }

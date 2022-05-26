@@ -1,21 +1,21 @@
-<div class="friend online-{{ user.online }}" (click)="!showButton && onSelectChange()">
-    <div class="checkbox" *ngIf="showCheckbox">
+<div class="friend online-{{ user.online }}" (click)="shouldShow('checkbox') && onSelectChange()">
+    <div class="checkbox" *ngIf="shouldShow('checkbox')">
         <p class="selected {{selected}}" (click)="showButton && onSelectChange()"></p>
     </div>
     <div class="user">
             <span class="ranking-number" *ngIf="shouldShow('ranking')">{{ ranking }}. </span>
-            <span class="user-avatar fire-avatar" >
-                <img *ngIf="user.avatar_border === 'nature'" src="../../../../assets/images/avatars/border-2.png" />
-                <img *ngIf="user.avatar_border === 'iron-crown'" src="../../../../assets/images/avatars/border-3.png" />
-                <img *ngIf="user.avatar_border === 'master'" src="../../../../assets/images/avatars/border-3.png" />
-                <img *ngIf="user.avatar_border === 'portal'" src="../../../../assets/images/avatars/border-4.png" />
-                <img *ngIf="user.avatar_border === 'slime'" src="../../../../assets/images/avatars/border-rect-2.png"/>
-                <img *ngIf="user.avatar_border === 'regular' || !user.avatar_border" src="../../../../assets/images/avatars/border-rect-1.png" />
+            <span class="user-avatar fire-avatar" *ngIf="shouldShow('avatar')">
+                <img *ngIf="user.avatar_border === shopItem.NATURE" src="../../../../assets/images/avatars/border-2.png" />
+                <img *ngIf="user.avatar_border === shopItem.IRON_CROWN" src="../../../../assets/images/avatars/border-3.png" />
+                <img *ngIf="user.avatar_border === shopItem.MASTER" src="../../../../assets/images/avatars/border-3.png" />
+                <img *ngIf="user.avatar_border === shopItem.PORTAL" src="../../../../assets/images/avatars/border-4.png" />
+                <img *ngIf="user.avatar_border === shopItem.SLIME" src="../../../../assets/images/avatars/border-rect-2.png"/>
+                <img *ngIf="user.avatar_border === shopItem.REGULAR || !user.avatar_border" src="../../../../assets/images/avatars/border-rect-1.png" />
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
             </span>
-            <span class="friend-name">{{ user.name }}</span>
+            <span class="friend-name" *ngIf="shouldShow('name')">{{ user.name }}</span>
             <span class="score" *ngIf="shouldShow('score')">{{ user.score }}</span>
-            <button class="button-primary" *ngIf="showButton"
+            <button class="button-primary" *ngIf="shouldShow('delete')"
                     (click)="onButtonClick.emit(user)">{{ buttonText }}</button>
     </div>
 </div>

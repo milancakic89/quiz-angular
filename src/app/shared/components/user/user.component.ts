@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ShopItem } from 'src/app/shop/types';
 import { User } from '../../config.service';
 
-type Components = 'avatar' | 'score' | 'online' | 'delete' | 'info' | 'checkbox' | 'ranking';
+type Components = 'name' | 'avatar' | 'score' | 'online' | 'delete' | 'info' | 'checkbox' | 'ranking';
 @Component({
   selector: 'user-item',
   templateUrl: './user.component.html',
@@ -19,7 +20,7 @@ export class UserComponent implements OnInit {
   @Input() public showComponents: Components[] = [];
 
   public selected = false;
-  
+  public shopItem = ShopItem;
 
   @Output() public onButtonClick = new EventEmitter<User>();
   @Output() public onSelectedChange = new EventEmitter<boolean>()
