@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AppRoutingModule,
     NgSelectModule,
     FormsModule,
+    SharedModule,
     SocialLoginModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

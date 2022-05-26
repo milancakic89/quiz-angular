@@ -120,6 +120,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showRequestsModal = false;
   }
 
+  public goToSettings(){
+    this.router.navigateByUrl('/settings')
+  }
+
   public acceptTournamentInvitation(){
     if(this.invitedToRoomName){
       this.invited = false;
@@ -350,7 +354,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.showFeedback = false;
       this.animateBox = false;
       this.feedbackMessage = '';
-     
     }, 500)
 
   }

@@ -44,7 +44,11 @@
     </div>
     <div class="user-header" *ngIf="isLogged">
         <div class="left-info">
-            <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a>
+            <user-item  [showComponents]="['avatar', 'bg-off', 'user-click']" 
+                        [user]="user"
+                        (onSelectedChange)="goToSettings()"
+                        [size]="'medium'"></user-item>
+            <!-- <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a> -->
         </div>
         <div class="right-info">
             <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>

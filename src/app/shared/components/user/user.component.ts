@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ShopItem } from 'src/app/shop/types';
 import { User } from '../../config.service';
 
-type Components = 'name' | 'avatar' | 'score' | 'online' | 'delete' | 'info' | 'checkbox' | 'ranking';
+type Components = 'name' | 'avatar' | 'score' | 'online' | 'delete' | 'info' | 'checkbox' | 'ranking' | 'bg-off' | 'user-click';
 @Component({
   selector: 'user-item',
   templateUrl: './user.component.html',
@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   @Input() public buttonText = 'buttonText';
   @Input() public showCheckbox = false;
   @Input() public showComponents: Components[] = [];
+  @Input() public size: 'regular' | 'medium' = 'regular';
 
   public selected = false;
   public shopItem = ShopItem;

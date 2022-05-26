@@ -1,8 +1,8 @@
-<div class="friend online-{{ user.online }}" (click)="shouldShow('checkbox') && onSelectChange()">
+<div class="friend online-{{ user.online }}" (click)="onSelectChange()">
     <div class="checkbox" *ngIf="shouldShow('checkbox')">
         <p class="selected {{selected}}" (click)="showButton && onSelectChange()"></p>
     </div>
-    <div class="user">
+    <div class="user size-{{size}}" [ngStyle]="{'background-color': shouldShow('bg-off') && 'transparent'}">
             <span class="ranking-number" *ngIf="shouldShow('ranking')">{{ ranking }}. </span>
             <span class="user-avatar fire-avatar" *ngIf="shouldShow('avatar')">
                 <img *ngIf="user.avatar_border === shopItem.NATURE" src="../../../../assets/images/avatars/border-2.png" />

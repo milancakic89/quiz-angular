@@ -20,10 +20,12 @@
 
 .shop {
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 140px);
+    padding-bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 
     &.true {
         justify-content: center;
@@ -76,13 +78,11 @@
     }
 
     &-body {
-        margin-top: -80px;
         width: 95%;
         display: flex;
         flex-wrap: wrap;
         max-width: 500px;
         padding: 20px 2% 20% 2%;
-        height: calc(95% * 1.38);
         max-height: 620px;
         justify-content: space-between;
         align-content: flex-start;
@@ -123,8 +123,8 @@
         }
     }
 
-    &.life{
-        .border{
+    &.life {
+        .border {
             padding: 6px;
         }
     }
