@@ -44,6 +44,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
   get RECEIVED_DATA() { return this.socketService.RECEIVED_DATA }
 
+  get user(){return this.config.userValue}
+  set user(value) { this.config.user.next(value) }
+
   public showNavigation = true;
   public RECEICED_TEMP = {} as unknown as any;
 
@@ -53,7 +56,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     deviceFounded: false
   }
 
-  public user: User = {} as User;
   public showModal = false;
   public animateBox = false;
   public gameRunning = false;

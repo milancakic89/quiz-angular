@@ -27,8 +27,9 @@ export class ShopComponent implements OnInit, OnDestroy {
       this.centerContent = true;
     }
     this.subscription = this.sockerService.socketData.subscribe(data => {
-      if(data && data.event === 'BUY_ITEM' ){
+      if (data && data.event === 'BUY_ITEM' ){
         this.config.user.next(data.data);
+        console.log(data.data)
         this.notifications.notification.emit({success: true, message: data.message });
       }
     })

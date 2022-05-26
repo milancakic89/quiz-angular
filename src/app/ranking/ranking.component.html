@@ -1,5 +1,5 @@
 <div class="rankings">
-                <user-item [showComponents]="['avatar', 'info', 'score', 'ranking']"
+                <user-item [showComponents]="['avatar', 'name', 'info', 'score', 'ranking']"
                             [ranking]="i + 1"
                             *ngFor="let player of rankedPlayers; let i = index;"
                            [user]="player"

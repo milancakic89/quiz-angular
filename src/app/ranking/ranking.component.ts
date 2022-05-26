@@ -1,5 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../shared/config.service';
 import { SocketService } from '../socket-service';
@@ -16,11 +17,12 @@ interface Filter{
   templateUrl: './ranking.component.html',
   styleUrls: ['./ranking.component.scss']
 })
-export class RankingComponent implements OnInit {
+export class RankingComponent implements OnInit, OnDestroy {
 
   constructor(private socketService: SocketService) { }
 
-  public rankedPlayers: User[] = []
+  public rankedPlayers: User[] = [];
+  private subscription: Subscription = null as unknown as Subscription;
   public filters: Filter[] = [
     {
       filter: '50',
@@ -48,9 +50,16 @@ export class RankingComponent implements OnInit {
     }
   ]
 
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+  }
+
   ngOnInit(): void {
-    this.socketService.socketData.subscribe(data =>{
+    this.subscription = this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'GET_RANKING_LIST'){
+        console.log(data)
         this.rankedPlayers = data.data.sort((a:User, b: User) => {
           if(a.score > b.score){
             return -1;
