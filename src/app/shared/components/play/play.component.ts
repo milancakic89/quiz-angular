@@ -22,7 +22,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   
   @Output() onTournamentFinish = new EventEmitter<any>();
 
-  get user() { return this.config.user.getValue() }
+  get user() { return this.config.userData.getValue() }
 
   @Input() room = '';
 

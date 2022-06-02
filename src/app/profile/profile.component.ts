@@ -92,7 +92,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.onResetLives();
       }
     })
-    this.config.refreshUser()
   }
 
   public cleanEmptyRooms(){

@@ -30,7 +30,7 @@ export class RoomComponent implements OnInit, OnDestroy {
               private config: Configuration,
               private router: Router) { }
 
-  get user() { return this.config.user.getValue() as User }
+  get user() { return this.config.userData.getValue() as User }
   get root() { return this.user._id.toString() === this.createdBy.toString()}
 
   get room() { return this.tournamentService.room}

@@ -17,6 +17,7 @@ export class ShopComponent implements OnInit, OnDestroy {
               private config: Configuration) { }
 
   public centerContent = false;
+  public receivedItem = false;
   public purchasingModal = false;
   public purchaseLink = '';
   public shopItem = ShopItem;
@@ -26,11 +27,6 @@ export class ShopComponent implements OnInit, OnDestroy {
     if (window.innerHeight > 650) {
       this.centerContent = true;
     }
-    this.subscription = this.sockerService.socketData.subscribe(data => {
-      if (data && data.event === 'BUY_ITEM' ){
-        this.notifications.notification.emit({success: true, message: data.message });
-      }
-    })
   }
 
   ngOnDestroy(): void {

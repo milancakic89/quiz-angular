@@ -122,9 +122,8 @@ export const getToken = () => {
 export class Configuration{
     constructor(private router: Router, private service: ApiService, private socketService: SocketService){ }
 
-    get user() { return this._user}
-    get userValue(): User{ return this._user.getValue()}
-    set user(value){this._user.next(value as any as User)}
+    // get user(): BehaviorSubject<User | any > { return this._user as unknown as BehaviorSubject<User> }
+    // get userValue(): User{ return this._user.getValue()}
 
     get isRoot(){return isRoot()}
     set isRoot(value){setRoot(value)}
@@ -137,6 +136,9 @@ export class Configuration{
 
     get logged(){return logged()}
     set logged(value){ setLogged(value)}
+
+  public userData = new BehaviorSubject<User>(null as unknown as User);
+  public user = this.userData.asObservable();
     
 
 
@@ -181,5 +183,5 @@ export class Configuration{
 
     }
 
-    private _user = new BehaviorSubject<User | any>(null);
+  private _user = new BehaviorSubject<User | any>(null as any);
 }

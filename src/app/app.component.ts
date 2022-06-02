@@ -44,8 +44,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
   get RECEIVED_DATA() { return this.socketService.RECEIVED_DATA }
 
-  get user(){return this.config.userValue}
-  set user(value) { this.config.user.next(value) }
+  get user(){return this.config.userData.getValue()}
+  set user(value) { this.config.userData.next(value) }
 
   public showNavigation = true;
   public RECEICED_TEMP = {} as unknown as any;
@@ -149,9 +149,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     if(window.innerHeight > 650){
       this.centerContent = true;
     }
-    this.RECEIVED_DATA.subscribe(data =>{
-      this.RECEICED_TEMP = data;
-    })
     this.spinner = true;
     setTimeout(()=>{
       if (!localStorage.getItem('access')){
@@ -183,12 +180,28 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         
       }
+
+      if (data && data.event === 'BUY_ITEM') {
+        if (data.data) {
+            this.user = data.data;
+            this.notificationService.notification.emit({ success: true, message: data.message }); 
+        }
+
+      }
+      
+      if (data && data.event === 'TOURNAMENT_INVITATION') {
+        if (data.user_id !== this.user._id) {
+          this.invitedToRoomName = data.roomName;
+          this.invited = true;
+          this.invitedBy = data.userName;
+        }
+
+      }
       if (data && data.event === 'ONLINE_USERS_COUNT') {
           this.service.onlineUsers.next(data.data);
       }
       if (data && data.event === 'REFRESH_USER') {
-        console.log('received refresh')
-          this.config.user.next(data.data);
+          this.config.userData.next(data.data);
           const user = data.data;
         if (user) {
           if (user.name === 'Kvizoman') {
@@ -228,7 +241,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.animateReward(data.tickets, data.data);
     }
       if (data && data.event === 'AUTOLOGIN') {
-          this.config.user = data.data;
+        this.config.userData.next(data.data);
           this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
           this.config.logged = true;
           this.spinner = false;
@@ -276,11 +289,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.gameRunning = bool;
     });
 
-    if(this._initRedirect && !location.href.includes('privacy-and-terms')){
-      this._initRedirect = false;
-      this.router.navigateByUrl('');
-      return;
-    }
+    // if(this._initRedirect && !location.href.includes('privacy-and-terms')){
+    //   this._initRedirect = false;
+    //   this.router.navigateByUrl('');
+    //   return;
+    // }
   }
 
   ngAfterViewInit(): void {

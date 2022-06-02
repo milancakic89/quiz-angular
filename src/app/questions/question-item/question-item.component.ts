@@ -21,7 +21,7 @@ export class QuestionItemComponent implements OnInit, OnDestroy {
 
   get root(){return this.config.isRoot}
   
-  get admin(){ return this.question.posted_by === this.config.userValue._id}
+  get admin(){ return this.question.posted_by === this.config.userData.getValue()._id}
 
   public question: Question = null as unknown as Question;
   public denyReason = '';

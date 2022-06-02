@@ -35,7 +35,7 @@ export class PlayComponent implements OnDestroy, OnInit {
   get attempts() { return this._attempts }
   set attempts(value) { this._attempts = value }
 
-  get userContributions() { return this.config.user.getValue().categories as unknown as any }
+  get userContributions() { return this.config.userData.getValue().categories as unknown as any }
 
   public time = 25;
   public score = 0;

@@ -390,12 +390,6 @@ export class SocketService {
             this.socketData.next(data)
 
         });
-        this.socket.on('TRACK_QUEUE_MANAGER', (data: SocketResponse) => {
-            this.socketData.next(data)
-            this.RECEIVED_EVENT = data.event
-            this.RECEIVED_DATA.next(data.data)
-
-        });
 
         this.socket.on('CHECK_PRACTICE_QUESTION', (data: SocketResponse) => {
             this.socketData.next(data)
@@ -413,7 +407,7 @@ export class SocketService {
             const token = this.token;
             data.Authorization = token;
         }
-       
+        
         this.socket.emit(eventName, data)
     }
 }

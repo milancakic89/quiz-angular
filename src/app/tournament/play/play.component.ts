@@ -20,7 +20,7 @@ export class PlayComponent implements OnInit, OnDestroy {
               private router: Router,
               private config: Configuration){}
 
-  get user(){ return this.config.user.getValue()}
+  get user(){ return this.config.userData.getValue()}
 
   get room() { return this.tournamentService.room }
   set room(value) { this.tournamentService.room = value }
