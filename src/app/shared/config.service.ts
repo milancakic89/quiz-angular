@@ -30,6 +30,7 @@ export interface User{
   online: boolean;
   selected?: boolean; 
   avatar_border?: string;
+  shop_items?:[]
 
 }
 

@@ -1,7 +1,9 @@
 .settings {
     width: 100%;
-    height: calc(100vh - 60px);
-    background-image: url('../../../assets/images/new-theme/question-board.png');
+    height: calc(100vh - 140px);
+    padding: 10px;
+    background-color: orange;
+    border: 3px solid brown;
     background-size: contain;
     text-align: center;
     padding: 20px;
@@ -20,25 +22,55 @@ input[type="file"] {
     cursor: pointer;
 }
 
-form{
+form {
     justify-content: center;
     padding-top: 80px;
-    input{
+
+    input {
         border: none;
         border-bottom: 3px solid black;
     }
 }
 
-.form-row{
+.form-row {
     justify-content: center;
     align-items: center;
+
     @media screen and (max-width: 500px) {
         flex-direction: column;
     }
-    &-input{
-        
+
+    &-input {
+
         @media screen and (max-width: 500px) {
             width: 100%;
+        }
+    }
+}
+
+.avatar-wrapper {
+    border-top: 1px solid brown;
+    border-bottom: 1px solid brown;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 80px;
+    justify-content: space-between;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .item-border {
+        width: 80px;
+        margin-right: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+            border: 2px solid brown;
         }
     }
 }

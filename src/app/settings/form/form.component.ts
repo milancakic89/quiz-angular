@@ -6,10 +6,12 @@ import { SocketService } from 'src/app/socket-service';
 import { UploadService } from 'src/app/upload.service';
 import { SettingsService } from '../settings.service';
 import { environment } from 'src/environments/environment';
+import { ShopItem } from 'src/app/shop/types';
 
 export interface Settings{
   name: string;
   image: any;
+  avatar_border?: string;
 }
 
 @Component({
@@ -31,7 +33,8 @@ export class FormComponent implements OnInit {
 
   get user () { return this.config.user.getValue() as User}
 
-  public selectedImage = null
+  public selectedImage = null;
+  public shopItem = ShopItem;
 
   @ViewChild('upload') public upload: any;
 
@@ -46,6 +49,16 @@ export class FormComponent implements OnInit {
         this.router.navigateByUrl('/profile')
       }
     })
+  }
+
+  public trackByFn(i: number){
+    return i;
+  }
+
+  public selectAvatar(item: string, i: number){
+    console.log(item, i)
+    console.log(this.user.shop_items)
+    this.user.avatar_border = item;
   }
 
   public backToProfile() {
@@ -81,5 +94,6 @@ export class FormComponent implements OnInit {
   private _settings: Settings = {
     name: '',
     image: null,
+    avatar_border: ''
   }
 }
