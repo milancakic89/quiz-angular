@@ -42,6 +42,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this._settings.name = this.user.name;
     this._settings.image = this.user.avatar_url;
+    this._settings.avatar_border = this.user.avatar_border
   }
 
   public trackByFn(i: number){
