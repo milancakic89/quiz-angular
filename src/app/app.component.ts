@@ -185,6 +185,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         if (data.data) {
             this.user = data.data;
             this.notificationService.notification.emit({ success: true, message: data.message }); 
+            this.router.navigateByUrl('/shop')
         }
 
       }
@@ -239,7 +240,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (data && data.event === 'GET_DAILY_REWARD') {
         this.animateReward(data.tickets, data.data);
-    }
+      }
+      if (data && data.event === 'UPDATE_SETTINGS') {
+        console.log('here')
+          this.notificationService.notification.emit({ success: true, message: 'Uspesno sacuvano' })
+          this.user = data.data;
+          this.router.navigateByUrl('/settings')
+      }
+     
       if (data && data.event === 'AUTOLOGIN') {
         this.config.userData.next(data.data);
           this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
@@ -289,11 +297,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.gameRunning = bool;
     });
 
-    // if(this._initRedirect && !location.href.includes('privacy-and-terms')){
-    //   this._initRedirect = false;
-    //   this.router.navigateByUrl('');
-    //   return;
-    // }
+    if (this.service.initRedirect && !location.href.includes('privacy-and-terms')){
+      console.log('redirect happens')
+      this.service.initRedirect = false;
+      this.router.navigateByUrl('');
+      return;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -447,9 +456,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public logout(){
-    // this.subscription.unsubscribe()
+    this.subscription.unsubscribe()
     this.config.logout();
   }
-
-  private _initRedirect = true;
 }

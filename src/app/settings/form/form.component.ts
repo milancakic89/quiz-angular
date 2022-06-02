@@ -42,13 +42,6 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this._settings.name = this.user.name;
     this._settings.image = this.user.avatar_url;
-    this.socketService.socketData.subscribe(data =>{
-      if(data && data.event === 'UPDATE_SETTINGS'){
-        this.notifications.notification.emit({success: true, message: 'Uspesno sacuvano'})
-        this.user.avatar_url = this.settings.image;
-        this.router.navigateByUrl('/profile')
-      }
-    })
   }
 
   public trackByFn(i: number){
@@ -59,9 +52,9 @@ export class FormComponent implements OnInit {
     this.settings.avatar_border = item;
   }
 
-  public backToProfile() {
-    this.router.navigateByUrl('/profile')
-  }
+  // public backToProfile() {
+  //   this.router.navigateByUrl('/profile')
+  // }
 
   public onImageChange(){
     this._settings.image = this.upload.nativeElement.files[0];
@@ -73,8 +66,8 @@ export class FormComponent implements OnInit {
     if(this.selectedImage){
       imageUrl = await this.uploadService.uploadImage(this._settings.image)
       this._settings.image = imageUrl;
-      this.socketService.emit('UPDATE_SETTINGS', {settings: this._settings})
     }
+    this.socketService.emit('UPDATE_SETTINGS', { settings: this._settings })
    
 
   }
