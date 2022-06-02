@@ -5,6 +5,7 @@
     <div class="user size-{{size}}" [ngStyle]="{'background-color': shouldShow('bg-off') && 'transparent'}">
             <span class="ranking-number" *ngIf="shouldShow('ranking')">{{ ranking }}. </span>
             <span class="user-avatar fire-avatar" *ngIf="shouldShow('avatar')">
+                <img *ngIf="user.avatar_border === shopItem.ADMIN" src="../../../../assets/images/avatars/border-5.gif" />
                 <img *ngIf="user.avatar_border === shopItem.NATURE" src="../../../../assets/images/avatars/border-2.png" />
                 <img *ngIf="user.avatar_border === shopItem.IRON_CROWN" src="../../../../assets/images/avatars/border-3.png" />
                 <img *ngIf="user.avatar_border === shopItem.MASTER" src="../../../../assets/images/avatars/border-rect-1.png" />

@@ -1,6 +1,7 @@
 export enum ShopItem {
     //BORDERS
     NATURE = 'NATURE',
+    ADMIN = 'ADMIN',
     IRON_CROWN = 'IRON_CROWN',
     MASTER = 'MASTER',
     PORTAL = 'PORTAL',
@@ -16,6 +17,7 @@ export enum ShopItem {
 export enum ShopItemPrice {
     //BORDERS
     NATURE = 10,
+    ADMIN = 2000,
     IRON_CROWN = 10,
     MASTER = 100,
     PORTAL = 50,
