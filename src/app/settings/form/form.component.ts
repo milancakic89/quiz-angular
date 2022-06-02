@@ -56,9 +56,7 @@ export class FormComponent implements OnInit {
   }
 
   public selectAvatar(item: string, i: number){
-    console.log(item, i)
-    console.log(this.user.shop_items)
-    this.user.avatar_border = item;
+    this.settings.avatar_border = item;
   }
 
   public backToProfile() {
