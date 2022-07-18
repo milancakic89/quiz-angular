@@ -31,7 +31,7 @@ export class FormComponent implements OnInit {
   get settings(){ return this._settings}
   set settings(value: Settings){ this._settings = value}
 
-  get user () { return this.config.userData.getValue() as User}
+  get user () { return this.config.user}
 
   public selectedImage = null;
   public shopItem = ShopItem;
@@ -75,7 +75,7 @@ export class FormComponent implements OnInit {
 
   public logout(){
     localStorage.clear();
-    this.config.userData.next(null as unknown as User)
+    this.config.user = null;
     this.config.logged = false;
     setTimeout(() =>{
       this.router.navigateByUrl('')

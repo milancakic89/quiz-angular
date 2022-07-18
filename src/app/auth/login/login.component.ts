@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   get login() { return this._loginDetails; }
   get isRoot(){ return this.config.isRoot}
   
-  public user = null as unknown as User;
+  get user(){ return this.config.user}
   public title = 'Kviz opsteg znanja';
   public feedbackClass = '';
   public centerLogin = false;
@@ -85,13 +85,9 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngAfterViewInit(): void {
-    // document.exitFullscreen();
-      this.config.user.subscribe(user =>{
-      if(user){
-        this.user = user;
+      if(this.user){
         this.router.navigateByUrl('/profile')
       }
-    })
   }
 
   public logOut(): void {

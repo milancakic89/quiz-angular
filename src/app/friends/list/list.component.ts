@@ -23,7 +23,7 @@ export class ListComponent implements OnInit, OnDestroy {
               private notifications: NotificationService,
               private config: Configuration) { }
 
-  public user: User = {} as User;
+  get user(){ return this.config.user}
 
   public searchQuery = '';
 
@@ -67,11 +67,6 @@ export class ListComponent implements OnInit, OnDestroy {
         this.getFriendsList();
       }
     })
-    this.config.user.subscribe(user =>{
-      if(user){
-        this.user = user;      
-      }
-    });
 
     this.socketSubscription = this.socket.socketData.subscribe(data =>{
       if(data && data.event === 'ADD_FRIEND' && data.success){

@@ -22,14 +22,11 @@ export class AchievementsComponent implements OnInit {
 
   constructor(private config: Configuration, private socketService: SocketService) { }
 
-  public user: any = null;
+  get user(){return this.config.user}
 
   public achievements: Achievement[] = [];
 
   ngOnInit(): void {
-    this.config.user.subscribe((user: any) =>{
-      this.user = user;
-    })
     this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'GET_ACHIEVEMENTS'){
               this.achievements = data.data;

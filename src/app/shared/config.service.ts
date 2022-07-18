@@ -137,8 +137,8 @@ export class Configuration{
     get logged(){return logged()}
     set logged(value){ setLogged(value)}
 
-  public userData = new BehaviorSubject<User>(null as unknown as User);
-  public user = this.userData.asObservable();
+    get user() { return this._user.getValue()};
+    set user(value){this._user.next(value)}
     
 
 

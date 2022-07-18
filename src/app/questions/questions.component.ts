@@ -21,9 +21,9 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     private config: Configuration) { }
 
   get isRoot() { return this.config.isRoot }
+  get user(){ return this.config.user}
 
   public questions: Question[] = [];
-  public user: any;
   public updateQuestion = '';
   public showUpdateButton = true;
   public filterStatus = '';
@@ -44,11 +44,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   public selectedFilter = '';
 
   ngOnInit(): void {
-    this.config.user.subscribe(user => {
-      if (user) {
-        this.user = user;
-      }
-    })
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'GET_QUESTIONS'){
         if(this.filterStatus){

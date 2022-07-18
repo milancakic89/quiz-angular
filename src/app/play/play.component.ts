@@ -35,7 +35,9 @@ export class PlayComponent implements OnDestroy, OnInit {
   get attempts() { return this._attempts }
   set attempts(value) { this._attempts = value }
 
-  get userContributions() { return this.config.userData.getValue().categories as unknown as any }
+  get user(){ return this.config.user}
+
+  get userContributions() { return this.config.user.categories as unknown as any }
 
   public time = 25;
   public score = 0;
@@ -69,12 +71,10 @@ export class PlayComponent implements OnDestroy, OnInit {
   public bottomLetterBoxes: Letter[][] = [];//[[]]
 
   ngOnInit() {
-    this.config.user.subscribe(user => {
-      if (user) {
-        this.lives = user.lives;
+      if (this.user) {
+        this.lives = this.user.lives;
       }
-    })
-
+    
     this.route.params.subscribe(params =>{
       if(params['category']){
         this.playCategory = params['category'];

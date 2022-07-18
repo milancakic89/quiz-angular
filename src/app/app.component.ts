@@ -11,7 +11,7 @@ import { PlayService } from './play/play.service';
 import { TournamentService } from './tournament/tournament.service';
 import { SettingsService } from './settings/settings.service';
 import { Settings } from './settings/form/form.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Device, getConfiguration } from './device-configuration';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { filter, map, mergeMap } from 'rxjs/operators';
@@ -44,8 +44,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   get RECEIVED_EVENT() { return this.socketService.RECEIVED_EVENT }
   get RECEIVED_DATA() { return this.socketService.RECEIVED_DATA }
 
-  get user(){return this.config.userData.getValue()}
-  set user(value) { this.config.userData.next(value) }
+  get user() { return this.config.user}
+  set user(value: User) { this.config.user = value }
 
   public showNavigation = true;
   public RECEICED_TEMP = {} as unknown as any;
@@ -170,7 +170,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       ).subscribe(x => {
           x['showNavigation'] === true ? this.showNavigation = true : this.showNavigation = false;
       })
-
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         if(data.user_id !== this.user._id){
@@ -202,7 +201,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.service.onlineUsers.next(data.data);
       }
       if (data && data.event === 'REFRESH_USER') {
-          this.config.userData.next(data.data);
+          this.config.user = data.data;
           const user = data.data;
         if (user) {
           if (user.name === 'Kvizoman') {
@@ -249,7 +248,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }
      
       if (data && data.event === 'AUTOLOGIN') {
-        this.config.userData.next(data.data);
+        this.config.user = data.data;
           this.config.isRoot = data.data.roles.some((role: any) => role === 'ADMIN');
           this.config.logged = true;
           this.spinner = false;
@@ -467,4 +466,5 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   private _initRedirect = true;
+  private _user: User = null as unknown as User;
 }

@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private config: Configuration,
               private tournamentService: TournamentService,
               private socketService: SocketService) { }
-  get user() { return this.config.userData.getValue() as User}
+  get user() { return this.config.user}
   
   get room() { return this.tournamentService.room }
   set room(value) { this.tournamentService.room = value }

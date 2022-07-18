@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
 import { FeedbackMessageService } from '../feedback.service';
 import { PlayService } from '../play/play.service';
@@ -13,7 +12,7 @@ import { ProfileService } from './profile.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
 
   constructor(private config: Configuration,
               private router: Router,
@@ -29,7 +28,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public imageUrl = 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.0/img/avatar.png';
 
   public showInput = false;
-  public user = null as any as User;
+  get user(){ return this.config.user}
 
   public clicked = false;
 
@@ -41,16 +40,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public centerLogin = false;
 
   public achievementNotification = false;
-  public subscription: Subscription = null as unknown as Subscription;
 
 
   public onChangeAvatar(){
     localStorage.setItem('avatar', this.imageUrl);
     this.showInput = false;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   
@@ -73,15 +67,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
   public async load(){
-    this.subscription = this.config.user.subscribe(data =>{
-      this.user = data;
-      if(Date.now() >= data.daily_price){
+    if(this.user){
+      if (Date.now() >= this.user.daily_price) {
         this.feedbackService.DailyPrice.emit(true);
       }
       if (this.user.notifications.achievements) {
         this.achievementNotification = true;
       }
-      if (data.playing) {
+      if (this.user.playing) {
         this.gameLeaved = true;
         setTimeout(() => {
           this.gameLeaved = false;
@@ -91,7 +84,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.user.lives === 0) {
         this.onResetLives();
       }
-    })
+    }
+
   }
 
   public cleanEmptyRooms(){

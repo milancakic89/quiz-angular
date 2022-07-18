@@ -19,57 +19,58 @@
 </div>
 
 
-<div class="content device-width-{{device.width}} device-height-{{device.height}}" [ngClass]="{'expand': !isLogged, 'bottom-padding': showNavigation}" *ngIf="!spinner">
-    <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
+    <div class="content device-width-{{device.width}} device-height-{{device.height}}"
+         [ngClass]="{'expand': !isLogged, 'bottom-padding': showNavigation}" *ngIf="!spinner">
+        <div class="modal-game-results" [ngClass]="{'open': gameResults.showModal}" *ngIf="gameResults.showModal">
             <!--   RESULTS     -->
-        <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">
-            <div class="stars-row">
-                <img src="../assets/images/ic_star.png" *ngFor="let star of stars" />
+            <div *ngIf="gameResults.success && !gameResults.noQuestions" class="stars-results">
+                <div class="stars-row">
+                    <img src="../assets/images/ic_star.png" *ngFor="let star of stars" />
+                </div>
+                <button class="button-yellow" (click)="onGameFinish()">Ok</button>
             </div>
-           
-            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
-        </div>
-
-        <div *ngIf="!gameResults.success && !gameResults.noQuestions">
-            <h3>Niste osvojili poen, pokusajte ponovo</h3>
-            <img src="../assets/images/new-theme/sad-emoji.png" width="200" height="200"/>
-            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
-        </div>
-
-        <div *ngIf="gameResults.noQuestions">
-            <h3>Nema pitanja u bazi</h3>
-            <button class="button-yellow" (click)="onGameFinish()">Ok</button>
-        </div>
+            <div *ngIf="!gameResults.success && !gameResults.noQuestions">
+                <h3>Niste osvojili poen, pokusajte ponovo</h3>
+                <img src="../assets/images/new-theme/sad-emoji.png" width="200" height="200" />
+                <button class="button-yellow" (click)="onGameFinish()">Ok</button>
+            </div>
+            <div *ngIf="gameResults.noQuestions">
+                <h3>Nema pitanja u bazi</h3>
+                <button class="button-yellow" (click)="onGameFinish()">Ok</button>
+            </div>
             <!--    /RESULTS     -->
-    </div>
-    <div class="user-header" *ngIf="isLogged">
-        <div class="left-info">
-            <user-item  [showComponents]="['avatar', 'bg-off', 'user-click']" 
-                        [user]="user"
-                        (onSelectedChange)="goToSettings()"
-                        [size]="'medium'"></user-item>
-            <!-- <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a> -->
         </div>
-        <div class="right-info">
-            <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
-            <p class="wrap" *ngIf="!showLivesTimer"><span class="hearth-life" *ngFor="let life of [].constructor(user.lives)"></span></p>
-            <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
-                      (click)="resetAvailable && openDailyReward()"></span>
-            </p>
-            <p class="user-score text-white"><span class="user-score-icon"></span><span>{{ user.score }}</span></p>
-            <a routerLink="/shop" class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{ user.tickets }}</span></a>
+        <div class="user-header" *ngIf="isLogged">
+            <div class="left-info">
+                <user-item [showComponents]="['avatar', 'bg-off', 'user-click']"
+                           [user]="user"
+                           (onSelectedChange)="goToSettings()"
+                           [size]="'medium'"></user-item>
+                <!-- <a [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}" routerLink="/settings"></a> -->
+            </div>
+            <div class="right-info">
+                <p class="reset-timer" *ngIf="showLivesTimer && lives_timer_delay">{{ minutesString }}:{{secondsString}}</p>
+                <p class="wrap" *ngIf="!showLivesTimer"><span class="hearth-life"
+                          *ngFor="let life of [].constructor(user.lives)"></span></p>
+                <p class="user-chest"><span class="user-chest-icon {{resetAvailable}}"
+                          (click)="resetAvailable && openDailyReward()"></span>
+                </p>
+                <p class="user-score text-white"><span class="user-score-icon"></span><span>{{ user?.score }}</span></p>
+                <a routerLink="/shop" class="user-ticket text-white"><span class="user-ticket-icon"></span><span>{{
+                        user.tickets }}</span></a>
+            </div>
         </div>
-    </div>
-    <div class="scrollable-area {{centerContent}}" [ngClass]="{'not-logged': !isLogged, 'scroll-height': !showNavigation}">
+        <div class="scrollable-area {{centerContent}}"
+             [ngClass]="{'not-logged': !isLogged, 'scroll-height': !showNavigation}">
             <!-- IN GAME MODALS-->
             <!-- NOTIFICATION MESSAGE -->
-            <div class="notification" *ngIf="showFeedback" [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
+            <div class="notification" *ngIf="showFeedback"
+                 [ngClass]="{'success' : successFeedback, 'error': !successFeedback, 'hide': animateBox}">
                 <div class="wrapper">
                     <span>{{ feedbackMessage }}</span>
                     <button class="button-danger" (click)="hideFeedback()">Ok</button>
                 </div>
             </div>
-
             <!-- PROVIDE NAME -->
             <div class="provide-name" *ngIf="showNewNameModal">
                 <div class="name-wrapper">
@@ -78,9 +79,7 @@
                         <button class="button-primary" (click)="saveName()">Ok</button>
                     </div>
                 </div>
-              
             </div>
-
             <!--  TOURNAMENT INVITATION-->
             <div class="tournament-invitation" *ngIf="invited">
                 <div class="invitation-wrapper">
@@ -89,10 +88,8 @@
                         <button class="button-primary" (click)="acceptTournamentInvitation()">Prihvati</button>
                         <button class="button-danger" (click)="removeNotification()">Izadji</button>
                     </div>
-                   
                 </div>
             </div>
-
             <div class="friend-request-modal" *ngIf="showRequestsModal">
                 <div class="name-wrapper">
                     <div class="body">
@@ -103,34 +100,40 @@
                     </div>
                 </div>
             </div>
-
             <!-- DAILY REWARD -->
-            <div class="daily-reward-rulet"  *ngIf="dailyModal">
-                            <div class="daily-reward-rulet-box">
-                                <div class="daily-items">
-                                    <p class="reward-item reward-3" [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}">
-                                        <span class="inner-item">3</span>
-                                    </p>
-                                    <p class="reward-item reward-1" [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}">
-                                        <span class="inner-item">1</span>
-                                    </p>
-                                    <p class="reward-item reward-5" [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}">
-                                        <span class="inner-item">5</span>
-                                    </p>
-                                    <p class="reward-item reward-4" [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}">
-                                        <span class="inner-item">4</span>
-                                    </p>
-                                    <p class="reward-item reward-10" [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}">
-                                        <span class="inner-item">10</span>
-                                    </p>
-                                    <p class="reward-item reward-2" [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}">
-                                        <span class="inner-item">2</span>
-                                    </p>
-                                </div>
-                                <button class="button-primary {{allowRewardBtn}}" (click)="allowRewardBtn && closeDailyReward()">Ok</button>
-                            </div>
+            <div class="daily-reward-rulet" *ngIf="dailyModal">
+                <div class="daily-reward-rulet-box">
+                    <div class="daily-items">
+                        <p class="reward-item reward-3"
+                           [ngClass]="{'bordered': ticketReward === 3 || animateBorderOnNumbers([4,7,17])}">
+                            <span class="inner-item">3</span>
+                        </p>
+                        <p class="reward-item reward-1"
+                           [ngClass]="{'bordered': ticketReward === 1 || animateBorderOnNumbers([1,9,13])}">
+                            <span class="inner-item">1</span>
+                        </p>
+                        <p class="reward-item reward-5"
+                           [ngClass]="{'bordered': ticketReward === 5 || animateBorderOnNumbers([5,12,18])}">
+                            <span class="inner-item">5</span>
+                        </p>
+                        <p class="reward-item reward-4"
+                           [ngClass]="{'bordered': ticketReward === 4 || animateBorderOnNumbers([2,8,16,19])}">
+                            <span class="inner-item">4</span>
+                        </p>
+                        <p class="reward-item reward-10"
+                           [ngClass]="{'bordered': ticketReward === 10 || animateBorderOnNumbers([3,11,14])}">
+                            <span class="inner-item">10</span>
+                        </p>
+                        <p class="reward-item reward-2"
+                           [ngClass]="{'bordered': ticketReward === 2 || animateBorderOnNumbers([6,10,15])}">
+                            <span class="inner-item">2</span>
+                        </p>
+                    </div>
+                    <button class="button-primary {{allowRewardBtn}}"
+                            (click)="allowRewardBtn && closeDailyReward()">Ok</button>
+                </div>
             </div>
             <!-- END OF MODALS-->
             <router-outlet></router-outlet>
         </div>
-</div>
+    </div>

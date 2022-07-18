@@ -21,7 +21,7 @@ export class WaitingOthersComponent implements OnInit, OnDestroy {
     private playService: PlayService,
     private socket: SocketService) { }
 
-  get user() { return this.config.userData.getValue()}
+  get user() { return this.config.user }
 
   get room() { return this.tournamentService.room }
   set room(value) { this.tournamentService.room = value }

@@ -21,7 +21,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
     private playService: PlayService,
     private config: Configuration) { }
   
-  get user() { return this.config.userData.getValue() as User }
+  get user() { return this.config.user}
 
   get root(){return this.config.isRoot}
 
