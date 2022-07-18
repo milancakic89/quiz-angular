@@ -6,6 +6,11 @@ import { Configuration } from 'src/app/shared/config.service';
 import { SocketService } from 'src/app/socket-service';
 import { TournamentService } from '../tournament.service';
 
+interface Letter {
+  label: string | null;
+  in_use: boolean;
+  id: string | null;
+}
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -38,6 +43,11 @@ export class PlayComponent implements OnInit, OnDestroy {
   public totalPlayers = 0;
   public form = null;
 
+  public disable = false;
+
+  public topLetters: Letter[] = []; //[]
+  public bottomLetterBoxes: Letter[][] = [];//[[]]
+
   public subscription: Subscription = null as any;
 
 
@@ -53,6 +63,47 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
+  }
+
+  public addLetter(topLetter: Letter) {
+    let founded = false;
+    this.bottomLetterBoxes.forEach((bottomLetterBox) => {
+      bottomLetterBox.forEach(bottomLetter => {
+        if (founded) { return }
+        if (!bottomLetter.in_use) {
+          founded = true;
+          bottomLetter.in_use = true;
+          topLetter.in_use = true;
+          bottomLetter.label = topLetter.label;
+          bottomLetter.id = topLetter.id;
+        }
+      })
+    })
+  }
+
+  public removeLetter(bottomLetter: Letter) {
+    const letter = this.topLetters.find(item => item.id === bottomLetter.id);
+    if (letter) {
+      bottomLetter.in_use = false;
+      bottomLetter.label = null;
+      bottomLetter.id = null;
+      letter.in_use = false;
+    }
+  }
+
+  public async updateWordQuestion() {
+    this.disable = true;
+    let result = '';
+    this.bottomLetterBoxes.forEach((box, i) => {
+      if (i !== 0) {
+        result += ' ';
+      }
+      box.forEach(letterBox => {
+        result += letterBox.label;
+      })
+    });
+
+    this.socket.emit('CHECK_PRACTICE_QUESTION', { question_id: this.question._id, correct: result, isWord: true })
   }
 
   public socketSetup(){

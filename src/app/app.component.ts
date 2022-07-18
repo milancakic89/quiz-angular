@@ -303,6 +303,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.router.navigateByUrl('');
       return;
     }
+    if (this._initRedirect && !location.href.includes('privacy-and-terms')) {
+      this._initRedirect = false;
+      this.router.navigateByUrl('');
+      return;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -459,4 +464,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription.unsubscribe()
     this.config.logout();
   }
+
+
+  private _initRedirect = true;
 }

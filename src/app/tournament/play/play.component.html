@@ -1,36 +1,57 @@
+
+
 <div *ngIf="showWaiting || !question" class="waiting-others">
     <h4>Cekaju se ostali igraci</h4>
-    <h4><img src="../../../assets/images/pirate-theme/items/character.png"/> </h4>
+    <h4><img src="../../../assets/images/pirate-theme/items/character.png" /> </h4>
 </div>
 <div class="game-box" *ngIf="question">
-    <div class="question-box-wrapper">
-        <div class="question-box-new" *ngIf="question.type === 'REGULAR'">
-            <h6 class="question-text-heading question-font"><span>{{questionIndex}}.</span> {{ question.question }} </h6>
-        </div>
-        <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new"
-             *ngIf="question.type === 'PICTURE'">
-        </div>
-        <div class="timer-wrap">
-            <div id="countdown" *ngIf="time > 0 && !questionSelected">
-                <div id="countdown-number">{{ time }}</div>
-                <svg>
-                    <circle r="18" cx="25" cy="25"></circle>
-                </svg>
+        <div class="question-box-wrapper">
+            <div class="question-box-new" *ngIf="question.type === 'REGULAR' || question.type === 'WORD'">
+                <h6 class="question-text-heading question-font"><span>{{questionIndex}}.</span> {{ question.question }} </h6>
             </div>
+            <div [ngStyle]="{'background-image': 'url(' + question.imageUrl + ')'}" class="question-box-new"
+                 *ngIf="question.type === 'PICTURE'">
+            </div>
+            <div class="timer-wrap">
+                <div id="countdown" *ngIf="time > 0 && !questionSelected">
+                    <div id="countdown-number">{{ time }}</div>
+                    <svg>
+                        <circle r="18" cx="25" cy="25"></circle>
+                    </svg>
+                </div>
+            </div>
+            <div class="stars-wrapper">
+                <p class="question-counter">{{ questionIndex}}</p>
+                <p class="stars-background"></p>
+            </div>
+            <ng-container *ngIf="question">
+                <button class="button-yellow question-font"
+                        *ngFor="let answer of question.answers; let i = index"
+                        [ngClass]="{
+                        'disabled-button': questionSelected,
+                        'wrong-answer': correct === 1 && btnIndex === i,
+                        'correct-answer': correct === 2  && btnIndex === i}"
+                        (click)="onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
+            </ng-container>
         </div>
-        <div class="stars-wrapper">
-            <p class="question-counter">{{ questionIndex}}</p>
-            <p class="stars-background"></p>
-        </div>
-        <ng-container *ngIf="question">
-            <button class="button-yellow question-font"
-            *ngFor="let answer of question.answers; let i = index"
-            [ngClass]="{
-                'disabled-button': questionSelected,
-                'wrong-answer': correct === 1 && btnIndex === i,
-                'correct-answer': correct === 2  && btnIndex === i}"
-            (click)="onSelectedAnswer(answer, question._id, i)"> {{ answer.text }} </button>
-        </ng-container>
-
-    </div>
 </div>
+<ng-container *ngIf="question.type === 'WORD'">
+    <div class="word-wrapper">
+        <div class="letters">
+            <ng-container *ngFor="let topLetter of topLetters; let l = index">
+                <span class="letter-box {{ topLetter.in_use }}" (click)="!topLetter.in_use && addLetter(topLetter)">{{
+                    topLetter.label }}</span>
+            </ng-container>
+        </div>
+        <div class="answer">
+            <p class="word-container"
+               [class.true]="correct === 2 && disable"
+               [class.false]="correct === 1 && disable"
+               *ngFor="let letterBox of bottomLetterBoxes; let i = index">
+                <span class="letter-box" *ngFor="let letter of letterBox; let j = index"
+                      (click)="removeLetter(letter)">{{ letter.label ? letter.label : ' ' }}</span>
+            </p>
+        </div>
+        <button class="button-primary" (click)="updateWordQuestion()">Prijavi odgovor</button>
+    </div>
+</ng-container>
