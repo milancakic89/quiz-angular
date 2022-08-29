@@ -1115,7 +1115,7 @@ $headerHeight: 65px;
 .orientation {
     display: none;
 
-    @media screen and (orientation: landscape) {
+    @media screen and (max-width: 768px) and (orientation: landscape) {
         width: 200vw;
         height: 200vh;
         display: flex;
