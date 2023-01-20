@@ -111,10 +111,7 @@ export class PlayComponent implements OnDestroy, OnInit {
           },10)
 
           setTimeout(() => {
-            console.log({
-              top: this.topLetters,
-              bottom: this.bottomLetterBoxes
-            })
+
           }, 1000)
         }
       }

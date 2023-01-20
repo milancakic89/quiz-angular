@@ -1,18 +1,18 @@
-# FROM node:14 as builder
+FROM node:14 as builder
 
-# WORKDIR /app
+WORKDIR /app
 
-# COPY package.json .
+COPY package.json .
 
-# RUN npm install
+RUN npm install
 
-# COPY . .
+COPY . .
 
-# RUN npm run build
+RUN npm run build
 
 
-# FROM nginx:latest
+FROM nginx:latest
 
-# WORKDIR /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
-# COPY --from=builder /app/dist/quiz-cms .
+COPY --from=builder /app/dist/quiz-cms .

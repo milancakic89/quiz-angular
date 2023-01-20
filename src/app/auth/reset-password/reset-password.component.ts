@@ -51,7 +51,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this._resetDetails)
     this.socket.emit('RESET_PASSWORD_CONFIRMATION', { data: this._resetDetails });
 
   }

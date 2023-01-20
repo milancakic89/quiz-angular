@@ -297,7 +297,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     if (this.service.initRedirect && !location.href.includes('privacy-and-terms')){
-      console.log('redirect happens')
       this.service.initRedirect = false;
       this.router.navigateByUrl('');
       return;

@@ -24,7 +24,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     SocialLoginModule,
     HttpClientModule,
-    // AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       registrationStrategy: 'registerWhenStable:30000'

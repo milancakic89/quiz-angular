@@ -59,7 +59,7 @@ export class RankingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.socketService.socketData.subscribe(data =>{
       if(data && data.event === 'GET_RANKING_LIST'){
-        console.log(data)
+
         this.rankedPlayers = data.data.sort((a:User, b: User) => {
           if(a.score > b.score){
             return -1;

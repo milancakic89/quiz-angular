@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription = this.socketService.socketData.subscribe((data: any) =>{
       if(data && data.event === 'ROOM_CREATED' && data.success){
         this.room = data.roomName;
-        console.log(data)
         setTimeout(()=>{
           this.router.navigateByUrl(`/tournament/room/${data.roomName}`);
         },10)
