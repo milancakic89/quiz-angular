@@ -977,7 +977,9 @@ $headerHeight: 65px;
     top: 64px;
     right: 5px;
     width: 100%;
-    background-color: rgb(246, 227, 61);
+    border: 3px solid #4f312d;
+    border-radius: 18px;
+    background-color: #ECCD97;
     max-width: 310px;
     height: auto;
     padding: 10px;
@@ -997,6 +999,10 @@ $headerHeight: 65px;
         display: flex;
         position: relative;
 
+        button{
+            margin-bottom: 0;
+        }
+
     }
 
 
@@ -1008,7 +1014,7 @@ $headerHeight: 65px;
     }
 
     &.success {
-        color: rgb(2, 85, 16);
+        color: green;
         // transform: translate(-50%, -100%) scale(1) !important;
         // animation: fadein .5s ease-out;
     }

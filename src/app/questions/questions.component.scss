@@ -3,7 +3,9 @@
 
 .questions-wrapper {
     margin-bottom: auto;
-    padding: 0;
+        padding: 0;
+    padding-top: 10px;
+
 }
 
 .approved,
@@ -26,6 +28,10 @@
     width: 94%;
     margin: 0 auto;
     max-width: 850px;
+    overflow: hidden;
+    z-index: 10;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     span {
         display: inline-flex;
@@ -127,8 +133,9 @@
 }
 
 .questions-table {
-    background-color: rgb(227, 187, 117) !important;
+    background-color: #ECCD97 !important;
     padding-bottom: 80px;
+    margin-top: -6px !important;
 }
 
 .question-item {
@@ -206,8 +213,8 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     margin-top: 2px;
-    width: 95%;
-    height: calc(100vh - 206px) !important;
+    width: 94%;
+    height: calc(100vh - 205px) !important;
 
     a {
         width: 100%;

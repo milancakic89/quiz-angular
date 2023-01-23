@@ -19,13 +19,11 @@ export type QuestionType = 'PICTURE' | 'REGULAR' | 'WORD' |'MODAL';
 })
 export class ContributeComponent implements OnInit, OnDestroy {
 
-  constructor(private questionService: QuestionService, 
-              private config: Configuration,
+  constructor(
               private router: Router,
               private storage: AngularFireStorage,
               private socketService: SocketService,
-              private notificationService: NotificationService,
-              private http: HttpClient) { }
+              private notificationService: NotificationService) { }
 
   @ViewChild('upload') public upload: any;
 
@@ -73,6 +71,10 @@ export class ContributeComponent implements OnInit, OnDestroy {
 
   public changeType(type: QuestionType){
     this.questionType = type;
+  }
+
+  public onBack(){
+      this.router.navigateByUrl('profile')
   }
 
 

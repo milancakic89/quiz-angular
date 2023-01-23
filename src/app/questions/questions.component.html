@@ -1,7 +1,6 @@
 
 
 <div class="page-content questions-wrapper">
-    <p class="amount">Ukupno({{questions.length}})</p>
     <p class="question-tabs"><span [ngClass]="filterStatus === '' ? 'active': ''" (click)="filter(''); load()">Sva </span>
         <span [ngClass]="filterStatus === 'NA CEKANJU' ? 'active': ''" (click)="filter('NA CEKANJU')">Na cekanju </span>
         <span [ngClass]="filterStatus === 'ODOBRENO' ? 'active' : ''" (click)="filter('ODOBRENO')">Odobreno</span></p>
