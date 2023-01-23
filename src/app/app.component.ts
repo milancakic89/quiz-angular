@@ -171,6 +171,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           x['showNavigation'] === true ? this.showNavigation = true : this.showNavigation = false;
       })
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
+      console.log(data.event)
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         if(data.user_id !== this.user._id){
           this.invitedToRoomName = data.roomName;
@@ -245,6 +246,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.notificationService.notification.emit({ success: true, message: 'Uspesno sacuvano' })
           this.user = data.data;
           this.router.navigateByUrl('/settings')
+      }
+      if (data && data.event === 'NEW_FRIEND_REQUEST') {
+        this.showRequestsModal = true;
+        // this.notificationService.notification.emit({ success: true, message: 'Novi zahtev za prijatelja!!!' })
       }
      
       if (data && data.event === 'AUTOLOGIN') {

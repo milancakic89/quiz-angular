@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 import { Configuration } from './shared/config.service';
-import { AppComponent } from './app.component';
 
 export type EventType = 'connection' |
     '' |
@@ -26,6 +25,7 @@ export type EventType = 'connection' |
     'GET_ROOM_RESULTS' |
     'CLEAN_THE_EMPTY_ROOMS' |
     'ADD_FRIEND' |
+    'NEW_FRIEND_REQUEST' |
     'FRIEND_ALLREADY_REQUESTED' |
     'USER_DISCONECTED' |
     'USER_CONNECTED' |
@@ -84,7 +84,8 @@ export type EventType = 'connection' |
     'PUBLISH_QUESTION' |
     'UNPUBLISH_QUESTION' |
     'BUY_ITEM' |
-    'REDUCE_LIVES';
+    'REDUCE_LIVES' |
+    '*'
 
 export interface Room {
     roomName?: string;
@@ -92,7 +93,7 @@ export interface Room {
     user_id: string;
 }
 
-interface Socket {
+interface Sockets {
     on: (event: EventType, data: any) => any;
     emit: (event: EventType, data: any) => any;
 }
@@ -104,7 +105,7 @@ export interface SocketResponse {
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
-    public socket: Socket = null as unknown as Socket;
+    public socket: Sockets = null as unknown as Sockets;
     public setupReady = false;
 
     public socketData = new BehaviorSubject<SocketResponse>({} as SocketResponse);
@@ -117,6 +118,7 @@ export class SocketService {
     constructor(private router: Router, private config: Configuration) {
         if (!this.setupReady) {
             this.socket = io.connect(environment.socketUrl);
+
             this.setup();
             this.setupReady = true;
         }
@@ -126,8 +128,13 @@ export class SocketService {
     get token() { return localStorage.getItem('access') }
 
     public setup() {
+    
 
         this.socket.on('AUTOLOGIN_AVAILABLE', (data: SocketResponse) => {
+            this.socketData.next(data)
+        });
+
+        this.socket.on('NEW_FRIEND_REQUEST', (data: SocketResponse) => {
             this.socketData.next(data)
         });
 

@@ -45,9 +45,12 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       if(response && response.event === 'LOGIN'){
         this.config.saveUser(response.data.data, response.data.token)
         this.router.navigateByUrl('/profile')
-      }
+      }//INCORRECT_LOGIN_DETAILS
       if (response && response.event === 'ACCOUNT_NOT_ACTIVATED' ){
         this.notification.notification.emit({success: false, message: 'Nalog nije aktiviran. Proverite email'});
+      }
+      if (response && response.event === 'INCORRECT_LOGIN_DETAILS') {
+        this.notification.notification.emit({ success: false, message: 'Proverite unete podatke!' });
       }
     })
 
