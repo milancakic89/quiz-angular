@@ -12,7 +12,6 @@ export const getConfiguration = (): Device =>{
     }
     const width = document.body.clientWidth
     const height = document.body.getBoundingClientRect().height;
-    console.log(width, height)
     //width
     if (width >= 200){
         device.width = 320;

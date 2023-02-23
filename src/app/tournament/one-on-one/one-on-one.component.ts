@@ -68,6 +68,8 @@ export class OneOnOneComponent implements OnInit, OnDestroy {
         this.oponentDeclined = true;
       }
     })
+
+    
     this.socketService.emit('JOIN_ROOM', { 
         roomName: '1on1', 
         user_id: this.user._id,

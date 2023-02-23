@@ -171,7 +171,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           x['showNavigation'] === true ? this.showNavigation = true : this.showNavigation = false;
       })
     this.socketService.socketData.subscribe((data: SocketResponse) =>{
-      console.log(data.event)
       if (data && data.event === 'TOURNAMENT_INVITATION') {
         if(data.user_id !== this.user._id){
           this.invitedToRoomName = data.roomName;
@@ -201,7 +200,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if (data && data.event === 'ONLINE_USERS_COUNT') {
           this.service.onlineUsers.next(data.data);
       }
-      if (data && data.event === 'REFRESH_USER') {
+      if (data && (data.event === 'REFRESH_USER' || data.event === 'REDUCE_LIVES')) {
           this.config.user = data.data;
           const user = data.data;
         if (user) {
@@ -242,7 +241,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.animateReward(data.tickets, data.data);
       }
       if (data && data.event === 'UPDATE_SETTINGS') {
-        console.log('here')
           this.notificationService.notification.emit({ success: true, message: 'Uspesno sacuvano' })
           this.user = data.data;
           this.router.navigateByUrl('/settings')
@@ -316,7 +314,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.device = getConfiguration()
-      console.log(this.device)
     }, 250)
   }
 
@@ -362,7 +359,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       if(this.seconds < 0){
         if(this.minutes <= 0){
           this.refreshUser();
-          console.log('trigered refresh')
           clearInterval(this.lives_interval);
           return;
         }

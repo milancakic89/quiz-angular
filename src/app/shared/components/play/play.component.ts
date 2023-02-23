@@ -14,10 +14,7 @@ import { TournamentService } from 'src/app/tournament/tournament.service';
 export class PlayComponent implements OnInit, OnDestroy {
 
   constructor(private socket: SocketService,
-    private route: ActivatedRoute,
     private playService: PlayService,
-    private tournamentService: TournamentService,
-    private router: Router,
     private config: Configuration) { }
   
   @Output() onTournamentFinish = new EventEmitter<any>();

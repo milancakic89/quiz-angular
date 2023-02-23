@@ -28,12 +28,10 @@ export class RoomMonitoringComponent implements OnInit {
     this.subscription = this.socketService.socketData.subscribe(data => {
       if(data && data.event === 'TRACK_QUEUE_MANAGER'){
         this.oneOnOneRoom.nextMatch = data.data.players;
-        console.log(data.data)
         this.oneOnOneRoom.oneOnOneUsers = data.data.queue;
         this.oneOnOneRoom.onlineUsers = 0;
         setTimeout(()=>{
           this.oneOnOneRoom = data.data;
-          console.log(this.oneOnOneRoom.oneOnOneUsers)
         }, 10)
         
       }
