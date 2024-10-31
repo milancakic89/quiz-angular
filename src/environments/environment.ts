@@ -1,6 +1,6 @@
 
 export const environment = {
-  production: true,
+  production: false,
   api: 'https://quiz-ts.onrender.com',
   client_id: '',
   client_secret: '',
@@ -17,7 +17,6 @@ export const environment = {
   socketUrl: 'https://quiz-ts.onrender.com',
   baseUrl: 'https://quiz-ts.onrender.com'
 };
-
 
 
 
