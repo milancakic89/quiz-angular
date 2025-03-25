@@ -1,0 +1,106 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+
+    nav{
+        display: none;
+        max-width: 300px;
+        height: 100%;
+        background-color: green;
+        margin-left: -300px;
+
+        &.show{
+            display: block;
+            flex-grow: 1;
+            transition: all;
+            margin-left: 0;
+            animation: show-nav .2s linear;
+        }
+    }
+
+    main{
+        display: flex;
+        max-width: 100%;
+        flex-grow: 8;
+        height: 100%;
+    }
+}
+
+.notification{
+    display: inline-flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: #fff;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 300px;
+    border-radius: 6px;
+
+    :first-child{
+        font-weight: 800;
+        margin-bottom: .4rem;
+    }
+
+    &.show{
+        animation: show-notification .3s ease-out;
+    }
+
+    &.hide{
+        animation: hide-notification .3s ease-out;
+        display: none;
+    }
+
+    &.ERROR{
+        background-color: rgb(149, 2, 2);
+    }
+
+    &.SUCCESS{
+        background-color: rgb(18, 118, 18);
+    }
+
+}
+
+@keyframes show-notification {
+    from {
+        transform: translateX(100%);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+
+@keyframes hide-notification {
+    0% {
+        display: inline-flex ;
+        transform: translateX(0);
+    }
+    98%{
+        display: none;
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+@keyframes show-nav {
+    from {
+        margin-left: -600px;
+    }
+    to{
+        margin-left: 0;
+    }
+}
+
+@keyframes animate-main {
+    from {
+        width: 100%;
+    }
+    to{
+        width: calc(100% - 300px);
+    }
+}

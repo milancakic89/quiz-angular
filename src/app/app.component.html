@@ -1,0 +1,43 @@
+<ng-container *ngIf="notifications$ | async as notification">
+    <span class="notification {{ notification.type }}" [ngClass]="{'show': showNotification$ | async, 'hide': (showNotification$ | async) === false }" >
+        <span>{{ notification.type }}</span>
+        <span>{{ notification.message }}</span>
+    </span>
+</ng-container>
+
+<div class="container">
+    <nav class="navigation" [class.show]="(user$ | async) !== null">
+        <ul>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard" [routerLinkActiveOptions]="{ exact: true }">Play</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/friends">Friends</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/friend-requests">Friend requests</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/leaderboard">Leaderboard</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/shop">Shop</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/my-questions">My questions</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/add-question">Add question</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" routerLink="/dashboard/profile">Profile</a>
+            </li>
+            <li>
+                <a (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <main [class.logged]="(user$ | async) !== null">
+        <router-outlet></router-outlet>
+    </main>
+</div>
