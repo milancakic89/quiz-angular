@@ -1,0 +1,10 @@
+<div class="modal-notification">
+    <h3>{{ data.header }}</h3>
+    <div class="body">
+        <p>{{ data.message }}</p>
+    </div>
+    <div class="footer">
+        <button (click)="onConfirm()" *ngIf="data.confirm">{{ data.confirmLabel || 'Confirm'}}</button>
+        <button  (click)="onCancel()" *ngIf="data.cancel">{{ data.cancelLabel || 'Cancel'}}</button>
+    </div>
+</div>

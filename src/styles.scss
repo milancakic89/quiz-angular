@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 *{
     box-sizing: border-box;
- 
 }
 
 html,
@@ -17,7 +16,13 @@ p,button,h1,h2,h3{
     margin: 0;
 }
 
+a{
+    text-decoration: none;
+    color: #6f5403;
+}
+
 button{
+    color: #fff;
     background-color: rgb(5, 166, 72);
     padding: .5rem;
     border: none;
@@ -33,10 +38,21 @@ button{
         background-color: rgb(194, 125, 7);
     }
 
-    .primary{
+    &.primary{
         margin-bottom: 1rem;
         padding: 1.5rem 4rem;
+
+        &.small{
+            padding: .3rem;
+            margin: 0;
+            border-radius: 4px;
+            font-weight: 400;
+        }
     }
+}
+
+input{
+    color: gray;
 }
 
 form{
@@ -104,5 +120,40 @@ ul{
                 color: #fff;
             }
         }
+    }
+}
+
+.user{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #fff;
+    display: flex;
+    padding: .4rem .6rem;
+    border-radius: 6px;
+    align-items: center;
+    margin-bottom: .8rem;
+    min-width: 250px;
+
+    .avatar{
+        display: inline-block;
+        align-self: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid gray;
+        overflow: hidden;
+        background-size: cover;
+        margin-right: .5rem;
+    }
+
+    button.small{
+        margin-left: auto;
+    }
+}
+
+.mat-mdc-dialog-surface {
+
+    &.mdc-dialog__surface{
+        border-radius: 0;
+        transform: translateY(-150px) !important;
     }
 }

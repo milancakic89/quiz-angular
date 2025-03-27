@@ -11,6 +11,7 @@ import { ShopComponent } from './shop/shop.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
+                pathMatch: 'full',
                 component: PlayComponent
             },
             {
@@ -57,6 +59,11 @@ export const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: LoginComponent,
+        canActivate: [AuthenticatedGuard],
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
         canActivate: [AuthenticatedGuard],
     },
 

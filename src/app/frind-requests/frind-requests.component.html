@@ -1,1 +1,9 @@
-<p>frind-requests works!</p>
+<ng-container *ngIf="requests$ | async as requests">
+    @for(request of requests; track request){
+        <p class="user">
+            <span class="avatar" [ngStyle]="{'background-image': 'url(' + request.avatar_url + ')'}"></span>
+            {{ request.name }}
+            <button class="primary small" (click)="acceptRequest(request)">Accept</button>
+        </p>
+    }
+</ng-container>

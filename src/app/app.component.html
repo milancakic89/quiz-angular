@@ -7,6 +7,10 @@
 
 <div class="container">
     <nav class="navigation" [class.show]="(user$ | async) !== null">
+        <span class="user" *ngIf="(user$ | async) as user" [ngStyle]="{'width': 'auto', 'min-width': '10px'}">
+            <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+            {{ user.name }}
+        </span>
         <ul>
             <li>
                 <a routerLinkActive="active" routerLink="/dashboard" [routerLinkActiveOptions]="{ exact: true }">Play</a>
@@ -33,7 +37,7 @@
                 <a routerLinkActive="active" routerLink="/dashboard/profile">Profile</a>
             </li>
             <li>
-                <a (click)="logout()">Logout</a>
+                <a [ngStyle]="{'background-color': 'red'}" (click)="logout()">Logout</a>
             </li>
         </ul>
     </nav>
