@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { EVENTS } from '../events';
-import { filter, first, map, switchMap, take } from 'rxjs/operators';
+import { filter, first, map, switchMap, take, tap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { Friend } from '../frinds/types';
 import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
@@ -17,10 +17,12 @@ export class FrindRequestsComponent implements OnInit, OnDestroy{
   private _requests$ = new BehaviorSubject<Friend[]>([])
   private _refresh$ = new BehaviorSubject<any>('data');
 
+  loading = true;
+
   subscription: Subscription;
   refreshSubscription: Subscription;
 
-  requests$ = this._requests$.asObservable();
+  requests$ = this._requests$.asObservable().pipe(tap(_ =>  console.log(this.loading)));
 
   ngOnInit(): void {
     this.socketService.sendMessage({event: EVENTS.GET_FRIEND_REQUESTS});
@@ -29,13 +31,16 @@ export class FrindRequestsComponent implements OnInit, OnDestroy{
           filter(data => data.event === EVENTS.GET_FRIEND_REQUESTS),
           map(data => data.data)
         ).subscribe(d => {
-          this._requests$.next(d)
+          this._requests$.next(d);
+          this.loading = false;
+         
         });
 
    this.refreshSubscription =  this.socketService.messages$.pipe(
       filter(data => data.event === EVENTS.ACCEPT_FRIEND),
     ).subscribe(_ => {
-      this.socketService.sendMessage({event: EVENTS.GET_FRIEND_REQUESTS})
+      this.socketService.sendMessage({event: EVENTS.GET_FRIEND_REQUESTS});
+      this.loading = true;
     })
   }
 

@@ -1,1 +1,9 @@
-<p>leaderboard works!</p>
+<ng-container *ngIf="leaderboard$ | async as leaderboard">
+    @for(user of leaderboard; track user){
+        <p class="user">
+            <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+            <span>{{ user.name }}</span>
+            <span>{{ user.score }}</span>
+        </p>
+    }
+</ng-container>

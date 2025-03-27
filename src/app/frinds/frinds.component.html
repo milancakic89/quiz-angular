@@ -1,12 +1,16 @@
 <div class="friend-list">
     <ng-container *ngIf="(friends$ | async) as friendArr">
-        @for(friend of friendArr; track friend){
-            <div class="friend">
-                <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
-                <p>Name: <span>{{ friend.name }}</span></p>
-                <p>Status: <span class="status" [class.online]="friend.online">{{ friend.online ? 'online' : 'offline'}}</span></p>
-            </div>
-        }
+        <ng-container *ngIf="friendArr.length > 0; else noFriends">
+            @for(friend of friendArr; track friend){
+                <div class="friend">
+                    <button class="x-remove" (click)="removeFriend(friend)">X</button>
+                    <span class="avatar" [ngStyle]="{'background-image': 'url(' + friend.avatar_url + ')'}"></span>
+                    <p>Name: <span>{{ friend.name }}</span></p>
+                    <p>Status: <span class="status" [class.online]="friend.online">{{ friend.online ? 'online' : 'offline'}}</span></p>
+                </div>
+            }
+        </ng-container>
+
     </ng-container>
 </div>
 <div class="find-friends">
@@ -15,7 +19,9 @@
         <ng-container *ngIf="(searchFriendsList$ | async ) as users">
             @for(user of users; track user){
                 <p class="user">
-                    <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+                    <span class="dot-status" [class.online]="user.online">
+                        <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
+                    </span>
                     {{ user.name }}
                     <button class="primary small" (click)="sendRequest(user)">Send request</button>
                 </p>
@@ -24,3 +30,6 @@
        
     </div>
 </div>
+<ng-template #noFriends>
+    <h2>No friens found</h2>
+</ng-template>
