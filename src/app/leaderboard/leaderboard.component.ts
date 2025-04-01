@@ -3,7 +3,7 @@ import { SocketService } from '../socket.service';
 import { filter, take } from 'rxjs/operators';
 import { EVENTS } from '../events';
 import { BehaviorSubject } from 'rxjs';
-import { Friend } from '../frinds/types';
+import { Friend } from '../friends/types';
 import { CommonModule } from '@angular/common';
 import { User } from '../types';
 
@@ -23,11 +23,9 @@ export class LeaderboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.sendMessage({event: EVENTS.GET_RANKING_LIST, query: ''});
-    console.log('request sent')
 
     this.socketService.messages$.pipe(filter(socketEvent => socketEvent.event === EVENTS.GET_RANKING_LIST),take(1)).subscribe(data => {
       this._leaderboard$.next(data.data.sort((a,b) => b.score - a.score))
-      console.log(data.data)
     }
 
     )

@@ -23,6 +23,11 @@ export class SocketService {
 
   user$ = this._user$.asObservable();
 
+  isAdmin$ = this.user$.pipe(filter(Boolean),map(user => user.roles.some(role => role === 'ADMIN')));
+
+  myId = '';
+  myselfUsername = '';
+
   constructor() {
     this.socket = io('http://localhost:4000'); // Connect to Socket.IO server
     this.socket.onAny((_: any, data: SocketEvent) => {
@@ -44,7 +49,13 @@ export class SocketService {
     this.socket.emit(eventData.event, data);
   }
 
-  saveUser(user: any){
+  clearMessageChanel(){
+    this._messages$.next(null);
+  }
+
+  saveUser(user: User){
+    this.myId = user._id;
+    this.myselfUsername = user.name;
     this._user$.next(user);
   }
 }

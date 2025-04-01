@@ -25,3 +25,9 @@ export interface User{
         shop_items: string[];
         avatar_border: string;
 }
+
+
+export interface Room {
+    created_by: string;
+    roomName: string;
+}

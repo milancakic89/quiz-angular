@@ -25,7 +25,6 @@ export class NotificationService {
 
     messages$ = this._socketService.messages$.subscribe(
         event => {
-            console.log(event)
             this.handleEventMessage(event.event)
         }
     )

@@ -4,14 +4,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthenticatedGuard } from './shared/guards/authenticated.guard';
 import { PlayComponent } from './play/play.component';
-import { FrindsComponent } from './frinds/frinds.component';
-import { FrindRequestsComponent } from './frind-requests/frind-requests.component';
+import { FrindsComponent } from './friends/frinds.component';
+import { FrindRequestsComponent } from './friend-requests/frind-requests.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ShopComponent } from './shop/shop.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { RoomComponent } from './room/room.component';
+import { playingGuard } from './shared/guards/playing.guard';
+import { GameplayComponent } from './gameplay/gameplay.component';
 
 export const routes: Routes = [
     {
@@ -27,8 +30,16 @@ export const routes: Routes = [
             {
                 path: 'friends',
                 component: FrindsComponent
-            }
-            ,
+            },
+            {
+                path: 'game',
+                component: GameplayComponent,
+                canDeactivate: [playingGuard]
+            },
+            {
+                path: 'room/:room_id',
+                component: RoomComponent,
+            },
             {
                 path: 'friend-requests',
                 component: FrindRequestsComponent
@@ -56,21 +67,14 @@ export const routes: Routes = [
         ]
     },
     {
-        path: '',
-        pathMatch: 'full',
-        component: LoginComponent,
-        canActivate: [AuthenticatedGuard],
-    },
-    {
         path: 'register',
         component: RegisterComponent,
         canActivate: [AuthenticatedGuard],
     },
-
     {
-        path: "*",
-        redirectTo: ''
-    }
-
+        path: '**',
+        component: LoginComponent,
+        canActivate: [AuthenticatedGuard],
+    },
 
 ];

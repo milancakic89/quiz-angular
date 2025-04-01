@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { Friend } from './types';
 import { FormsModule } from '@angular/forms';
+import { UserItemComponent } from '../shared/components/user-item/user-item.component';
 
 @Component({
   selector: 'app-frinds',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, UserItemComponent],
   templateUrl: './frinds.component.html',
   styleUrl: './frinds.component.scss',
 })
@@ -63,10 +64,11 @@ export class FrindsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.search$.pipe(debounceTime(400)).subscribe(search => {
       this.socketService.sendMessage({ event: EVENTS.GET_ALL_USERS, query: search })
-    })
+    });
+
     this.socketService.sendMessage({
       event: EVENTS.GET_FRIEND_LIST
-    });
+    })
 
     this.onlineCountSubscription = this.socketService.messages$.pipe(
       filter(socketEvent => socketEvent.event === EVENTS.USER_CONNECTED || socketEvent.event === EVENTS.USER_DISCONECTED)

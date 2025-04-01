@@ -3,12 +3,13 @@ import { SocketService } from '../socket.service';
 import { EVENTS } from '../events';
 import { filter, first, map, switchMap, take, tap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { Friend } from '../frinds/types';
+import { Friend } from '../friends/types';
 import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
+import { UserItemComponent } from '../shared/components/user-item/user-item.component';
 
 @Component({
   selector: 'app-frind-requests',
-  imports: [CommonModule],
+  imports: [CommonModule, UserItemComponent],
   templateUrl: './frind-requests.component.html',
   styleUrl: './frind-requests.component.scss'
 })
