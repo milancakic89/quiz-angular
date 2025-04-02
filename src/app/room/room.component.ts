@@ -27,6 +27,7 @@ export class RoomComponent implements OnInit, OnDestroy{
   socketService = inject(SocketService);
 
   myself = this.socketService.myselfUsername;
+  user$ = this.socketService.user$
 
   roomCreatedByMyself$ = this.roomService.roomAndOwner$.pipe(
     map(roomAndOwner => roomAndOwner.owner_id === this.socketService.myId && roomAndOwner.room === this._roomId),
@@ -42,9 +43,17 @@ export class RoomComponent implements OnInit, OnDestroy{
 
   roomUsers$ = this.socketService.messages$.pipe(
     filter(socketEvent => socketEvent.event === EVENTS.JOINED_ROOM),
-    map((event: any) => event.users.map(user =>{
-      return { ...user, online: true}
-    }) as Friend[]),
+    map((event: any) => {
+      return event.users.reduce((acc, curr) => {
+        if(!acc.find(usr => usr._id === curr._id)){
+          acc.push({
+            ...curr,
+            online: true
+          });
+        }
+        return acc;
+      }, [])
+    }),
     startWith([])
   )
 
@@ -69,7 +78,6 @@ export class RoomComponent implements OnInit, OnDestroy{
     let playing = false;
     this.roomService.userPlaying$.subscribe(isPlaying => {
       playing = isPlaying;
-      console.log({ playing })
     })
     return playing;
   }
@@ -98,11 +106,13 @@ export class RoomComponent implements OnInit, OnDestroy{
     this.socketService.messages$.pipe(
       filter(socketEvent => socketEvent.event === EVENTS.TOURNAMENT_STARTING)
     ).subscribe(_ => {
+      this.roomService.setHideNavbar(true);
       this.router.navigate(['dashboard','game']);
     })
   }
 
   ngOnDestroy(): void {
+    this.roomService.setUserPlaying(false);
     this.socketService.sendMessage({
       event: EVENTS.CLEAN_THE_EMPTY_ROOMS
     })
@@ -111,7 +121,8 @@ export class RoomComponent implements OnInit, OnDestroy{
   startTournament(){
     this.socketService.sendMessage({
       event: EVENTS.START_TOURNAMENT,
-      roomName: this._roomId
+      roomName: this._roomId,
+      amountOfQuestions: 2
     })
   }
 

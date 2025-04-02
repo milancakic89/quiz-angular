@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
 
   showNotification$ = this._showNotification$.asObservable();
 
-  user$ = this.socketService.user$.pipe(tap(console.log));
+  user$ = this.socketService.user$;
+
+  hideNavbar$ = this.roomService.hideNavbar$;
 
   notifications$ = this.notificationService.notification$.pipe(tap(() => {
     this._showNotification$.next(true);

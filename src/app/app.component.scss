@@ -42,6 +42,7 @@
     overflow: hidden;
     min-width: 300px;
     border-radius: 6px;
+    z-index: 100;
 
     :first-child{
         font-weight: 800;

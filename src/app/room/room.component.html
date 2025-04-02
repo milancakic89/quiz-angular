@@ -6,15 +6,16 @@
 <h2>Tournament participants</h2>
 <div class="wrapper">
     <ng-container *ngIf="roomUsers$ | async as friends">
-        <button class="primary small start-game" *ngIf="(roomCreatedByMyself$ | async) === true" [disabled]="friends.length <= 1" (click)="startTournament()">Play</button>
+        <button class="primary small start-game" *ngIf="(roomCreatedByMyself$ | async) === true" [disabled]="friends.length < 1" (click)="startTournament()">Play</button>
     </ng-container>
   
     <div class="tournament">
         <ng-container *ngIf="roomUsers$ | async as friends">
           
             <ng-container *ngIf="friends.length > 0">
+                <user-item [showBtn]="false" *ngIf="(roomCreatedByMyself$ | async) === false" [user]="user$ | async" [online]="true"></user-item>
                 @for(friend of friends; track friend){
-                    <user-item [showBtn]="false" [user]="friend" (onBtnClick)="invite(friend)" btnLabel="Invite"></user-item>
+                    <user-item [showBtn]="false" [user]="friend" btnLabel="Invite"></user-item>
                 }
             </ng-container>
         </ng-container>
@@ -30,7 +31,7 @@
         </ng-container>
     </ng-container>
     <ng-template #empty>
-        <h3>Invite friends to tournament <button class="primary small" (click)="refresh()">Refresh</button> </h3>
+        <h3 *ngIf="(roomCreatedByMyself$ | async) === true">Invite friends to tournament <button class="primary small" (click)="refresh()">Refresh</button> </h3>
     </ng-template>
 </div>
 

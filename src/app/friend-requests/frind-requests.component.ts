@@ -23,7 +23,7 @@ export class FrindRequestsComponent implements OnInit, OnDestroy{
   subscription: Subscription;
   refreshSubscription: Subscription;
 
-  requests$ = this._requests$.asObservable().pipe(tap(_ =>  console.log(this.loading)));
+  requests$ = this._requests$.asObservable();
 
   ngOnInit(): void {
     this.socketService.sendMessage({event: EVENTS.GET_FRIEND_REQUESTS});

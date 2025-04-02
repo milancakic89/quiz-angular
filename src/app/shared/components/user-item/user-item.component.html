@@ -1,6 +1,6 @@
 
 
-    <span class="dot-status" [class.online]="user.online">
+    <span class="dot-status" [class.online]="user.online || online">
         <span class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')'}"></span>
     </span>
     {{ user.name }}

@@ -1,1 +1,40 @@
-<button (click)="selectLetter()">Check</button>
+<div class="disconected" *ngIf="userDisconected$ | async">
+    <h2>Oponent disconected. redirecting you to main menu</h2>
+</div>
+<ng-container *ngIf="(showResult$ | async) === false">
+    <div class="playing" *ngIf="(question$ | async) as question">
+
+        <div class="question">
+            <h2>{{ question.question }}</h2>
+            <div class="timer" *ngIf="counter$ | async as counter">
+                @for(count of counter; track trackIndex){
+                    <div class="tick"></div>
+                }
+            </div>
+        </div>
+    
+    
+        @for(answer of question.answers; track answer){
+            <button class="primary" 
+            [class.correct]="(correct$ | async) === 'CORRECT' && (selectedLetter$ | async) === answer.letter"
+            [class.wrong]="(correct$ | async) === 'WRONG' && (selectedLetter$ | async) === answer.letter"
+             (click)="selectLetter(answer.letter)" [disabled]="disableBtn$ | async">{{ answer.text }}</button>
+        }
+    </div>
+    
+</ng-container>
+
+<ng-container *ngIf="(showResult$ | async) === true">
+    <div class="results">
+        <h1>Results</h1>
+        <ng-container *ngIf="(results$ | async) as results">
+            @for(result of results; track result._id){
+                <p>{{ result.name }}: {{result.score }}</p>
+            }
+        </ng-container>
+    </div>
+
+  
+
+</ng-container>
+

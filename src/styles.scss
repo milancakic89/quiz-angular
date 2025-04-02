@@ -38,9 +38,21 @@ button{
         background-color: rgb(194, 125, 7);
     }
 
+    &:disabled{
+        background-color: gray;
+    }
+
     &.primary{
         margin-bottom: 1rem;
         padding: 1.5rem 4rem;
+
+        &.correct{
+            background-color: rgb(5, 137, 60);
+        }
+
+        &.wrong{
+            background-color: rgb(232, 58, 14);
+        }
 
         &.small{
             padding: .3rem;

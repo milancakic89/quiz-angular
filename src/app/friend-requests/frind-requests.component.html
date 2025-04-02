@@ -1,7 +1,7 @@
 <ng-container *ngIf="requests$ | async as requests">
     <ng-container *ngIf="requests.length > 0; else noRequests">
         @for(request of requests; track request){
-            <user-item [user]="request"></user-item>
+            <user-item [user]="request" btnLabel="Accept" (onBtnClick)="acceptRequest(request)"></user-item>
         }
     </ng-container>
 
