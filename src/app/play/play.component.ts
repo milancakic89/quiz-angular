@@ -45,4 +45,10 @@ export class PlayComponent implements AfterViewInit, OnDestroy{
       event: EVENTS.CREATE_ROOM
     })
   }
+
+  joinOneOnOne(){
+    this.roomService.setHideNavbar(true);
+    this.router.navigateByUrl('dashboard/one-on-one');
+
+  }
 }

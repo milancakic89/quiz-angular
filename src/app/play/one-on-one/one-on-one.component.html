@@ -1,0 +1,29 @@
+<div class="me box" *ngIf="user$ | async as user">
+    <div  class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')' }"></div>
+    <div class="actions" >
+        <div class="name">
+            <h2>{{ user.name }}</h2>
+        </div>
+        <button class="primary" [disabled]="(match$ | async) === null" (click)="acceptOponent()">Accept</button>
+        <button class="danger" [disabled]="(match$ | async) === null" (click)="declineOponent()">Decline</button>
+    </div>
+</div>
+<div class="oponent box">
+    <div *ngIf="oponent$ | async as user; else searching" class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url + ')' }"></div>
+    <div class="actions">
+        <div class="name">
+            <h2 *ngIf="match$ | async as match">
+                {{ match.oponent.name }}
+                <span *ngIf="(oponentDeclined$ | async) === 'ACCEPTED'">(Acepted)</span>
+                <span *ngIf="(oponentDeclined$ | async) === 'DECLINED'">(Declined)</span>
+
+            </h2>
+        </div>
+        <button *ngIf="match$ | async" class="primary gray" [class.responded]="(oponentDeclined$ | async) === 'ACCEPTED'">Accept</button>
+        <button *ngIf="match$ | async"  class="danger gray"  [class.responded]="(oponentDeclined$ | async) === 'DECLINED'">Decline</button>
+    </div>
+</div>
+
+<ng-template #searching>
+    <div class="avatar search"></div>
+</ng-template>

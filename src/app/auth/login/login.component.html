@@ -1,10 +1,15 @@
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-    <h2>Login</h2>
-    <label for="email"></label>
-    <input id="email" type="email" name="password" formControlName="email" placeholder="Email"/>
-    <label for="password"></label>
-    <input id="password" type="password" name="password" formControlName="password" placeholder="Password"/>
-    <button type="submit">Login</button>
-    <br/>
-    <a routerLink="/register">Dont have account, click here</a>
-</form>
+<app-overlay-loader [loading]="loading$ | async">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <h2>Login</h2>
+        <label for="email"></label>
+        <input id="email" type="email" name="password" formControlName="email" placeholder="Email"/>
+        <label for="password"></label>
+        <input id="password" type="password" name="password" formControlName="password" placeholder="Password"/>
+        <button type="submit">Login</button>
+        <br/>
+        <a routerLink="/register">Dont have account, click here</a>
+    </form>
+    <span class="loader">
+        Loading...
+    </span>
+</app-overlay-loader>

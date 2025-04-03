@@ -61,6 +61,29 @@ button{
             font-weight: 400;
         }
     }
+
+    &.danger{
+        margin-bottom: 1rem;
+        padding: 1.5rem 4rem;
+        background-color: rgb(232, 58, 14);
+
+        &.small{
+            padding: .3rem;
+            margin: 0;
+            border-radius: 4px;
+            font-weight: 400;
+        }
+
+        &:hover{
+            background-color: rgb(194, 125, 7);
+        }
+
+        &:disabled{
+            background-color: gray;
+        }
+
+
+    }
 }
 
 input{

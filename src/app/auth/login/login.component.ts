@@ -1,27 +1,34 @@
-import { ChangeDetectionStrategy, Component, inject, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Inject, OnDestroy, OnInit } from '@angular/core';
 import { SocketEvent, SocketService } from '../../socket.service'
-import {Observable } from 'rxjs';
-import {filter, tap } from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subscription } from 'rxjs';
+import {filter, take, tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../shared/validators/password-validator';
 import { EVENTS } from '../../events';
 import { NotificationService } from '../../shared/notifications.service';
 import { RouterModule } from '@angular/router';
+import { OverlayLoaderComponent } from "../../shared/components/overlay-loader/overlay-loader.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [CommonModule,ReactiveFormsModule, RouterModule, OverlayLoaderComponent, OverlayLoaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit, OnDestroy{
 
   notificationService = inject(NotificationService)
 
   private _fb = inject(FormBuilder);
   private _socketService = inject(SocketService);
+  private _loading$ = new BehaviorSubject(false);
+
+  loading$ = this._loading$.asObservable();
+
+  loginSubscription: Subscription;
 
   signinForm = this._fb.group({
     email: new FormControl('test@test.com', {
@@ -31,8 +38,26 @@ export class LoginComponent{
     password: new FormControl('Masterdamus12', [Validators.required, passwordValidator()])
   });
 
+  constructor(){
+     this._socketService.connect()
+  }
+
+  ngOnInit(): void {
+    this.loginSubscription = this._socketService.messages$.pipe(
+      filter(socketData => socketData.event === EVENTS.LOGIN),
+    ).subscribe(
+      _ => this._loading$.next(false)
+    )
+  }
+
+  ngOnDestroy(): void {
+    this._loading$.next(false);
+      this.loginSubscription.unsubscribe()
+  }
+
 
   onSubmit(): void {
+   this._loading$.next(true);
    const { email, password } = this.signinForm.value;
 
     this._socketService.sendMessage({
@@ -40,6 +65,8 @@ export class LoginComponent{
         email: email,
         password: password
     })
+
+
   }
 
 }

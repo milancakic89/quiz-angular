@@ -2,15 +2,15 @@ import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/cor
 import { SocketService } from '../socket.service';
 import { RoomService } from '../room/model/room.service';
 import { EVENTS } from '../events';
-import { BehaviorSubject, combineLatest, debounceTime, filter, map, shareReplay, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, filter, map, shareReplay, Subscription, take, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 type CheckCorrect = 'CORRECT' | 'WRONG' | 'NULL';
 
 @Component({
   selector: 'app-gameplay',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './gameplay.component.html',
   styleUrl: './gameplay.component.scss',
   standalone: true
@@ -29,6 +29,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   private _results$ = new BehaviorSubject([]);
   candeactivate = false;
 
+  isOneOnOne = false;
 
   disableBtn$ = this._disableBtn$.asObservable()
   correct$ = this._correct$.asObservable();
@@ -84,6 +85,11 @@ export class GameplayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.roomService.isOneOnOneRoom$.pipe(take(1)).subscribe(oneOneOne => {
+      this.isOneOnOne = oneOneOne;
+    });
+
+    this.roomService.setHideNavbar(true);
     this.roomId$.subscribe(roomId => {
       this.roomName = roomId;
       this.socketService.sendMessage({
@@ -122,15 +128,21 @@ export class GameplayComponent implements OnInit, OnDestroy {
           this._results$.next(data.users)
           this._disableBtn$.next(false);
           this._correct$.next('NULL');
-          this.socketService.sendMessage({
+          const eventData: any = {
             event: EVENTS.GET_ROOM_QUESTION,
             roomName: this.roomName
-          })
+          }
+          if(this.isOneOnOne){
+            eventData.match = true;
+          };
+
+          this.socketService.sendMessage(eventData);
         }
       )
   }
 
   ngOnDestroy(): void {
+    this.roomService.setIsOneOnOne(false);
     this.roomService.setHideNavbar(false);
     this.roomService.setUserPlaying(false);
     this.statusSubscription.unsubscribe();

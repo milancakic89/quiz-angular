@@ -12,14 +12,21 @@ export class RoomService {
     private _userPlaying$ = new BehaviorSubject<boolean>(false);
     private _roomAndOwner$ = new BehaviorSubject<RoomOwner | null>(null);
     private _hideNavbar$ = new BehaviorSubject(false);
+    private _isOneOnOneRoom$ = new BehaviorSubject(false);
 
     roomId$ = this._roomId$.asObservable();
+
+    isOneOnOneRoom$ = this._isOneOnOneRoom$.asObservable();
+  
     userPlaying$ = this._userPlaying$.asObservable();
 
     roomAndOwner$ = this._roomAndOwner$.asObservable().pipe(filter(Boolean));
 
     hideNavbar$ = this._hideNavbar$.asObservable();
 
+    setIsOneOnOne(val: boolean){
+        this._isOneOnOneRoom$.next(val);
+    }
 
     setRoomId(id: string){
         this._roomId$.next(id);

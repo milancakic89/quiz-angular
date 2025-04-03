@@ -15,6 +15,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { RoomComponent } from './room/room.component';
 import { playingGuard } from './shared/guards/playing.guard';
 import { GameplayComponent } from './gameplay/gameplay.component';
+import { OneOnOneComponent } from './play/one-on-one/one-on-one.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +38,11 @@ export const routes: Routes = [
                 canDeactivate: [playingGuard]
             },
             {
+                path: 'one-on-one',
+                component: OneOnOneComponent,
+                canDeactivate: []
+            },
+            {
                 path: 'room/:room_id',
                 component: RoomComponent,
             },
@@ -47,10 +53,6 @@ export const routes: Routes = [
             {
                 path: 'leaderboard',
                 component: LeaderboardComponent
-            },
-            {
-                path: 'shop',
-                component: ShopComponent
             },
             {
                 path: 'my-questions',

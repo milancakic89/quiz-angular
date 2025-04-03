@@ -29,6 +29,10 @@ export class SocketService {
   myselfUsername = '';
 
   constructor() {
+    this.createSocket()
+  }
+
+  createSocket(){
     this.socket = io('http://localhost:4000'); // Connect to Socket.IO server
     this.socket.onAny((_: any, data: SocketEvent) => {
       console.log(data)
@@ -38,7 +42,6 @@ export class SocketService {
       this._token = data.token;
       this.saveUser(data.data);
     })
-
   }
 
   sendMessage(eventData: SocketEvent): void {
@@ -53,9 +56,22 @@ export class SocketService {
     this._messages$.next(null);
   }
 
+  connect(){
+    if(this.socket.disconnected){
+      this.socket.connect()
+    }
+  }
+
   saveUser(user: User){
-    this.myId = user._id;
-    this.myselfUsername = user.name;
+    if(user){
+      this.myId = user._id;
+      this.myselfUsername = user.name;
+    }else{
+      this.myId = null;
+      this.myselfUsername = null;
+      location.reload()
+    }
     this._user$.next(user);
+  
   }
 }

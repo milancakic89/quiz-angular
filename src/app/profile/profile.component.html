@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<ng-container *ngIf="user$ | async as user">
+    <div class="profile">
+        <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url}"></div>
+        <p>NAME: {{ user.name }}</p>
+        <p>EMAIL: {{ user.email }}</p>
+        <div>
+            <span>ROLES: </span> 
+            @for(role of user.roles; track role){
+                <span>{{ role }}</span>
+            }
+           
+        </div>
+    </div>
+</ng-container>
