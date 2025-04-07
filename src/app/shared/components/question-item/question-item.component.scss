@@ -1,0 +1,58 @@
+:host{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px .5rem .5rem 45px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-bottom: .5rem;
+    overflow: hidden;
+
+    span{
+        display: inline-flex;
+        flex-grow: 1;
+    }
+
+    .question{
+        width: 70%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        position: relative;
+
+        &:before{
+            display: inline-flex;
+            justify-content: center;
+           align-items: center;
+            content: attr(data-index);
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            left: -45px;
+            top: -10px;
+            line-height: 10px;
+            color: #fff;
+            background-color: black;
+        }
+    }
+
+    .category,
+    .status{
+        width: 15%;
+    }
+
+    .status{
+       justify-content: flex-end;
+
+       &.approved{
+        color: rgb(2, 190, 2);
+       }
+
+       &.pending{
+        color: orange;
+       }
+
+       &.denied{
+        color: red;
+       }
+    }
+}

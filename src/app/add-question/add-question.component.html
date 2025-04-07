@@ -1,1 +1,22 @@
-<p>add-question works!</p>
+<h2>Create your own qustions that can appear to others, because you are answering questions made by others after all</h2>
+<p>Once question is submited, it will be approved by admins once the question/answer is processed. You can check the status of your question
+    on my questions page.
+</p>
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <label for="question">Question</label>
+    <textarea name="question" id="question" formControlName="question"></textarea>
+
+    <label for="correct">Correct answer</label>
+    <input name="correct" id="correct" formControlName="correct"/>
+
+    <label for="wrong-1">Wrong answer 1</label>
+    <input name="wrong-1" id="wrong-1" formControlName="wrongOne"/>
+
+    <label for="wrong-2">Wrong answer 2</label>
+    <input name="wrong-2" id="wrong-2" formControlName="wrongTwo"/>
+
+    <label for="wrong-3">Wrong answer 3</label>
+    <input name="wrong-3" id="wrong-3" formControlName="wrongThree"/>
+
+    <button class="primary" [disabled]="!questionForm.valid">Submit</button>
+</form>

@@ -2,9 +2,10 @@ import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/cor
 import { SocketService } from '../socket.service';
 import { RoomService } from '../room/model/room.service';
 import { EVENTS } from '../events';
-import { BehaviorSubject, combineLatest, debounceTime, filter, map, shareReplay, Subscription, take, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, filter, map, Observable, shareReplay, Subscription, take, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { Question } from '../types';
 
 type CheckCorrect = 'CORRECT' | 'WRONG' | 'NULL';
 
@@ -43,7 +44,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   );
 
 
-  question$ = this._question$.asObservable().pipe(filter(Boolean))
+  question$: Observable<Question> = this._question$.asObservable().pipe(filter(Boolean))
 
   roomName = '';
 

@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { filter, Subject, throttleTime } from "rxjs";
-import { EVENTS }from "../events";
+import { EVENTS } from "../events";
 import { SocketService } from "../socket.service";
 
 interface NotificationMessage {
@@ -70,14 +70,20 @@ export class NotificationService {
                 message.message = 'Request sent';
                 break;
             case EVENTS.ACCEPT_FRIEND:
-                    showMessage = true;
-                    message.type = 'SUCCESS';
-                    message.message = 'Accepted';
-                    break;
+                showMessage = true;
+                message.type = 'SUCCESS';
+                message.message = 'Accepted';
+                break;
             case EVENTS.FRIEND_ALLREADY_REQUESTED:
                 showMessage = true;
                 message.type = 'INFO';
                 message.message = 'Request allready sent';
+                break;
+            case EVENTS.ADD_QUESTION:
+                showMessage = true;
+                message.type = 'SUCCESS';
+                message.message = 'Question added';
+                break;
 
         }
 

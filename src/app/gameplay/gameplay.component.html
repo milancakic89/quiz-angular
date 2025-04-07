@@ -4,8 +4,11 @@
 <ng-container *ngIf="(showResult$ | async) === false">
     <div class="playing" *ngIf="(question$ | async) as question">
 
-        <div class="question">
-            <h2>{{ question.question }}</h2>
+        <div class="question" [ngStyle]="{'background-image': question.type === 'PICTURE' && 'url(' + question.imageUrl + ')'}">
+            <ng-container *ngIf="question.type === 'REGULAR';">
+                <h2>{{ question.question }}</h2>
+            </ng-container>
+          
             <div class="timer" *ngIf="counter$ | async as counter">
                 @for(count of counter; track trackIndex){
                     <div class="tick"></div>

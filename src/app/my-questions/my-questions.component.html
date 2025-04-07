@@ -1,1 +1,5 @@
-<p>my-questions works!</p>
+<ng-container *ngIf="(questions$ | async) as questions">
+    @for (question of questions; let i = $index; track question._id) {
+        <app-question-item [question]="question" [index]="i + 1"></app-question-item>
+    }
+</ng-container>
