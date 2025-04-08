@@ -1,10 +1,11 @@
 // socket.service.ts
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map, tap, take } from 'rxjs/operators';
+import { filter, map, tap, take, mapTo, startWith, debounceTime } from 'rxjs/operators';
 import { io, Socket } from 'socket.io-client';
 import  { EVENTS } from './events';
 import { User } from './types';
+import { Router } from '@angular/router';
 
 export interface SocketEvent {
     event: EVENTS;
@@ -14,6 +15,7 @@ export interface SocketEvent {
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
+  private _router = inject(Router)
   private socket: Socket;
   private _messages$ = new BehaviorSubject<SocketEvent>(null as unknown as SocketEvent);
   private _user$ = new BehaviorSubject<User>(null);
@@ -28,6 +30,9 @@ export class SocketService {
   myId = '';
   myselfUsername = '';
 
+  tempEmail = '';
+
+
   constructor() {
     this.createSocket()
   }
@@ -36,7 +41,7 @@ export class SocketService {
     this.socket = io('http://localhost:4000'); // Connect to Socket.IO server
     this.socket.onAny((_: any, data: SocketEvent) => {
       console.log(data)
-        this._messages$.next(data);
+      this._messages$.next(data);
     });
     this.socket.on('LOGIN', (data: any) => {
       this._token = data.token;

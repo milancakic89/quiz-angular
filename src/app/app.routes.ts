@@ -16,6 +16,7 @@ import { RoomComponent } from './room/room.component';
 import { playingGuard } from './shared/guards/playing.guard';
 import { GameplayComponent } from './gameplay/gameplay.component';
 import { OneOnOneComponent } from './play/one-on-one/one-on-one.component';
+import { ResetComponent } from './auth/reset/reset.component';
 
 export const routes: Routes = [
     {
@@ -72,6 +73,11 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         canActivate: [AuthenticatedGuard],
+    },
+    {
+        path: 'activate',
+        component: ResetComponent,
+        canActivate: [],
     },
     {
         path: '**',

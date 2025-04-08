@@ -1,7 +1,8 @@
 <ng-container *ngIf="user$ | async as user">
     <div class="profile">
-        <div class="avatar" [ngStyle]="{'background-image': 'url(' + user.avatar_url}"></div>
-        <p>NAME: {{ user.name }}</p>
+        <div class="avatar" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"></div>
+        <p>IMAGE URL: <input name="name" placeholder="Image url" [(ngModel)]="imageUrl" (change)="onChange()"/></p>
+        <p>NAME: <input name="name" [(ngModel)]="nameChange" (change)="onChange()"/></p>
         <p>EMAIL: {{ user.email }}</p>
         <div>
             <span>ROLES: </span> 

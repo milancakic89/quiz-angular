@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { passwordValidator } from '../../shared/validators/password-validator';
 import { EVENTS } from '../../events';
 import { NotificationService } from '../../shared/notifications.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { OverlayLoaderComponent } from "../../shared/components/overlay-loader/overlay-loader.component";
 import { CommonModule } from '@angular/common';
 
@@ -23,12 +23,14 @@ export class LoginComponent implements OnInit, OnDestroy{
   notificationService = inject(NotificationService)
 
   private _fb = inject(FormBuilder);
+  private _router = inject(Router);
   private _socketService = inject(SocketService);
   private _loading$ = new BehaviorSubject(false);
 
   loading$ = this._loading$.asObservable();
 
   loginSubscription: Subscription;
+  activateSubscription: Subscription;
 
   signinForm = this._fb.group({
     email: new FormControl('test@test.com', {
@@ -47,6 +49,15 @@ export class LoginComponent implements OnInit, OnDestroy{
       filter(socketData => socketData.event === EVENTS.LOGIN),
     ).subscribe(
       _ => this._loading$.next(false)
+    );
+
+    this.activateSubscription = this._socketService.messages$.pipe(
+      filter(socketData => socketData.event === EVENTS.ACCOUNT_NOT_ACTIVATED),
+    ).subscribe(
+      _ => {
+        this._loading$.next(false);
+        this._router.navigateByUrl('activate')
+      }
     )
   }
 
@@ -59,6 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   onSubmit(): void {
    this._loading$.next(true);
    const { email, password } = this.signinForm.value;
+   this._socketService.tempEmail = email;
 
     this._socketService.sendMessage({
         event: EVENTS.LOGIN,

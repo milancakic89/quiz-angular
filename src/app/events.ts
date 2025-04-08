@@ -338,6 +338,13 @@ export enum EVENTS {
 */
  ACCOUNT_NOT_ACTIVATED = 'ACCOUNT_NOT_ACTIVATED',
 
+ /**
+* @description Emits account not yet activated
+* @common_data_to_send {event: 'ACCOUNT_NOT_ACTIVATED', data: null}
+* @returns EVENT STRING
+*/
+ACCOUNT_ACTIVATED = 'ACCOUNT_ACTIVATED',
+
 /**
 * @description Emits register requests
 * @common_data_to_send {event: 'REGISTER', data: {email, pass}}
