@@ -26,13 +26,21 @@ export class ResetComponent implements OnInit{
       map(data => data.data)
     ).subscribe(activated => {
       if(activated){
-        this._router.navigateByUrl('');
         this._notifications.showMessage({
           type: 'SUCCESS',
           message: 'Activated. You can now login'
         })
+      }else{  
+        this._notifications.showMessage({
+          type: 'ERROR',
+          message: 'Wrong code. Try again'
+        })
+        this._socketService.activateRouteAllow = false;
       }
-      this._router.navigateByUrl('')
+      setTimeout(() => {
+        this._router.navigateByUrl('')
+      })
+      
     })
   }
 

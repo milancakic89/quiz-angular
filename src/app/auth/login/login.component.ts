@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, Inject, OnDestroy, OnInit } from '@angular/core';
 import { SocketEvent, SocketService } from '../../socket.service'
 import {BehaviorSubject, Observable, Subscription } from 'rxjs';
-import {filter, take, tap } from 'rxjs/operators';
+import {filter, map, take, tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../shared/validators/password-validator';
 import { EVENTS } from '../../events';
@@ -53,10 +53,18 @@ export class LoginComponent implements OnInit, OnDestroy{
 
     this.activateSubscription = this._socketService.messages$.pipe(
       filter(socketData => socketData.event === EVENTS.ACCOUNT_NOT_ACTIVATED),
+      map(data => data.data)
     ).subscribe(
-      _ => {
-        this._loading$.next(false);
-        this._router.navigateByUrl('activate')
+      activated => {
+        if(!activated){
+          this._socketService.activateRouteAllow = true;
+          this._loading$.next(false);
+          setTimeout(() => {
+            this._router.navigateByUrl('activate')
+          })
+        }
+
+       
       }
     )
   }

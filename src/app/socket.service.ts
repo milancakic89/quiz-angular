@@ -31,14 +31,15 @@ export class SocketService {
   myselfUsername = '';
 
   tempEmail = '';
-
+  activateRouteAllow = false;
 
   constructor() {
     this.createSocket()
   }
 
   createSocket(){
-    this.socket = io('http://localhost:4000'); // Connect to Socket.IO server
+    const url = location.origin;
+    this.socket = io('https://quiz-ts.onrender.com'); // Connect to Socket.IO server
     this.socket.onAny((_: any, data: SocketEvent) => {
       console.log(data)
       this._messages$.next(data);

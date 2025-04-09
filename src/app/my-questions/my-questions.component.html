@@ -1,5 +1,14 @@
-<ng-container *ngIf="(questions$ | async) as questions">
-    @for (question of questions; let i = $index; track question._id) {
-        <app-question-item [question]="question" [index]="i + 1"></app-question-item>
-    }
-</ng-container>
+<app-overlay-loader [loading]="updating$ | async">
+    <ng-container *ngIf="refresh$ | async">
+        <ng-container *ngIf="(questions$ | async) as questions">
+            @for (question of questions; let i = $index; track question._id) {
+                <app-question-item [question]="question" [index]="i + 1" [admin]="isAdmin$ | async" (updated)="onUpdateQuestions()"></app-question-item>
+            }
+        </ng-container>
+    </ng-container>
+    <span class="loader">
+        Loading...
+    </span>
+</app-overlay-loader>
+
+

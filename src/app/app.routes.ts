@@ -17,6 +17,7 @@ import { playingGuard } from './shared/guards/playing.guard';
 import { GameplayComponent } from './gameplay/gameplay.component';
 import { OneOnOneComponent } from './play/one-on-one/one-on-one.component';
 import { ResetComponent } from './auth/reset/reset.component';
+import { ActivateGuard } from './shared/guards/activate.guard';
 
 export const routes: Routes = [
     {
@@ -77,7 +78,7 @@ export const routes: Routes = [
     {
         path: 'activate',
         component: ResetComponent,
-        canActivate: [],
+        canActivate: [ActivateGuard],
     },
     {
         path: '**',

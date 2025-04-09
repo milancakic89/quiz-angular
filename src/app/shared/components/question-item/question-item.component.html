@@ -1,5 +1,9 @@
 <span class="question" [attr.data-index]="index">{{ question.question | trim }}</span>
 <span class="category">{{ question.category}}</span>
+<span *ngIf="admin">
+    <button class="small" (click)="approve()">Odobri</button>
+    <button class="danger small" (click)="decline()">Odbij</button>
+</span>
 <span class="status" [ngClass]="{
     'approved': question.status === 'ODOBRENO', 
     'denied': question.status === 'ODBIJENO',
