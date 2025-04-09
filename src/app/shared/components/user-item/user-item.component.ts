@@ -21,6 +21,10 @@ export class UserItemComponent {
 
   @Input() showBtn = true;
 
+  @Input() score: number;
+
+  @Input() showScore = false;
+
   onAction(){
     this.onBtnClick.emit(this.user)
   }

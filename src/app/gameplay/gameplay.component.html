@@ -29,13 +29,14 @@
 
 <ng-container *ngIf="(showResult$ | async) === true">
     <div class="results">
-        <h1>Results</h1>
+        <a routerLink="dashboard/play">Back</a>
+        <h2>Results</h2>
         <ng-container *ngIf="(results$ | async) as results">
             @for(result of results; track result._id){
-                <p>{{ result.name }}: {{result.score }}</p>
+                <user-item [user]="result" [showScore]="true" [score]="result.score" [showBtn]="false"></user-item>
             }
         </ng-container>
-        <a routerLink="dashboard/play">Back</a>
+       
     </div>
 
   

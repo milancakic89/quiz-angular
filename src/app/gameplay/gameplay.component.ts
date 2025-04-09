@@ -6,12 +6,13 @@ import { BehaviorSubject, combineLatest, debounceTime, filter, map, Observable, 
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Question } from '../types';
+import { UserItemComponent } from "../shared/components/user-item/user-item.component";
 
 type CheckCorrect = 'CORRECT' | 'WRONG' | 'NULL';
 
 @Component({
   selector: 'app-gameplay',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, UserItemComponent],
   templateUrl: './gameplay.component.html',
   styleUrl: './gameplay.component.scss',
   standalone: true
@@ -36,7 +37,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   correct$ = this._correct$.asObservable();
   selectedLetter$ = this._selectedLetter$.asObservable();
   showResult$ = this._showResult$.asObservable();
-  results$ = this._results$.asObservable();
+  results$ = this._results$.asObservable().pipe(tap(console.log));
 
   counter$ = this._counter$.asObservable().pipe(
     map(counter => Array(counter).fill('')),

@@ -2,7 +2,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #fff;
     display: flex;
-    padding: .4rem .6rem;
+    padding: .4rem .6rem ;
     border-radius: 6px;
     align-items: center;
     margin-bottom: .8rem;
@@ -44,4 +44,11 @@
             background-color: rgb(2, 186, 2);
         }
     }
+}
+
+.score{
+    display: inline-flex;
+    margin-left: auto;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
