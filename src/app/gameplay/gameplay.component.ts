@@ -37,7 +37,7 @@ export class GameplayComponent implements OnInit, OnDestroy {
   correct$ = this._correct$.asObservable();
   selectedLetter$ = this._selectedLetter$.asObservable();
   showResult$ = this._showResult$.asObservable();
-  results$ = this._results$.asObservable().pipe(tap(console.log));
+  results$ = this._results$.asObservable();
 
   counter$ = this._counter$.asObservable().pipe(
     map(counter => Array(counter).fill('')),

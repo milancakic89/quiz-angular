@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit{
     skip(1),
     debounceTime(400)
   ).subscribe(val => {
-    console.log({ val })
     this.socketService.sendMessage({
       event: EVENTS.UPDATE_SETTINGS,
       settings: {
@@ -54,7 +53,6 @@ export class ProfileComponent implements OnInit{
   }
 
   onChange(){
-    console.log('on change', this.nameChange)
     this._changeName$.next(this.nameChange)
   }
 
