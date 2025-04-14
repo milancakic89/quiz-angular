@@ -101,7 +101,7 @@ export class OneOnOneComponent implements OnInit, OnDestroy{
         event: EVENTS.START_TOURNAMENT,
         roomName: match.roomName,
         match: true,
-        amountOfQuestions: 2
+        amountOfQuestions: 15
       })
     })
 
