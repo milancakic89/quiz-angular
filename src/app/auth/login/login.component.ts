@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.loginSubscription = this._socketService.messages$.pipe(
-      filter(socketData => socketData.event === EVENTS.LOGIN),
+      filter(socketData => socketData.event === EVENTS.LOGIN || socketData.event === EVENTS.INCORRECT_LOGIN_DETAILS),
     ).subscribe(
       _ => this._loading$.next(false)
     );
