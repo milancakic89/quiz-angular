@@ -1,10 +1,31 @@
 <h2>Create your own qustions that can appear to others, because you are answering questions made by others after all</h2>
-<p>Once question is submited, it will be approved by admins once the question/answer is processed. You can check the status of your question
+<p>Once question is submited, it will be approved as soon as question/answer is validated. You can check the status of your questions
     on my questions page.
 </p>
 <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+   <label for="type">Question type</label>
+    <select name="type" id="type" formControlName="type">
+        <option [ngValue]="'TEXT'" selected>Text</option>
+        <option [ngValue]="'IMAGE'">Image</option>
+    </select>
+
+    <select name="category" id="category" formControlName="category">
+        @for(category of categories; track category){
+                <option  [ngValue]="category">{{category}}</option>
+        }
+       
+    </select>
+
+    <ng-container  *ngIf="(questionType$ | async) === 'TEXT'">
     <label for="question">Question</label>
     <textarea name="question" id="question" formControlName="question"></textarea>
+    </ng-container>
+
+    <ng-container  *ngIf="(questionType$ | async) === 'IMAGE'" >
+        <label for="imageUrl">Image url</label>
+        <input name="imageUrl" id="imageUrl" formControlName="imageUrl"/>
+    </ng-container>
+
 
     <label for="correct">Correct answer</label>
     <input name="correct" id="correct" formControlName="correct"/>

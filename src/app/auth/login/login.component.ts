@@ -33,11 +33,11 @@ export class LoginComponent implements OnInit, OnDestroy{
   activateSubscription: Subscription;
 
   signinForm = this._fb.group({
-    email: new FormControl('test@test.com', {
+    email: new FormControl('', {
       validators: [Validators.email, Validators.required],
       updateOn: 'blur',
     }),
-    password: new FormControl('Masterdamus12', [Validators.required, passwordValidator()])
+    password: new FormControl('', [Validators.required, passwordValidator()])
   });
 
   constructor(){

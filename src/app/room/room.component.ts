@@ -122,7 +122,7 @@ export class RoomComponent implements OnInit, OnDestroy{
     this.socketService.sendMessage({
       event: EVENTS.START_TOURNAMENT,
       roomName: this._roomId,
-      amountOfQuestions: 2
+      amountOfQuestions: 15
     })
   }
 

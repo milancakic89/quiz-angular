@@ -1,4 +1,4 @@
-:host{
+:host {
     width: 100%;
 }
 
@@ -7,30 +7,38 @@ label {
 }
 
 input,
-textarea{
+textarea {
     margin-bottom: 1rem;
     padding: 0 .5rem;
 }
 
-button{
+button {
     align-self: flex-end;
 }
-textarea{
-    padding:  .5rem;
+
+textarea {
+    padding: .5rem;
     min-height: 5rem;
     border: none;
     outline: none;
 }
 
-h2{
+h2 {
     margin-bottom: .3rem;
 }
 
-p{
+p {
     color: gray;
 }
 
-form{
+select {
+    padding: .5rem .4rem;
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+}
+
+form {
     margin-top: 3rem;
     max-width: 600px;
 }

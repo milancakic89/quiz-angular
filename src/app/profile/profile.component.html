@@ -4,12 +4,12 @@
         <p>IMAGE URL: <input name="name" placeholder="Image url" [(ngModel)]="imageUrl" (change)="onChange()"/></p>
         <p>NAME: <input name="name" [(ngModel)]="nameChange" (change)="onChange()"/></p>
         <p>EMAIL: {{ user.email }}</p>
-        <div>
+        <!-- <div>
             <span>ROLES: </span> 
             @for(role of user.roles; track role){
                 <span>{{ role }}</span>
             }
            
-        </div>
+        </div> -->
     </div>
 </ng-container>

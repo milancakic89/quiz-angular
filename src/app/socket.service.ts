@@ -41,7 +41,9 @@ export class SocketService {
     const url = location.origin;
     this.socket = io('https://quiz-ts.onrender.com'); // Connect to Socket.IO server
     this.socket.onAny((_: any, data: SocketEvent) => {
-      console.log(data)
+      if(location.href.includes('localhost')){
+        console.log(data)
+      }
       this._messages$.next(data);
     });
     this.socket.on('LOGIN', (data: any) => {

@@ -7,6 +7,7 @@
 <div class="wrapper">
     <ng-container *ngIf="roomUsers$ | async as friends">
         <button class="primary small start-game" *ngIf="(roomCreatedByMyself$ | async) === true" [disabled]="friends.length < 1" (click)="startTournament()">Play</button>
+
     </ng-container>
   
     <div class="tournament">
