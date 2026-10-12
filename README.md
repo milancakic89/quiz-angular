@@ -1,4 +1,6 @@
-# FE part of Live quiz using webSockets to play against players in real time (Serbian lang game)
+# FE part of quiz (Serbian lang game)
+Frontend part of live quiz using webSockets to play against players in real time
+
 - Playing 1 vs 1 on random oponent search
 - Adding friends
 - Play agains friend
